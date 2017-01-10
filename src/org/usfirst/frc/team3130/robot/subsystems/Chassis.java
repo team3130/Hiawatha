@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import com.ctre.CANTalon;
 
 /**
- *
+ * Basically a copy of Greenwood's chassis at this point
  */
 public class Chassis extends PIDSubsystem {
 	
