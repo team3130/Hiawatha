@@ -3,12 +3,12 @@ package org.usfirst.frc.team3130.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team3130.robot.commands.*;
 import org.usfirst.frc.team3130.robot.subsystems.*;
 
 /**
@@ -21,12 +21,13 @@ import org.usfirst.frc.team3130.robot.subsystems.*;
 public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
-	SendableChooser chooser;
+	SendableChooser<CommandGroup> chooser;
 
 	@Override
 	public void robotInit() {
 		OI.GetInstance();
-		chooser = new SendableChooser();
+		Chassis.GetInstance();
+		chooser = new SendableChooser<CommandGroup>();
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 	}
