@@ -9,29 +9,20 @@ public class RobotMap {
 			//Prefix DIO_
 
 		//Relay
-			public static final int RLY_HEADLIGHT = 3;
+			//Prefix RLY_
 			
 		//Motors-PWM
 			//Prefix PWM_
 			
 		//Motors-CAN
 			public static final int CAN_PNMMODULE = 1;
-			public static final int CAN_SHOOTERMOTOR = 2;
-			public static final int CAN_LEFTMOTORFRONT = 3;
-			public static final int CAN_LEFTMOTORREAR = 4;
-			public static final int CAN_RIGHTMOTORFRONT = 5;
-			public static final int CAN_RIGHTMOTORREAR = 6;
-			public static final int CAN_INTAKEMOTOR = 7;
-			public static final int CAN_CLIMBERTAPE = 8;
-			public static final int CAN_CLIMBERWINCH = 9;
-			public static final int CAN_CLIMBERWINCH2 = 10;
+			public static final int CAN_LEFTMOTORFRONT = 2;
+			public static final int CAN_LEFTMOTORREAR = 3;
+			public static final int CAN_RIGHTMOTORFRONT = 4;
+			public static final int CAN_RIGHTMOTORREAR = 5;
 		
 		//Pnuematics Ports
-			public static final int PNM_INTAKEPIN = 0;
-			public static final int PNM_SHOOTERLOCK = 1;
-			public static final int PNM_GEARSHIFTER = 2;
-			public static final int PNM_INTAKEACTUATEOUT = 3;
-			public static final int PNM_INTAKEACTUATEUP = 4;
+			public static final int PNM_GEARSHIFTER = 1;
 		
 		//Analog Input
 			//Prefix ANG_
@@ -58,7 +49,7 @@ public class RobotMap {
 			public static final int LST_AXS_RJOYSTICKX = 4;
 			public static final int LST_AXS_RJOYSTICKY = 5;
 
-			//POV Degress
+			//POV Degress List
 			public static final int LST_POV_UNPRESSED = -1;
 			public static final int LST_POV_N = 0;
 			public static final int LST_POV_NE = 45;
@@ -69,12 +60,4 @@ public class RobotMap {
 			public static final int LST_POV_W = 270;
 			public static final int LST_POV_NW = 315;
 			
-
-			//Vision
-			public static final int BTN_AIMLEFT = 3;
-			public static final int BTN_AIMRIGHT = 4;
-			public static final int BTN_HEADLIGHT = 2;
-
-			//Drive
-			public static final int BTN_SHIFT = 1;
 }

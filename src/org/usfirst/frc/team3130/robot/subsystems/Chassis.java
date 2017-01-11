@@ -154,9 +154,8 @@ public class Chassis extends PIDSubsystem {
     
     public static double GetDistance()
     {
-    	//The right encoder is nonfunctional, just use the left distance.
-    	//return (GetDistanceL() + GetDistanceR()) / 2.0;
-    	return GetDistanceL();
+    	//Returns the average of the left and right speeds
+    	return (GetDistanceL() + GetDistanceR()) / 2.0;
     }
     
     public static double GetAngle()
