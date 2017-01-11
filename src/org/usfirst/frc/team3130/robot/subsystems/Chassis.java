@@ -1,18 +1,14 @@
 package org.usfirst.frc.team3130.robot.subsystems;
 
-import org.usfirst.frc.team3130.robot.RobotMap;
-import org.usfirst.frc.team3130.robot.commands.DefaultDrive;
-
-import com.ctre.CANTalon;
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Preferences;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.Solenoid;
+import org.usfirst.frc.team3130.robot.*;
+import org.usfirst.frc.team3130.robot.commands.DefaultDrive;
+
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import com.ctre.CANTalon;
 
 /**
  * Basically a copy of Greenwood's chassis at this point
@@ -35,9 +31,11 @@ public class Chassis extends PIDSubsystem {
 	private static CANTalon m_leftMotorRear;
 	private static CANTalon m_rightMotorFront;
 	private static CANTalon m_rightMotorRear;
+	private static Solenoid m_shifter;
 	private static AHRS m_navX;
 	
 	//Create and define all standard data types needed
+	private static boolean m_bShiftedLow;
 	private static double moveSpeed;
 	private static double prevAbsBias;
 	private static boolean m_bNavXPresent;
@@ -65,7 +63,8 @@ public class Chassis extends PIDSubsystem {
 		
 		m_drive = new RobotDrive(m_leftMotorFront, m_leftMotorRear, m_rightMotorFront, m_rightMotorRear);
 		m_drive.setSafetyEnabled(false);
-
+		m_shifter = new Solenoid(RobotMap.CAN_PNMMODULE, RobotMap.PNM_GEARSHIFTER);
+		m_bShiftedLow = false;
 		
 		try{
 			//Connect to navX Gyro on MXP port.
@@ -117,8 +116,14 @@ public class Chassis extends PIDSubsystem {
     {
     	DriveArcade(move, turn, false);
     }
-
     
+    public static void Shift(boolean shiftDown)
+    {
+    	m_shifter.set(shiftDown);
+    	m_bShiftedLow = shiftDown;
+    }
+    
+    public static boolean GetShiftedDown(){return m_bShiftedLow;}
 
     public static double GetSpeedL()
     {
@@ -132,8 +137,9 @@ public class Chassis extends PIDSubsystem {
     
     public static double GetSpeed()
     {
-    	//Return the average of the speeds from the Left and Right Encoders
-    	return (GetSpeedL() + GetSpeedR())/2.0;
+    	//The right encoder is nonfunctional, just use the left speed.
+    	//return (GetSpeedL() + GetSpeedR())/2.0;
+    	return GetSpeedL();
     }
     
     public static double GetDistanceL()
@@ -208,11 +214,19 @@ public class Chassis extends PIDSubsystem {
     
     public static void SetPIDValues()
     {
-    	GetInstance().getPIDController().setPID(
-    			Preferences.getInstance().getDouble("ChassisLowP", 0.085),
-    			Preferences.getInstance().getDouble("ChassisLowI", 0.02),
-    			Preferences.getInstance().getDouble("ChassisLowD", 0.125)
-    	);
+    	if(m_bShiftedLow){
+    		GetInstance().getPIDController().setPID(
+    				Preferences.getInstance().getDouble("ChassisHighP",0.075),
+    				Preferences.getInstance().getDouble("ChassisHighI",0.01),
+    				Preferences.getInstance().getDouble("ChassisHighD",0.09)
+    		);
+    	}else{
+    		GetInstance().getPIDController().setPID(
+    				Preferences.getInstance().getDouble("ChassisLowP", 0.085),
+    				Preferences.getInstance().getDouble("ChassisLowI", 0.02),
+    				Preferences.getInstance().getDouble("ChassisLowD", 0.125)
+    		);
+    	}
     }
     
     public static void HoldAngle(double angle)
