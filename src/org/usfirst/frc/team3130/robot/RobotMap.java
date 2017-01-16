@@ -25,6 +25,10 @@ public class RobotMap {
 		
 		//Pnuematics Ports
 			public static final int PNM_GEARSHIFTER = 1;
+			public static final int PNM_LIFTLEG1 = 2;
+			public static final int PNM_LIFTLEG2 = 3;
+			public static final int PNM_LIFTLEG3 = 4;
+			public static final int PNM_LIFTLEG4 = 5;
 		
 		//Analog Input
 			//Prefix ANG_
