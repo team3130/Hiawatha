@@ -27,6 +27,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		OI.GetInstance();
 		Chassis.GetInstance();
+		Intake.GetInstance();
 		chooser = new SendableChooser<CommandGroup>();
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
