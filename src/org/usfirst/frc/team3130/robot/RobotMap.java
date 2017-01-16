@@ -62,4 +62,9 @@ public class RobotMap {
 			public static final int LST_POV_W = 270;
 			public static final int LST_POV_NW = 315;
 			
+			
+			//Intake
+			public static final int BTN_INTAKEUP = LST_BTN_A;
+			public static final int BTN_INTAKEDOWN = LST_BTN_B;
+			
 }
