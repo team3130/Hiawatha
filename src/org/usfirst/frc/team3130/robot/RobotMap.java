@@ -72,7 +72,5 @@ public class RobotMap {
 			//Intake
 			public static final int BTN_INTAKEUP = LST_BTN_A;
 			public static final int BTN_INTAKEDOWN = LST_BTN_B;
-			public static final int BTN_CLIMBERUP = 0;	//TODO: Get Actual Button
-			public static final int BTN_CLIMBERDOWN = 0;//TODO: Get Actual Button
 			
 }

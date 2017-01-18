@@ -1,7 +1,8 @@
 package org.usfirst.frc.team3130.robot;
 
 
-import org.usfirst.frc.team3130.robot.commands.*;
+import org.usfirst.frc.team3130.robot.commands.IntakeDown;
+import org.usfirst.frc.team3130.robot.commands.IntakeUp;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -24,8 +25,6 @@ public class OI {
 	//Define Joystick Buttons
 	private static JoystickButton intakeIn;
 	private static JoystickButton intakeOut;
-	private static JoystickButton climberUp;
-	private static JoystickButton climberDown;
 	
 	private OI()
 	{
@@ -37,15 +36,10 @@ public class OI {
 		//Create Joystick Buttons
 		intakeIn = new JoystickButton(gamepad, RobotMap.BTN_INTAKEUP);
 		intakeOut = new JoystickButton(gamepad, RobotMap.BTN_INTAKEDOWN);
-		climberUp = new JoystickButton(gamepad, RobotMap.BTN_CLIMBERUP);
-		climberDown = new JoystickButton(gamepad, RobotMap.BTN_CLIMBERDOWN);
 		
 		//Bind Joystick Buttons to Commands
 		intakeIn.whileHeld(new IntakeUp());
 		intakeOut.whileHeld(new IntakeDown());
-		climberUp.whileHeld(new ClimbUp());
-		climberDown.whileHeld(new ClimbDown());
-		
 	}
 
 }
