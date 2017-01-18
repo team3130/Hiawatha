@@ -24,6 +24,7 @@ public class RobotMap {
 			public static final int CAN_INTAKEMOTOR2 = 7;
 			public static final int CAN_CLIMBERMOTOR1 = 8;
 			public static final int CAN_CLIMBERMOTOR2 = 9;
+			public static final int CAN_SHOOTERTURRET = 10;
 		
 		//Pnuematics Ports
 			public static final int PNM_GEARSHIFTER = 1;
