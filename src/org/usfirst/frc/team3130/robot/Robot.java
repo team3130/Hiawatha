@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team3130.robot.commands.RobotSensors;
 import org.usfirst.frc.team3130.robot.subsystems.*;
 
 /**
@@ -22,9 +23,13 @@ public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
 	SendableChooser<CommandGroup> chooser;
+	RobotSensors robotSensors;
 
 	@Override
 	public void robotInit() {
+		robotSensors = new RobotSensors();
+		robotSensors.start();
+		
 		OI.GetInstance();
 		Chassis.GetInstance();
 		Intake.GetInstance();
