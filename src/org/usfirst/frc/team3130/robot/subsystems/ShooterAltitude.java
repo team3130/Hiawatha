@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3130.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.*;
 import org.usfirst.frc.team3130.robot.RobotMap;
 import org.usfirst.frc.team3130.robot.commands.ShooterAltitudeAdjust;
 
@@ -39,8 +38,6 @@ public class ShooterAltitude extends Subsystem {
     	m_altitudeController.changeControlMode(TalonControlMode.Position);
     	m_altitudeController.enableForwardSoftLimit(true);
     	m_altitudeController.setForwardSoftLimit(TOP_ALT);
-    	
-    	
     }
 
     //Set the default command to ShooterAltitudeAdjust
