@@ -84,7 +84,7 @@ public class Chassis extends PIDSubsystem {
 		LiveWindow.addActuator("Chassis", "Right Front TalonSRX", m_rightMotorFront);
 		LiveWindow.addActuator("Chassis", "Right Rear TalonSRX", m_rightMotorRear);
 		
-		LiveWindow.addSensor("Chassis", "NavX", m_navX);
+		//LiveWindow.addSensor("Chassis", "NavX", m_navX);
 		
 		
 		moveSpeed = 0;

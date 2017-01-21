@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3130.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.CANSpeedController.ControlMode;
 
@@ -27,15 +28,22 @@ public class ShooterWheels extends Subsystem {
     	return m_pInstance;
     }
     
-    CANTalon m_wheelControl;
+    private static CANTalon m_wheelControl;
     
     private ShooterWheels() {
     	m_wheelControl = new CANTalon(RobotMap.CAN_SHOOTERWHEELS);
     	m_wheelControl.changeControlMode(TalonControlMode.Speed);
+    	
+    	LiveWindow.addActuator("Shooter", "Wheels", m_wheelControl);
     }
 
     public void initDefaultCommand() {
         
+    }
+    
+    public static double getSpeed()
+    {
+    	return m_wheelControl.get();
     }
     
     /**
@@ -44,7 +52,7 @@ public class ShooterWheels extends Subsystem {
      * <br>This function instead sets an actual rotational velocity.
      * @param speed is the speed in rotations per second
      */
-    public void setSpeed(double speed)
+    public static void setSpeed(double speed)
     {
     	m_wheelControl.set(speed*100);	//Convert from 10 milliseconds to 1 second
     }

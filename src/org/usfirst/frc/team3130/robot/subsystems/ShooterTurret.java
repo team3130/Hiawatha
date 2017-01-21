@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.*;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.TalonControlMode;
 
 public class ShooterTurret extends Subsystem {
 
@@ -25,16 +26,55 @@ public class ShooterTurret extends Subsystem {
     	return m_pInstance;
     }
     
+    private static final int RATIO_TICKSTODEGREE = 0;	//TODO: Find actual ratio
+    
     private static CANTalon m_shooterTurret;
+    
     
     private ShooterTurret() {
     	
     	m_shooterTurret = new CANTalon(RobotMap.CAN_SHOOTERTURRET);
+    	m_shooterTurret.configEncoderCodesPerRev(RATIO_TICKSTODEGREE);
+    	m_shooterTurret.setForwardSoftLimit(Preferences.getInstance().getDouble("Turret programatic angle limit", 190));
+    	m_shooterTurret.setReverseSoftLimit(-Preferences.getInstance().getDouble("Turret programatic angle limit", 190));
     	
     }
 	
     public void initDefaultCommand() {
         
+    }
+    
+    /**
+     * Allows manual control of the turret
+     * <p> 
+     * @param speed
+     */
+    public static void moveTurret(double speed)
+    {
+    	m_shooterTurret.changeControlMode(TalonControlMode.PercentVbus);
+    	m_shooterTurret.set(speed);
+    }
+    
+    /**
+     * Sets the angle to turn the turret to.
+     * <p> This function will set the angle to the relative position from where it currently is.
+     * <br> The function will return false if the angle needed to wrap around rather than being set due to the resultant angle being out of range.
+     * @param angle
+     * @return
+     */
+    public static boolean setSetpoint(double angle)
+    {
+    	m_shooterTurret.changeControlMode(TalonControlMode.Position);
+    	double setpoint = m_shooterTurret.getPosition() + angle;
+    	if(setpoint > Preferences.getInstance().getDouble("Turret programatic angle limit", 190)){
+    		m_shooterTurret.setSetpoint(setpoint - 360);
+    		return false;
+    	}else if(setpoint < -Preferences.getInstance().getDouble("Turret programatic angle limit", 190)){
+    		m_shooterTurret.setSetpoint(setpoint + 350);
+    		return false;
+    	}
+    	m_shooterTurret.setSetpoint(setpoint);
+    	return true;
     }
 }
 
