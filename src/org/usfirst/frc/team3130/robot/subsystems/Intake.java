@@ -27,14 +27,11 @@ public class Intake extends Subsystem {
     	return m_pInstance;
     }
 	
-	private static CANTalon m_intakeMotor1;
-	private static CANTalon m_intakeMotor2;
+	private static CANTalon m_intakeMotor;
 
 	private Intake()
 	{
-		m_intakeMotor1 = new CANTalon(RobotMap.CAN_INTAKEMOTOR1);
-		m_intakeMotor2 = new CANTalon(RobotMap.CAN_INTAKEMOTOR2);
-		m_intakeMotor2.reverseOutput(true);
+		m_intakeMotor = new CANTalon(RobotMap.CAN_INTAKEMOTOR);
 	}
 	
     public void initDefaultCommand() {
@@ -49,8 +46,7 @@ public class Intake extends Subsystem {
      */
     public static void spinIntake(double speed)
     {
-    	m_intakeMotor1.set(speed);
-    	m_intakeMotor2.set(speed);
+    	m_intakeMotor.set(speed);
     }
 }
 

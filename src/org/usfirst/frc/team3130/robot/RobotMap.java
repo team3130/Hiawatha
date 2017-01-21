@@ -20,8 +20,7 @@ public class RobotMap {
 			public static final int CAN_LEFTMOTORREAR = 3;
 			public static final int CAN_RIGHTMOTORFRONT = 4;
 			public static final int CAN_RIGHTMOTORREAR = 5;
-			public static final int CAN_INTAKEMOTOR1 = 6;
-			public static final int CAN_INTAKEMOTOR2 = 7;
+			public static final int CAN_INTAKEMOTOR = 6;
 			public static final int CAN_CLIMBERMOTOR1 = 8;
 			public static final int CAN_CLIMBERMOTOR2 = 9;
 			public static final int CAN_SHOOTERTURRET = 10;
@@ -75,7 +74,7 @@ public class RobotMap {
 			//Intake
 			public static final int BTN_INTAKEUP = LST_BTN_A;
 			public static final int BTN_INTAKEDOWN = LST_BTN_B;
-			public static final int BTN_CLIMBERUP = 0;	//TODO: Get Actual Button
-			public static final int BTN_CLIMBERDOWN = 0;//TODO: Get Actual Button
+			public static final int BTN_CLIMBERUP = 1;	//TODO: Get Actual Button
+			public static final int BTN_CLIMBERDOWN = 1;//TODO: Get Actual Button
 			
 }
