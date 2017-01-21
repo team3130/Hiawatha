@@ -42,11 +42,11 @@ public class Intake extends Subsystem {
     /**
      * Sets the speed of the intakeWheels.
      * The wheels will spin in opposite directions, such that they are both spinning upwards at the gap.
-     * @param speed the percentage of the voltage being fed to the controlers to pass on to the motors.
+     * @param percentage the percentage of the voltage being fed to the controlers to pass on to the motors.
      */
-    public static void spinIntake(double speed)
+    public static void spinIntake(double percentage)
     {
-    	m_intakeMotor.set(speed);
+    	m_intakeMotor.set(percentage);
     }
 }
 

@@ -44,12 +44,12 @@ public class Climber extends Subsystem {
     
     /**
      * Controls the spinning of the Climber Mechanism.
-     * @param speed the percentage of the provided voltage to the motor controllers that is passed to the motors
+     * @param percentage the percentage of the provided voltage to the motor controllers that is passed to the motors
      */
-    public static void Climb(double speed)
+    public static void Climb(double percentage)
     {
-    	m_liftMotor1.set(speed);
-    	m_liftMotor2.set(speed);
+    	m_liftMotor1.set(percentage);
+    	m_liftMotor2.set(percentage);
     }
 }
 

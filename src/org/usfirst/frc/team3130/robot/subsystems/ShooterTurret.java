@@ -47,12 +47,12 @@ public class ShooterTurret extends Subsystem {
     /**
      * Allows manual control of the turret
      * <p> 
-     * @param speed
+     * @param percentage
      */
-    public static void moveTurret(double speed)
+    public static void moveTurret(double percentage)
     {
     	m_shooterTurret.changeControlMode(TalonControlMode.PercentVbus);
-    	m_shooterTurret.set(speed);
+    	m_shooterTurret.set(percentage);
     }
     
     /**
