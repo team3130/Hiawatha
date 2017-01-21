@@ -2,12 +2,11 @@ package org.usfirst.frc.team3130.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.CANSpeedController.ControlMode;
 
 import org.usfirst.frc.team3130.robot.RobotMap;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 
 public class ShooterWheels extends Subsystem {
@@ -33,6 +32,7 @@ public class ShooterWheels extends Subsystem {
     private ShooterWheels() {
     	m_wheelControl = new CANTalon(RobotMap.CAN_SHOOTERWHEELS);
     	m_wheelControl.changeControlMode(TalonControlMode.Speed);
+    	m_wheelControl.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	
     	LiveWindow.addActuator("Shooter", "Wheels", m_wheelControl);
     }
@@ -43,7 +43,7 @@ public class ShooterWheels extends Subsystem {
     
     public static double getSpeed()
     {
-    	return m_wheelControl.get();
+    	return m_wheelControl.getSpeed();
     }
     
     /**

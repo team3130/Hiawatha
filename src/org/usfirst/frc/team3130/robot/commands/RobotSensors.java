@@ -1,6 +1,9 @@
 package org.usfirst.frc.team3130.robot.commands;
 
+import org.usfirst.frc.team3130.robot.subsystems.ShooterWheels;
+
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -8,15 +11,19 @@ import edu.wpi.first.wpilibj.command.Command;
 public class RobotSensors extends Command {
 
     public RobotSensors() {
-
+    	//Ensure permenant running
+    	this.setRunWhenDisabled(true);
+    	this.setInterruptible(false);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	SmartDashboard.putNumber("TEST", 100);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	SmartDashboard.putNumber("Shooter Wheel Speed", ShooterWheels.getSpeed());
     }
 
     // Make this return true when this Command no longer needs to run execute()
