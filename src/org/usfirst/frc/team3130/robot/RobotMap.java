@@ -78,4 +78,7 @@ public class RobotMap {
 			public static final int BTN_CLIMBERUP = 1;	//TODO: Get Actual Button
 			public static final int BTN_CLIMBERDOWN = 1;//TODO: Get Actual Button
 			
+			//Hopper
+			public static final int BTN_HOPPERDRIVE = 1;//TODO: Get Actual Button
+			
 }
