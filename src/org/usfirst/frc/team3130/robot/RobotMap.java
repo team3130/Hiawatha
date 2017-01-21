@@ -12,7 +12,7 @@ public class RobotMap {
 			//Prefix RLY_
 			
 		//Motors-PWM
-			//Prefix PWM_
+			public static final int PWM_SHOOTERALTITUDE = 1;
 			
 		//Motors-CAN
 			public static final int CAN_PNMMODULE = 1;
@@ -24,7 +24,6 @@ public class RobotMap {
 			public static final int CAN_CLIMBERMOTOR1 = 7;
 			public static final int CAN_CLIMBERMOTOR2 = 8;
 			public static final int CAN_SHOOTERTURRET = 9;
-			public static final int CAN_SHOOTERALTITUDE = 10;
 			public static final int CAN_SHOOTERWHEELS = 11;
 
 		

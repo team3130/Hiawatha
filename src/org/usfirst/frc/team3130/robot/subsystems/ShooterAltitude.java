@@ -1,20 +1,25 @@
 package org.usfirst.frc.team3130.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team3130.robot.RobotMap;
 import org.usfirst.frc.team3130.robot.commands.ShooterAltitudeAdjust;
 
-import com.ctre.CANTalon;
-import com.ctre.CANTalon.TalonControlMode;
-
 public class ShooterAltitude extends Subsystem {
 	
 	//Define constants
-	private static final double RATIO_TICKSPERINCH = 7*71*Math.PI*(1.9+.05);	//Winch Diamater ~1.9, Rope Radius ~.05
 	public static final double TOP_ALT = 26;
 
 	//Instance Handling
     private static ShooterAltitude m_pInstance;
+    /**
+     * A system for getting an instance of this class.
+     * The function provides a method by which the class is setup as a singleton
+     * with only a single copy of it existing in memory.
+     * <p> It will return a reference to the class, which is shared amoungst all callers of GetInstance()
+     * 
+     * @return the reference to the class refered to in GetInstance. In this case, ShooterAltitude.
+     */
     public static ShooterAltitude GetInstance()
     {
     	if(m_pInstance == null) m_pInstance = new ShooterAltitude();
@@ -22,7 +27,7 @@ public class ShooterAltitude extends Subsystem {
     }
     
     //Define Objects
-    private static CANTalon m_altitudeController;
+    private static Servo m_altitudeController;
     
     
     //Define basic memory types
@@ -33,11 +38,9 @@ public class ShooterAltitude extends Subsystem {
     	//Initialize Basic data types
     	
     	
-    	//Set up Talon
-    	m_altitudeController = new CANTalon(RobotMap.CAN_SHOOTERALTITUDE);
-    	m_altitudeController.changeControlMode(TalonControlMode.Position);
-    	m_altitudeController.enableForwardSoftLimit(true);
-    	m_altitudeController.setForwardSoftLimit(TOP_ALT);
+    	//Set up Servo
+    	m_altitudeController = new Servo(RobotMap.PWM_SHOOTERALTITUDE);
+
     }
 
     //Set the default command to ShooterAltitudeAdjust
@@ -45,31 +48,34 @@ public class ShooterAltitude extends Subsystem {
     	setDefaultCommand(new ShooterAltitudeAdjust());
     }
     
-  //Getters
-    //Check if shooter is at the bottom altitude
-    public static boolean isAtBottom()
+    
+    /**
+     * Returns the current position of the servo is degrees
+     * @return the current angle of the servo
+     */
+    public static double getAltitude()
     {
-    	return m_altitudeController.isRevLimitSwitchClosed();
+    	return m_altitudeController.getAngle();
     }
     
-    //Get position of the canTalon
-    public static double getAltitude(){
-    	return m_altitudeController.getPosition();
+    /**
+     * Sets the angle of the Shooter Altitude Axis
+     * @param angle is the angle to set the servo to
+     */
+    public static void setAltitude(double angle)
+    {
+    	m_altitudeController.setAngle(angle);
     }
     
-    //Make Talon go to a certain position 
-    public static void setAltitude(double goal){
-    	
-    }
-    
-    //Increase the Altitude by set amount
-    public static void increaseAltitude(double increase){
-    	setAltitude(getAltitude() + increase);
-    }
-    
-    //Decrease the Altitude by set amount
-    public static void decreaseAltitude(double decrease){
-    	setAltitude(getAltitude() - decrease);
+    /**
+     * Sets the angle of the altitude relative to the angle it is currently at
+     * <p> A positive value of adjust will lead to the angle increasing,
+     * <br> while a negative value will decrease the angle.
+     * @param adjust is the degrees by which to change the altitude
+     */
+    public static void adjustAltitude(double adjust)
+    {
+    	setAltitude(adjust + getAltitude());
     }
     
 }
