@@ -46,8 +46,9 @@ public class ShooterTurret extends Subsystem {
     
     /**
      * Allows manual control of the turret
-     * <p> 
-     * @param percentage
+     * <p> Manually drives the turret in PercentVbus, so the units provided are the percentage of the voltage available 
+     * to the srx. The turret won't turn past 190 degrees from zero in each direction, the same limit as is defined by setSetpoint().
+     * @param percentage the percentage of the provided voltage to the motor controllers that is passed to the motors
      */
     public static void moveTurret(double percentage)
     {

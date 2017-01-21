@@ -41,9 +41,13 @@ public class ShooterWheels extends Subsystem {
         
     }
     
+    /**
+     * Returns the current RPS of the wheels
+     * @return the current angular velocity in revolutions per second
+     */
     public static double getSpeed()
     {
-    	return m_wheelControl.getSpeed();
+    	return m_wheelControl.getSpeed()*100;	//convert /centiseconds to /seconds
     }
     
     /**
@@ -54,7 +58,7 @@ public class ShooterWheels extends Subsystem {
      */
     public static void setSpeed(double speed)
     {
-    	m_wheelControl.set(speed*100);	//Convert from 10 milliseconds to 1 second
+    	m_wheelControl.set(speed/100.d);	//Convert from a speed in seconds to centiseconds
     }
 }
 
