@@ -33,6 +33,8 @@ public class ShooterWheels extends Subsystem {
     	m_wheelControl = new CANTalon(RobotMap.CAN_SHOOTERWHEELS);
     	m_wheelControl.changeControlMode(TalonControlMode.Speed);
     	m_wheelControl.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	m_wheelControl.setPID(1, 0, 0); //TODO:Tune PID Numbers
+    	m_wheelControl.configEncoderCodesPerRev(1024);
     	
     	LiveWindow.addActuator("Shooter", "Wheels", m_wheelControl);
     }

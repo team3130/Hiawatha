@@ -82,4 +82,7 @@ public class RobotMap {
 			//Hopper
 			public static final int BTN_HOPPERDRIVE = 1;//TODO: Get Actual Button
 			
+			//Shooter
+			public static final int BTN_TESTSHOOTERWHEELS = LST_BTN_LBUMPER;
+			
 }

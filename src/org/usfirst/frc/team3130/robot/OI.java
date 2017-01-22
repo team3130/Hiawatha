@@ -27,6 +27,7 @@ public class OI {
 	private static JoystickButton climberUp;
 	private static JoystickButton climberDown;
 	private static JoystickButton hopperRun;
+	private static JoystickButton testShooterWheels;
 	
 	private OI()
 	{
@@ -41,6 +42,7 @@ public class OI {
 		climberUp = new JoystickButton(gamepad, RobotMap.BTN_CLIMBERUP);
 		climberDown = new JoystickButton(gamepad, RobotMap.BTN_CLIMBERDOWN);
 		hopperRun = new JoystickButton(gamepad, RobotMap.BTN_HOPPERDRIVE);
+		testShooterWheels = new JoystickButton(gamepad, RobotMap.BTN_TESTSHOOTERWHEELS);
 		
 		//Bind Joystick Buttons to Commands
 		intakeIn.whileHeld(new IntakeUp());
@@ -48,6 +50,7 @@ public class OI {
 		climberUp.whileHeld(new ClimbUp());
 		climberDown.whileHeld(new ClimbDown());
 		hopperRun.whileHeld(new DriveHopper());
+		testShooterWheels.whileHeld(new TestWheels());
 		
 	}
 
