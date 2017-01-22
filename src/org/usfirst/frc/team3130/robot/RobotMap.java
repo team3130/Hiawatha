@@ -84,5 +84,4 @@ public class RobotMap {
 			
 			//Shooter
 			public static final int BTN_TESTSHOOTERWHEELS = LST_BTN_LBUMPER;
-			
 }

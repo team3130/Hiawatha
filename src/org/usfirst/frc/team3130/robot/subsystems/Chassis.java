@@ -70,6 +70,7 @@ public class Chassis extends PIDSubsystem {
 			//Connect to navX Gyro on MXP port.
 			m_navX = new AHRS(SPI.Port.kMXP);
 			m_bNavXPresent = true;
+			LiveWindow.addSensor("Chassis", "NavX", m_navX);
 		} catch(Exception ex){
 			//If connection fails log the error and fall back to encoder based angles.
 			String str_error = "Error instantiating navX from MXP: ";
@@ -83,8 +84,6 @@ public class Chassis extends PIDSubsystem {
 		LiveWindow.addActuator("Chassis", "Left Rear TalonSRX", m_leftMotorRear);
 		LiveWindow.addActuator("Chassis", "Right Front TalonSRX", m_rightMotorFront);
 		LiveWindow.addActuator("Chassis", "Right Rear TalonSRX", m_rightMotorRear);
-		
-		//LiveWindow.addSensor("Chassis", "NavX", m_navX);
 		
 		
 		moveSpeed = 0;
