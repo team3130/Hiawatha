@@ -8,8 +8,8 @@ import org.usfirst.frc.team3130.robot.commands.ShooterAltitudeAdjust;
 public class ShooterAltitude extends Subsystem {
 	
 	//Define constants
-	public static final double TOP_ALT = 26;
-	private static final double ADJUST_MULTIPLIER = 2.0;
+
+
 
 	//Instance Handling
     private static ShooterAltitude m_pInstance;
@@ -76,7 +76,7 @@ public class ShooterAltitude extends Subsystem {
      */
     public static void adjustAltitude(double adjust)
     {
-    	setAltitude(adjust*ADJUST_MULTIPLIER + getAltitude());
+    	setAltitude(adjust + getAltitude());
     }
     
 }
