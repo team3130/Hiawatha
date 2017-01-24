@@ -9,6 +9,7 @@ public class ShooterAltitude extends Subsystem {
 	
 	//Define constants
 	public static final double TOP_ALT = 26;
+	private static final double ADJUST_MULTIPLIER = 2.0;
 
 	//Instance Handling
     private static ShooterAltitude m_pInstance;
@@ -50,7 +51,7 @@ public class ShooterAltitude extends Subsystem {
     
     
     /**
-     * Returns the current position of the servo is degrees
+     * Returns the current position of the servo in degrees
      * @return the current angle of the servo
      */
     public static double getAltitude()
@@ -75,7 +76,7 @@ public class ShooterAltitude extends Subsystem {
      */
     public static void adjustAltitude(double adjust)
     {
-    	setAltitude(adjust + getAltitude());
+    	setAltitude(adjust*ADJUST_MULTIPLIER + getAltitude());
     }
     
 }
