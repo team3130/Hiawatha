@@ -35,8 +35,8 @@ public class ShooterTurret extends Subsystem {
     	
     	m_shooterTurret = new CANTalon(RobotMap.CAN_SHOOTERTURRET);
     	m_shooterTurret.configEncoderCodesPerRev(RATIO_TICKSTODEGREE);
-    	m_shooterTurret.setForwardSoftLimit(Preferences.getInstance().getDouble("Turret programatic angle limit", 190));
-    	m_shooterTurret.setReverseSoftLimit(-Preferences.getInstance().getDouble("Turret programatic angle limit", 190));
+    	m_shooterTurret.setForwardSoftLimit(Preferences.getInstance().getDouble("Turret programatic angle limit", 10));
+    	m_shooterTurret.setReverseSoftLimit(-Preferences.getInstance().getDouble("Turret programatic angle limit", 10));
     	
     }
 	
@@ -67,10 +67,10 @@ public class ShooterTurret extends Subsystem {
     {
     	m_shooterTurret.changeControlMode(TalonControlMode.Position);
     	double setpoint = m_shooterTurret.getPosition() + angle;
-    	if(setpoint > Preferences.getInstance().getDouble("Turret programatic angle limit", 190)){
+    	if(setpoint > Preferences.getInstance().getDouble("Turret programatic angle limit", 10)){
     		m_shooterTurret.setSetpoint(setpoint - 360);
     		return false;
-    	}else if(setpoint < -Preferences.getInstance().getDouble("Turret programatic angle limit", 190)){
+    	}else if(setpoint < -Preferences.getInstance().getDouble("Turret programatic angle limit", 10)){
     		m_shooterTurret.setSetpoint(setpoint + 350);
     		return false;
     	}
