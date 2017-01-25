@@ -67,11 +67,7 @@ public class ShooterTurret extends Subsystem {
     {
     	m_shooterTurret.changeControlMode(TalonControlMode.Position);
     	double setpoint = m_shooterTurret.getPosition() + angle;
-    	if(setpoint > Preferences.getInstance().getDouble("Turret programatic angle limit", 10)){
-    		m_shooterTurret.setSetpoint(setpoint - 360);
-    		return false;
-    	}else if(setpoint < -Preferences.getInstance().getDouble("Turret programatic angle limit", 10)){
-    		m_shooterTurret.setSetpoint(setpoint + 350);
+    	if(Math.abs(setpoint) > Preferences.getInstance().getDouble("Turret programatic angle limit", 10)){
     		return false;
     	}
     	m_shooterTurret.setSetpoint(setpoint);
