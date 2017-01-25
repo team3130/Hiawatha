@@ -71,7 +71,7 @@ public class ShooterTurret extends Subsystem {
     		m_shooterTurret.setSetpoint(setpoint - 360);
     		return false;
     	}else if(setpoint < -Preferences.getInstance().getDouble("Turret programatic angle limit", 190)){
-    		m_shooterTurret.setSetpoint(setpoint + 350);
+    		m_shooterTurret.setSetpoint(setpoint + 360);
     		return false;
     	}
     	m_shooterTurret.setSetpoint(setpoint);
