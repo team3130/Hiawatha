@@ -46,6 +46,7 @@ public class Chassis extends PIDSubsystem {
 	 * Calibrating ratio: 0.955
 	 */
 	public static final double InchesPerRev = 0.995 * Math.PI * 7.625 * 15 / 22;
+	public static final double InchesWheelToWheel = 26.0;
 	
 	
 	private Chassis()
