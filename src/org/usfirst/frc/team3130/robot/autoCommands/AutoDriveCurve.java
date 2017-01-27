@@ -53,10 +53,12 @@ public class AutoDriveCurve extends PIDCommand {
     	
     	Chassis.Shift(m_shiftLow);
     	
+    	//define the radii that the robot's middle, right wheels, and left wheels will follow
     	double R = (m_arcLength*360)/(2*Math.PI*m_angle);
     	double insideR = R - (Chassis.InchesWheelToWheel / 2);
     	double outsideR = R + (Chassis.InchesWheelToWheel / 2);
     	
+    	//set direction by which side is the inside (the smaller arc)
     	if (m_right) {
     		m_arcLL = 2.0 * Math.PI * outsideR * (m_angle/360.0);
     		m_arcLR = 2.0 * Math.PI * insideR * (m_angle/360.0);
@@ -66,6 +68,7 @@ public class AutoDriveCurve extends PIDCommand {
     		m_arcLR = 2.0 * Math.PI * outsideR * (m_angle/360.0);
     	}
     	
+    	//set speeds for both wheel sides to give desired total speed
 		m_speedL = m_arcLL / m_totalTime;
 		m_speedR = m_arcLR / m_totalTime;
 		
