@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 
 /**
@@ -58,6 +59,10 @@ public class Chassis extends PIDSubsystem {
 		m_leftMotorRear = new CANTalon(RobotMap.CAN_LEFTMOTORREAR);
 		m_rightMotorFront = new CANTalon(RobotMap.CAN_RIGHTMOTORFRONT);
 		m_rightMotorRear = new CANTalon(RobotMap.CAN_RIGHTMOTORREAR);
+		
+		//Configure encoders
+		m_leftMotorFront.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		m_rightMotorFront.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		m_leftMotorFront.reverseSensor(false);
 		m_rightMotorFront.reverseSensor(true);
 		
@@ -71,6 +76,7 @@ public class Chassis extends PIDSubsystem {
 		m_rightMotorRear.changeControlMode(TalonControlMode.Follower);
 		m_rightMotorRear.set(RobotMap.CAN_RIGHTMOTORFRONT);
 		
+		//Set up the drive
 		m_drive = new RobotDrive(m_leftMotorFront, m_rightMotorFront);
 		m_drive.setSafetyEnabled(true);
 		m_shifter = new Solenoid(RobotMap.CAN_PNMMODULE, RobotMap.PNM_GEARSHIFTER);
@@ -215,7 +221,7 @@ public class Chassis extends PIDSubsystem {
     	prevAbsBias = 0;
     }
     
-    //Shouldn't be used unless absolutely necessary, takes an ecessive amount of time to run
+    //Shouldn't be used unless absolutely necessary, takes an excessive amount of time to run
     public static void ResetEncoders()
     {
     	m_leftMotorFront.setPosition(0);
@@ -247,6 +253,119 @@ public class Chassis extends PIDSubsystem {
     }
     
     public static void DriveStraight(double move) { moveSpeed = move; }
+    
+    
+    //PID Accessor functions for the Talons
+    
+	    /**
+	     * Sets the control mode of the left talon
+	     * @param mode the control method to be used to drive the left talon
+	     */
+	    public static void setLeftMotorMode(TalonControlMode mode)
+	    {
+	    	m_leftMotorFront.changeControlMode(mode);
+	    }
+    
+    /**
+     * Sets the control mode of the left talon
+     * @param mode the control method to be used to drive the right talon
+     */
+    public static void setRightMotorMode(TalonControlMode mode)
+    {
+    	m_rightMotorFront.changeControlMode(mode);
+    }
+    
+    /**
+     * Sets the PID Values of both talons
+     * <p>The PID Values to be used can be defined in Preferences, and 
+     */
+    public static void setTalonPID()
+    {
+    	//Left Motor PID Setup
+    	switch(m_leftMotorFront.getControlMode()){
+    		case Position:
+	    		m_leftMotorFront.setPID(
+	    				Preferences.getInstance().getDouble("CurveDrive Position P", 0.1), 
+	    				Preferences.getInstance().getDouble("CurveDrive Position I", 0.0),
+	    				Preferences.getInstance().getDouble("CurveDrive Position D", 0.0)
+	    		);
+	    		break;
+	    		
+    		case Speed:
+    			m_leftMotorFront.setPID(
+	    				Preferences.getInstance().getDouble("CurveDrive Speed P", 0.1), 
+	    				Preferences.getInstance().getDouble("CurveDrive Speed I", 0.0),
+	    				Preferences.getInstance().getDouble("CurveDrive Speed D", 0.0)
+	    		);
+    			break;
+    			
+    		//Don't do anything for PID if the motors aren't in the Speed or Position control modes
+			default:
+				break; 
+    	}
+    	
+    	//Right Motor PID Setup
+    	switch(m_rightMotorFront.getControlMode()){
+			case Position:
+	    		m_leftMotorFront.setPID(
+	    				Preferences.getInstance().getDouble("CurveDrive Position P", 0.1), 
+	    				Preferences.getInstance().getDouble("CurveDrive Position I", 0.0),
+	    				Preferences.getInstance().getDouble("CurveDrive Position D", 0.0)
+	    		);
+	    		break;
+	    		
+			case Speed:
+				m_leftMotorFront.setPID(
+	    				Preferences.getInstance().getDouble("CurveDrive Speed P", 0.1), 
+	    				Preferences.getInstance().getDouble("CurveDrive Speed I", 0.0),
+	    				Preferences.getInstance().getDouble("CurveDrive Speed D", 0.0)
+	    		);
+				break;
+				
+			//Don't do anything for PID if the motors aren't in the Speed or Position control modes
+			default:
+				break; 
+    	}
+    }
+    
+    /**
+     * Calls the .set() function on the left talon
+     * <p>
+     * Sets the appropriate output on the talon, depending on the mode.
+     * </p>
+     * 
+     * <p>In PercentVbus, the output is between -1.0 and 1.0, with 0.0 as stopped. 
+     * In Follower mode, the output is the integer device ID of the talon to duplicate. 
+     * In Voltage mode, outputValue is in volts. In Current mode, outputValue is in amperes. 
+     * In Speed mode, outputValue is in position change / 10ms. 
+     * In Position mode, outputValue is in encoder ticks or an analog value, depending on the sensor.</p>
+     * 
+     * @param set - The setpoint value, as described above.
+     */
+    public void setLeftTalon(double set)
+    {
+    	m_leftMotorFront.set(set);
+    }
+    
+    
+    /**
+     * Calls the .set() function on the right talon
+     * <p>
+     * Sets the appropriate output on the talon, depending on the mode.
+     * </p>
+     * 
+     * <p>In PercentVbus, the output is between -1.0 and 1.0, with 0.0 as stopped. 
+     * In Follower mode, the output is the integer device ID of the talon to duplicate. 
+     * In Voltage mode, outputValue is in volts. In Current mode, outputValue is in amperes. 
+     * In Speed mode, outputValue is in position change / 10ms. 
+     * In Position mode, outputValue is in encoder ticks or an analog value, depending on the sensor.</p>
+     * 
+     * @param set - The setpoint value, as described above.
+     */
+    public void setRightTalon(double set)
+    {
+    	m_rightMotorFront.set(set);
+    }
 }
 
 
