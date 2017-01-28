@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.TalonControlMode;
 
 /**
  * Basically a copy of Greenwood's chassis at this point
@@ -59,11 +60,19 @@ public class Chassis extends PIDSubsystem {
 		m_rightMotorRear = new CANTalon(RobotMap.CAN_RIGHTMOTORREAR);
 		m_leftMotorFront.reverseSensor(false);
 		m_rightMotorFront.reverseSensor(true);
+		
 		m_leftMotorFront.configEncoderCodesPerRev(RobotMap.RATIO_DRIVECODESPERREV);
 		m_rightMotorFront.configEncoderCodesPerRev(RobotMap.RATIO_DRIVECODESPERREV);
 		
-		m_drive = new RobotDrive(m_leftMotorFront, m_leftMotorRear, m_rightMotorFront, m_rightMotorRear);
-		m_drive.setSafetyEnabled(false);
+		//Slave the rear motors to the front motors
+		m_leftMotorRear.changeControlMode(TalonControlMode.Follower);
+		m_leftMotorRear.set(RobotMap.CAN_LEFTMOTORFRONT);
+		
+		m_rightMotorRear.changeControlMode(TalonControlMode.Follower);
+		m_rightMotorRear.set(RobotMap.CAN_RIGHTMOTORFRONT);
+		
+		m_drive = new RobotDrive(m_leftMotorFront, m_rightMotorFront);
+		m_drive.setSafetyEnabled(true);
 		m_shifter = new Solenoid(RobotMap.CAN_PNMMODULE, RobotMap.PNM_GEARSHIFTER);
 		m_bShiftedLow = false;
 		
