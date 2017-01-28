@@ -132,16 +132,17 @@ public class Chassis extends PIDSubsystem {
     	m_bShiftedLow = shiftDown;
     }
     
+    //Getters
     public static boolean GetShiftedDown(){return m_bShiftedLow;}
 
     public static double GetSpeedL()
     {
-    	return m_leftMotorFront.getSpeed() * InchesPerRev / 50.0;
+    	return m_leftMotorFront.getSpeed() * InchesPerRev;
     }
     
     public static double GetSpeedR()
     {
-    	return m_rightMotorFront.getSpeed() * InchesPerRev / 50.0;	
+    	return m_rightMotorFront.getSpeed() * InchesPerRev;	
     }
     
     public static double GetSpeed()
@@ -183,6 +184,7 @@ public class Chassis extends PIDSubsystem {
     	}
     }
     
+    //Angle PID Controls
     @Override
     public double returnPIDInput()
     {
