@@ -47,7 +47,7 @@ public class Chassis extends PIDSubsystem {
 	 * Calibrating ratio: 0.955
 	 */
 	public static final double InchesPerRev = 0.995 * Math.PI * 7.625 * 15 / 22;
-	public static final double InchesWheelToWheel = 26.0;
+	public static final double robotWidth = 26.0;
 	
 	
 	private Chassis()
@@ -247,6 +247,24 @@ public class Chassis extends PIDSubsystem {
     }
     
     public static void DriveStraight(double move) { moveSpeed = move; }
+    
+    public static CANTalon getFrontL() {
+    	return m_leftMotorFront;
+    }
+    
+    public static void setSpeedL(double speed)
+    {
+    	m_leftMotorFront.set(speed/100.d);	//Convert from a speed in seconds to centiseconds
+    }
+    
+    public static CANTalon getFrontR() {
+    	return m_rightMotorFront;
+    }
+    
+    public static void setSpeedR(double speed)
+    {
+    	m_rightMotorFront.set(speed/100.d);	//Convert from a speed in seconds to centiseconds
+    }
 }
 
 

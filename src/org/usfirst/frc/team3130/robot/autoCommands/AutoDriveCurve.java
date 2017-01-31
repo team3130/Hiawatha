@@ -1,8 +1,9 @@
 package org.usfirst.frc.team3130.robot.autoCommands;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
+
+import com.ctre.CANTalon.FeedbackDevice;
+import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Timer;
@@ -14,17 +15,13 @@ public class AutoDriveCurve extends PIDCommand {
 
 	private Timer timer;
 	
-	private double m_arcLength;
-	private double m_angle;
+	private double m_radius;
+	private double m_theta;
 	private double m_threshold;
-	private double m_speed;
+	private double m_time;
 	private boolean m_shiftLow;
-	private boolean m_right;
-	private double m_totalTime;
-	private double m_arcLR;
-	private double m_arcLL;
-	private double m_speedL;
-	private double m_speedR;
+	private boolean m_goRight;
+	private double m_speed;
 	
     public AutoDriveCurve() {
     	super(0.1, 0, 0);	//TODO: Tune Pid Numbers
@@ -34,14 +31,13 @@ public class AutoDriveCurve extends PIDCommand {
         requires(Chassis.GetInstance());
     }
 
-    public void SetParam(double arcLength, double threshold, double angle, double speed, boolean shiftLow, boolean goRight){
-    	m_arcLength = arcLength;
-    	m_angle = angle;
+    public void SetParam(double radius, double theta, double time, double threshold, boolean shiftLow, boolean goRight){
+    	m_radius = radius;
+    	m_theta = theta;
     	m_threshold = threshold;
-    	m_speed = speed;
+    	m_time = time;
     	m_shiftLow = shiftLow;
-    	m_right = goRight;
-    	m_totalTime = m_arcLength / m_speed;
+    	m_goRight = goRight;
     }
     
     // Called just before this Command runs the first time
@@ -54,23 +50,27 @@ public class AutoDriveCurve extends PIDCommand {
     	Chassis.Shift(m_shiftLow);
     	
     	//define the radii that the robot's middle, right wheels, and left wheels will follow
-    	double R = (m_arcLength*360)/(2*Math.PI*m_angle);
-    	double insideR = R - (Chassis.InchesWheelToWheel / 2);
-    	double outsideR = R + (Chassis.InchesWheelToWheel / 2);
+    	double insideArc = 2.0 * Math.PI * (m_radius - (Chassis.robotWidth / 2)) * (m_theta/360.0);
+    	double outsideArc = 2.0 * Math.PI * (m_radius + (Chassis.robotWidth / 2)) * (m_theta/360.0);
     	
-    	//set direction by which side is the inside (the smaller arc)
-    	if (m_right) {
-    		m_arcLL = 2.0 * Math.PI * outsideR * (m_angle/360.0);
-    		m_arcLR = 2.0 * Math.PI * insideR * (m_angle/360.0);
+    	
+    	//set the speed of the inside wheels and set distance for outside wheels
+    	if(m_goRight) {
+    		Chassis.getFrontR().changeControlMode(TalonControlMode.Speed);
+        	Chassis.getFrontR().setFeedbackDevice(FeedbackDevice.QuadEncoder);
+        	Chassis.getFrontR().setPID(1, 0, 0); //TODO:Tune PID Numbers
+        	Chassis.getFrontR().configEncoderCodesPerRev(1024);
+        	Chassis.setSpeedR(insideArc/m_time);
+        	//code to set distance of L
     	}
     	else {
-    		m_arcLL = 2.0 * Math.PI * insideR * (m_angle/360.0);
-    		m_arcLR = 2.0 * Math.PI * outsideR * (m_angle/360.0);
+    		Chassis.getFrontL().changeControlMode(TalonControlMode.Speed);
+    		Chassis.getFrontL().setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    		Chassis.getFrontL().setPID(1, 0, 0); //TODO:Tune PID Numbers
+    		Chassis.getFrontL().configEncoderCodesPerRev(1024);
+    		Chassis.setSpeedL(insideArc/m_time);
+    		//code to set distance of R
     	}
-    	
-    	//set speeds for both wheel sides to give desired total speed
-		m_speedL = m_arcLL / m_totalTime;
-		m_speedR = m_arcLR / m_totalTime;
 		
     	getPIDController().enable();
     	timer.reset();
