@@ -35,7 +35,6 @@ public class Robot extends IterativeRobot {
 		Intake.GetInstance();
 		LifterLegs.GetInstance();
 		Climber.GetInstance();
-		ShooterTurret.GetInstance();
 		ShooterWheels.GetInstance();
 		ShooterAltitude.GetInstance();
 		Hopper.GetInstance();
