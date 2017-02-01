@@ -32,13 +32,14 @@ public class Robot extends IterativeRobot {
 		
 		OI.GetInstance();
 		Chassis.GetInstance();
-		Intake.GetInstance();
-		LifterLegs.GetInstance();
 		Climber.GetInstance();
-		ShooterTurret.GetInstance();
+		GearGrabber.GetInstance();
+		Hopper.GetInstance();
+		Intake.GetInstance();
 		ShooterWheels.GetInstance();
 		ShooterAltitude.GetInstance();
 		Hopper.GetInstance();
+		TurnWheelExtender.GetInstance();
 		chooser = new SendableChooser<CommandGroup>();
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
