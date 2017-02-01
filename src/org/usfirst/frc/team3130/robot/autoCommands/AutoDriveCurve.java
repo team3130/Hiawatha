@@ -47,6 +47,7 @@ public class AutoDriveCurve extends Command {
     	//Needs to occur for both turn directions
 		Chassis.Shift(m_shiftLow);
 		Chassis.setTalonPID();
+		Chassis.ReleaseAngle();
     	
     	if(m_turnLeft){
     		Chassis.setRightMotorMode(TalonControlMode.Position);

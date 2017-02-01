@@ -2,6 +2,8 @@ package org.usfirst.frc.team3130.robot.autoCommands;
 
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 
+import com.ctre.CANTalon.TalonControlMode;
+
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.PIDCommand;
@@ -47,6 +49,8 @@ public class AutoDriveStraightToPoint extends PIDCommand {
     	
     	Chassis.Shift(m_shiftLow);
     	Chassis.HoldAngle(m_angle);
+    	Chassis.setLeftMotorMode(TalonControlMode.PercentVbus);
+    	Chassis.setRightMotorMode(TalonControlMode.PercentVbus);
     	
     	timer.reset();
     	timer.start();
