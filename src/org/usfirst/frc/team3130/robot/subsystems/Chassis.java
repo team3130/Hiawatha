@@ -265,6 +265,15 @@ public class Chassis extends PIDSubsystem {
     {
     	m_rightMotorFront.set(speed/100.d);	//Convert from a speed in seconds to centiseconds
     }
+
+    public static void TalonsToCoast(boolean coast)
+    {
+    	m_leftMotorFront.enableBrakeMode(!coast);
+    	m_leftMotorRear.enableBrakeMode(!coast);
+    	m_rightMotorFront.enableBrakeMode(!coast);
+    	m_rightMotorRear.enableBrakeMode(!coast);
+
+    }
 }
 
 
