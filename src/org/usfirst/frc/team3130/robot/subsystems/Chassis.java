@@ -342,7 +342,7 @@ public class Chassis extends PIDSubsystem {
      * 
      * @param set - The setpoint value, as described above.
      */
-    public void setLeftTalon(double set)
+    public static void setLeftTalon(double set)
     {
     	m_leftMotorFront.set(set);
     }
@@ -362,9 +362,27 @@ public class Chassis extends PIDSubsystem {
      * 
      * @param set - The setpoint value, as described above.
      */
-    public void setRightTalon(double set)
+    public static void setRightTalon(double set)
     {
     	m_rightMotorFront.set(set);
+    }
+    
+    /**
+     * Returns the difference between the setpoint and the current position
+     * @return the error on the left encoder
+     */
+    public static double getLeftTalonError()
+    {
+    	return m_leftMotorFront.getError();
+    }
+    
+    /**
+     * Returns the difference between the setpoint and the current position
+     * @return the error on the right encoder
+     */
+    public static double getRightTalonError()
+    {
+    	return m_rightMotorFront.getError();
     }
 }
 

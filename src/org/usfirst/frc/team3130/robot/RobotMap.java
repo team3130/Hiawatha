@@ -4,6 +4,7 @@ public class RobotMap {
 	//Constant Ratios
 			public static final int RATIO_WINCHCODESPERREV = 1024;
 			public static final int RATIO_DRIVECODESPERREV = 360;
+			public static final double DIM_ROBOTWHEELTOWHEEL = 31.63;
 
 		//DIO Ports
 			//Prefix DIO_
