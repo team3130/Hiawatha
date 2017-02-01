@@ -22,19 +22,15 @@ public class RobotMap {
 			public static final int CAN_RIGHTMOTORREAR = 5;
 			public static final int CAN_CLIMBERMOTOR1 = 6;
 			public static final int CAN_CLIMBERMOTOR2 = 7;
-			public static final int CAN_FUELTRANSFERMOTOR = 8;
-			public static final int CAN_HOPPERMOTOR1 = 9;
-			public static final int CAN_HOPPERMOTOR2 = 10;
+			public static final int CAN_INTAKEMOTOR = 8;
+			public static final int CAN_HOPPERSTIR = 9;
+			public static final int CAN_HOPPERINDEX = 10;
 			public static final int CAN_SHOOTERWHEELS = 11;
-			public static final int CAN_SHOOTERTURRET = 12;
-			public static final int CAN_INTAKEMOTOR = 13;
+
 		
 		//Pnuematics Ports
 			public static final int PNM_GEARSHIFTER = 1;
-			public static final int PNM_LIFTLEG1 = 2;
-			public static final int PNM_LIFTLEG2 = 3;
-			public static final int PNM_LIFTLEG3 = 4;
-			public static final int PNM_LIFTLEG4 = 5;
+			public static final int PNM_LIFTWHEEL = 2;
 		
 		//Analog Input
 			//Prefix ANG_
@@ -84,4 +80,7 @@ public class RobotMap {
 			
 			//Shooter
 			public static final int BTN_TESTSHOOTERWHEELS = LST_BTN_LBUMPER;
+			
+			//Wheel Lift
+			public static final int BTN_LIFTROBOT = 1;	//TODO: Get Actual Button
 }

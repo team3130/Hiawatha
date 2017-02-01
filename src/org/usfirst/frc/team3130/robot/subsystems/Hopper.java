@@ -28,17 +28,14 @@ public class Hopper extends Subsystem {
     }
 
     //Define necessary objects
-    private static CANTalon m_hopperMotor1;
-    private static CANTalon m_hopperMotor2;
-    private static CANTalon m_fuelTransfer;
+    private static CANTalon m_hopperStirrer;
+    private static CANTalon m_hopperIndexer;
     
     private Hopper()
     {
     	//instantiate necessary objects
-    	m_hopperMotor1 = new CANTalon(RobotMap.CAN_HOPPERMOTOR1);
-    	m_hopperMotor2 = new CANTalon(RobotMap.CAN_HOPPERMOTOR2);
-    	m_fuelTransfer = new CANTalon(RobotMap.CAN_FUELTRANSFERMOTOR);
-    	m_hopperMotor2.reverseOutput(true);
+    	m_hopperStirrer = new CANTalon(RobotMap.CAN_HOPPERSTIR);
+    	m_hopperIndexer = new CANTalon(RobotMap.CAN_HOPPERINDEX);
     }
     
     public void initDefaultCommand() {
@@ -47,18 +44,25 @@ public class Hopper extends Subsystem {
     }
     
     /**
-     * Drives the hopper belts
-     * <p> This function will drive the hopper belts in opposite directions, with the bottom one being driven forward, 
-     * and the top being driven backwards. The function takes a value from -1.0 to 1.0 which is the percentage of the 
-     * voltage provided to the talon which should be passed on to the belt motors.
-     * <br> It also drives the motor transporting balls between the hopper and the shooter
+     * Drives the hopper stirrer
+     * <p> This function will drive the hopper stirrer. The function takes a value from -1.0 to 1.0 which is the percentage of the 
+     * voltage provided to the talon which should be passed on to the stirrer motor.
      * @param percent the percentage of the voltage available to the talon to drive at
      */
-    public static void driveHopper(double percent)
+    public static void driveHopperStirrer(double percent)
     {
-    	m_hopperMotor1.set(percent);
-    	m_hopperMotor2.set(percent);
-    	m_fuelTransfer.set(percent);
+    	m_hopperStirrer.set(percent);
+    }
+    
+    /**
+     * Drives the hopper indexer
+     * <p> This function will drive the hopper indexer. The function takes a value from -1.0 to 1.0 which is the percentage of the 
+     * voltage provided to the talon which should be passed on to the indexer motor.
+     * @param percent the percentage of the voltage available to the talon to drive at
+     */
+    public static void driveHopperIndexer(double percent)
+    {
+    	m_hopperIndexer.set(percent);
     }
 }
 

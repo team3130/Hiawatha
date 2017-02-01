@@ -1,27 +1,25 @@
 package org.usfirst.frc.team3130.robot.commands;
 
-import org.usfirst.frc.team3130.robot.subsystems.Hopper;
+import org.usfirst.frc.team3130.robot.subsystems.TurnWheelExtender;
 
-import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DriveHopper extends Command {
+public class ExtendLiftWheel extends Command {
 
-    public DriveHopper() {
-        requires(Hopper.GetInstance());
+    public ExtendLiftWheel() {
+        requires(TurnWheelExtender.GetInstance());
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	TurnWheelExtender.ActuateWheel(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Hopper.driveHopperStirrer(Preferences.getInstance().getDouble("Hopper Stirrer PercentVBus", 1.0));
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -31,6 +29,7 @@ public class DriveHopper extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	TurnWheelExtender.ActuateWheel(false);
     }
 
     // Called when another command which requires one or more of the same
