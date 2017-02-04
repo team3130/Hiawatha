@@ -123,12 +123,21 @@ public class Chassis extends PIDSubsystem {
     }
     
     public static boolean GetShiftedDown(){return m_bShiftedLow;}
-
+    
+    
+    /**
+     * Returns the current speed of the front left motor
+     * @return Current speed of the front left motor (unknown units)
+     */
     public static double GetSpeedL()
     {
     	return m_leftMotorFront.getSpeed() * InchesPerRev / 50.0;
     }
     
+    /**
+     * Returns the current speed of the front right motor
+     * @return Current speed of the front right motor (unknown units)
+     */
     public static double GetSpeedR()
     {
     	return m_rightMotorFront.getSpeed() * InchesPerRev / 50.0;	
@@ -141,15 +150,24 @@ public class Chassis extends PIDSubsystem {
     	return GetSpeedL();
     }
     
+    /**
+     * 
+     * @return Current distance of the front left motor in inches
+     */
     public static double GetDistanceL()
     {
     	return m_leftMotorFront.getPosition() * InchesPerRev;
     }
     
+    /**
+     * 
+     * @return Current distance of the front right motor in inches
+     */
     public static double GetDistanceR()
     {
     	return m_rightMotorFront.getPosition() * InchesPerRev;
     }
+    
     
     public static double GetDistance()
     {

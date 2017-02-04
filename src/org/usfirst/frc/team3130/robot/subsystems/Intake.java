@@ -48,5 +48,13 @@ public class Intake extends Subsystem {
     {
     	m_intakeMotor.set(percentage);
     }
+    
+    /**
+     * Gets the speed of the intakeWheels
+     * @return speed of the intakeWheels in native ticks per 100ms
+     */
+    public static double getIntake() {
+    	return m_intakeMotor.getSpeed();
+    }
 }
 
