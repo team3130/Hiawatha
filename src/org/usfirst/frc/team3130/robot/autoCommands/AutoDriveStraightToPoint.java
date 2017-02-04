@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3130.robot.autoCommands;
 
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
+import org.usfirst.frc.team3130.robot.subsystems.Chassis.TurnDirection;
 
 import com.ctre.CANTalon.TalonControlMode;
 
@@ -49,8 +50,7 @@ public class AutoDriveStraightToPoint extends PIDCommand {
     	
     	Chassis.Shift(m_shiftLow);
     	Chassis.HoldAngle(m_angle);
-    	Chassis.setLeftMotorMode(TalonControlMode.PercentVbus);
-    	Chassis.setRightMotorMode(TalonControlMode.PercentVbus);
+    	Chassis.setTurnDir(TurnDirection.kStraight);
     	
     	timer.reset();
     	timer.start();
