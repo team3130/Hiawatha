@@ -4,8 +4,8 @@ package org.usfirst.frc.team3130.robot.autoCommands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team3130.robot.RobotMap;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
+import org.usfirst.frc.team3130.robot.subsystems.Chassis.TurnDirection;
 
-import com.ctre.CANTalon.TalonControlMode;
 
 /**
  *
@@ -19,8 +19,6 @@ public class AutoDriveCurve extends Command {
 	private boolean m_turnLeft = false;
 	
 	private double m_radiusFar;
-	private double m_radiusNear;
-	private double m_conversionRatio;	//Converts from the far side to the near side
 	
     public AutoDriveCurve() {				
         requires(Chassis.GetInstance());
@@ -28,11 +26,11 @@ public class AutoDriveCurve extends Command {
 
 
     /**
-     * 
-     * @param radius
-     * @param threshold
-     * @param angle
-     * @param shiftLow
+     * Sets up the curve to be driven
+     * @param radius the radius from to the center of the robot
+     * @param threshold the threshold on the distance in inches
+     * @param angle the angle to turn in radians
+     * @param shiftLow to shift the robot to low gear or not
      */
     public void SetParam(double radius, double threshold, double angle, boolean shiftLow){
     	m_angle = angle;
@@ -40,46 +38,52 @@ public class AutoDriveCurve extends Command {
     	m_shiftLow = shiftLow;
     	
     	if(radius > 0) m_turnLeft = true;
-    	m_radiusNear = radius - RobotMap.DIM_ROBOTWHEELTOWHEEL/2;
-    	m_radiusFar = radius + RobotMap.DIM_ROBOTWHEELTOWHEEL/2;
-    	m_conversionRatio = m_radiusNear/m_radiusFar;
+    	m_radiusFar = Math.abs(radius) + RobotMap.DIM_ROBOTWHEELTOWHEEL/2;
+    }
+    
+    /**
+     * Sets up the curve to be driven
+     * @param linearDistance the distance in a straight line, as a chord of the curve
+     * @param horizontalOffset the distance from the starting point to the tangent line of the ending point of the curve
+     * @param shiftLow to shift the robot to low gear or not
+     * @param threshold the threshold on the distance in inches
+     */
+    public void SetParam(double linearDistance, double horizontalOffset, boolean shiftLow, double threshold)
+    {
+    	m_threshold = threshold;
+    	m_shiftLow = shiftLow;
+    	
+    	m_angle = 2*Math.asin(horizontalOffset/linearDistance);
+    	
+    	double radius = (linearDistance*linearDistance)/(2*horizontalOffset);
+    	if(radius>0) m_turnLeft = true;
+    	m_radiusFar = Math.abs(radius) + RobotMap.DIM_ROBOTWHEELTOWHEEL/2;
     }
     
     // Called just before this Command runs the first time
     protected void initialize() {  	
     	//Needs to occur for both turn directions
 		Chassis.Shift(m_shiftLow);
-		Chassis.setTalonPID();
-		Chassis.ReleaseAngle();
-    	
+		Chassis.ReleaseAngle();		
 
     	if(m_turnLeft){
-    		Chassis.setRightMotorMode(TalonControlMode.Position);
-    		Chassis.setLeftMotorMode(TalonControlMode.Speed);
-    		
-
-    		Chassis.setRightTalon((m_angle*Math.PI*m_radiusFar)/180);
-    	}else{
-    		Chassis.setLeftMotorMode(TalonControlMode.Position);
-    		Chassis.setRightMotorMode(TalonControlMode.Speed);
-    		
-    		Chassis.setLeftTalon((m_angle*Math.PI*m_radiusFar)/180);
+    		Chassis.setTurnDir(TurnDirection.kLeft);    		
     	}
+    	else{
+    		Chassis.setTurnDir(TurnDirection.kRight);
+    	}
+    	
+    	Chassis.setPositionTalon(m_angle*m_radiusFar);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(m_turnLeft){
-    		Chassis.setLeftTalon(m_conversionRatio * Chassis.GetSpeedR());
-    	}else{
-    		Chassis.setRightTalon(m_conversionRatio * Chassis.GetSpeedL());
-    	}
+    	Chassis.HoldAngle(Chassis.getPositionTalonSpeed()/m_radiusFar);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(m_turnLeft) return Chassis.getRightTalonError() < m_threshold;
-    	return Chassis.getLeftTalonError() < m_threshold;
+    	return Chassis.getPositionTalonError() < m_threshold;
     }
 
     // Called once after isFinished returns true

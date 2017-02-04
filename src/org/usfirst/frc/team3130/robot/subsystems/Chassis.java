@@ -343,7 +343,8 @@ public class Chassis extends PIDSubsystem {
 	public static void HoldAngle(double angle)
 	{
 		SetPIDValues();
-		GetInstance().getPIDController().setSetpoint(GetAngle() + angle);
+		if(m_dir.equals(TurnDirection.kStraight))GetInstance().getPIDController().setSetpoint(GetAngle() + angle);
+		else GetInstance().getPIDController().setSetpoint(angle);
 		GetInstance().getPIDController().enable();
 	}
 	
@@ -522,6 +523,19 @@ public class Chassis extends PIDSubsystem {
 	{
 		if(m_dir.equals(TurnDirection.kRight)) return m_rightMotorFront.getError();
 		else if(m_dir.equals(TurnDirection.kLeft))return m_leftMotorFront.getError();
+		return -1;
+	}
+	
+	/**
+	 * Returns the current speed of the postion talon
+	 * 
+	 * Determines which side is being driven in position mode, and returns the speed of that side. Returns -1 if in kStraight mode
+	 * @return the speed of the position talon
+	 */
+	public static double getPositionTalonSpeed()
+	{
+		if(m_dir.equals(TurnDirection.kRight)) return m_leftMotorFront.getSpeed();
+		else if(m_dir.equals(TurnDirection.kLeft))return m_rightMotorFront.getSpeed();
 		return -1;
 	}
 	
