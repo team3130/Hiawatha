@@ -24,7 +24,7 @@ public class RobotSensors extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//Shooter Wheel
-    	//SmartDashboard.putNumber("Shooter Wheel Speed", ShooterWheels.getSpeed());
+    	SmartDashboard.putNumber("Shooter Wheel Speed", ShooterWheels.getSpeed());
     	//SmartDashboard.putNumber("Shooter Wheel Voltage", ShooterWheels.GetVolt());
     	//SmartDashboard.putNumber("Shooter Wheel Current", ShooterWheels.GetCurrent());
     	

@@ -31,9 +31,9 @@ public class ShooterWheels extends Subsystem {
     
     private ShooterWheels() {
     	m_wheelControl = new CANTalon(RobotMap.CAN_SHOOTERWHEELS);
-    	m_wheelControl.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+    	m_wheelControl.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	m_wheelControl.setPID(1 , 0, 0 ); //TODO:Tune PID Numbers
-    	m_wheelControl.configEncoderCodesPerRev(1024);
+    	m_wheelControl.configEncoderCodesPerRev(18);	//After going through gear ratio 18 ticks per rev
     	
     	LiveWindow.addActuator("Shooter", "Wheels", m_wheelControl);
     }
