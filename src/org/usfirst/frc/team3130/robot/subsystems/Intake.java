@@ -56,5 +56,21 @@ public class Intake extends Subsystem {
     public static double getIntake() {
     	return m_intakeMotor.getSpeed();
     }
+    
+    /**
+     * Gets the voltage output of the intakeWheels talon
+     * @return voltage output of talon, in volts
+     */
+    public static double getVolt() {
+    	return m_intakeMotor.getOutputVoltage();
+    }
+    
+    /**
+     * Gets the current going through the intakeWheels talon
+     * @return current going through talon, in Amperes
+     */
+    public static double getCurrent() {
+    	return m_intakeMotor.getOutputCurrent();
+    }
 }
 

@@ -18,7 +18,7 @@ public class GearGrabber extends Subsystem {
      * with only a single copy of it existing in memory.
      * <p> It will return a reference to the class, which is shared amoungst all callers of GetInstance()
      * 
-     * @return the reference to the class refered to in GetInstance. In this case, GearGrabber.
+     * @return the reference to the class referred to in GetInstance. In this case, GearGrabber.
      */
     public static GearGrabber GetInstance()
     {

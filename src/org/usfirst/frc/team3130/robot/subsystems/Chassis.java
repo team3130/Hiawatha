@@ -151,6 +151,38 @@ public class Chassis extends PIDSubsystem {
     }
     
     /**
+     * Returns the current voltage being output by the front left talon
+     * @return voltage being output by talon in volts
+     */
+    public static double GetVoltL() {
+    	return m_leftMotorFront.getOutputVoltage();
+    }
+    
+    /**
+     * Returns the current voltage being output by the front right talon
+     * @return voltage being output by talon in volts
+     */
+    public static double GetVoltR() {
+    	return m_rightMotorFront.getOutputVoltage();
+    }
+    
+    /**
+     * Returns the current going through the front left talon
+     * @return current going through talon, in Amperes
+     */
+    public static double GetCurrentL() {
+    	return m_leftMotorFront.getOutputCurrent();
+    }
+    
+    /**
+     * Returns the current going through the front right talon
+     * @return current going through talon, in Amperes
+     */
+    public static double GetCurrentR() {
+    	return m_rightMotorFront.getOutputCurrent();
+    }
+    
+    /**
      * 
      * @return Current distance of the front left motor in inches
      */
