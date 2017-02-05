@@ -25,16 +25,30 @@ public class RobotSensors extends Command {
     protected void execute() {
     	//Shooter Wheel
     	//SmartDashboard.putNumber("Shooter Wheel Speed", ShooterWheels.getSpeed());
+    	//SmartDashboard.putNumber("Shooter Wheel Voltage", ShooterWheels.GetVolt());
+    	//SmartDashboard.putNumber("Shooter Wheel Current", ShooterWheels.GetCurrent());
+    	
     	
     	//Chassis
     	//SmartDashboard.putNumber("Front Left Wheel Speed", Chassis.GetSpeedL());
     	//SmartDashboard.putNumber("Front Right Wheel Speed", Chassis.GetSpeedR());
+    	//SmartDashboard.putNumber("Front Left Voltage", Chassis.GetFrontVoltL());
+    	//SmartDashboard.putNumber("Front Right Voltage", Chassis.GetFrontVoltR());
+    	//SmartDashboard.putNumber("Rear Left Voltage", Chassis.GetRearVoltL());
+    	//SmartDashboard.putNumber("Rear Right Voltage", Chassis.GetRearVoltR());
+    	//SmartDashboard.putNumber("Front Left Current", Chassis.GetFrontCurrentL());
+    	//SmartDashboard.putNumber("Front Right Current", Chassis.GetFrontCurrentR());
+    	//SmartDashboard.putNumber("Rear Left Current", Chassis.GetRearCurrentL());
+    	//SmartDashboard.putNumber("Rear Right Current", Chassis.GetRearCurrentR());
+    	
     	
     	//Shooter Altitude
-    	//SmartDashboard.putNumber("Shooter Altitude Servo Angle", ShooterAltitude.getAltitude());
+    	//SmartDashboard.putNumber("Shooter Altitude Angle", ShooterAltitude.getAltitude());
     	
     	//Intake
     	//SmartDashboard.putNumber("Intake Wheels Speed", Intake.getIntake());
+    	//SmartDashboard.putNumber("Intake Wheels Voltage", Intake.getVolt());
+    	//SmartDashboard.putNumber("Intake Wheels Current", Intake.getCurrent());
     	
     }
 

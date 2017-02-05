@@ -51,6 +51,7 @@ public class ShooterWheels extends Subsystem {
     	return m_wheelControl.getSpeed()*100;	//convert /centiseconds to /seconds
     }
     
+    
     /**
      * Sets the speed to spin the Wheels at. 
      * <p> <b> THIS IS NOT THE USUAL VOLTAGE PERCENTAGE </b>
@@ -63,6 +64,21 @@ public class ShooterWheels extends Subsystem {
     	m_wheelControl.set(speed/100.d);	//Convert from a speed in seconds to centiseconds
     }
     
+    /**
+     * Returns the voltage being output by the shooter wheels talon
+     * @return voltage output of talon, in volts
+     */
+    public static double GetVolt() {
+    	return m_wheelControl.getOutputVoltage();
+    }
+    
+    /**
+     * Returns the current going through the shooter wheels talon
+     * @return current going through talon, in Amperes
+     */
+    public static double GetCurrent() {
+    	return m_wheelControl.getOutputCurrent();
+    }
     
     public static void stop()
     {
