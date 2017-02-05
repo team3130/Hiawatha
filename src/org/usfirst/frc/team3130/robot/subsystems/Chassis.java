@@ -154,7 +154,7 @@ public class Chassis extends PIDSubsystem {
      * Returns the current voltage being output by the front left talon
      * @return voltage being output by talon in volts
      */
-    public static double GetVoltL() {
+    public static double GetFrontVoltL() {
     	return m_leftMotorFront.getOutputVoltage();
     }
     
@@ -162,15 +162,31 @@ public class Chassis extends PIDSubsystem {
      * Returns the current voltage being output by the front right talon
      * @return voltage being output by talon in volts
      */
-    public static double GetVoltR() {
+    public static double GetFrontVoltR() {
     	return m_rightMotorFront.getOutputVoltage();
+    }
+    
+    /**
+     * Returns the current voltage being output by the rear left talon
+     * @return voltage being output by talon in volts
+     */
+    public static double GetRearVoltL() {
+    	return m_leftMotorRear.getOutputVoltage();
+    }
+    
+    /**
+     * Returns the current voltage being output by the rear right talon
+     * @return voltage being output by talon in volts
+     */
+    public static double GetRearVoltR() {
+    	return m_rightMotorRear.getOutputVoltage();
     }
     
     /**
      * Returns the current going through the front left talon
      * @return current going through talon, in Amperes
      */
-    public static double GetCurrentL() {
+    public static double GetFrontCurrentL() {
     	return m_leftMotorFront.getOutputCurrent();
     }
     
@@ -178,8 +194,24 @@ public class Chassis extends PIDSubsystem {
      * Returns the current going through the front right talon
      * @return current going through talon, in Amperes
      */
-    public static double GetCurrentR() {
+    public static double GetFrontCurrentR() {
     	return m_rightMotorFront.getOutputCurrent();
+    }
+    
+    /**
+     * Returns the current going through the rear left talon
+     * @return current going through talon, in Amperes
+     */
+    public static double GetRearCurrentL() {
+    	return m_leftMotorRear.getOutputCurrent();
+    }
+    
+    /**
+     * Returns the current going through the rear right talon
+     * @return current going through talon, in Amperes
+     */
+    public static double GetRearCurrentR() {
+    	return m_rightMotorRear.getOutputCurrent();
     }
     
     /**
