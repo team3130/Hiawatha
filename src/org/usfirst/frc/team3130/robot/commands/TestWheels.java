@@ -16,13 +16,14 @@ public class TestWheels extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	double testSpeed = Preferences.getInstance().getDouble("Test Speed", 0);
+    	double testSpeed = Preferences.getInstance().getDouble("Speed Setpoint", 0);
     	System.out.println(testSpeed);
     	ShooterWheels.setSpeed(testSpeed);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	ShooterWheels.setPID();
     }
 
     // Make this return true when this Command no longer needs to run execute()
