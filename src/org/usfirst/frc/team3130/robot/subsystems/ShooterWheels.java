@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3130.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
@@ -31,9 +32,8 @@ public class ShooterWheels extends Subsystem {
     
     private ShooterWheels() {
     	m_wheelControl = new CANTalon(RobotMap.CAN_SHOOTERWHEELS);
-    	m_wheelControl.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-    	m_wheelControl.setPID(1 , 0, 0 ); //TODO:Tune PID Numbers
-    	m_wheelControl.configEncoderCodesPerRev(1024);
+    	m_wheelControl.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	m_wheelControl.configEncoderCodesPerRev(18);	//After going through gear ratio 18 ticks per rev
     	
     	LiveWindow.addActuator("Shooter", "Wheels", m_wheelControl);
     }
@@ -44,11 +44,11 @@ public class ShooterWheels extends Subsystem {
     
     /**
      * Returns the current RPS of the wheels
-     * @return the current angular velocity in revolutions per second
+     * @return the current angular velocity in revolutions per something????
      */
     public static double getSpeed()
     {
-    	return m_wheelControl.getSpeed()*100;	//convert /centiseconds to /seconds
+    	return m_wheelControl.getSpeed() * (600.0/18.0);	//convert /centiseconds to /seconds
     }
     
     
@@ -56,12 +56,12 @@ public class ShooterWheels extends Subsystem {
      * Sets the speed to spin the Wheels at. 
      * <p> <b> THIS IS NOT THE USUAL VOLTAGE PERCENTAGE </b>
      * <br>This function instead sets an actual rotational velocity.
-     * @param speed is the speed in rotations per second
+     * @param speed is the speed in rotations per something????
      */
     public static void setSpeed(double speed)
     {
     	m_wheelControl.changeControlMode(TalonControlMode.Speed);
-    	m_wheelControl.set(speed/100.d);	//Convert from a speed in seconds to centiseconds
+    	m_wheelControl.set(speed / (600.0/18.0));	//Convert from a speed in seconds to centiseconds
     }
     
     /**
@@ -78,6 +78,23 @@ public class ShooterWheels extends Subsystem {
      */
     public static double GetCurrent() {
     	return m_wheelControl.getOutputCurrent();
+    }
+    
+    public static double GetSetpoint() {
+    	return m_wheelControl.getSetpoint() * (600.0/18.0);
+    }
+    
+    public static void setPID() {
+    	System.out.println("setting PID...");
+    	m_wheelControl.setPID(
+    			Preferences.getInstance().getDouble("Shooter P", 1), 
+    			Preferences.getInstance().getDouble("Shooter I", 0), 
+    			Preferences.getInstance().getDouble("Shooter D", 0),
+    			Preferences.getInstance().getDouble("Shooter F", 0),
+    			0,
+    			Preferences.getInstance().getDouble("Shooter Max Ramp", 0),
+    			0
+    		); //TODO:Tune PID Numbers
     }
     
     public static void stop()
