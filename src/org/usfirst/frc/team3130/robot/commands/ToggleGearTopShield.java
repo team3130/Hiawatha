@@ -1,21 +1,21 @@
 package org.usfirst.frc.team3130.robot.commands;
 
-import org.usfirst.frc.team3130.robot.subsystems.TurnWheelExtender;
+import org.usfirst.frc.team3130.robot.subsystems.GearTopShield;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ExtendLiftWheel extends Command {
+public class ToggleGearTopShield extends Command {
 
-    public ExtendLiftWheel() {
-        requires(TurnWheelExtender.GetInstance());
+    public ToggleGearTopShield() {
+        requires(GearTopShield.GetInstance());
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	TurnWheelExtender.ActuateWheel(true);
+    	GearTopShield.ActuateSheild(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -29,7 +29,7 @@ public class ExtendLiftWheel extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	TurnWheelExtender.ActuateWheel(false);
+    	GearTopShield.ActuateSheild(false);
     }
 
     // Called when another command which requires one or more of the same

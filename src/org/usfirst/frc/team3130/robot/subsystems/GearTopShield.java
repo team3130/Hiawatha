@@ -8,21 +8,21 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class TurnWheelExtender extends Subsystem {
+public class GearTopShield extends Subsystem {
 
 	//Instance Handling
-    private static TurnWheelExtender m_pInstance;
+    private static GearTopShield m_pInstance;
     /**
      * A system for getting an instance of this class.
      * The function provides a method by which the class is setup as a singleton
      * with only a single copy of it existing in memory.
      * <p> It will return a reference to the class, which is shared amoungst all callers of GetInstance()
      * 
-     * @return the reference to the class refered to in GetInstance. In this case, TurnWheelExtender.
+     * @return the reference to the class refered to in GetInstance. In this case, GearTopShield.
      */
-    public static TurnWheelExtender GetInstance()
+    public static GearTopShield GetInstance()
     {
-    	if(m_pInstance == null) m_pInstance = new TurnWheelExtender();
+    	if(m_pInstance == null) m_pInstance = new GearTopShield();
     	return m_pInstance;
     }
     
@@ -34,17 +34,19 @@ public class TurnWheelExtender extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    private TurnWheelExtender()
+    private GearTopShield()
     {
-    	m_liftWheel = new Solenoid(RobotMap.CAN_PNMMODULE, RobotMap.PNM_LIFTWHEEL);
+    	m_liftWheel = new Solenoid(RobotMap.CAN_PNMMODULE, RobotMap.PNM_TOPGEARSHIELD);
     }
     
     /**
-     * Extends the wheel that facilitates easier turning
-     * <p>Actuates the cylinder that has the wheel mounted to it, so as to make turning the robot easier, at the cost of traction
+     * Extends the shield to allow balls over the gear intake
+     * <p>Actuates the cylinder that moves a shield over the gear intake drop slot, 
+     * allowing balls to be intook into the hopper over the passive gear intake, 
+     * allowing the robot to intake both balls and gears passively from the same side.
      * @param extend to extend the cylinder or not, true extends, false retracts
      */
-    public static void ActuateWheel(boolean extend)
+    public static void ActuateSheild(boolean extend)
     {
     	m_liftWheel.set(extend);
     }
