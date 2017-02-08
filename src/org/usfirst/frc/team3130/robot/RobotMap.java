@@ -31,7 +31,7 @@ public class RobotMap {
 		
 		//Pnuematics Ports
 			public static final int PNM_GEARSHIFTER = 0;
-			public static final int PNM_LIFTWHEEL = 1;
+			public static final int PNM_TOPGEARSHIELD = 1;
 			public static final int PNM_GEARPINCH = 2;
 			public static final int PNM_GEARDOOR = 3;
 			public static final int PNM_GEARLIFT = 4;
@@ -85,6 +85,6 @@ public class RobotMap {
 			//Shooter
 			public static final int BTN_TESTSHOOTERWHEELS = LST_BTN_LBUMPER;
 			
-			//Wheel Lift
-			public static final int BTN_LIFTROBOT = 1;	//TODO: Get Actual Button
+			//Gear Control
+			public static final int BTN_SHIELDGEAR = 1;	//TODO: Get Actual Button
 }
