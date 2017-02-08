@@ -61,6 +61,11 @@ public class Chassis extends PIDSubsystem {
 		m_leftMotorFront.configEncoderCodesPerRev(RobotMap.RATIO_DRIVECODESPERREV);
 		m_rightMotorFront.configEncoderCodesPerRev(RobotMap.RATIO_DRIVECODESPERREV);
 		
+		m_leftMotorFront.reverseOutput(true);
+		m_rightMotorFront.reverseOutput(true);
+		m_leftMotorRear.reverseOutput(true);
+		m_rightMotorRear.reverseOutput(true);
+		
 		m_drive = new RobotDrive(m_leftMotorFront, m_leftMotorRear, m_rightMotorFront, m_rightMotorRear);
 		m_drive.setSafetyEnabled(false);
 		m_shifter = new Solenoid(RobotMap.CAN_PNMMODULE, RobotMap.PNM_GEARSHIFTER);
