@@ -16,7 +16,7 @@ public class RunWheelsManual extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	double testSpeed = Preferences.getInstance().getDouble("Speed Setpoint", 2000);
+    	double testSpeed = Preferences.getInstance().getDouble("Speed Setpoint", 3800);
     	System.out.println(testSpeed);
     	ShooterWheels.setSpeed(testSpeed);
     	ShooterWheels.setPID();
