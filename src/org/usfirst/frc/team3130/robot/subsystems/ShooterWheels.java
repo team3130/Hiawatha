@@ -85,11 +85,15 @@ public class ShooterWheels extends Subsystem {
     	return m_wheelControl.getSetpoint() * 4.0;
     }
     
+    public static double GetError() {
+    	return GetSetpoint() - getSpeed();
+    }
+    
     public static void setPID() {
     	System.out.println("setting PID...");
     	m_wheelControl.setPID(
     			Preferences.getInstance().getDouble("Shooter P", 10.0), 
-    			Preferences.getInstance().getDouble("Shooter I", 0.01), 
+    			Preferences.getInstance().getDouble("Shooter I", 0.0025), 
     			Preferences.getInstance().getDouble("Shooter D", 0),
     			Preferences.getInstance().getDouble("Shooter F", 4.0),
     			0,
