@@ -25,6 +25,11 @@ public class Robot extends IterativeRobot {
 	SendableChooser<CommandGroup> chooser;
 	RobotSensors robotSensors;
 
+	public static BasicCylinder bcGearPinch;
+	public static BasicCylinder bcGearLift;
+	public static BasicCylinder bcGearDoors;
+	public static BasicCylinder bcGearShield;
+	
 	@Override
 	public void robotInit() {
 		robotSensors = new RobotSensors();
@@ -33,14 +38,16 @@ public class Robot extends IterativeRobot {
 		OI.GetInstance();
 		Chassis.GetInstance();
 		Climber.GetInstance();
-		GearGrabber.GetInstance();
-		GearTopShield.GetInstance();
 		Hopper.GetInstance();
 		IndexMotor.GetInstance();
 		Intake.GetInstance();
 		ShooterWheels.GetInstance();
 		ShooterAltitude.GetInstance();
 		Hopper.GetInstance();
+		
+		bcGearPinch = new BasicCylinder(RobotMap.PNM_GEARPINCH);
+		bcGearLift = new BasicCylinder(RobotMap.PNM_GEARLIFT);
+		bcGearDoors = new BasicCylinder(RobotMap.PNM_GEARDOOR);
 
 		chooser = new SendableChooser<CommandGroup>();
 		// chooser.addObject("My Auto", new MyAutoCommand());

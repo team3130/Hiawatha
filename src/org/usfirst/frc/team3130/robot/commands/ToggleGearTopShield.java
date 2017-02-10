@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3130.robot.commands;
 
-import org.usfirst.frc.team3130.robot.subsystems.GearTopShield;
+import org.usfirst.frc.team3130.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -10,12 +10,12 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ToggleGearTopShield extends Command {
 
     public ToggleGearTopShield() {
-        requires(GearTopShield.GetInstance());
+        requires(Robot.bcGearShield);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	GearTopShield.ActuateSheild(true);
+    	Robot.bcGearShield.actuate(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -29,7 +29,7 @@ public class ToggleGearTopShield extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	GearTopShield.ActuateSheild(false);
+    	Robot.bcGearShield.actuate(false);
     }
 
     // Called when another command which requires one or more of the same

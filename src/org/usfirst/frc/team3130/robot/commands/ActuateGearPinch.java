@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3130.robot.commands;
 
-import org.usfirst.frc.team3130.robot.subsystems.GearGrabber;
+import org.usfirst.frc.team3130.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -10,12 +10,12 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ActuateGearPinch extends Command {
 
     public ActuateGearPinch() {
-    	requires(GearGrabber.GetInstance());
+    	requires(Robot.bcGearPinch);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	GearGrabber.pinchActuate(false);
+    	Robot.bcGearPinch.actuate(false);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -24,12 +24,12 @@ public class ActuateGearPinch extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	GearGrabber.pinchActuate(true);
+    	Robot.bcGearPinch.actuate(true);
     }
 
     // Called when another command which requires one or more of the same
