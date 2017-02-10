@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class TestWheels extends Command {
+public class RunWheelsManual extends Command {
 
-    public TestWheels() {
+    public RunWheelsManual() {
         requires(ShooterWheels.GetInstance());
     }
 

@@ -29,13 +29,11 @@ public class Hopper extends Subsystem {
 
     //Define necessary objects
     private static CANTalon m_hopperStirrer;
-    private static CANTalon m_hopperIndexer;
     
     private Hopper()
     {
     	//instantiate necessary objects
     	m_hopperStirrer = new CANTalon(RobotMap.CAN_HOPPERSTIR);
-    	m_hopperIndexer = new CANTalon(RobotMap.CAN_HOPPERINDEX);
     }
     
     public void initDefaultCommand() {
@@ -52,17 +50,6 @@ public class Hopper extends Subsystem {
     public static void driveHopperStirrer(double percent)
     {
     	m_hopperStirrer.set(percent);
-    }
-    
-    /**
-     * Drives the hopper indexer
-     * <p> This function will drive the hopper indexer. The function takes a value from -1.0 to 1.0 which is the percentage of the 
-     * voltage provided to the talon which should be passed on to the indexer motor.
-     * @param percent the percentage of the voltage available to the talon to drive at
-     */
-    public static void driveHopperIndexer(double percent)
-    {
-    	m_hopperIndexer.set(percent);
     }
 }
 

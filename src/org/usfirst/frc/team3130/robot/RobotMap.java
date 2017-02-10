@@ -24,7 +24,7 @@ public class RobotMap {
 			public static final int CAN_CLIMBERMOTOR2 = 7;
 			public static final int CAN_INTAKEMOTOR = 8;
 			public static final int CAN_HOPPERSTIR = 9;
-			public static final int CAN_HOPPERINDEX = 10;
+			public static final int CAN_INDEXMOTOR = 10;
 			public static final int CAN_SHOOTERWHEELS = 11;
 
 		
