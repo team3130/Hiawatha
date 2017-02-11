@@ -34,5 +34,24 @@ public class BasicCylinder extends Subsystem {
     {
     	pnm_actuator.set(extend);
     }
+    
+    /**
+     * Returns the current state of the solenoid
+     * <p>Returns true when the cylinder is extended, and false when it is retracted</p>
+     * @return the solenoid state
+     */
+    public boolean getState()
+    {
+    	return pnm_actuator.get();
+    }
+    
+    /**
+     * Sets the solenoid to the state it currently isn't in.
+     * <p>Gets the current state of the solenoid and sets it to the opposite of that.</p>
+     */
+    public void toggleState()
+    {
+    	pnm_actuator.set(!pnm_actuator.get());
+    }
 }
 

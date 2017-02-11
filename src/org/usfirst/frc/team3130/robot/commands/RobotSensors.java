@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3130.robot.commands;
 
+import org.usfirst.frc.team3130.robot.Robot;
 import org.usfirst.frc.team3130.robot.RobotMap;
 import org.usfirst.frc.team3130.robot.subsystems.*;
 
@@ -88,6 +89,11 @@ public class RobotSensors extends Command {
     	//SmartDashboard.putNumber("Intake Wheels Voltage", Intake.getVolt());
     	//SmartDashboard.putNumber("Intake Wheels Current", Intake.getCurrent());
     	
+    	//Gear
+    	//SmartDashboard.putBoolean("Gear Lift State", Robot.bcGearLift.getState());
+    	//SmartDashboard.putBoolean("Gear Pinch State", Robot.bcGearPinch.getState());
+    	//SmartDashboard.putBoolean("Gear Doors State", Robot.bcGearDoors.getState());
+    	//SmartDashboard.putBoolean("Gear Shield State", Robot.bcGearShield.getState());
     }
 
     // Make this return true when this Command no longer needs to run execute()

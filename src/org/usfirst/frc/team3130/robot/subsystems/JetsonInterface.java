@@ -52,5 +52,14 @@ public class JetsonInterface extends Subsystem {
     	return jetsonTable.getNumber(key, backup);
     }
     
+    /**
+     * Places a number on the Jetson networktable
+     * @param key the key to bind the value to
+     * @param data the number to put on the table
+     */
+    public static void putDouble(String key, double data)
+    {
+    	jetsonTable.putNumber(key, data);
+    }
 }
 
