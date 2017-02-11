@@ -34,6 +34,7 @@ public class ShooterWheels extends Subsystem {
     	m_wheelControl = new CANTalon(RobotMap.CAN_SHOOTERWHEELS);
     	m_wheelControl.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	m_wheelControl.configEncoderCodesPerRev(18);	//After going through gear ratio 18 ticks per rev
+    	m_wheelControl.reverseSensor(true);
     	
     	LiveWindow.addActuator("Shooter", "Wheels", m_wheelControl);
     }
@@ -48,7 +49,7 @@ public class ShooterWheels extends Subsystem {
      */
     public static double getSpeed()
     {
-    	return m_wheelControl.getSpeed() * (600.0/18.0);	//convert /centiseconds to /seconds
+    	return m_wheelControl.getSpeed() * 4.0;	//convert /centiseconds to /seconds
     }
     
     
@@ -61,7 +62,7 @@ public class ShooterWheels extends Subsystem {
     public static void setSpeed(double speed)
     {
     	m_wheelControl.changeControlMode(TalonControlMode.Speed);
-    	m_wheelControl.set(speed / (600.0/18.0));	//Convert from a speed in seconds to centiseconds
+    	m_wheelControl.set(speed / 4.0);	//Convert from a speed in seconds to centiseconds
     }
     
     /**
@@ -81,16 +82,25 @@ public class ShooterWheels extends Subsystem {
     }
     
     public static double GetSetpoint() {
-    	return m_wheelControl.getSetpoint() * (600.0/18.0);
+    	return m_wheelControl.getSetpoint() * 4.0;
+    }
+    
+    public static double GetError() {
+    	return GetSetpoint() - getSpeed();
+    }
+    
+    public static double GetPosition()
+    {
+    	return m_wheelControl.getPosition();
     }
     
     public static void setPID() {
     	System.out.println("setting PID...");
     	m_wheelControl.setPID(
-    			Preferences.getInstance().getDouble("Shooter P", 1), 
-    			Preferences.getInstance().getDouble("Shooter I", 0), 
-    			Preferences.getInstance().getDouble("Shooter D", 0),
-    			Preferences.getInstance().getDouble("Shooter F", 0),
+    			Preferences.getInstance().getDouble("Shooter P", 35.0), 
+    			Preferences.getInstance().getDouble("Shooter I", 0.0005), 
+    			Preferences.getInstance().getDouble("Shooter D", 1500),
+    			Preferences.getInstance().getDouble("Shooter F", 4.0),
     			0,
     			Preferences.getInstance().getDouble("Shooter Max Ramp", 0),
     			0

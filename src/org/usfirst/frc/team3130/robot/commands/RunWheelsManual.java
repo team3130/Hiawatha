@@ -8,22 +8,23 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class TestWheels extends Command {
+public class RunWheelsManual extends Command {
 
-    public TestWheels() {
+    public RunWheelsManual() {
         requires(ShooterWheels.GetInstance());
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	double testSpeed = Preferences.getInstance().getDouble("Speed Setpoint", 0);
+    	double testSpeed = Preferences.getInstance().getDouble("Speed Setpoint", 3800);
     	System.out.println(testSpeed);
     	ShooterWheels.setSpeed(testSpeed);
+    	ShooterWheels.setPID();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	ShooterWheels.setPID();
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

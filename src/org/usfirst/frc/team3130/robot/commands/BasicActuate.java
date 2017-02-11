@@ -1,19 +1,24 @@
 package org.usfirst.frc.team3130.robot.commands;
 
+import org.usfirst.frc.team3130.robot.subsystems.BasicCylinder;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class GrabGear extends Command {
+public class BasicActuate extends Command {
 
-    public GrabGear() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+	private BasicCylinder cylinder;
+	
+    public BasicActuate(BasicCylinder cylinder) {
+        requires(cylinder);
+        this.cylinder = cylinder;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	cylinder.actuate(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -27,10 +32,12 @@ public class GrabGear extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	cylinder.actuate(false);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

@@ -9,7 +9,10 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import com.ctre.CANTalon;
+<<<<<<< HEAD
 import com.ctre.CANTalon.FeedbackDevice;
+=======
+>>>>>>> master
 import com.ctre.CANTalon.TalonControlMode;
 
 /**
@@ -107,21 +110,25 @@ public class Chassis extends PIDSubsystem {
 		m_leftMotorFront.configEncoderCodesPerRev(RobotMap.RATIO_DRIVECODESPERREV);
 		m_rightMotorFront.configEncoderCodesPerRev(RobotMap.RATIO_DRIVECODESPERREV);
 		
-		//Slave the rear motors to the front motors
+
+		//Slave the Talons
 		m_leftMotorRear.changeControlMode(TalonControlMode.Follower);
 		m_leftMotorRear.set(RobotMap.CAN_LEFTMOTORFRONT);
 		
 		m_rightMotorRear.changeControlMode(TalonControlMode.Follower);
 		m_rightMotorRear.set(RobotMap.CAN_RIGHTMOTORFRONT);
 		
-		//Set up the drive
+		m_leftMotorFront.changeControlMode(TalonControlMode.PercentVbus);
+		m_rightMotorFront.changeControlMode(TalonControlMode.PercentVbus);
+		
+		
 		m_drive = new RobotDrive(m_leftMotorFront, m_rightMotorFront);
-		m_drive.setSafetyEnabled(true);
+		m_drive.setSafetyEnabled(false);
+
 		m_shifter = new Solenoid(RobotMap.CAN_PNMMODULE, RobotMap.PNM_GEARSHIFTER);
 		m_bShiftedLow = false;
 		
-		//TODO: uncomment below
-		/*
+		
 		try{
 			//Connect to navX Gyro on MXP port.
 			m_navX = new AHRS(SPI.Port.kMXP);
@@ -134,13 +141,21 @@ public class Chassis extends PIDSubsystem {
 			DriverStation.reportError(str_error, true);
 			m_bNavXPresent = false;
 		}
-		*/
+		
 		//Add systems to LiveWindow
 		LiveWindow.addActuator("Chassis", "Left Front Talon", m_leftMotorFront);
 		LiveWindow.addActuator("Chassis", "Left Rear TalonSRX", m_leftMotorRear);
 		LiveWindow.addActuator("Chassis", "Right Front TalonSRX", m_rightMotorFront);
 		LiveWindow.addActuator("Chassis", "Right Rear TalonSRX", m_rightMotorRear);
 		
+		//Flip Outputs
+		m_leftMotorFront.reverseOutput(true);
+		m_rightMotorFront.reverseOutput(true);
+		//m_leftMotorRear.reverseOutput(true);
+		//m_rightMotorRear.reverseOutput(true);
+		
+		//m_drive.setInvertedMotor(MotorType.kFrontLeft, true);
+		//m_drive.setInvertedMotor(MotorType.kFrontRight, true);
 		
 		moveSpeed = 0;
 		prevAbsBias = 0;

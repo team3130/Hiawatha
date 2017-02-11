@@ -29,6 +29,10 @@ public class OI {
 	private static JoystickButton hopperRun;
 	private static JoystickButton testShooterWheels;
 	private static JoystickButton shieldGear;
+	private static JoystickButton liftGear;
+	private static JoystickButton pinchGear;
+	private static JoystickButton doorGear;
+	private static JoystickButton spinIndexer;
 	
 	private OI()
 	{
@@ -45,6 +49,10 @@ public class OI {
 		hopperRun = new JoystickButton(gamepad, RobotMap.BTN_HOPPERDRIVE);
 		testShooterWheels = new JoystickButton(gamepad, RobotMap.BTN_TESTSHOOTERWHEELS);
 		shieldGear = new JoystickButton(gamepad, RobotMap.BTN_SHIELDGEAR);
+		liftGear = new JoystickButton(gamepad, RobotMap.BTN_LIFTGEAR);
+		pinchGear = new JoystickButton(gamepad, RobotMap.BTN_PINCHGEAR);
+		doorGear = new JoystickButton(gamepad, RobotMap.BTN_DOORGEAR);
+		spinIndexer = new JoystickButton(gamepad, RobotMap.BTN_TESTSHOOTERWHEELS);
 		
 		//Bind Joystick Buttons to Commands
 		intakeIn.whileHeld(new IntakeUp());
@@ -52,8 +60,12 @@ public class OI {
 		climberUp.whileHeld(new ClimbUp());
 		climberDown.whileHeld(new ClimbDown());
 		hopperRun.whileHeld(new DriveHopper());
-		testShooterWheels.whileHeld(new TestWheels());
-		shieldGear.toggleWhenActive(new ToggleGearTopShield());
+		testShooterWheels.whileHeld(new RunWheelsManual());
+		shieldGear.toggleWhenActive(new BasicActuate(Robot.bcGearShield));
+		liftGear.whileHeld(new BasicActuate(Robot.bcGearLift));
+		pinchGear.toggleWhenActive(new BasicActuate(Robot.bcGearPinch));
+		doorGear.whileHeld(new BasicActuate(Robot.bcGearDoors));
+		spinIndexer.whileHeld(new RunIndexer());
 	}
 
 }

@@ -4,12 +4,16 @@ import org.usfirst.frc.team3130.robot.subsystems.*;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  *
  */
 public class RobotSensors extends Command {
-
+	
+	Timer timer = new Timer();
+	boolean measuring = false;
+	
     public RobotSensors() {
     	//Ensure permanent running
     	this.setRunWhenDisabled(true);
@@ -18,14 +22,27 @@ public class RobotSensors extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	SmartDashboard.putNumber("Recovery Time", 0.0);
+    	timer.reset();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//Shooter Wheel
+    	if(Math.abs(ShooterWheels.GetError()) > 100.0 && !measuring){
+    		timer.reset();
+    		timer.start();
+    		measuring = true;
+    	}
+    	else if(Math.abs(ShooterWheels.GetError()) < 100 && measuring){
+    		timer.stop();
+    		SmartDashboard.putNumber("Recovery Time", timer.get());
+    	}
+    	
     	SmartDashboard.putNumber("Shooter Wheel Speed", ShooterWheels.getSpeed());
     	SmartDashboard.putNumber("Shooter Wheel Setpoint", ShooterWheels.GetSetpoint());
     	SmartDashboard.putNumber("Shooter Wheel Voltage", ShooterWheels.GetVolt());
+    	SmartDashboard.putNumber("Shooter Wheel Position", ShooterWheels.GetPosition());
     	//SmartDashboard.putNumber("Shooter Wheel Current", ShooterWheels.GetCurrent());
     	
     	

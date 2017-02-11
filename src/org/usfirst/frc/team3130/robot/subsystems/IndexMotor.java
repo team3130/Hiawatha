@@ -5,35 +5,38 @@ import org.usfirst.frc.team3130.robot.RobotMap;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  *
  */
-public class Hopper extends Subsystem {
+public class IndexMotor extends Subsystem {
 
 	//Instance Handling
-    private static Hopper m_pInstance;
+    private static IndexMotor m_pInstance;
     /**
      * A system for getting an instance of this class.
      * The function provides a method by which the class is setup as a singleton
      * with only a single copy of it existing in memory.
      * <p> It will return a reference to the class, which is shared amoungst all callers of GetInstance()
      * 
-     * @return the reference to the class refered to in GetInstance. In this case, Hopper.
+     * @return the reference to the class refered to in GetInstance. In this case, IndexMotor.
      */
-    public static Hopper GetInstance()
+    public static IndexMotor GetInstance()
     {
-    	if(m_pInstance == null) m_pInstance = new Hopper();
+    	if(m_pInstance == null) m_pInstance = new IndexMotor();
     	return m_pInstance;
     }
 
     //Define necessary objects
-    private static CANTalon m_hopperStirrer;
+    private static CANTalon m_indexMotor;
     
-    private Hopper()
+    private IndexMotor()
     {
     	//instantiate necessary objects
-    	m_hopperStirrer = new CANTalon(RobotMap.CAN_HOPPERSTIR);
+    	m_indexMotor = new CANTalon(RobotMap.CAN_INDEXMOTOR);
+    	m_indexMotor.reverseOutput(false);
+    	LiveWindow.addActuator("Index", "Index Motor", m_indexMotor);
     }
     
     public void initDefaultCommand() {
@@ -42,14 +45,14 @@ public class Hopper extends Subsystem {
     }
     
     /**
-     * Drives the hopper stirrer
-     * <p> This function will drive the hopper stirrer. The function takes a value from -1.0 to 1.0 which is the percentage of the 
-     * voltage provided to the talon which should be passed on to the stirrer motor.
+     * Drives the index motor
+     * <p> This function will drive the index motor. The function takes a value from -1.0 to 1.0 which is the percentage of the 
+     * voltage provided to the talon which should be passed on to the index motor.
      * @param percent the percentage of the voltage available to the talon to drive at
      */
-    public static void driveHopperStirrer(double percent)
+    public static void driveIndexMotor(double percent)
     {
-    	m_hopperStirrer.set(percent);
+    	m_indexMotor.set(percent);
     }
 }
 
