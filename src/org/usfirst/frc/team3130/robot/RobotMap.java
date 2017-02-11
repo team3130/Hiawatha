@@ -7,7 +7,7 @@ public class RobotMap {
 			public static final double DIM_ROBOTWHEELTOWHEEL = 31.63;
 
 		//DIO Ports
-			//Prefix DIO_
+			public static final int DIO_JETSONPWRON = 0;
 
 		//Relay
 			//Prefix RLY_
