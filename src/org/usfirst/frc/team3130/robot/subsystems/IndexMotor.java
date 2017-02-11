@@ -35,7 +35,7 @@ public class IndexMotor extends Subsystem {
     {
     	//instantiate necessary objects
     	m_indexMotor = new CANTalon(RobotMap.CAN_INDEXMOTOR);
-    	
+    	m_indexMotor.reverseOutput(false);
     	LiveWindow.addActuator("Index", "Index Motor", m_indexMotor);
     }
     
