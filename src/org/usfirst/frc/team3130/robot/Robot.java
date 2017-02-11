@@ -34,7 +34,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		robotSensors = new RobotSensors();
 		robotSensors.start();
-		
+
 		bcGearPinch = new BasicCylinder(RobotMap.PNM_GEARPINCH);
 		bcGearLift = new BasicCylinder(RobotMap.PNM_GEARLIFT);
 		bcGearDoors = new BasicCylinder(RobotMap.PNM_GEARDOOR);
@@ -48,7 +48,7 @@ public class Robot extends IterativeRobot {
 		Intake.GetInstance();
 		ShooterWheels.GetInstance();
 		
-		
+
 		chooser = new SendableChooser<CommandGroup>();
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
