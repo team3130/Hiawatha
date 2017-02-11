@@ -1,6 +1,8 @@
 package org.usfirst.frc.team3130.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.tables.ITable;
 
 /**
  *
@@ -23,10 +25,32 @@ public class JetsonInterface extends Subsystem {
     	return m_pInstance;
     }
     
+    private static ITable jetsonTable;
+    private static final String TABLENAME = "/Jetson";
+    
+    private JetsonInterface()
+    {
+    	jetsonTable = NetworkTable.getTable(TABLENAME);
+    }
     
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
+    
+    /**
+     * Generic getter for values from the Jetson
+     * 
+     * <p>A generic function to get values from the network table accessed by the Jetson. 
+     * As it isn't specialized for any of the values, the default needs to be passed in.</p>
+     * @param key the key to get the value of
+     * @param backup the value to return if the key doesn't exist in the table
+     * @return either the value in the table or the backup
+     */
+    public static double getDouble(String key, double backup)
+    {
+    	return jetsonTable.getNumber(key, backup);
+    }
+    
 }
 
