@@ -35,6 +35,11 @@ public class Robot extends IterativeRobot {
 		robotSensors = new RobotSensors();
 		robotSensors.start();
 		
+		bcGearPinch = new BasicCylinder(RobotMap.PNM_GEARPINCH);
+		bcGearLift = new BasicCylinder(RobotMap.PNM_GEARLIFT);
+		bcGearDoors = new BasicCylinder(RobotMap.PNM_GEARDOOR);
+		bcGearShield = new BasicCylinder(RobotMap.PNM_TOPGEARSHIELD);
+		
 		OI.GetInstance();
 		Chassis.GetInstance();
 		Climber.GetInstance();
@@ -45,11 +50,7 @@ public class Robot extends IterativeRobot {
 		ShooterAltitude.GetInstance();
 		Hopper.GetInstance();
 		
-		bcGearPinch = new BasicCylinder(RobotMap.PNM_GEARPINCH);
-		bcGearLift = new BasicCylinder(RobotMap.PNM_GEARLIFT);
-		bcGearDoors = new BasicCylinder(RobotMap.PNM_GEARDOOR);
-		bcGearShield = new BasicCylinder(RobotMap.PNM_TOPGEARSHIELD);
-
+		
 		chooser = new SendableChooser<CommandGroup>();
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
