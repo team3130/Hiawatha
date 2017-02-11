@@ -9,10 +9,9 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import com.ctre.CANTalon;
-<<<<<<< HEAD
+
 import com.ctre.CANTalon.FeedbackDevice;
-=======
->>>>>>> master
+
 import com.ctre.CANTalon.TalonControlMode;
 
 /**
