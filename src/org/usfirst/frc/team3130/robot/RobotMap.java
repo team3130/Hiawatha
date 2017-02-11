@@ -6,7 +6,7 @@ public class RobotMap {
 			public static final int RATIO_DRIVECODESPERREV = 360;
 
 		//DIO Ports
-			//Prefix DIO_
+			public static final int DIO_JETSONPWRON = 0;
 
 		//Relay
 			//Prefix RLY_
