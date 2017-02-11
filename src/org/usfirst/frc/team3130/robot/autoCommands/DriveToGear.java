@@ -2,6 +2,7 @@ package org.usfirst.frc.team3130.robot.autoCommands;
 
 import org.usfirst.frc.team3130.robot.OI;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
+import org.usfirst.frc.team3130.robot.subsystems.JetsonInterface;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -21,9 +22,9 @@ public class DriveToGear extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//Implemented from https://i.imgur.com/B9THPiA.png
-    	double x =0;	//TODO: Get from Jetson Interface
-    	double y =0;	//TODO: Get from Jetson Interface
-    	double theta =0;//TODO: Get from Jetson Interface
+    	double y = JetsonInterface.getDouble("PegYOffset", 0);	//TODO: get implemented on Jetson end
+    	double x = JetsonInterface.getDouble("PegOffset", 0);	//TODO: switch to x offset once updated on Jetson end
+    	double theta = JetsonInterface.getDouble("PegYaw", 0);
     	
     	double C = y/(x*x);
     	double alpha = Math.atan(2*C*x);

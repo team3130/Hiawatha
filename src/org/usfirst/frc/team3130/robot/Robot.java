@@ -46,6 +46,7 @@ public class Robot extends IterativeRobot {
 		Hopper.GetInstance();
 		IndexMotor.GetInstance();
 		Intake.GetInstance();
+		JetsonInterface.GetInstance();
 		ShooterWheels.GetInstance();
 		
 
