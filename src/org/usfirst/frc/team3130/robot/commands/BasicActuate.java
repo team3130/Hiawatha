@@ -1,21 +1,24 @@
 package org.usfirst.frc.team3130.robot.commands;
 
-import org.usfirst.frc.team3130.robot.Robot;
+import org.usfirst.frc.team3130.robot.subsystems.BasicCylinder;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ToggleGearTopShield extends Command {
+public class BasicActuate extends Command {
 
-    public ToggleGearTopShield() {
-        requires(Robot.bcGearShield);
+	private BasicCylinder cylinder;
+	
+    public BasicActuate(BasicCylinder cylinder) {
+        requires(cylinder);
+        this.cylinder = cylinder;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.bcGearShield.actuate(true);
+    	cylinder.actuate(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -29,7 +32,7 @@ public class ToggleGearTopShield extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.bcGearShield.actuate(false);
+    	cylinder.actuate(false);
     }
 
     // Called when another command which requires one or more of the same
