@@ -1,15 +1,14 @@
 package org.usfirst.frc.team3130.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Preferences;
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-
 import org.usfirst.frc.team3130.robot.RobotMap;
 
 import com.ctre.CANTalon;
-import com.ctre.CANTalon.FeedbackDevice;
-import com.ctre.CANTalon.TalonControlMode;
 
+import edu.wpi.first.wpilibj.command.Subsystem;
+
+/**
+ *
+ */
 public class IndexMotor extends Subsystem {
 
 	//Instance Handling
@@ -27,81 +26,30 @@ public class IndexMotor extends Subsystem {
     	if(m_pInstance == null) m_pInstance = new IndexMotor();
     	return m_pInstance;
     }
-    
-    private static CANTalon m_indexControl;
-    
-    private IndexMotor() {
-    	m_indexControl = new CANTalon(RobotMap.CAN_INDEXMOTOR);
-    	m_indexControl.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-    	m_indexControl.configEncoderCodesPerRev(18);	//After going through gear ratio 18 ticks per rev
-    	m_indexControl.reverseSensor(true);
-    	
-    	LiveWindow.addActuator("Shooter", "Wheels", m_indexControl);
-    }
 
+    //Define necessary objects
+    private static CANTalon m_hopperStirrer;
+    
+    private IndexMotor()
+    {
+    	//instantiate necessary objects
+    	m_hopperStirrer = new CANTalon(RobotMap.CAN_HOPPERSTIR);
+    }
+    
     public void initDefaultCommand() {
-        
+        // Set the default command for a subsystem here.
+        //setDefaultCommand(new MySpecialCommand());
     }
     
     /**
-     * Returns the current RPS of the wheels
-     * @return the current angular velocity in revolutions per something????
+     * Drives the index motor
+     * <p> This function will drive the index motor. The function takes a value from -1.0 to 1.0 which is the percentage of the 
+     * voltage provided to the talon which should be passed on to the index motor.
+     * @param percent the percentage of the voltage available to the talon to drive at
      */
-    public static double getSpeed()
+    public static void driveIndexMotor(double percent)
     {
-    	return m_indexControl.getSpeed() * 4.0;	//convert /centiseconds to /seconds
-    }
-    
-    
-    /**
-     * Sets the speed to spin the Wheels at. 
-     * <p> <b> THIS IS NOT THE USUAL VOLTAGE PERCENTAGE </b>
-     * <br>This function instead sets an actual rotational velocity.
-     * @param speed is the speed in rotations per something????
-     */
-    public static void setSpeed(double speed)
-    {
-    	m_indexControl.changeControlMode(TalonControlMode.Speed);
-    	m_indexControl.set(speed / 4.0);	//Convert from a speed in seconds to centiseconds
-    }
-    
-    /**
-     * Returns the voltage being output by the shooter wheels talon
-     * @return voltage output of talon, in volts
-     */
-    public static double GetVolt() {
-    	return m_indexControl.getOutputVoltage();
-    }
-    
-    /**
-     * Returns the current going through the shooter wheels talon
-     * @return current going through talon, in Amperes
-     */
-    public static double GetCurrent() {
-    	return m_indexControl.getOutputCurrent();
-    }
-    
-    public static double GetSetpoint() {
-    	return m_indexControl.getSetpoint() * 4.0;
-    }
-    
-    public static void setPID() {
-    	System.out.println("setting PID...");
-    	m_indexControl.setPID(
-    			Preferences.getInstance().getDouble("Shooter P", 10.0), 
-    			Preferences.getInstance().getDouble("Shooter I", 0.01), 
-    			Preferences.getInstance().getDouble("Shooter D", 0),
-    			Preferences.getInstance().getDouble("Shooter F", 4.0),
-    			0,
-    			Preferences.getInstance().getDouble("Shooter Max Ramp", 0),
-    			0
-    		); //TODO:Tune PID Numbers
-    }
-    
-    public static void stop()
-    {
-    	m_indexControl.changeControlMode(TalonControlMode.PercentVbus);
-    	m_indexControl.set(0);
+    	m_hopperStirrer.set(percent);
     }
 }
 

@@ -48,6 +48,7 @@ public class Robot extends IterativeRobot {
 		bcGearPinch = new BasicCylinder(RobotMap.PNM_GEARPINCH);
 		bcGearLift = new BasicCylinder(RobotMap.PNM_GEARLIFT);
 		bcGearDoors = new BasicCylinder(RobotMap.PNM_GEARDOOR);
+		bcGearShield = new BasicCylinder(RobotMap.PNM_TOPGEARSHIELD);
 
 		chooser = new SendableChooser<CommandGroup>();
 		// chooser.addObject("My Auto", new MyAutoCommand());
