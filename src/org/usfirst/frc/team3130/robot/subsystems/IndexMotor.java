@@ -5,6 +5,7 @@ import org.usfirst.frc.team3130.robot.RobotMap;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  *
@@ -28,12 +29,14 @@ public class IndexMotor extends Subsystem {
     }
 
     //Define necessary objects
-    private static CANTalon m_hopperStirrer;
+    private static CANTalon m_indexMotor;
     
     private IndexMotor()
     {
     	//instantiate necessary objects
-    	m_hopperStirrer = new CANTalon(RobotMap.CAN_HOPPERSTIR);
+    	m_indexMotor = new CANTalon(RobotMap.CAN_INDEXMOTOR);
+    	
+    	LiveWindow.addActuator("Index", "Index Motor", m_indexMotor);
     }
     
     public void initDefaultCommand() {
@@ -49,7 +52,7 @@ public class IndexMotor extends Subsystem {
      */
     public static void driveIndexMotor(double percent)
     {
-    	m_hopperStirrer.set(percent);
+    	m_indexMotor.set(percent);
     }
 }
 
