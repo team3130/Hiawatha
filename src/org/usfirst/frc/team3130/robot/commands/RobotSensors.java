@@ -42,6 +42,7 @@ public class RobotSensors extends Command {
     	SmartDashboard.putNumber("Shooter Wheel Speed", ShooterWheels.getSpeed());
     	SmartDashboard.putNumber("Shooter Wheel Setpoint", ShooterWheels.GetSetpoint());
     	SmartDashboard.putNumber("Shooter Wheel Voltage", ShooterWheels.GetVolt());
+    	SmartDashboard.putNumber("Shooter Wheel Position", ShooterWheels.GetPosition());
     	//SmartDashboard.putNumber("Shooter Wheel Current", ShooterWheels.GetCurrent());
     	
     	

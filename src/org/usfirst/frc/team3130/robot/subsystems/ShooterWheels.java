@@ -89,6 +89,11 @@ public class ShooterWheels extends Subsystem {
     	return GetSetpoint() - getSpeed();
     }
     
+    public static double GetPosition()
+    {
+    	return m_wheelControl.getPosition();
+    }
+    
     public static void setPID() {
     	System.out.println("setting PID...");
     	m_wheelControl.setPID(
