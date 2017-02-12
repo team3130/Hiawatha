@@ -1,21 +1,9 @@
 package org.usfirst.frc.team3130.misc;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class LinearInterp {
-	
-	Comparator<Double> compD = new Comparator<Double>() {
-		@Override
-		public int compare(Double o1, Double o2) {
-			if(o1 > o2)
-				return 1;
-			else if(o1 < o1)
-				return -1;
-			return 0;
-		}
-	};
-	
+		
 	private ArrayList<Double> dist;
 	private ArrayList<Double> speed;
 	
