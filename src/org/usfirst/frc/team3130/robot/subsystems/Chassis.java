@@ -68,9 +68,6 @@ public class Chassis extends PIDSubsystem {
 		m_rightMotorRear.changeControlMode(TalonControlMode.Follower);
 		m_rightMotorRear.set(RobotMap.CAN_RIGHTMOTORFRONT);
 		
-		m_leftMotorFront.changeControlMode(TalonControlMode.PercentVbus);
-		m_rightMotorFront.changeControlMode(TalonControlMode.PercentVbus);
-		
 
 		
 		m_drive = new RobotDrive(m_leftMotorFront, m_rightMotorFront);
@@ -97,15 +94,6 @@ public class Chassis extends PIDSubsystem {
 		LiveWindow.addActuator("Chassis", "Left Rear TalonSRX", m_leftMotorRear);
 		LiveWindow.addActuator("Chassis", "Right Front TalonSRX", m_rightMotorFront);
 		LiveWindow.addActuator("Chassis", "Right Rear TalonSRX", m_rightMotorRear);
-		
-		//Flip Outputs
-		m_leftMotorFront.reverseOutput(true);
-		m_rightMotorFront.reverseOutput(true);
-		//m_leftMotorRear.reverseOutput(true);
-		//m_rightMotorRear.reverseOutput(true);
-		
-		//m_drive.setInvertedMotor(MotorType.kFrontLeft, true);
-		//m_drive.setInvertedMotor(MotorType.kFrontRight, true);
 		
 		moveSpeed = 0;
 		prevAbsBias = 0;
