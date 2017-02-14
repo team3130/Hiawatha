@@ -26,15 +26,16 @@ public class RobotMap {
 			public static final int CAN_INTAKEMOTOR = 8;
 			public static final int CAN_HOPPERSTIR = 9;
 			public static final int CAN_INDEXMOTOR = 10;
-			public static final int CAN_SHOOTERWHEELS = 11;
+			public static final int CAN_SHOOTERWHEELSLEFT = 11;
+			public static final int CAN_SHOOTERWHEELSRIGHT = 12;
 
 		
 		//Pnuematics Ports
 			public static final int PNM_GEARSHIFTER = 0;
-			public static final int PNM_TOPGEARSHIELD = 1;
+			public static final int PNM_GEARLIFT = 1;
 			public static final int PNM_GEARPINCH = 2;
 			public static final int PNM_GEARDOOR = 3;
-			public static final int PNM_GEARLIFT = 4;
+			public static final int PNM_TOPGEARSHIELD = 4;
 		
 		//Analog Input
 			//Prefix ANG_

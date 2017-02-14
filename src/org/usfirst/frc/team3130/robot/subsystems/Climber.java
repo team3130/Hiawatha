@@ -51,5 +51,9 @@ public class Climber extends Subsystem {
     	m_liftMotor1.set(percentage);
     	m_liftMotor2.set(percentage);
     }
+    
+    public static double getLiftAmp() {
+    	return m_liftMotor1.getOutputCurrent();
+    }
 }
 
