@@ -51,21 +51,21 @@ public class RobotSensors extends Command {
     	}
     	
     	//Shooter Wheel
-    	if(Math.abs(ShooterWheels.GetError()) > 100.0 && !measuring){
+    	if(Math.abs(ShooterWheelsLeft.GetError()) > 100.0 && !measuring){
     		timer.reset();
     		timer.start();
     		measuring = true;
     	}
-    	else if(Math.abs(ShooterWheels.GetError()) < 100 && measuring){
+    	else if(Math.abs(ShooterWheelsLeft.GetError()) < 100 && measuring){
     		timer.stop();
     		SmartDashboard.putNumber("Recovery Time", timer.get());
     	}
     	
-    	SmartDashboard.putNumber("Shooter Wheel Speed", ShooterWheels.getSpeed());
-    	SmartDashboard.putNumber("Shooter Wheel Setpoint", ShooterWheels.GetSetpoint());
-    	SmartDashboard.putNumber("Shooter Wheel Voltage", ShooterWheels.GetVolt());
-    	SmartDashboard.putNumber("Shooter Wheel Position", ShooterWheels.GetPosition());
-    	//SmartDashboard.putNumber("Shooter Wheel Current", ShooterWheels.GetCurrent());
+    	SmartDashboard.putNumber("Shooter Wheel Speed", ShooterWheelsLeft.getSpeed());
+    	SmartDashboard.putNumber("Shooter Wheel Setpoint", ShooterWheelsLeft.GetSetpoint());
+    	SmartDashboard.putNumber("Shooter Wheel Voltage", ShooterWheelsLeft.GetVolt());
+    	SmartDashboard.putNumber("Shooter Wheel Position", ShooterWheelsLeft.GetPosition());
+    	//SmartDashboard.putNumber("Shooter Wheel Current", ShooterWheelsLeft.GetCurrent());
     	
     	
     	//Chassis

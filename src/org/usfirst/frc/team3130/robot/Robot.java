@@ -46,7 +46,8 @@ public class Robot extends IterativeRobot {
 		Hopper.GetInstance();
 		IndexMotor.GetInstance();
 		Intake.GetInstance();
-		ShooterWheels.GetInstance();
+		ShooterWheelsLeft.GetInstance();
+		ShooterWheelsRight.GetInstance();
 		
 
 		chooser = new SendableChooser<CommandGroup>();
