@@ -49,7 +49,8 @@ public class Robot extends IterativeRobot {
 		JetsonInterface.GetInstance();
 		ShooterWheelsLeft.GetInstance();
 		ShooterWheelsRight.GetInstance();
-		WheelSpeedCalculations.GetInstance();
+		WheelSpeedCalculationsRight.GetInstance();
+		WheelSpeedCalculationsLeft.GetInstance();
 
 		chooser = new SendableChooser<CommandGroup>();
 		// chooser.addObject("My Auto", new MyAutoCommand());

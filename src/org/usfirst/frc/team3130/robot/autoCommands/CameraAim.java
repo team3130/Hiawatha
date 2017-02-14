@@ -2,7 +2,8 @@ package org.usfirst.frc.team3130.robot.autoCommands;
 
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.subsystems.JetsonInterface;
-import org.usfirst.frc.team3130.robot.subsystems.ShooterWheels;
+import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
+import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsRight;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis.TurnDirection;
 
 import edu.wpi.first.wpilibj.Preferences;
@@ -19,7 +20,8 @@ public class CameraAim extends Command {
 	
     public CameraAim() {
         requires(Chassis.GetInstance());
-        requires(ShooterWheels.GetInstance());
+        requires(ShooterWheelsLeft.GetInstance());
+        requires(ShooterWheelsRight.GetInstance());
     }
 
     /**
@@ -29,7 +31,8 @@ public class CameraAim extends Command {
     public boolean onTarget()
     {
     	return (m_yaw < Preferences.getInstance().getDouble("Boiler Threshold", DEFAULTTHRESHOLD))
-    			&& Math.abs(ShooterWheels.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD);
+    			&& Math.abs(ShooterWheelsLeft.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)
+    			&& Math.abs(ShooterWheelsRight.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD);
     }
     
     // Called just before this Command runs the first time
@@ -51,7 +54,8 @@ public class CameraAim extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	ShooterWheels.stop();
+    	ShooterWheelsLeft.stop();
+    	ShooterWheelsRight.stop();
     }
 
     // Called when another command which requires one or more of the same

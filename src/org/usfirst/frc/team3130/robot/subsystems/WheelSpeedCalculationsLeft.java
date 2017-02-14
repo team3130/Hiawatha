@@ -15,21 +15,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class WheelSpeedCalculations extends Subsystem {
+public class WheelSpeedCalculationsLeft extends Subsystem {
 
 	//Instance Handling
-    private static WheelSpeedCalculations m_pInstance;
+    private static WheelSpeedCalculationsLeft m_pInstance;
     /**
      * A system for getting an instance of this class.
      * The function provides a method by which the class is setup as a singleton
      * with only a single copy of it existing in memory.
      * <p> It will return a reference to the class, which is shared amoungst all callers of GetInstance()
      * 
-     * @return the reference to the class refered to in GetInstance. In this case, WheelSpeedCalculations.
+     * @return the reference to the class refered to in GetInstance. In this case, WheelSpeedCalculationsLeft.
      */
-    public static WheelSpeedCalculations GetInstance()
+    public static WheelSpeedCalculationsLeft GetInstance()
     {
-    	if(m_pInstance == null) m_pInstance = new WheelSpeedCalculations();
+    	if(m_pInstance == null) m_pInstance = new WheelSpeedCalculationsLeft();
     	return m_pInstance;
     }
 	
@@ -92,7 +92,7 @@ public class WheelSpeedCalculations extends Subsystem {
 	private static LinearInterp speedCurve;
 	private static final String FILEPATH = "home/lvuser/speed-storage.ini";
 
-	private WheelSpeedCalculations()
+	private WheelSpeedCalculationsLeft()
 	{
 		ReadFile();
 		speedCurve = null;
