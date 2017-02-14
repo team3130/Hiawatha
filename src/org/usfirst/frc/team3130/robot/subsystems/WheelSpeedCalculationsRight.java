@@ -90,7 +90,7 @@ public class WheelSpeedCalculationsRight extends Subsystem {
 
 	private static ArrayList<DataPoint> data_MainStorage;
 	private static LinearInterp speedCurve;
-	private static final String FILEPATH = "home/lvuser/speed-storage.ini";
+	private static final String FILEPATH = "home/lvuser/speed-storage-right.ini";
 
 	private WheelSpeedCalculationsRight()
 	{

@@ -4,6 +4,8 @@ import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.subsystems.JetsonInterface;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsRight;
+import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsLeft;
+import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsRight;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis.TurnDirection;
 
 import edu.wpi.first.wpilibj.Preferences;
@@ -17,6 +19,7 @@ public class CameraAim extends Command {
 	private double m_yaw;
 	private final double DEFAULTTHRESHOLD = 0.5;
 	private final double SHOOTERTHRESHOLD = 5.0;
+	private final double DEFAULTBOILERDISTANCE = 120;
 	
     public CameraAim() {
         requires(Chassis.GetInstance());
@@ -38,6 +41,8 @@ public class CameraAim extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Chassis.setTurnDir(TurnDirection.kStraight);
+    	ShooterWheelsLeft.setPID();
+    	ShooterWheelsRight.setPID();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -45,6 +50,10 @@ public class CameraAim extends Command {
     	m_yaw = JetsonInterface.getDouble("Boiler Yaw", 0);
     	Chassis.HoldAngle(m_yaw);
     	Chassis.DriveStraight(0);
+    	
+    	double dist = JetsonInterface.getDouble("Boiler Distance", DEFAULTBOILERDISTANCE);
+    	ShooterWheelsLeft.setSpeed(WheelSpeedCalculationsLeft.GetSpeed(dist));
+    	ShooterWheelsRight.setSpeed(WheelSpeedCalculationsRight.GetSpeed(dist));
     }
 
     // Make this return true when this Command no longer needs to run execute()
