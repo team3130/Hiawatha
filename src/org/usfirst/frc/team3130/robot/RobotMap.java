@@ -91,4 +91,6 @@ public class RobotMap {
 			public static final int BTN_PINCHGEAR = LST_BTN_Y;
 			public static final int BTN_LIFTGEAR = LST_BTN_X;
 			public static final int AXS_DOORGEAR = LST_AXS_RTRIGGER;
+			
+			public static final int BTN_SHIFT = 1;
 }
