@@ -88,7 +88,7 @@ public class RobotMap {
 			
 			//Gear Control
 			public static final int BTN_SHIELDGEAR = 80;	//TODO: Get Actual Button
-			public static final int BTN_PINCHGEAR = 80;	//TODO: Get Actual Button
-			public static final int BTN_LIFTGEAR = 80;	//TODO: Get Actual Button
-			public static final int BTN_DOORGEAR = 80; 	//TODO: Get Actual Button
+			public static final int BTN_PINCHGEAR = LST_BTN_Y;	//TODO: Get Actual Button
+			public static final int BTN_LIFTGEAR = LST_BTN_X;	//TODO: Get Actual Button
+			public static final int BTN_DOORGEAR = LST_BTN_START; 	//TODO: Get Actual Button
 }

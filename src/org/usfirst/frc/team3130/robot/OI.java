@@ -33,6 +33,7 @@ public class OI {
 	private static JoystickButton pinchGear;
 	private static JoystickButton doorGear;
 	private static JoystickButton spinIndexer;
+
 	
 	private OI()
 	{
@@ -63,9 +64,11 @@ public class OI {
 		testShooterWheels.whileHeld(new RunWheelsManual());
 		shieldGear.toggleWhenActive(new BasicActuate(Robot.bcGearShield));
 		liftGear.whileHeld(new BasicActuate(Robot.bcGearLift));
-		pinchGear.toggleWhenActive(new BasicActuate(Robot.bcGearPinch));
+		liftGear.whileHeld(new BasicActuate(Robot.bcGearDoors));
+		pinchGear.whileHeld(new BasicActuate(Robot.bcGearPinch));
 		doorGear.whileHeld(new BasicActuate(Robot.bcGearDoors));
 		spinIndexer.whileHeld(new RunIndexer());
+		
 	}
 
 }

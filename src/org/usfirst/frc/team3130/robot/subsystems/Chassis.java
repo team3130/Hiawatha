@@ -75,7 +75,7 @@ public class Chassis extends PIDSubsystem {
 		m_shifter = new Solenoid(RobotMap.CAN_PNMMODULE, RobotMap.PNM_GEARSHIFTER);
 		m_bShiftedLow = false;
 		
-		
+		/*
 		try{
 			//Connect to navX Gyro on MXP port.
 			m_navX = new AHRS(SPI.Port.kMXP);
@@ -87,7 +87,7 @@ public class Chassis extends PIDSubsystem {
 			str_error += ex.getLocalizedMessage();
 			DriverStation.reportError(str_error, true);
 			m_bNavXPresent = false;
-		}
+		}*/
 		
 		//Add systems to LiveWindow
 		LiveWindow.addActuator("Chassis", "Left Front Talon", m_leftMotorFront);

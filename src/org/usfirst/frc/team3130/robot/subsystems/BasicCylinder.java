@@ -1,7 +1,10 @@
 package org.usfirst.frc.team3130.robot.subsystems;
 
+import org.usfirst.frc.team3130.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  *
@@ -20,7 +23,8 @@ public class BasicCylinder extends Subsystem {
     
     public BasicCylinder(int PNM_port)
     {
-    	pnm_actuator = new Solenoid(PNM_port);
+    	pnm_actuator = new Solenoid(RobotMap.CAN_PNMMODULE, PNM_port);
+    	LiveWindow.addActuator("Gear", PNM_port, pnm_actuator);
     }
     
     /**
