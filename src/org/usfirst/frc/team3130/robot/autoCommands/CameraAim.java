@@ -25,6 +25,8 @@ public class CameraAim extends Command {
         requires(Chassis.GetInstance());
         requires(ShooterWheelsLeft.GetInstance());
         requires(ShooterWheelsRight.GetInstance());
+        requires(WheelSpeedCalculationsLeft.GetInstance());
+        requires(WheelSpeedCalculationsRight.GetInstance());
     }
 
     /**
