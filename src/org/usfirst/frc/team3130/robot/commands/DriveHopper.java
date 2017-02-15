@@ -20,7 +20,7 @@ public class DriveHopper extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Hopper.driveHopperStirrer(Preferences.getInstance().getDouble("Hopper Stirrer PercentVBus", 1.0));
+    	Hopper.driveHopperStirrer(Preferences.getInstance().getDouble("Hopper Stirrer PercentVBus", 0.5));
     	
     }
 
