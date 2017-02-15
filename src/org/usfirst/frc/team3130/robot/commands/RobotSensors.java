@@ -50,17 +50,6 @@ public class RobotSensors extends Command {
     		jetsonOn = true;
     	}
     	
-    	//Shooter Wheel
-    	if(Math.abs(ShooterWheelsLeft.GetError()) > 100.0 && !measuring){
-    		timer.reset();
-    		timer.start();
-    		measuring = true;
-    	}
-    	else if(Math.abs(ShooterWheelsLeft.GetError()) < 100 && measuring){
-    		timer.stop();
-    		SmartDashboard.putNumber("Recovery Time", timer.get());
-    	}
-    	
     	SmartDashboard.putNumber("Shooter Left Wheel Speed", ShooterWheelsLeft.getSpeed());
     	SmartDashboard.putNumber("Shooter Left Wheel Setpoint", ShooterWheelsLeft.GetSetpoint());
     	SmartDashboard.putNumber("Shooter Left Wheel Voltage", ShooterWheelsLeft.GetVolt());
