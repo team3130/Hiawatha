@@ -35,7 +35,6 @@ public class IndexMotorLeft extends Subsystem {
     {
     	//instantiate necessary objects
     	m_indexMotor = new CANTalon(RobotMap.CAN_INDEXMOTORLEFT);
-    	m_indexMotor.reverseOutput(false);
     	LiveWindow.addActuator("Index", "Index Motor Left", m_indexMotor);
     }
     
@@ -52,7 +51,7 @@ public class IndexMotorLeft extends Subsystem {
      */
     public static void driveIndexMotor(double percent)
     {
-    	m_indexMotor.set(percent);
+    	m_indexMotor.set(-percent);
     }
 }
 
