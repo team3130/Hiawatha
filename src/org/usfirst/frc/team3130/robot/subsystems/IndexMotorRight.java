@@ -10,33 +10,32 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 /**
  *
  */
-public class IndexMotor extends Subsystem {
+public class IndexMotorRight extends Subsystem {
 
 	//Instance Handling
-    private static IndexMotor m_pInstance;
+    private static IndexMotorRight m_pInstance;
     /**
      * A system for getting an instance of this class.
      * The function provides a method by which the class is setup as a singleton
      * with only a single copy of it existing in memory.
      * <p> It will return a reference to the class, which is shared amoungst all callers of GetInstance()
      * 
-     * @return the reference to the class refered to in GetInstance. In this case, IndexMotor.
+     * @return the reference to the class refered to in GetInstance. In this case, IndexMotorLeft.
      */
-    public static IndexMotor GetInstance()
+    public static IndexMotorRight GetInstance()
     {
-    	if(m_pInstance == null) m_pInstance = new IndexMotor();
+    	if(m_pInstance == null) m_pInstance = new IndexMotorRight();
     	return m_pInstance;
     }
 
     //Define necessary objects
     private static CANTalon m_indexMotor;
     
-    private IndexMotor()
+    private IndexMotorRight()
     {
     	//instantiate necessary objects
-    	m_indexMotor = new CANTalon(RobotMap.CAN_INDEXMOTOR);
-    	m_indexMotor.reverseOutput(false);
-    	LiveWindow.addActuator("Index", "Index Motor", m_indexMotor);
+    	m_indexMotor = new CANTalon(RobotMap.CAN_INDEXMOTORRIGHT);
+    	LiveWindow.addActuator("Index", "Index Motor Right", m_indexMotor);
     }
     
     public void initDefaultCommand() {
@@ -52,7 +51,7 @@ public class IndexMotor extends Subsystem {
      */
     public static void driveIndexMotor(double percent)
     {
-    	m_indexMotor.set(percent);
+    	m_indexMotor.set(-percent);
     }
 }
 

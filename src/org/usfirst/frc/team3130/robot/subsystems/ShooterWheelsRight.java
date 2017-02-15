@@ -34,7 +34,7 @@ public class ShooterWheelsRight extends Subsystem {
     	m_wheelControl = new CANTalon(RobotMap.CAN_SHOOTERWHEELSRIGHT);
     	m_wheelControl.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	m_wheelControl.configEncoderCodesPerRev(18);	//After going through gear ratio 18 ticks per rev
-    	m_wheelControl.reverseSensor(false);
+    	m_wheelControl.reverseSensor(true);
     	
     	LiveWindow.addActuator("Shooter", "Wheels Right", m_wheelControl);
     }
@@ -49,7 +49,7 @@ public class ShooterWheelsRight extends Subsystem {
      */
     public static double getSpeed()
     {
-    	return m_wheelControl.getSpeed() * 4.0;	//convert /centiseconds to /seconds
+    	return m_wheelControl.getSpeed() * -1.0;	//convert /centiseconds to /seconds
     }
     
     
@@ -62,7 +62,7 @@ public class ShooterWheelsRight extends Subsystem {
     public static void setSpeed(double speed)
     {
     	m_wheelControl.changeControlMode(TalonControlMode.Speed);
-    	m_wheelControl.set(speed / 4.0);	//Convert from a speed in seconds to centiseconds
+    	m_wheelControl.set(speed / -1.0);	//Convert from a speed in seconds to centiseconds
     }
     
     /**
@@ -82,7 +82,7 @@ public class ShooterWheelsRight extends Subsystem {
     }
     
     public static double GetSetpoint() {
-    	return m_wheelControl.getSetpoint() * 4.0;
+    	return m_wheelControl.getSetpoint() * -1.0;
     }
     
     public static double GetError() {

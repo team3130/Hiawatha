@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3130.robot.commands;
 
-import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
+import org.usfirst.frc.team3130.robot.subsystems.*;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,6 +12,7 @@ public class RunWheelsManual extends Command {
 
     public RunWheelsManual() {
         requires(ShooterWheelsLeft.GetInstance());
+        requires(ShooterWheelsRight.GetInstance());
     }
 
     // Called just before this Command runs the first time
@@ -20,6 +21,8 @@ public class RunWheelsManual extends Command {
     	System.out.println(testSpeed);
     	ShooterWheelsLeft.setSpeed(testSpeed);
     	ShooterWheelsLeft.setPID();
+    	ShooterWheelsRight.setSpeed(testSpeed);
+    	ShooterWheelsRight.setPID();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -35,6 +38,7 @@ public class RunWheelsManual extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	ShooterWheelsLeft.stop();
+    	ShooterWheelsRight.stop();
     }
 
     // Called when another command which requires one or more of the same
