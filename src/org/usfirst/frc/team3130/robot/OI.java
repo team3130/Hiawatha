@@ -5,9 +5,35 @@ import org.usfirst.frc.team3130.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 
 
 public class OI {
+	private class JoystickTrigger extends Trigger{
+
+		private Joystick stick;
+		private int axis;
+		private double threshold;
+		
+		private JoystickTrigger(Joystick stick, int axis){
+			this.stick = stick;
+			this.axis = axis;
+			threshold = 0.1;
+		}
+		
+		private JoystickTrigger(Joystick stick, int axis, double threshold){
+			this.stick = stick;
+			this.axis = axis;
+			this.threshold = threshold;
+		}
+		
+		@Override
+		public boolean get() {
+			return stick.getRawAxis(axis) > threshold;
+		}
+		
+	}
+	
 	//Instance Handling
     private static OI m_pInstance;
     public static OI GetInstance()
@@ -28,11 +54,12 @@ public class OI {
 	private static JoystickButton climberDown;
 	private static JoystickButton hopperRun;
 	private static JoystickButton testShooterWheels;
-	private static JoystickButton shieldGear;
+	private static JoystickTrigger shieldGear;
 	private static JoystickButton liftGear;
 	private static JoystickButton pinchGear;
-	private static JoystickButton doorGear;
+	private static JoystickTrigger doorGear;
 	private static JoystickButton spinIndexer;
+
 	
 	private OI()
 	{
@@ -48,10 +75,10 @@ public class OI {
 		climberDown = new JoystickButton(gamepad, RobotMap.BTN_CLIMBERDOWN);
 		hopperRun = new JoystickButton(gamepad, RobotMap.BTN_HOPPERDRIVE);
 		testShooterWheels = new JoystickButton(gamepad, RobotMap.BTN_TESTSHOOTERWHEELS);
-		shieldGear = new JoystickButton(gamepad, RobotMap.BTN_SHIELDGEAR);
+		shieldGear = new JoystickTrigger(gamepad, RobotMap.AXS_SHIELDGEAR);
 		liftGear = new JoystickButton(gamepad, RobotMap.BTN_LIFTGEAR);
 		pinchGear = new JoystickButton(gamepad, RobotMap.BTN_PINCHGEAR);
-		doorGear = new JoystickButton(gamepad, RobotMap.BTN_DOORGEAR);
+		doorGear = new JoystickTrigger(gamepad, RobotMap.AXS_DOORGEAR);
 		spinIndexer = new JoystickButton(gamepad, RobotMap.BTN_TESTSHOOTERWHEELS);
 		
 		//Bind Joystick Buttons to Commands
@@ -63,10 +90,10 @@ public class OI {
 		testShooterWheels.whileHeld(new RunWheelsManual());
 		shieldGear.toggleWhenActive(new BasicActuate(Robot.bcGearShield));
 		liftGear.whileHeld(new BasicActuate(Robot.bcGearLift));
-		pinchGear.toggleWhenActive(new BasicActuate(Robot.bcGearPinch));
-		doorGear.whileHeld(new BasicActuate(Robot.bcGearDoors));
+		liftGear.whileHeld(new BasicActuate(Robot.bcGearDoors));
+		pinchGear.whileHeld(new BasicActuate(Robot.bcGearPinch));
+		doorGear.whileActive(new BasicActuate(Robot.bcGearDoors));
 		spinIndexer.whileHeld(new RunIndexer());
 	}
-
 }
 
