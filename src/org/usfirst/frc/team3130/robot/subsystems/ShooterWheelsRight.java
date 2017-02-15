@@ -20,7 +20,7 @@ public class ShooterWheelsRight extends Subsystem {
      * with only a single copy of it existing in memory.
      * <p> It will return a reference to the class, which is shared amoungst all callers of GetInstance()
      * 
-     * @return the reference to the class refered to in GetInstance. In this case, ShooterWheelsLeft.
+     * @return the reference to the class refered to in GetInstance. In this case, ShooterWheelsRight.
      */
     public static ShooterWheelsRight GetInstance()
     {
@@ -34,7 +34,7 @@ public class ShooterWheelsRight extends Subsystem {
     	m_wheelControl = new CANTalon(RobotMap.CAN_SHOOTERWHEELSRIGHT);
     	m_wheelControl.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	m_wheelControl.configEncoderCodesPerRev(18);	//After going through gear ratio 18 ticks per rev
-    	m_wheelControl.reverseSensor(true);
+    	m_wheelControl.reverseSensor(false);
     	
     	LiveWindow.addActuator("Shooter", "Wheels Right", m_wheelControl);
     }

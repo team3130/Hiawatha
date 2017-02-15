@@ -60,6 +60,8 @@ public class OI {
 	private static JoystickTrigger doorGear;
 	private static JoystickButton spinIndexer;
 
+	private static JoystickButton shiftUp;
+	private static JoystickButton shiftDown;
 	
 	private OI()
 	{
@@ -81,6 +83,9 @@ public class OI {
 		doorGear = new JoystickTrigger(gamepad, RobotMap.AXS_DOORGEAR);
 		spinIndexer = new JoystickButton(gamepad, RobotMap.BTN_TESTSHOOTERWHEELS);
 		
+		shiftUp = new JoystickButton(stickL, RobotMap.BTN_SHIFT);
+		shiftDown = new JoystickButton(stickR, RobotMap.BTN_SHIFT);
+		
 		//Bind Joystick Buttons to Commands
 		intakeIn.whileHeld(new IntakeUp());
 		intakeOut.whileHeld(new IntakeDown());
@@ -94,6 +99,9 @@ public class OI {
 		pinchGear.whileHeld(new BasicActuate(Robot.bcGearPinch));
 		doorGear.whileActive(new BasicActuate(Robot.bcGearDoors));
 		spinIndexer.whileHeld(new RunIndexer());
+		
+		shiftUp.whenPressed(new DriveShiftUp());
+		shiftDown.whenPressed(new DriveShiftDown());
 	}
 }
 

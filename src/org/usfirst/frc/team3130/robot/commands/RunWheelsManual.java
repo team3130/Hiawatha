@@ -20,11 +20,13 @@ public class RunWheelsManual extends Command {
     	double testSpeed = Preferences.getInstance().getDouble("Speed Setpoint", 1500);
     	System.out.println(testSpeed);
     	
+    	double testSpeed2 = testSpeed;
+    	
     	ShooterWheelsLeft.setPID();
     	ShooterWheelsLeft.setSpeed(testSpeed);
 
     	ShooterWheelsRight.setPID();
-    	ShooterWheelsRight.setSpeed(testSpeed);
+    	ShooterWheelsRight.setSpeed(testSpeed2);
 
     }
 

@@ -62,11 +62,15 @@ public class RobotSensors extends Command {
     	}
     	
     	SmartDashboard.putNumber("Shooter Left Wheel Speed", ShooterWheelsLeft.getSpeed());
-    	SmartDashboard.putNumber("Shooter Right Wheel Speed", ShooterWheelsRight.getSpeed());
-    	SmartDashboard.putNumber("Shooter Wheel Setpoint", ShooterWheelsLeft.GetSetpoint());
-    	SmartDashboard.putNumber("Shooter Wheel Voltage", ShooterWheelsLeft.GetVolt());
-    	SmartDashboard.putNumber("Shooter Wheel Position", ShooterWheelsLeft.GetPosition());
+    	SmartDashboard.putNumber("Shooter Left Wheel Setpoint", ShooterWheelsLeft.GetSetpoint());
+    	SmartDashboard.putNumber("Shooter Left Wheel Voltage", ShooterWheelsLeft.GetVolt());
+    	SmartDashboard.putNumber("Shooter Left Wheel Position", ShooterWheelsLeft.GetPosition());
     	SmartDashboard.putNumber("Shooter Left Wheel Current", ShooterWheelsLeft.GetCurrent());
+
+    	SmartDashboard.putNumber("Shooter Right Wheel Speed", ShooterWheelsRight.getSpeed());
+    	SmartDashboard.putNumber("Shooter Right Wheel Setpoint", ShooterWheelsRight.GetSetpoint());
+    	SmartDashboard.putNumber("Shooter Right Wheel Voltage", ShooterWheelsRight.GetVolt());
+    	SmartDashboard.putNumber("Shooter Right Wheel Position", ShooterWheelsRight.GetPosition());
     	SmartDashboard.putNumber("Shooter Right Wheel Current", ShooterWheelsRight.GetCurrent());
     	
     	
