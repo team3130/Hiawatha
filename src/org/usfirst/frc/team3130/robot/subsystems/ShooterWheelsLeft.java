@@ -96,9 +96,9 @@ public class ShooterWheelsLeft extends Subsystem {
     
     public static void setPID() {
     	m_wheelControl.setPID(
-    			Preferences.getInstance().getDouble("Left Shooter P", 35.0), //These are the numbers for the shooter with red tape
-    			Preferences.getInstance().getDouble("Left Shooter I", 0.0005), 
-    			Preferences.getInstance().getDouble("Left Shooter D", 1500),
+    			Preferences.getInstance().getDouble("Left Shooter P", 40.0), //These are the numbers for the shooter with red tape
+    			Preferences.getInstance().getDouble("Left Shooter I", 0.0001), 
+    			Preferences.getInstance().getDouble("Left Shooter D", 4000),
     			Preferences.getInstance().getDouble("Left Shooter F", 4.0),
     			0,
     			Preferences.getInstance().getDouble("Left Shooter Max Ramp", 0),
