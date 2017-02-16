@@ -81,7 +81,7 @@ public class OI {
 		liftGear = new JoystickButton(gamepad, RobotMap.BTN_LIFTGEAR);
 		pinchGear = new JoystickButton(gamepad, RobotMap.BTN_PINCHGEAR);
 		doorGear = new JoystickTrigger(gamepad, RobotMap.AXS_DOORGEAR);
-		spinIndexer = new JoystickButton(gamepad, RobotMap.BTN_TESTSHOOTERWHEELS);
+		spinIndexer = new JoystickButton(gamepad, RobotMap.BTN_RUNINDEXER);
 		
 		shiftUp = new JoystickButton(stickL, RobotMap.BTN_SHIFT);
 		shiftDown = new JoystickButton(stickR, RobotMap.BTN_SHIFT);
