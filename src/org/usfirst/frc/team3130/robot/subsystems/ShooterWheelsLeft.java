@@ -95,7 +95,6 @@ public class ShooterWheelsLeft extends Subsystem {
     }
     
     public static void setPID() {
-    	System.out.println("setting PID...");
     	m_wheelControl.setPID(
     			Preferences.getInstance().getDouble("Left Shooter P", 35.0), //These are the numbers for the shooter with red tape
     			Preferences.getInstance().getDouble("Left Shooter I", 0.0005), 
@@ -105,6 +104,7 @@ public class ShooterWheelsLeft extends Subsystem {
     			Preferences.getInstance().getDouble("Left Shooter Max Ramp", 0),
     			0
     		); //TODO:Tune PID Numbers
+    	
     }
     
     public static void stop()

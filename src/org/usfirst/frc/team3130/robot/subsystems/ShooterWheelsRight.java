@@ -95,7 +95,6 @@ public class ShooterWheelsRight extends Subsystem {
     }
     
     public static void setPID() {
-    	System.out.println("setting PID...");
     	m_wheelControl.setPID(
     			Preferences.getInstance().getDouble("Right Shooter P", 35.0), 
     			Preferences.getInstance().getDouble("Right Shooter I", 0.0005), 
@@ -106,6 +105,7 @@ public class ShooterWheelsRight extends Subsystem {
     			0
     		); //TODO:Tune PID Numbers
     }
+    
     
     public static void stop()
     {

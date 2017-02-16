@@ -17,16 +17,14 @@ public class RunWheelsManual extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	double testSpeed = Preferences.getInstance().getDouble("Speed Setpoint", 1500);
-    	System.out.println(testSpeed);
-    	
-    	double testSpeed2 = testSpeed;
+    	double leftSpeed = Preferences.getInstance().getDouble("Left Speed Setpoint", 1500);
+    	double rightSpeed = Preferences.getInstance().getDouble("Right Speed Setpoint", 1500);
     	
     	ShooterWheelsLeft.setPID();
-    	ShooterWheelsLeft.setSpeed(testSpeed);
+    	ShooterWheelsLeft.setSpeed(leftSpeed);
 
     	ShooterWheelsRight.setPID();
-    	ShooterWheelsRight.setSpeed(testSpeed2);
+    	ShooterWheelsRight.setSpeed(rightSpeed);
 
     }
 
