@@ -86,6 +86,7 @@ public class RobotMap {
 			
 			//Shooter
 			public static final int BTN_TESTSHOOTERWHEELS = LST_BTN_LBUMPER;
+			public static final int BTN_RUNINDEXER = LST_BTN_START;
 			
 			//Gear Control
 			public static final int AXS_SHIELDGEAR = LST_AXS_LTRIGGER;
