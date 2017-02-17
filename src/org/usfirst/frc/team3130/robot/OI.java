@@ -95,9 +95,9 @@ public class OI {
 		testShooterWheels.whileHeld(new RunWheelsManual());
 		shieldGear.toggleWhenActive(new BasicActuate(Robot.bcGearShield));
 		liftGear.whileHeld(new BasicActuate(Robot.bcGearLift));
-		liftGear.whileHeld(new BasicActuate(Robot.bcGearDoors));
-		pinchGear.whileHeld(new BasicActuate(Robot.bcGearPinch));
-		doorGear.whileActive(new BasicActuate(Robot.bcGearDoors));
+		liftGear.toggleWhenPressed(new BasicActuate(Robot.bcGearDoors));
+		pinchGear.toggleWhenPressed(new BasicActuate(Robot.bcGearPinch));
+		doorGear.toggleWhenActive(new BasicActuate(Robot.bcGearDoors));
 		spinIndexer.whileHeld(new RunIndexer());
 		
 		shiftUp.whenPressed(new DriveShiftUp());
