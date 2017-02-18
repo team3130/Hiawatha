@@ -11,10 +11,20 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveToGear extends Command {
 
+	private double speed;
+	private boolean setSpeed;
+	
     public DriveToGear() {
         requires(Chassis.GetInstance());
+        setSpeed = false;
     }
 
+    public void setParam(double speed)
+    {
+    	this.speed = speed;
+    	setSpeed = true;
+    }
+    
     // Called just before this Command runs the first time
     protected void initialize() {
     }
@@ -31,6 +41,7 @@ public class DriveToGear extends Command {
     	
     	double angle = theta+Math.atan(C*x)-alpha;	//Extends theta's endpoint to be coincident to alpha's, then goes back alpha degrees
     	Chassis.HoldAngle(angle);
+    	if(!setSpeed) speed = -OI.stickL.getY();
     	Chassis.DriveStraight(-OI.stickL.getY());
     }
 
