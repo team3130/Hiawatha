@@ -34,4 +34,10 @@ public class LowerGearPickup extends CommandGroup {
     {
     	end();
     }
+	
+	@Override
+	protected boolean isFinished()
+	{
+		return false;
+	}
 }
