@@ -34,7 +34,7 @@ public class RobotMap {
 		//Pnuematics Ports
 			public static final int PNM_GEARSHIFTER = 0;
 			public static final int PNM_GEARLIFT = 1;
-			public static final int PNM_GEARPINCH = 2;
+			public static final int PNM_GEARPINCH = 6;
 			public static final int PNM_GEARDOOR = 3;
 			public static final int PNM_TOPGEARSHIELD = 4;
 		
