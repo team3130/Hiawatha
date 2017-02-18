@@ -50,8 +50,8 @@ public class OI {
 	//Define Joystick Buttons
 	private static JoystickButton intakeIn;
 	private static JoystickButton intakeOut;
-	private static JoystickButton climberUp;
-	private static JoystickButton climberDown;
+	private static JoystickTrigger climberUp;
+	private static JoystickTrigger climberDown;
 	private static JoystickButton hopperRun;
 	private static JoystickButton testShooterWheels;
 	private static JoystickTrigger shieldGear;
@@ -73,14 +73,14 @@ public class OI {
 		//Create Joystick Buttons
 		intakeIn = new JoystickButton(gamepad, RobotMap.BTN_INTAKEUP);
 		intakeOut = new JoystickButton(gamepad, RobotMap.BTN_INTAKEDOWN);
-		climberUp = new JoystickButton(gamepad, RobotMap.BTN_CLIMBERUP);
-		climberDown = new JoystickButton(gamepad, RobotMap.BTN_CLIMBERDOWN);
+		climberUp = new JoystickTrigger(gamepad, RobotMap.BTN_CLIMBERUP);
+		climberDown = new JoystickTrigger(gamepad, RobotMap.BTN_CLIMBERDOWN);
 		hopperRun = new JoystickButton(gamepad, RobotMap.BTN_HOPPERDRIVE);
 		testShooterWheels = new JoystickButton(gamepad, RobotMap.BTN_TESTSHOOTERWHEELS);
-		shieldGear = new JoystickTrigger(gamepad, RobotMap.AXS_SHIELDGEAR);
-		liftGear = new JoystickButton(gamepad, RobotMap.BTN_LIFTGEAR);
-		pinchGear = new JoystickButton(gamepad, RobotMap.BTN_PINCHGEAR);
-		doorGear = new JoystickTrigger(gamepad, RobotMap.AXS_DOORGEAR);
+		shieldGear = new JoystickTrigger(stickR, RobotMap.AXS_SHIELDGEAR);
+		liftGear = new JoystickButton(stickR, RobotMap.BTN_LIFTGEAR);
+		pinchGear = new JoystickButton(stickL, RobotMap.BTN_PINCHGEAR);
+		doorGear = new JoystickTrigger(stickL, RobotMap.AXS_DOORGEAR);
 		spinIndexer = new JoystickButton(gamepad, RobotMap.BTN_RUNINDEXER);
 		
 		shiftUp = new JoystickButton(stickL, RobotMap.BTN_SHIFT);
@@ -89,8 +89,8 @@ public class OI {
 		//Bind Joystick Buttons to Commands
 		intakeIn.whileHeld(new IntakeUp());
 		intakeOut.whileHeld(new IntakeDown());
-		climberUp.whileHeld(new ClimbUp());
-		climberDown.whileHeld(new ClimbDown());
+		climberUp.whileActive(new ClimbUp());
+		climberDown.whileActive(new ClimbDown());
 		hopperRun.whileHeld(new DriveHopper());
 		testShooterWheels.whileHeld(new RunWheelsManual());
 		shieldGear.toggleWhenActive(new BasicActuate(Robot.bcGearShield));
