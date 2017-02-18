@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3130.robot;
 
 
+import org.usfirst.frc.team3130.robot.autoCommands.DriveToGear;
 import org.usfirst.frc.team3130.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -62,6 +63,7 @@ public class OI {
 
 	private static JoystickButton shiftUp;
 	private static JoystickButton shiftDown;
+	private static JoystickButton gearAssist;
 	
 	private OI()
 	{
@@ -85,6 +87,7 @@ public class OI {
 		
 		shiftUp = new JoystickButton(stickL, RobotMap.BTN_SHIFT);
 		shiftDown = new JoystickButton(stickR, RobotMap.BTN_SHIFT);
+		gearAssist = new JoystickButton(stickR, RobotMap.BTN_GEARASSIST);
 		
 		//Bind Joystick Buttons to Commands
 		intakeIn.whileHeld(new IntakeUp());
@@ -101,6 +104,7 @@ public class OI {
 		
 		shiftUp.whenPressed(new DriveShiftUp());
 		shiftDown.whenPressed(new DriveShiftDown());
+		gearAssist.whileHeld(new DriveToGear());
 	}
 }
 

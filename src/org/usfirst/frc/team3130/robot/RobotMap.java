@@ -95,4 +95,6 @@ public class RobotMap {
 			public static final int AXS_DOORGEAR = 3;	//Joystick L
 			
 			public static final int BTN_SHIFT = 1;
+			
+			public static final int BTN_GEARASSIST = 5;	//Joystick R
 }
