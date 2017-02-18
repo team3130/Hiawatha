@@ -3,6 +3,7 @@ package org.usfirst.frc.team3130.robot.autoCommands;
 import org.usfirst.frc.team3130.robot.Robot;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -36,5 +37,15 @@ public class GearPlaceAuto extends CommandGroup {
         addSequential(pnm_OpenPinch,.2);
         addSequential(pnm_DropLift,.2);
         addSequential(drive_offPeg,2);
+    }
+    
+    protected void initialize()
+    {
+    	drive_toGear.setParam(Preferences.getInstance().getDouble("GearPlace toPeg speed", .5));
+    	
+    	drive_ontoPeg.SetParam(-8, .5, 0, .25, false);
+    	
+    	drive_offPeg.SetParam(10, .5, 0, .25, false);
+    	
     }
 }

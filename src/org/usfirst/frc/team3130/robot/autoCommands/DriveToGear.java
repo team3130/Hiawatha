@@ -21,7 +21,7 @@ public class DriveToGear extends Command {
 
     public void setParam(double speed)
     {
-    	this.speed = speed;
+    	this.speed = -speed;
     	setSpeed = true;
     }
     
