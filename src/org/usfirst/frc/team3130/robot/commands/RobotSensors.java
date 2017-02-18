@@ -52,14 +52,14 @@ public class RobotSensors extends Command {
     	
     	SmartDashboard.putNumber("Shooter Left Wheel Speed", ShooterWheelsLeft.getSpeed());
     	SmartDashboard.putNumber("Shooter Left Wheel Setpoint", ShooterWheelsLeft.GetSetpoint());
-    	SmartDashboard.putNumber("Shooter Left Wheel Voltage", ShooterWheelsLeft.GetVolt());
-    	SmartDashboard.putNumber("Shooter Left Wheel Position", ShooterWheelsLeft.GetPosition());
+    	//SmartDashboard.putNumber("Shooter Left Wheel Voltage", ShooterWheelsLeft.GetVolt());
+    	//SmartDashboard.putNumber("Shooter Left Wheel Position", ShooterWheelsLeft.GetPosition());
     	SmartDashboard.putNumber("Shooter Left Wheel Current", ShooterWheelsLeft.GetCurrent());
 
     	SmartDashboard.putNumber("Shooter Right Wheel Speed", ShooterWheelsRight.getSpeed());
     	SmartDashboard.putNumber("Shooter Right Wheel Setpoint", ShooterWheelsRight.GetSetpoint());
-    	SmartDashboard.putNumber("Shooter Right Wheel Voltage", ShooterWheelsRight.GetVolt());
-    	SmartDashboard.putNumber("Shooter Right Wheel Position", ShooterWheelsRight.GetPosition());
+    	//SmartDashboard.putNumber("Shooter Right Wheel Voltage", ShooterWheelsRight.GetVolt());
+    	//SmartDashboard.putNumber("Shooter Right Wheel Position", ShooterWheelsRight.GetPosition());
     	SmartDashboard.putNumber("Shooter Right Wheel Current", ShooterWheelsRight.GetCurrent());
     	
     	
@@ -85,10 +85,12 @@ public class RobotSensors extends Command {
     	//SmartDashboard.putNumber("Intake Wheels Current", Intake.getCurrent());
     	
     	//Gear
-    	//SmartDashboard.putBoolean("Gear Lift State", Robot.bcGearLift.getState());
-    	//SmartDashboard.putBoolean("Gear Pinch State", Robot.bcGearPinch.getState());
-    	//SmartDashboard.putBoolean("Gear Doors State", Robot.bcGearDoors.getState());
-    	//SmartDashboard.putBoolean("Gear Shield State", Robot.bcGearShield.getState());
+    	SmartDashboard.putBoolean("Gear Lift State", Robot.bcGearLift.getState());
+    	SmartDashboard.putBoolean("Gear Pinch State", Robot.bcGearPinch.getState());
+    	SmartDashboard.putBoolean("Gear Doors State", Robot.bcGearDoors.getState());
+    	SmartDashboard.putBoolean("Gear Shield State", Robot.bcGearShield.getState());
+    	
+    	SmartDashboard.putBoolean("GearShift State", !Chassis.GetShiftedDown());
     }
 
     // Make this return true when this Command no longer needs to run execute()
