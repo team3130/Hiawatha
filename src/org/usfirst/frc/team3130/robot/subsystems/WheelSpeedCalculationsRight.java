@@ -94,6 +94,8 @@ public class WheelSpeedCalculationsRight extends Subsystem {
 
 	private WheelSpeedCalculationsRight()
 	{
+		data_MainStorage = new ArrayList<DataPoint>();
+		
 		ReadFile();
 		speedCurve = null;
 		ReloadCurve();
