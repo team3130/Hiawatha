@@ -56,9 +56,8 @@ public class OI {
 	private static JoystickButton hopperRun;
 	private static JoystickButton testShooterWheels;
 	private static JoystickButton shieldGear;
-	private static JoystickButton liftGear;
 	private static JoystickButton pinchGear;
-	private static JoystickButton doorGear;
+	private static JoystickButton lowerGearActive;
 	private static JoystickButton spinIndexer;
 
 	private static JoystickButton shiftUp;
@@ -79,15 +78,14 @@ public class OI {
 		climberDown = new JoystickTrigger(gamepad, RobotMap.BTN_CLIMBERDOWN);
 		hopperRun = new JoystickButton(gamepad, RobotMap.BTN_HOPPERDRIVE);
 		testShooterWheels = new JoystickButton(gamepad, RobotMap.BTN_TESTSHOOTERWHEELS);
-		shieldGear = new JoystickButton(stickR, RobotMap.AXS_SHIELDGEAR);
-		liftGear = new JoystickButton(stickR, RobotMap.BTN_LIFTGEAR);
+		shieldGear = new JoystickButton(gamepad, RobotMap.AXS_SHIELDGEAR);
 		pinchGear = new JoystickButton(stickL, RobotMap.BTN_PINCHGEAR);
-		doorGear = new JoystickButton(stickL, RobotMap.AXS_DOORGEAR);
+		lowerGearActive = new JoystickButton(stickR, RobotMap.BTN_LOWERGEARACTIVE);
 		spinIndexer = new JoystickButton(gamepad, RobotMap.BTN_RUNINDEXER);
 		
-		shiftUp = new JoystickButton(stickL, RobotMap.BTN_SHIFT);
-		shiftDown = new JoystickButton(stickR, RobotMap.BTN_SHIFT);
 		gearAssist = new JoystickButton(stickR, RobotMap.BTN_GEARASSIST);
+		shiftUp = new JoystickButton(stickR, RobotMap.BTN_SHIFTUP);
+		shiftDown = new JoystickButton(stickL, RobotMap.BTN_SHIFTDOWN);
 		
 		//Bind Joystick Buttons to Commands
 		intakeIn.whileHeld(new IntakeUp());
@@ -97,9 +95,8 @@ public class OI {
 		hopperRun.whileHeld(new DriveHopper());
 		testShooterWheels.whileHeld(new RunWheelsManual());
 		shieldGear.toggleWhenPressed(new BasicActuate(Robot.bcGearShield));
-		liftGear.toggleWhenPressed(new BasicActuate(Robot.bcGearLift));
-		pinchGear.toggleWhenPressed(new BasicActuate(Robot.bcGearPinch));
-		doorGear.toggleWhenPressed(new BasicActuate(Robot.bcGearDoors));
+		pinchGear.whileHeld(new BasicActuate(Robot.bcGearPinch));
+		lowerGearActive.whileHeld(new LowerGearPickup());
 		spinIndexer.whileHeld(new RunIndexer());
 		
 		shiftUp.whenPressed(new DriveShiftUp());

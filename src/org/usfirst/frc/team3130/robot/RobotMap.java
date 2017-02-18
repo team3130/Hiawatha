@@ -89,12 +89,14 @@ public class RobotMap {
 			public static final int BTN_RUNINDEXER = LST_BTN_RBUMPER;
 			
 			//Gear Control
-			public static final int AXS_SHIELDGEAR = 3;	//Joystick R
-			public static final int BTN_PINCHGEAR = 4;	//Joystick L
-			public static final int BTN_LIFTGEAR = 2;	//Joystick R
-			public static final int AXS_DOORGEAR = 3;	//Joystick L
+			public static final int AXS_SHIELDGEAR = LST_BTN_X;
+			public static final int BTN_PINCHGEAR = 1;	//Joystick L
+			public static final int BTN_LOWERGEARACTIVE = 1;	//Joystick R
 			
 			public static final int BTN_SHIFT = 1;
 			
-			public static final int BTN_GEARASSIST = 5;	//Joystick R
+			public static final int BTN_GEARASSIST = 3;	//Joystick R
+			
+			public static final int BTN_SHIFTDOWN = 3;	//Joystick L
+			public static final int BTN_SHIFTUP = 2;	//Joystick R
 }
