@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3130.robot.autoCommands;
 
+import org.usfirst.frc.team3130.robot.OI;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.subsystems.JetsonInterface;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
@@ -45,13 +46,14 @@ public class CameraAim extends Command {
     	Chassis.setTurnDir(TurnDirection.kStraight);
     	ShooterWheelsLeft.setPID();
     	ShooterWheelsRight.setPID();
+    	Chassis.SetPIDValues();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	m_yaw = JetsonInterface.getDouble("Boiler Yaw", 0);
     	Chassis.HoldAngle(m_yaw);
-    	Chassis.DriveStraight(0);
+    	Chassis.DriveStraight(OI.stickL.getY());
     	
     	double dist = JetsonInterface.getDouble("Boiler Distance", DEFAULTBOILERDISTANCE);
     	ShooterWheelsLeft.setSpeed(WheelSpeedCalculationsLeft.GetSpeed(dist));
