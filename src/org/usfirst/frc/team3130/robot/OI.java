@@ -54,10 +54,10 @@ public class OI {
 	private static JoystickTrigger climberDown;
 	private static JoystickButton hopperRun;
 	private static JoystickButton testShooterWheels;
-	private static JoystickTrigger shieldGear;
+	private static JoystickButton shieldGear;
 	private static JoystickButton liftGear;
 	private static JoystickButton pinchGear;
-	private static JoystickTrigger doorGear;
+	private static JoystickButton doorGear;
 	private static JoystickButton spinIndexer;
 
 	private static JoystickButton shiftUp;
@@ -77,10 +77,10 @@ public class OI {
 		climberDown = new JoystickTrigger(gamepad, RobotMap.BTN_CLIMBERDOWN);
 		hopperRun = new JoystickButton(gamepad, RobotMap.BTN_HOPPERDRIVE);
 		testShooterWheels = new JoystickButton(gamepad, RobotMap.BTN_TESTSHOOTERWHEELS);
-		shieldGear = new JoystickTrigger(stickR, RobotMap.AXS_SHIELDGEAR);
+		shieldGear = new JoystickButton(stickR, RobotMap.AXS_SHIELDGEAR);
 		liftGear = new JoystickButton(stickR, RobotMap.BTN_LIFTGEAR);
 		pinchGear = new JoystickButton(stickL, RobotMap.BTN_PINCHGEAR);
-		doorGear = new JoystickTrigger(stickL, RobotMap.AXS_DOORGEAR);
+		doorGear = new JoystickButton(stickL, RobotMap.AXS_DOORGEAR);
 		spinIndexer = new JoystickButton(gamepad, RobotMap.BTN_RUNINDEXER);
 		
 		shiftUp = new JoystickButton(stickL, RobotMap.BTN_SHIFT);
@@ -93,10 +93,10 @@ public class OI {
 		climberDown.whileActive(new ClimbDown());
 		hopperRun.whileHeld(new DriveHopper());
 		testShooterWheels.whileHeld(new RunWheelsManual());
-		shieldGear.toggleWhenActive(new BasicActuate(Robot.bcGearShield));
+		shieldGear.toggleWhenPressed(new BasicActuate(Robot.bcGearShield));
 		liftGear.toggleWhenPressed(new BasicActuate(Robot.bcGearLift));
 		pinchGear.toggleWhenPressed(new BasicActuate(Robot.bcGearPinch));
-		doorGear.toggleWhenActive(new BasicActuate(Robot.bcGearDoors));
+		doorGear.toggleWhenPressed(new BasicActuate(Robot.bcGearDoors));
 		spinIndexer.whileHeld(new RunIndexer());
 		
 		shiftUp.whenPressed(new DriveShiftUp());
