@@ -20,6 +20,7 @@ public class DefaultDrive extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Chassis.ReleaseAngle();
+    	Chassis.TalonsToCoast(false);
     }
 
     // Called repeatedly when this Command is scheduled to run
