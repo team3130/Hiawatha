@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3130.robot.autoCommands.AutoBasicActuate;
+import org.usfirst.frc.team3130.robot.commands.ResetSolenoids;
 import org.usfirst.frc.team3130.robot.commands.RobotSensors;
 import org.usfirst.frc.team3130.robot.subsystems.*;
 
@@ -32,6 +33,7 @@ public class Robot extends IterativeRobot {
 	public static BasicCylinder bcGearShield;	//Disabled In
 	
 	private static AutoBasicActuate gearDoorsDownEnable;
+	private static ResetSolenoids resetGear;
 	
 	@Override
 	public void robotInit() {
@@ -44,6 +46,7 @@ public class Robot extends IterativeRobot {
 		bcGearShield = new BasicCylinder(RobotMap.PNM_TOPGEARSHIELD);
 		
 		gearDoorsDownEnable = new AutoBasicActuate(bcGearDoors, true);
+		resetGear = new ResetSolenoids();
 		
 		OI.GetInstance();
 		Chassis.GetInstance();
@@ -64,7 +67,7 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void disabledInit() {
-
+		resetGear.start();
 	}
 
 	@Override

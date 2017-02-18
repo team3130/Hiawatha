@@ -18,7 +18,7 @@ public class LowerGearPickup extends CommandGroup {
 
     	backToDefault = new PickupGear();
     	
-    	addParallel(new AutoBasicActuate(Robot.bcGearPinch, true), 0.1);
+    	addParallel(new AutoBasicActuate(Robot.bcGearPinch, false), 0.1);
     	addSequential(new AutoBasicActuate(Robot.bcGearDoors, false), 0.1);
     	addSequential(new AutoBasicActuate(Robot.bcGearLift, true), 0.1);
     }
