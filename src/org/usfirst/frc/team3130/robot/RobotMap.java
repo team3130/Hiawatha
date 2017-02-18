@@ -77,21 +77,21 @@ public class RobotMap {
 			//Intake
 			public static final int BTN_INTAKEUP = LST_BTN_A;
 			public static final int BTN_INTAKEDOWN = LST_BTN_B;
-			public static final int BTN_CLIMBERUP = 80;	//TODO: Get Actual Button
-			public static final int BTN_CLIMBERDOWN = 80;//TODO: Get Actual Button
+			public static final int BTN_CLIMBERUP = LST_AXS_RTRIGGER;	//TODO: Get Actual Button
+			public static final int BTN_CLIMBERDOWN = LST_AXS_LTRIGGER;//TODO: Get Actual Button
 			
 			//Hopper
 			public static final int BTN_HOPPERDRIVE = LST_BTN_RBUMPER;//TODO: Get Actual Button
 			
 			//Shooter
 			public static final int BTN_TESTSHOOTERWHEELS = LST_BTN_LBUMPER;
-			public static final int BTN_RUNINDEXER = LST_BTN_START;
+			public static final int BTN_RUNINDEXER = LST_BTN_RBUMPER;
 			
 			//Gear Control
-			public static final int AXS_SHIELDGEAR = LST_AXS_LTRIGGER;
-			public static final int BTN_PINCHGEAR = LST_BTN_Y;
-			public static final int BTN_LIFTGEAR = LST_BTN_X;
-			public static final int AXS_DOORGEAR = LST_AXS_RTRIGGER;
+			public static final int AXS_SHIELDGEAR = 3;	//Joystick R
+			public static final int BTN_PINCHGEAR = 4;	//Joystick L
+			public static final int BTN_LIFTGEAR = 2;	//Joystick R
+			public static final int AXS_DOORGEAR = 3;	//Joystick L
 			
 			public static final int BTN_SHIFT = 1;
 }
