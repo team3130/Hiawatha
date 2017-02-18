@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team3130.robot.autoCommands.AutoBasicActuate;
 import org.usfirst.frc.team3130.robot.commands.RobotSensors;
 import org.usfirst.frc.team3130.robot.subsystems.*;
 
@@ -25,10 +26,12 @@ public class Robot extends IterativeRobot {
 	SendableChooser<CommandGroup> chooser;
 	RobotSensors robotSensors;
 
-	public static BasicCylinder bcGearPinch;
-	public static BasicCylinder bcGearLift;
-	public static BasicCylinder bcGearDoors;
-	public static BasicCylinder bcGearShield;
+	public static BasicCylinder bcGearPinch;	//Disabled Open
+	public static BasicCylinder bcGearLift;		//Disabled Up
+	public static BasicCylinder bcGearDoors;	//Disabled Up
+	public static BasicCylinder bcGearShield;	//Disabled In
+	
+	private static AutoBasicActuate gearDoorsDownEnable;
 	
 	@Override
 	public void robotInit() {
@@ -39,6 +42,8 @@ public class Robot extends IterativeRobot {
 		bcGearLift = new BasicCylinder(RobotMap.PNM_GEARLIFT);
 		bcGearDoors = new BasicCylinder(RobotMap.PNM_GEARDOOR);
 		bcGearShield = new BasicCylinder(RobotMap.PNM_TOPGEARSHIELD);
+		
+		gearDoorsDownEnable = new AutoBasicActuate(bcGearDoors, true);
 		
 		OI.GetInstance();
 		Chassis.GetInstance();
@@ -80,6 +85,8 @@ public class Robot extends IterativeRobot {
 		 */
 
 		// schedule the autonomous command (example)
+		gearDoorsDownEnable.start();
+		
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}
@@ -100,6 +107,8 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		
+		gearDoorsDownEnable.start();
 	}
 
 	/**

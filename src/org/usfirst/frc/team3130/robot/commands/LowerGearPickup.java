@@ -9,13 +9,29 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class LowerGearPickup extends CommandGroup {
 
+	private PickupGear backToDefault;
+	
     public LowerGearPickup() {
     	requires(Robot.bcGearDoors);
     	requires(Robot.bcGearLift);
     	requires(Robot.bcGearPinch);
+
+    	backToDefault = new PickupGear();
     	
-    	addParallel(new AutoBasicActuate(Robot.bcGearDoors, false), 0.1);
-    	addSequential(new AutoBasicActuate(Robot.bcGearPinch, true), 0.1);
+    	addParallel(new AutoBasicActuate(Robot.bcGearPinch, true), 0.1);
+    	addSequential(new AutoBasicActuate(Robot.bcGearDoors, false), 0.1);
     	addSequential(new AutoBasicActuate(Robot.bcGearLift, true), 0.1);
+    }
+    
+    @Override
+    protected void end()
+    {
+    	backToDefault.start();
+    }
+    
+    @Override
+    protected void interrupted()
+    {
+    	end();
     }
 }
