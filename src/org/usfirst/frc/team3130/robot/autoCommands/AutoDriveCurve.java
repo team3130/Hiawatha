@@ -22,6 +22,7 @@ public class AutoDriveCurve extends Command {
 	
     public AutoDriveCurve() {				
         requires(Chassis.GetInstance());
+
     }
 
 
@@ -65,6 +66,7 @@ public class AutoDriveCurve extends Command {
     	//Needs to occur for both turn directions
 		Chassis.Shift(m_shiftLow);
 		Chassis.ReleaseAngle();		
+        Chassis.TalonsToCoast(false);
 
     	if(m_turnLeft){
     		Chassis.setTurnDir(TurnDirection.kLeft);    		

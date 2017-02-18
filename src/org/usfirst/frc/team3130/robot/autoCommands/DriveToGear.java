@@ -17,6 +17,7 @@ public class DriveToGear extends Command {
     public DriveToGear() {
         requires(Chassis.GetInstance());
         setSpeed = false;
+
     }
 
     public void setParam(double speed)
@@ -27,6 +28,7 @@ public class DriveToGear extends Command {
     
     // Called just before this Command runs the first time
     protected void initialize() {
+        Chassis.TalonsToCoast(false);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -42,7 +44,7 @@ public class DriveToGear extends Command {
     	double angle = theta+Math.atan(C*x)-alpha;	//Extends theta's endpoint to be coincident to alpha's, then goes back alpha degrees
     	Chassis.HoldAngle(angle);
     	if(!setSpeed) speed = -OI.stickL.getY();
-    	Chassis.DriveStraight(-OI.stickL.getY());
+    	Chassis.DriveStraight(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

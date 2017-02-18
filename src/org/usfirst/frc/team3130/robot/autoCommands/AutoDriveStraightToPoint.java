@@ -47,6 +47,7 @@ public class AutoDriveStraightToPoint extends PIDCommand {
     	getPIDController().setSetpoint(m_distance + Chassis.GetDistance());
     	getPIDController().setAbsoluteTolerance(m_threshold);
     	setPID();
+        Chassis.TalonsToCoast(false);
     	
     	Chassis.Shift(m_shiftLow);
 	Chassis.setTurnDir(TurnDirection.kStraight);

@@ -28,6 +28,7 @@ public class CameraAim extends Command {
         requires(ShooterWheelsRight.GetInstance());
         requires(WheelSpeedCalculationsLeft.GetInstance());
         requires(WheelSpeedCalculationsRight.GetInstance());
+
     }
 
     /**
@@ -47,6 +48,7 @@ public class CameraAim extends Command {
     	ShooterWheelsLeft.setPID();
     	ShooterWheelsRight.setPID();
     	Chassis.SetPIDValues();
+        Chassis.TalonsToCoast(false);
     }
 
     // Called repeatedly when this Command is scheduled to run
