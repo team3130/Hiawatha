@@ -7,6 +7,7 @@ import org.usfirst.frc.team3130.robot.commands.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class OI {
@@ -64,6 +65,13 @@ public class OI {
 	private static JoystickButton shiftDown;
 	private static JoystickButton gearAssist;
 	
+	//Define Commands
+	WipeStopPointsL wipeLPoints;
+	WipeStopPointsR wipeRPoints;
+	AddPointL		addLPoint;
+	AddPointR		addRPoint;
+	TestSpeedPoints	testCurve;
+	
 	private OI()
 	{
 		//Create Joysticks
@@ -87,6 +95,14 @@ public class OI {
 		shiftUp = new JoystickButton(stickR, RobotMap.BTN_SHIFTUP);
 		shiftDown = new JoystickButton(stickL, RobotMap.BTN_SHIFTDOWN);
 		
+		//Create Commands
+		wipeLPoints	= new WipeStopPointsL();
+		wipeRPoints	= new WipeStopPointsR();
+		addLPoint	= new AddPointL();
+		addRPoint	= new AddPointR();
+		testCurve	= new TestSpeedPoints();
+		
+		
 		//Bind Joystick Buttons to Commands
 		intakeIn.whileHeld(new IntakeUp());
 		intakeOut.whileHeld(new IntakeDown());
@@ -102,6 +118,13 @@ public class OI {
 		shiftUp.whenPressed(new DriveShiftUp());
 		shiftDown.whenPressed(new DriveShiftDown());
 		gearAssist.whileHeld(new DriveToGear());
+		
+		//Place Commands on SMD
+		SmartDashboard.putData("Wipe Left Points", wipeLPoints);
+		SmartDashboard.putData("Wipe Right Points", wipeRPoints);
+		SmartDashboard.putData("Add Left Point", addLPoint);
+		SmartDashboard.putData("Add Right Point", addRPoint);
+		SmartDashboard.putData("Test Speed Curve", testCurve);
 	}
 }
 
