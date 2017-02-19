@@ -70,6 +70,7 @@ public class OI {
 	WipeStopPointsR wipeRPoints;
 	AddPointL		addLPoint;
 	AddPointR		addRPoint;
+	TestSpeedPoints	testCurve;
 	
 	private OI()
 	{
@@ -99,6 +100,7 @@ public class OI {
 		wipeRPoints	= new WipeStopPointsR();
 		addLPoint	= new AddPointL();
 		addRPoint	= new AddPointR();
+		testCurve	= new TestSpeedPoints();
 		
 		
 		//Bind Joystick Buttons to Commands
@@ -122,6 +124,7 @@ public class OI {
 		SmartDashboard.putData("Wipe Right Points", wipeRPoints);
 		SmartDashboard.putData("Add Left Point", addLPoint);
 		SmartDashboard.putData("Add Right Point", addRPoint);
+		SmartDashboard.putData("Test Speed Curve", testCurve);
 	}
 }
 
