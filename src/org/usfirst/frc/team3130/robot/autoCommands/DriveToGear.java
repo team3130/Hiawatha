@@ -34,15 +34,15 @@ public class DriveToGear extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//Implemented from https://i.imgur.com/B9THPiA.png
-    	double y = JetsonInterface.getDouble("Peg Crossrange", 0);	//TODO: get implemented on Jetson end
-    	double x = JetsonInterface.getDouble("Peg Downrange", 1);	//TODO: switch to x offset once updated on Jetson end
-    	double theta = JetsonInterface.getDouble("Peg Yaw", 0);
+    	double cr = JetsonInterface.getDouble("Peg Crossrange", 0);	//TODO: get implemented on Jetson end
+    	double dr = JetsonInterface.getDouble("Peg Downrange", 1);	//TODO: switch to x offset once updated on Jetson end
+    	double yaw = JetsonInterface.getDouble("Peg Yaw", 0);
     	
-    	double C = y/(x*x);
-    	double alpha = Math.atan(2*C*x);
+    	double alpha = Math.atan2(cr, dr);
+    	double beta = Math.atan2(2*cr, dr);
     	
-    	double angle = theta+Math.atan(C*x)-alpha;	//Extends theta's endpoint to be coincident to alpha's, then goes back alpha degrees
-    	Chassis.HoldAngle(angle);
+    	double angle = alpha - beta - yaw;	//Extends theta's endpoint to be coincident to alpha's, then goes back alpha degrees
+    	Chassis.HoldAngle(angle * (180/Math.PI));
     	if(!setSpeed) speed = -OI.stickL.getY();
     	Chassis.DriveStraight(speed);
     }
