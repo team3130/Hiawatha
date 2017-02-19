@@ -7,7 +7,6 @@ import org.usfirst.frc.team3130.robot.commands.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
@@ -69,6 +68,8 @@ public class OI {
 	//Define Commands
 	WipeStopPointsL wipeLPoints;
 	WipeStopPointsR wipeRPoints;
+	AddPointL		addLPoint;
+	AddPointR		addRPoint;
 	
 	private OI()
 	{
@@ -96,6 +97,8 @@ public class OI {
 		//Create Commands
 		wipeLPoints	= new WipeStopPointsL();
 		wipeRPoints	= new WipeStopPointsR();
+		addLPoint	= new AddPointL();
+		addRPoint	= new AddPointR();
 		
 		
 		//Bind Joystick Buttons to Commands
@@ -117,6 +120,8 @@ public class OI {
 		//Place Commands on SMD
 		SmartDashboard.putData("Wipe Left Points", wipeLPoints);
 		SmartDashboard.putData("Wipe Right Points", wipeRPoints);
+		SmartDashboard.putData("Add Left Point", addLPoint);
+		SmartDashboard.putData("Add Right Point", addRPoint);
 	}
 }
 
