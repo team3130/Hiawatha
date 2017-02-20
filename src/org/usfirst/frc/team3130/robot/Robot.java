@@ -28,6 +28,11 @@ public class Robot extends IterativeRobot {
 
 	public static BasicCylinder bcGearPinch;	//Disabled Open
 	public static BasicCylinder bcGearLift;		//Disabled Up
+	public static BasicCANTalon btHopper;
+	public static BasicCANTalon btGearBar;
+	public static BasicCANTalon btIntake;
+	public static BasicCANTalon btLeftIndex;
+	public static BasicCANTalon btRightIndex;
 	
 	private static ResetSolenoids resetGear;
 	
@@ -38,17 +43,18 @@ public class Robot extends IterativeRobot {
 
 		bcGearPinch = new BasicCylinder(RobotMap.PNM_GEARPINCH);
 		bcGearLift = new BasicCylinder(RobotMap.PNM_GEARLIFT);
+		
+		btHopper = new BasicCANTalon(RobotMap.CAN_HOPPERSTIR);
+		btGearBar = new BasicCANTalon(RobotMap.CAN_GEARBAR);
+		btIntake = new BasicCANTalon(RobotMap.CAN_INTAKEMOTOR);
+		btLeftIndex = new BasicCANTalon(RobotMap.CAN_INDEXMOTORLEFT);
+		btRightIndex = new BasicCANTalon(RobotMap.CAN_INDEXMOTORRIGHT);
 
 		resetGear = new ResetSolenoids();
 		
 		OI.GetInstance();
 		Chassis.GetInstance();
 		Climber.GetInstance();
-		GearBeaterBar.GetInstance();
-		Hopper.GetInstance();
-		IndexMotorLeft.GetInstance();
-		IndexMotorRight.GetInstance();
-		Intake.GetInstance();
 		ShooterWheelsLeft.GetInstance();
 		ShooterWheelsRight.GetInstance();
 		

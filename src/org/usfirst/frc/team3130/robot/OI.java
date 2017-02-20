@@ -4,6 +4,7 @@ package org.usfirst.frc.team3130.robot;
 import org.usfirst.frc.team3130.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 
@@ -83,11 +84,11 @@ public class OI {
 		shiftDown = new JoystickButton(stickL, RobotMap.BTN_SHIFTDOWN);
 		
 		//Bind Joystick Buttons to Commands
-		intakeIn.whileHeld(new IntakeUp());
-		intakeOut.whileHeld(new IntakeDown());
+		intakeIn.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Up Speed", .6)));
+		intakeOut.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Down Speed", -.6)));
 		climberUp.whileActive(new ClimbUp());
 		climberDown.whileActive(new ClimbDown());
-		hopperRun.whileHeld(new DriveHopper());
+		hopperRun.whileHeld(new BasicSpinMotor(Robot.btHopper, Preferences.getInstance().getDouble("Hopper Stirrer PercentVBus", 0.5)));
 		testShooterWheels.whileHeld(new RunWheelsManual());
 		pinchGear.whileHeld(new BasicActuate(Robot.bcGearPinch));
 		lowerGearActive.whileHeld(new LowerGearPickup());
