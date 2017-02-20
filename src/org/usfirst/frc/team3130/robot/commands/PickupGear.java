@@ -15,6 +15,8 @@ public class PickupGear extends CommandGroup {
     	requires(Robot.bcGearPinch);
     	
     	addSequential(new AutoBasicActuate(Robot.bcGearPinch, true), 0.1);
+    	addParallel(new BasicSpinMotor(Robot.btGearBar, 0));
     	addSequential(new AutoBasicActuate(Robot.bcGearLift, false), 0.75);
+    	
     }
 }
