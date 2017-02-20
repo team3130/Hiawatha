@@ -5,6 +5,7 @@ import org.usfirst.frc.team3130.robot.autoCommands.DriveToGear;
 import org.usfirst.frc.team3130.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -56,7 +57,6 @@ public class OI {
 	private static JoystickTrigger climberDown;
 	private static JoystickButton hopperRun;
 	private static JoystickButton testShooterWheels;
-	private static JoystickButton shieldGear;
 	private static JoystickButton pinchGear;
 	private static JoystickButton lowerGearActive;
 	private static JoystickButton spinIndexer;
@@ -86,7 +86,6 @@ public class OI {
 		climberDown = new JoystickTrigger(gamepad, RobotMap.BTN_CLIMBERDOWN);
 		hopperRun = new JoystickButton(gamepad, RobotMap.BTN_HOPPERDRIVE);
 		testShooterWheels = new JoystickButton(gamepad, RobotMap.BTN_TESTSHOOTERWHEELS);
-		shieldGear = new JoystickButton(gamepad, RobotMap.AXS_SHIELDGEAR);
 		pinchGear = new JoystickButton(stickL, RobotMap.BTN_PINCHGEAR);
 		lowerGearActive = new JoystickButton(stickR, RobotMap.BTN_LOWERGEARACTIVE);
 		spinIndexer = new JoystickButton(gamepad, RobotMap.BTN_RUNINDEXER);
@@ -104,13 +103,12 @@ public class OI {
 		
 		
 		//Bind Joystick Buttons to Commands
-		intakeIn.whileHeld(new IntakeUp());
-		intakeOut.whileHeld(new IntakeDown());
+		intakeIn.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Up Speed", .6)));
+		intakeOut.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Down Speed", -.6)));
 		climberUp.whileActive(new ClimbUp());
 		climberDown.whileActive(new ClimbDown());
-		hopperRun.whileHeld(new DriveHopper());
+		hopperRun.whileHeld(new BasicSpinMotor(Robot.btHopper, Preferences.getInstance().getDouble("Hopper Stirrer PercentVBus", 0.5)));
 		testShooterWheels.whileHeld(new RunWheelsManual());
-		shieldGear.toggleWhenPressed(new BasicActuate(Robot.bcGearShield));
 		pinchGear.whileHeld(new BasicActuate(Robot.bcGearPinch));
 		lowerGearActive.whileHeld(new LowerGearPickup());
 		spinIndexer.whileHeld(new RunIndexer());

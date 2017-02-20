@@ -87,8 +87,6 @@ public class RobotSensors extends Command {
     	//Gear
     	SmartDashboard.putBoolean("Gear Lift State", Robot.bcGearLift.getState());
     	SmartDashboard.putBoolean("Gear Pinch State", Robot.bcGearPinch.getState());
-    	SmartDashboard.putBoolean("Gear Doors State", Robot.bcGearDoors.getState());
-    	SmartDashboard.putBoolean("Gear Shield State", Robot.bcGearShield.getState());
     	
     	SmartDashboard.putBoolean("GearShift State", !Chassis.GetShiftedDown());
     }
