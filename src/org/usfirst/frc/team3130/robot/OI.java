@@ -54,7 +54,6 @@ public class OI {
 	private static JoystickTrigger climberDown;
 	private static JoystickButton hopperRun;
 	private static JoystickButton testShooterWheels;
-	private static JoystickButton shieldGear;
 	private static JoystickButton pinchGear;
 	private static JoystickButton lowerGearActive;
 	private static JoystickButton spinIndexer;
@@ -76,7 +75,6 @@ public class OI {
 		climberDown = new JoystickTrigger(gamepad, RobotMap.BTN_CLIMBERDOWN);
 		hopperRun = new JoystickButton(gamepad, RobotMap.BTN_HOPPERDRIVE);
 		testShooterWheels = new JoystickButton(gamepad, RobotMap.BTN_TESTSHOOTERWHEELS);
-		shieldGear = new JoystickButton(gamepad, RobotMap.AXS_SHIELDGEAR);
 		pinchGear = new JoystickButton(stickL, RobotMap.BTN_PINCHGEAR);
 		lowerGearActive = new JoystickButton(stickR, RobotMap.BTN_LOWERGEARACTIVE);
 		spinIndexer = new JoystickButton(gamepad, RobotMap.BTN_RUNINDEXER);
@@ -91,7 +89,6 @@ public class OI {
 		climberDown.whileActive(new ClimbDown());
 		hopperRun.whileHeld(new DriveHopper());
 		testShooterWheels.whileHeld(new RunWheelsManual());
-		shieldGear.toggleWhenPressed(new BasicActuate(Robot.bcGearShield));
 		pinchGear.whileHeld(new BasicActuate(Robot.bcGearPinch));
 		lowerGearActive.whileHeld(new LowerGearPickup());
 		spinIndexer.whileHeld(new RunIndexer());

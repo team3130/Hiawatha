@@ -11,13 +11,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class PickupGear extends CommandGroup {
 
     public PickupGear() {
-    	requires(Robot.bcGearDoors);
     	requires(Robot.bcGearLift);
     	requires(Robot.bcGearPinch);
     	
-    	addParallel(new AutoBasicActuate(Robot.bcGearDoors, false), 0.1);
     	addSequential(new AutoBasicActuate(Robot.bcGearPinch, true), 0.1);
     	addSequential(new AutoBasicActuate(Robot.bcGearLift, false), 0.75);
-    	addSequential(new AutoBasicActuate(Robot.bcGearDoors, true), 0.1);
     }
 }

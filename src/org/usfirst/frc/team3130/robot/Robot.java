@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team3130.robot.autoCommands.AutoBasicActuate;
 import org.usfirst.frc.team3130.robot.commands.ResetSolenoids;
 import org.usfirst.frc.team3130.robot.commands.RobotSensors;
 import org.usfirst.frc.team3130.robot.subsystems.*;
@@ -29,10 +28,7 @@ public class Robot extends IterativeRobot {
 
 	public static BasicCylinder bcGearPinch;	//Disabled Open
 	public static BasicCylinder bcGearLift;		//Disabled Up
-	public static BasicCylinder bcGearDoors;	//Disabled Up
-	public static BasicCylinder bcGearShield;	//Disabled In
 	
-	private static AutoBasicActuate gearDoorsDownEnable;
 	private static ResetSolenoids resetGear;
 	
 	@Override
@@ -42,15 +38,13 @@ public class Robot extends IterativeRobot {
 
 		bcGearPinch = new BasicCylinder(RobotMap.PNM_GEARPINCH);
 		bcGearLift = new BasicCylinder(RobotMap.PNM_GEARLIFT);
-		bcGearDoors = new BasicCylinder(RobotMap.PNM_GEARDOOR);
-		bcGearShield = new BasicCylinder(RobotMap.PNM_TOPGEARSHIELD);
-		
-		gearDoorsDownEnable = new AutoBasicActuate(bcGearDoors, true);
+
 		resetGear = new ResetSolenoids();
 		
 		OI.GetInstance();
 		Chassis.GetInstance();
 		Climber.GetInstance();
+		GearBeaterBar.GetInstance();
 		Hopper.GetInstance();
 		IndexMotorLeft.GetInstance();
 		IndexMotorRight.GetInstance();
@@ -88,7 +82,6 @@ public class Robot extends IterativeRobot {
 		 */
 
 		// schedule the autonomous command (example)
-		gearDoorsDownEnable.start();
 		
 		if (autonomousCommand != null)
 			autonomousCommand.start();
@@ -111,7 +104,6 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		
-		gearDoorsDownEnable.start();
 	}
 
 	/**
