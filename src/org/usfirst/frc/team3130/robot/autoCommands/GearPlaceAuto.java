@@ -14,28 +14,21 @@ public class GearPlaceAuto extends CommandGroup {
 	private DriveToGear drive_toGear;;
 	private AutoDriveStraightToPoint drive_ontoPeg;
 	private AutoDriveStraightToPoint drive_offPeg;
-	private AutoBasicActuate pnm_OpenDoors;
 	private AutoBasicActuate pnm_OpenPinch;
 	private AutoBasicActuate pnm_DropLift;
-	private AutoBasicActuate pnm_CloseDoors;
 	
     public GearPlaceAuto() {
         requires(Chassis.GetInstance());
-        requires(Robot.bcGearDoors);
         requires(Robot.bcGearPinch);
         requires(Robot.bcGearLift);
         
         drive_toGear = new DriveToGear();
         drive_ontoPeg = new AutoDriveStraightToPoint();
         drive_offPeg = new AutoDriveStraightToPoint();
-	pnm_CloseDoors = new AutoBasicActuate(Robot.bcGearDoors, true);
-        pnm_OpenDoors = new AutoBasicActuate(Robot.bcGearDoors, false);
         pnm_OpenPinch = new AutoBasicActuate(Robot.bcGearPinch, true);
         pnm_DropLift = new AutoBasicActuate(Robot.bcGearLift, true);
         
-	addSequential(pnm_CloseDoors,.2);
         addSequential(drive_toGear,8);
-        addSequential(pnm_OpenDoors,.2);
         addSequential(drive_ontoPeg,2);
         addSequential(pnm_OpenPinch,.2);
         addSequential(pnm_DropLift,.2);

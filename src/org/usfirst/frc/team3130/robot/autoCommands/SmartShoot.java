@@ -1,8 +1,7 @@
 package org.usfirst.frc.team3130.robot.autoCommands;
 
-import org.usfirst.frc.team3130.robot.commands.DriveHopper;
-import org.usfirst.frc.team3130.robot.subsystems.IndexMotorLeft;
-import org.usfirst.frc.team3130.robot.subsystems.IndexMotorRight;
+import org.usfirst.frc.team3130.robot.Robot;
+import org.usfirst.frc.team3130.robot.commands.BasicSpinMotor;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsRight;
 import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsLeft;
@@ -17,20 +16,22 @@ public class SmartShoot extends CommandGroup {
 
 	private CameraAim aim;
 	private AutoSmartShoot shoot;
-	private DriveHopper feedShooters;
+	private BasicSpinMotor feedShooters;
 	
 	private double indexPercent;
 	
     public SmartShoot() {
         requires(ShooterWheelsRight.GetInstance());
         requires(ShooterWheelsLeft.GetInstance());
-        requires(IndexMotorLeft.GetInstance());
-        requires(IndexMotorRight.GetInstance());
+        requires(Robot.btHopper);
+        requires(Robot.btRightIndex);
+        requires(Robot.btLeftIndex);
         requires(WheelSpeedCalculationsLeft.GetInstance());
         requires(WheelSpeedCalculationsRight.GetInstance());
         
         aim = new CameraAim();
         shoot = new AutoSmartShoot();
+        feedShooters = new BasicSpinMotor(Robot.btHopper, .5);
         
         addParallel(aim);
         addParallel(feedShooters);

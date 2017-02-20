@@ -10,10 +10,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ResetSolenoids extends Command {
 
     public ResetSolenoids() {
-        requires(Robot.bcGearDoors);
         requires(Robot.bcGearLift);
         requires(Robot.bcGearPinch);
-        requires(Robot.bcGearShield);
     }
 
     // Called just before this Command runs the first time

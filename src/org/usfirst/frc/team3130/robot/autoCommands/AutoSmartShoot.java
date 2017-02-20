@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3130.robot.autoCommands;
 
-import org.usfirst.frc.team3130.robot.subsystems.IndexMotorLeft;
-import org.usfirst.frc.team3130.robot.subsystems.IndexMotorRight;
+import org.usfirst.frc.team3130.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -14,8 +13,8 @@ public class AutoSmartShoot extends Command {
 	private CameraAim aimer;
 	
     public AutoSmartShoot() {
-        requires(IndexMotorLeft.GetInstance());
-        requires(IndexMotorRight.GetInstance());
+        requires(Robot.btLeftIndex);
+        requires(Robot.btRightIndex);
     }
 
     /**
@@ -36,11 +35,11 @@ public class AutoSmartShoot extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(aimer.onTarget()){
-    		IndexMotorLeft.driveIndexMotor(percentage);
-        	IndexMotorRight.driveIndexMotor(percentage);
+    		Robot.btLeftIndex.spinMotor(percentage);
+        	Robot.btRightIndex.spinMotor(percentage);
     	}else{
-    		IndexMotorLeft.driveIndexMotor(0);
-    		IndexMotorLeft.driveIndexMotor(0);
+    		Robot.btLeftIndex.spinMotor(0);
+    		Robot.btLeftIndex.spinMotor(0);
     	}
     }
 
@@ -51,8 +50,8 @@ public class AutoSmartShoot extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	IndexMotorLeft.driveIndexMotor(0);
-    	IndexMotorRight.driveIndexMotor(0);
+    	Robot.btLeftIndex.spinMotor(0);
+    	Robot.btRightIndex.spinMotor(0);
     }
 
     // Called when another command which requires one or more of the same

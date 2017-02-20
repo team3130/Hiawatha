@@ -28,6 +28,7 @@ public class RobotMap {
 			public static final int CAN_INDEXMOTORLEFT = 10;
 			public static final int CAN_SHOOTERWHEELSLEFT = 11;
 			public static final int CAN_SHOOTERWHEELSRIGHT = 12;
+			public static final int CAN_GEARBAR = 13;
 			public static final int CAN_INDEXMOTORRIGHT = 45;
 
 		
