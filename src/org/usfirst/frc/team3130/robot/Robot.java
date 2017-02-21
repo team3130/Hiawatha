@@ -41,8 +41,8 @@ public class Robot extends IterativeRobot {
 		robotSensors = new RobotSensors();
 		robotSensors.start();
 
-		bcGearPinch = new BasicCylinder(RobotMap.PNM_GEARPINCH);
-		bcGearLift = new BasicCylinder(RobotMap.PNM_GEARLIFT);
+		bcGearPinch = new BasicCylinder(RobotMap.PNM_GEARPINCH, "Gear", "Pinch Cylinder");
+		bcGearLift = new BasicCylinder(RobotMap.PNM_GEARLIFT, "Gear", "Lift Cylinder");
 		
 		btHopper = new BasicCANTalon(RobotMap.CAN_HOPPERSTIR, "Hopper", "Hopper Motor");
 		btGearBar = new BasicCANTalon(RobotMap.CAN_GEARBAR, "Gear", "Gear Bar");
