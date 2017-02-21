@@ -23,7 +23,7 @@ public class BasicCANTalon extends Subsystem {
     public BasicCANTalon(int CAN_id, String subsystem, String item)
     {
     	mc_spinnyMotor = new CANTalon(CAN_id);
-    	LiveWindow.addActuator(subsystem, item, mc_spinnyMotor);
+    	//LiveWindow.addActuator(subsystem, item, mc_spinnyMotor);
     }
     
     /**

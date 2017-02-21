@@ -60,6 +60,7 @@ public class OI {
 	private static JoystickButton pinchGear;
 	private static JoystickButton lowerGearActive;
 	private static JoystickButton spinIndexer;
+	private static JoystickButton testCurvePreferences;
 
 	private static JoystickButton shiftUp;
 	private static JoystickButton shiftDown;
@@ -89,6 +90,7 @@ public class OI {
 		pinchGear = new JoystickButton(stickL, RobotMap.BTN_PINCHGEAR);
 		lowerGearActive = new JoystickButton(stickR, RobotMap.BTN_LOWERGEARACTIVE);
 		spinIndexer = new JoystickButton(gamepad, RobotMap.BTN_RUNINDEXER);
+		testCurvePreferences = new JoystickButton(gamepad, RobotMap.BTN_TESTCURVEPREFERENCES);
 		
 		gearAssist = new JoystickButton(stickR, RobotMap.BTN_GEARASSIST);
 		shiftUp = new JoystickButton(stickR, RobotMap.BTN_SHIFTUP);
@@ -112,6 +114,7 @@ public class OI {
 		pinchGear.whileHeld(new BasicActuate(Robot.bcGearPinch));
 		lowerGearActive.whileHeld(new LowerGearPickup());
 		spinIndexer.whileHeld(new RunIndexer());
+		testCurvePreferences.whileHeld(new SpeedCurveShoot());
 		
 		shiftUp.whenPressed(new DriveShiftUp());
 		shiftDown.whenPressed(new DriveShiftDown());
