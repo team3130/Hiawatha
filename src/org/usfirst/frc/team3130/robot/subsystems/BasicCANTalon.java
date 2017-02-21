@@ -20,10 +20,10 @@ public class BasicCANTalon extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public BasicCANTalon(int CAN_id)
+    public BasicCANTalon(int CAN_id, String subsystem, String item)
     {
     	mc_spinnyMotor = new CANTalon(CAN_id);
-    	LiveWindow.addActuator("Basic Spin Motor", CAN_id, mc_spinnyMotor);
+    	LiveWindow.addActuator(subsystem, item, mc_spinnyMotor);
     }
     
     /**

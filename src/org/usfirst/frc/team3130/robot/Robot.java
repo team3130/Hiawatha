@@ -41,14 +41,14 @@ public class Robot extends IterativeRobot {
 		robotSensors = new RobotSensors();
 		robotSensors.start();
 
-		bcGearPinch = new BasicCylinder(RobotMap.PNM_GEARPINCH);
-		bcGearLift = new BasicCylinder(RobotMap.PNM_GEARLIFT);
+		bcGearPinch = new BasicCylinder(RobotMap.PNM_GEARPINCH, "Gear", "Pinch Cylinder");
+		bcGearLift = new BasicCylinder(RobotMap.PNM_GEARLIFT, "Gear", "Lift Cylinder");
 		
-		btHopper = new BasicCANTalon(RobotMap.CAN_HOPPERSTIR);
-		btGearBar = new BasicCANTalon(RobotMap.CAN_GEARBAR);
-		btIntake = new BasicCANTalon(RobotMap.CAN_INTAKEMOTOR);
-		btLeftIndex = new BasicCANTalon(RobotMap.CAN_INDEXMOTORLEFT);
-		btRightIndex = new BasicCANTalon(RobotMap.CAN_INDEXMOTORRIGHT);
+		btHopper = new BasicCANTalon(RobotMap.CAN_HOPPERSTIR, "Hopper", "Hopper Motor");
+		btGearBar = new BasicCANTalon(RobotMap.CAN_GEARBAR, "Gear", "Gear Bar");
+		btIntake = new BasicCANTalon(RobotMap.CAN_INTAKEMOTOR, "Intake", "Intake Motor");
+		btLeftIndex = new BasicCANTalon(RobotMap.CAN_INDEXMOTORLEFT, "Indexer", "Left Index Motor");
+		btRightIndex = new BasicCANTalon(RobotMap.CAN_INDEXMOTORRIGHT, "Indexer", "Right Index Motor");
 
 		resetGear = new ResetSolenoids();
 		
