@@ -10,15 +10,13 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ClimbUp extends Command {
 
-	private int thresholdAmp = 5;
-	
     public ClimbUp() {
         requires(Climber.GetInstance());
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Climber.Climb(Preferences.getInstance().getDouble("Climber Up Speed", 1.0));
+    	Climber.Climb(Preferences.getInstance().getDouble("Climber Up Speed", -1.0));
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -27,7 +25,7 @@ public class ClimbUp extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Climber.getLiftAmp() > thresholdAmp; //TODO: make it stop climbing when a certain amperage is reached
+        return false;
     }
 
     // Called once after isFinished returns true
