@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team3130.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -57,7 +58,9 @@ public class Robot extends IterativeRobot {
 		Climber.GetInstance();
 		ShooterWheelsLeft.GetInstance();
 		ShooterWheelsRight.GetInstance();
-		
+
+		// Simplest camera feed. Remove if not needed.
+		CameraServer.getInstance().startAutomaticCapture();
 
 		chooser = new SendableChooser<CommandGroup>();
 		// chooser.addObject("My Auto", new MyAutoCommand());
