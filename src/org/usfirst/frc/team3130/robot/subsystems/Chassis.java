@@ -125,7 +125,7 @@ public class Chassis extends PIDSubsystem {
     
     public static void DriveArcade(double move, double turn, boolean squaredInputs)
     {
-    	m_drive.arcadeDrive(m_driveMultiplier * move, turn, squaredInputs);
+    	m_drive.arcadeDrive(move, turn, squaredInputs);
     }
     
     public static void DriveArcade(double move, double turn)
@@ -345,6 +345,11 @@ public class Chassis extends PIDSubsystem {
     
     public static void ReverseDrive(){
     	m_driveMultiplier *= -1;
+    }
+    
+    public static int getReverseMultiplier()
+    {
+    	return m_driveMultiplier;
     }
 }
 
