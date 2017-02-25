@@ -92,4 +92,7 @@ public class RobotMap {
 			
 			public static final int BTN_SHIFTDOWN = 3;	//Joystick L
 			public static final int BTN_SHIFTUP = 2;	//Joystick R
+			
+			//Drive
+			public static final int BTN_REVERSEDRIVE = 5; //Joystick R
 }

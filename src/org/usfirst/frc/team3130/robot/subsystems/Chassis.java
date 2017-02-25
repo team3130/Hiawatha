@@ -49,6 +49,8 @@ public class Chassis extends PIDSubsystem {
 	public static final double InchesPerRev = 0.995 * Math.PI * 7.625 * 15 / 22;
 	
 	
+	private static int m_driveMultiplier;
+	
 	private Chassis()
 	{
 		super("Chassis", 0.05, 0.01, 0.15);
@@ -97,6 +99,7 @@ public class Chassis extends PIDSubsystem {
 		
 		moveSpeed = 0;
 		prevAbsBias = 0;
+		m_driveMultiplier = 1;
 	}
 	
     public void initDefaultCommand() {
@@ -107,7 +110,7 @@ public class Chassis extends PIDSubsystem {
     //Drive methods for the two forms of control used. Two of each type exist to allow a 2 arg call to default to non-squared inputs
     public static void DriveTank(double moveL, double moveR, boolean squaredInputs)
     {
-    	m_drive.tankDrive(moveL, moveR, squaredInputs);
+    	m_drive.tankDrive(m_driveMultiplier * moveL, m_driveMultiplier * moveR, squaredInputs);
     }
     
     public static void DriveTank(double moveL, double moveR)
@@ -117,7 +120,7 @@ public class Chassis extends PIDSubsystem {
     
     public static void DriveArcade(double move, double turn, boolean squaredInputs)
     {
-    	m_drive.arcadeDrive(move, turn, squaredInputs);
+    	m_drive.arcadeDrive(m_driveMultiplier * move, m_driveMultiplier * turn, squaredInputs);
     }
     
     public static void DriveArcade(double move, double turn)
@@ -334,6 +337,11 @@ public class Chassis extends PIDSubsystem {
     	m_rightMotorFront.enableBrakeMode(!coast);
     	m_rightMotorRear.enableBrakeMode(!coast);
     }
+    
+    public static void ReverseDrive(){
+    	m_driveMultiplier *= -1;
+    }
 }
+
 
 
