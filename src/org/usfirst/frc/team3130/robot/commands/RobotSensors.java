@@ -54,13 +54,13 @@ public class RobotSensors extends Command {
     	SmartDashboard.putNumber("Shooter Left Wheel Setpoint", ShooterWheelsLeft.GetSetpoint());
     	//SmartDashboard.putNumber("Shooter Left Wheel Voltage", ShooterWheelsLeft.GetVolt());
     	//SmartDashboard.putNumber("Shooter Left Wheel Position", ShooterWheelsLeft.GetPosition());
-    	SmartDashboard.putNumber("Shooter Left Wheel Current", ShooterWheelsLeft.GetCurrent());
+    	//SmartDashboard.putNumber("Shooter Left Wheel Current", ShooterWheelsLeft.GetCurrent());
 
     	SmartDashboard.putNumber("Shooter Right Wheel Speed", ShooterWheelsRight.getSpeed());
     	SmartDashboard.putNumber("Shooter Right Wheel Setpoint", ShooterWheelsRight.GetSetpoint());
     	//SmartDashboard.putNumber("Shooter Right Wheel Voltage", ShooterWheelsRight.GetVolt());
     	//SmartDashboard.putNumber("Shooter Right Wheel Position", ShooterWheelsRight.GetPosition());
-    	SmartDashboard.putNumber("Shooter Right Wheel Current", ShooterWheelsRight.GetCurrent());
+    	//SmartDashboard.putNumber("Shooter Right Wheel Current", ShooterWheelsRight.GetCurrent());
     	
     	
     	//Chassis
@@ -74,6 +74,7 @@ public class RobotSensors extends Command {
     	//SmartDashboard.putNumber("Front Right Current", Chassis.GetFrontCurrentR());
     	//SmartDashboard.putNumber("Rear Left Current", Chassis.GetRearCurrentL());
     	//SmartDashboard.putNumber("Rear Right Current", Chassis.GetRearCurrentR());
+    	SmartDashboard.putNumber("Angle", Chassis.GetAngle());
     	
     	
     	//Shooter Altitude

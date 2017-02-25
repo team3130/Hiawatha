@@ -3,7 +3,7 @@ package org.usfirst.frc.team3130.robot;
 public class RobotMap {
 	//Constant Ratios
 			public static final int RATIO_WINCHCODESPERREV = 1024;
-			public static final int RATIO_DRIVECODESPERREV = 360;
+			public static final int RATIO_DRIVECODESPERREV = 2048;
 
 		//DIO Ports
 			public static final int DIO_JETSONPWRON = 0;

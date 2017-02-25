@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 
 /**
@@ -46,7 +47,7 @@ public class Chassis extends PIDSubsystem {
 	 * Wheel diameter: 7.625
 	 * Calibrating ratio: 0.955
 	 */
-	public static final double InchesPerRev = 0.995 * Math.PI * 7.625 * 15 / 22;
+	public static final double InchesPerRev = 4 * Math.PI;
 	
 	
 	private static int m_driveMultiplier;
@@ -61,6 +62,10 @@ public class Chassis extends PIDSubsystem {
 		m_rightMotorRear = new CANTalon(RobotMap.CAN_RIGHTMOTORREAR);
 		m_leftMotorFront.reverseSensor(false);
 		m_rightMotorFront.reverseSensor(true);
+		
+		m_leftMotorFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		m_rightMotorFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		
 		m_leftMotorFront.configEncoderCodesPerRev(RobotMap.RATIO_DRIVECODESPERREV);
 		m_rightMotorFront.configEncoderCodesPerRev(RobotMap.RATIO_DRIVECODESPERREV);
 		
