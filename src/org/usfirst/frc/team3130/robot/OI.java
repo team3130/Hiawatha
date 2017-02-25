@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3130.robot;
 
 
+import org.usfirst.frc.team3130.robot.autoCommands.AutoTurn;
 import org.usfirst.frc.team3130.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -62,6 +63,9 @@ public class OI {
 	private static JoystickButton shiftUp;
 	private static JoystickButton shiftDown;
 	
+	private static JoystickButton btn10;
+	private static AutoTurn turn;
+	
 	private OI()
 	{
 		//Create Joysticks
@@ -83,6 +87,10 @@ public class OI {
 		shiftUp = new JoystickButton(stickR, RobotMap.BTN_SHIFTUP);
 		shiftDown = new JoystickButton(stickL, RobotMap.BTN_SHIFTDOWN);
 		
+		btn10 = new JoystickButton(stickR, 10);
+		turn = new AutoTurn();
+		turn.SetParam(90);
+		
 		//Bind Joystick Buttons to Commands
 		intakeIn.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Up Speed", .6)));
 		intakeOut.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Down Speed", -.6)));
@@ -96,6 +104,7 @@ public class OI {
 		
 		shiftUp.whenPressed(new DriveShiftUp());
 		shiftDown.whenPressed(new DriveShiftDown());
+		btn10.whileHeld(turn);
 	}
 }
 

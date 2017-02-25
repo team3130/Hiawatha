@@ -115,12 +115,12 @@ public class Chassis extends PIDSubsystem {
     //Drive methods for the two forms of control used. Two of each type exist to allow a 2 arg call to default to non-squared inputs
     public static void DriveTank(double moveL, double moveR, boolean squaredInputs)
     {
-    	m_drive.tankDrive(m_driveMultiplier * moveL, m_driveMultiplier * moveR, squaredInputs);
+    	m_drive.tankDrive(moveL, moveR, squaredInputs);
     }
     
     public static void DriveTank(double moveL, double moveR)
     {
-    	DriveTank(moveL, moveR, false);
+    	m_drive.tankDrive(moveL, moveR, false);
     }
     
     public static void DriveArcade(double move, double turn, boolean squaredInputs)
@@ -130,7 +130,7 @@ public class Chassis extends PIDSubsystem {
     
     public static void DriveArcade(double move, double turn)
     {
-    	DriveArcade(move, turn, false);
+    	m_drive.arcadeDrive(move, turn, false);
     }
     
     public static void Shift(boolean shiftDown)
