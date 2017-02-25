@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3130.robot;
 
 
+
 import org.usfirst.frc.team3130.robot.autoCommands.DriveToGear;
 import org.usfirst.frc.team3130.robot.commands.*;
 
@@ -59,7 +60,9 @@ public class OI {
 	private static JoystickButton pinchGear;
 	private static JoystickButton lowerGearActive;
 	private static JoystickButton spinIndexer;
+
 	private static JoystickButton testCurvePreferences;
+	private static JoystickButton reverseDrive;
 
 	private static JoystickButton shiftUp;
 	private static JoystickButton shiftDown;
@@ -71,6 +74,9 @@ public class OI {
 	AddPointL		addLPoint;
 	AddPointR		addRPoint;
 	TestSpeedPoints	testCurve;
+	
+	private static JoystickButton btn10;
+	private static HoldAngleTest turn;
 	
 	private OI()
 	{
@@ -89,6 +95,7 @@ public class OI {
 		lowerGearActive = new JoystickButton(stickR, RobotMap.BTN_LOWERGEARACTIVE);
 		spinIndexer = new JoystickButton(gamepad, RobotMap.BTN_RUNINDEXER);
 		testCurvePreferences = new JoystickButton(gamepad, RobotMap.BTN_TESTCURVEPREFERENCES);
+		reverseDrive = new JoystickButton(stickR, RobotMap.BTN_REVERSEDRIVE);
 		
 		gearAssist = new JoystickButton(stickR, RobotMap.BTN_GEARASSIST);
 		shiftUp = new JoystickButton(stickR, RobotMap.BTN_SHIFTUP);
@@ -101,6 +108,9 @@ public class OI {
 		addRPoint	= new AddPointR();
 		testCurve	= new TestSpeedPoints();
 		
+		btn10 = new JoystickButton(stickR, 10);
+		turn = new HoldAngleTest();
+		turn.SetParam(90);
 		
 		//Bind Joystick Buttons to Commands
 		intakeIn.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Up Speed", .6)));
@@ -112,10 +122,13 @@ public class OI {
 		lowerGearActive.whileHeld(new LowerGearPickup());
 		spinIndexer.whileHeld(new RunIndexer());
 		testCurvePreferences.whileHeld(new SpeedCurveShoot());
+		reverseDrive.whenPressed(new ReverseDrive());
+		gearAssist.whileHeld(new DriveToGear());
 		
 		shiftUp.whenPressed(new DriveShiftUp());
 		shiftDown.whenPressed(new DriveShiftDown());
-		gearAssist.whileHeld(new DriveToGear());
+		
+		btn10.whileHeld(turn);
 		
 		//Place Commands on SMD
 		SmartDashboard.putData("Wipe Left Points", wipeLPoints);

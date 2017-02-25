@@ -47,14 +47,11 @@ public class Chassis extends PIDSubsystem {
 	private static double moveSpeed;
 	private static double prevAbsBias;
 	private static boolean m_bNavXPresent;
-	
-	/* Wheel sprockets: 22
-	 * Encoder shaft sprockets: 15
-	 * Wheel diameter: 7.625
-	 * Calibrating ratio: 0.955
-	 */
-	public static final double InchesPerRev = 0.995 * Math.PI * 7.625 * 15 / 22;
+
 	public static final double robotWidth = 26.0;
+
+	public static final double InchesPerRev = 4 * Math.PI;
+
 	
 	//PID Preferences Defaults
 	private static final double TALON_CURVEDRIVE_LOW_POSITION_P_DEFAULT = 0.1;
@@ -91,6 +88,8 @@ public class Chassis extends PIDSubsystem {
 	private static final double SUBSYSTEM_STRAIGHT_LOW_D_DEFAULT = 0.125;
 
 	
+	private static int m_driveMultiplier;
+	
 	private Chassis()
 	{
 		super("Chassis", 0.05, 0.01, 0.15);
@@ -105,6 +104,9 @@ public class Chassis extends PIDSubsystem {
 		m_rightMotorFront.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		m_leftMotorFront.reverseSensor(false);
 		m_rightMotorFront.reverseSensor(true);
+		
+		m_leftMotorFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		m_rightMotorFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		
 		m_leftMotorFront.configEncoderCodesPerRev(RobotMap.RATIO_DRIVECODESPERREV);
 		m_rightMotorFront.configEncoderCodesPerRev(RobotMap.RATIO_DRIVECODESPERREV);
@@ -145,7 +147,10 @@ public class Chassis extends PIDSubsystem {
 		
 		moveSpeed = 0;
 		prevAbsBias = 0;
+		
 		m_dir = TurnDirection.kStraight;
+		
+		m_driveMultiplier = 1;
 	}
 	
 	public void initDefaultCommand() {
@@ -234,7 +239,10 @@ public class Chassis extends PIDSubsystem {
 		return (GetDistanceL() + GetDistanceR()) / 2.0;
 	}
 	
-	/**
+
+	
+    
+    /**
      * Returns the current voltage being output by the front left talon
      * @return voltage being output by talon in volts
      */
@@ -614,6 +622,16 @@ public class Chassis extends PIDSubsystem {
 		m_rightMotorRear.enableBrakeMode(!coast);
 
 	}
+    
+    public static void ReverseDrive(){
+    	m_driveMultiplier *= -1;
+    }
+    
+    public static int getReverseMultiplier()
+    {
+    	return m_driveMultiplier;
+    }
 }
+
 
 
