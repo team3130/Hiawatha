@@ -92,7 +92,7 @@ public class OI {
 		pinchGear.whileHeld(new BasicActuate(Robot.bcGearPinch));
 		lowerGearActive.whileHeld(new LowerGearPickup());
 		spinIndexer.whileHeld(new RunIndexer());
-		reverseDrive.toggleWhenPressed(new ReverseDrive());
+		reverseDrive.whenPressed(new ReverseDrive());
 		
 		shiftUp.whenPressed(new DriveShiftUp());
 		shiftDown.whenPressed(new DriveShiftDown());
