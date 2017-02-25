@@ -120,7 +120,7 @@ public class Chassis extends PIDSubsystem {
     
     public static void DriveArcade(double move, double turn, boolean squaredInputs)
     {
-    	m_drive.arcadeDrive(m_driveMultiplier * move, m_driveMultiplier * turn, squaredInputs);
+    	m_drive.arcadeDrive(m_driveMultiplier * move, turn, squaredInputs);
     }
     
     public static void DriveArcade(double move, double turn)
