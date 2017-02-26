@@ -53,7 +53,7 @@ public class CameraAim extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	m_yaw = JetsonInterface.getDouble("Boiler Yaw", 0);
+    	m_yaw = -JetsonInterface.getDouble("Boiler Yaw", 0);
     	Chassis.HoldAngle(m_yaw);
     	Chassis.DriveStraight(OI.stickL.getY());
     	
