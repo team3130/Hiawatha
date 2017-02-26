@@ -1,5 +1,6 @@
-package org.usfirst.frc.team3130.robot.autoCommands;
+package org.usfirst.frc.team3130.robot.commands;
 
+import org.usfirst.frc.team3130.robot.OI;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -7,11 +8,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AutoTurn extends Command {
+public class HoldAngleTest extends Command {
 
 	private double m_angle;
 	
-    public AutoTurn() {
+    public HoldAngleTest() {
         requires(Chassis.GetInstance());
     }
 
@@ -29,6 +30,7 @@ public class AutoTurn extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Chassis.DriveStraight(Chassis.getReverseMultiplier() * -1 * OI.stickL.getY());
     }
 
     // Make this return true when this Command no longer needs to run execute()

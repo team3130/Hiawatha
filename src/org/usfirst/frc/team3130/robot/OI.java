@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3130.robot;
 
 
-import org.usfirst.frc.team3130.robot.autoCommands.AutoTurn;
 import org.usfirst.frc.team3130.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -64,7 +63,7 @@ public class OI {
 	private static JoystickButton shiftDown;
 	
 	private static JoystickButton btn10;
-	private static AutoTurn turn;
+	private static HoldAngleTest turn;
 	
 	private OI()
 	{
@@ -88,7 +87,7 @@ public class OI {
 		shiftDown = new JoystickButton(stickL, RobotMap.BTN_SHIFTDOWN);
 		
 		btn10 = new JoystickButton(stickR, 10);
-		turn = new AutoTurn();
+		turn = new HoldAngleTest();
 		turn.SetParam(90);
 		
 		//Bind Joystick Buttons to Commands
