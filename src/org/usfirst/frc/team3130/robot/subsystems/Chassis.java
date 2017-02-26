@@ -37,7 +37,7 @@ public class Chassis extends PIDSubsystem {
 	private static AHRS m_navX;
 	
 	//Create and define all standard data types needed
-	private static boolean m_bShiftedLow;
+	private static boolean m_bShiftedHigh;
 	private static double moveSpeed;
 	private static double prevAbsBias;
 	private static boolean m_bNavXPresent;
@@ -75,12 +75,11 @@ public class Chassis extends PIDSubsystem {
 		m_rightMotorRear.changeControlMode(TalonControlMode.Follower);
 		m_rightMotorRear.set(RobotMap.CAN_RIGHTMOTORFRONT);
 		
-
 		
 		m_drive = new RobotDrive(m_leftMotorFront, m_rightMotorFront);
 		m_drive.setSafetyEnabled(false);
 		m_shifter = new Solenoid(RobotMap.CAN_PNMMODULE, RobotMap.PNM_GEARSHIFTER);
-		m_bShiftedLow = false;
+		m_bShiftedHigh = false;
 		
 		
 		try{
@@ -136,10 +135,10 @@ public class Chassis extends PIDSubsystem {
     public static void Shift(boolean shiftDown)
     {
     	m_shifter.set(shiftDown);
-    	m_bShiftedLow = shiftDown;
+    	m_bShiftedHigh = shiftDown;
     }
     
-    public static boolean GetShiftedDown(){return m_bShiftedLow;}
+    public static boolean GetShiftedDown(){return m_bShiftedHigh;}
     
     
     /**
@@ -311,7 +310,7 @@ public class Chassis extends PIDSubsystem {
     
     public static void SetPIDValues()
     {
-    	if(m_bShiftedLow){
+    	if(m_bShiftedHigh){
     		GetInstance().getPIDController().setPID(
     				Preferences.getInstance().getDouble("ChassisHighP",0.075),
     				Preferences.getInstance().getDouble("ChassisHighI",0.01),
