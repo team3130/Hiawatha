@@ -1,8 +1,8 @@
 package org.usfirst.frc.team3130.robot;
 
 
-
 import org.usfirst.frc.team3130.robot.autoCommands.DriveToGear;
+
 import org.usfirst.frc.team3130.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
