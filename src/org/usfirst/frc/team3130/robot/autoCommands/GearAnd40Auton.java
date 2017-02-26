@@ -45,8 +45,8 @@ public class GearAnd40Auton extends CommandGroup {
     protected void initialize()
     {
     	drive_toHopper.SetParam(
-    			Preferences.getInstance().getDouble("Gear40 toHopper Downrange", 60), 
-    			Preferences.getInstance().getDouble("Gear40 toHopper Crossrange", 12), 
+    			Preferences.getInstance().getDouble("Gear40 toHopper Downrange", 119), 
+    			Preferences.getInstance().getDouble("Gear40 toHopper Crossrange", 27), 
     			false, 
     			1
     	);

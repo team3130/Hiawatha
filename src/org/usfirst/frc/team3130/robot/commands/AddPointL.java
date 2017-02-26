@@ -4,15 +4,15 @@ import org.usfirst.frc.team3130.robot.subsystems.JetsonInterface;
 import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsLeft;
 
 import edu.wpi.first.wpilibj.Preferences;
-import edu.wpi.first.wpilibj.command.InstantCommand;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class AddPointL extends InstantCommand {
+public class AddPointL extends Command {
 
     public AddPointL() {
-        super();
+    	this.setRunWhenDisabled(true);
         requires(WheelSpeedCalculationsLeft.GetInstance());
     }
 
@@ -23,5 +23,10 @@ public class AddPointL extends InstantCommand {
     	double speed = Preferences.getInstance().getDouble("Left Speed Setpoint", 0);
     	WheelSpeedCalculationsLeft.AddPoint(dist, speed);
     }
+
+	@Override
+	protected boolean isFinished() {
+		return true;
+	}
 
 }

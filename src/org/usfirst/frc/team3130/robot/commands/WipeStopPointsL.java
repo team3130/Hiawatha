@@ -2,15 +2,15 @@ package org.usfirst.frc.team3130.robot.commands;
 
 import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsLeft;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class WipeStopPointsL extends InstantCommand {
+public class WipeStopPointsL extends Command {
 
     public WipeStopPointsL() {
-        super();
+    	this.setRunWhenDisabled(true);
         requires(WheelSpeedCalculationsLeft.GetInstance());
     }
 
@@ -18,5 +18,11 @@ public class WipeStopPointsL extends InstantCommand {
     protected void initialize() {
     	WheelSpeedCalculationsLeft.WipeData();
     }
+
+	@Override
+	protected boolean isFinished() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 
 }

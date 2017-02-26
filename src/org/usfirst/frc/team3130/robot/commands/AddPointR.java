@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 public class AddPointR extends InstantCommand {
 
     public AddPointR() {
-        super();
+    	this.setRunWhenDisabled(true);
         requires(WheelSpeedCalculationsRight.GetInstance());
     }
 

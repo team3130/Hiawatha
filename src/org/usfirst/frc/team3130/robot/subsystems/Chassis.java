@@ -43,18 +43,15 @@ public class Chassis extends PIDSubsystem {
 	private static TurnDirection m_dir;
 	
 	//Create and define all standard data types needed
-	private static boolean m_bShiftedLow;
+	private static boolean m_bShiftedHigh;
 	private static double moveSpeed;
 	private static double prevAbsBias;
 	private static boolean m_bNavXPresent;
-	
-	/* Wheel sprockets: 22
-	 * Encoder shaft sprockets: 15
-	 * Wheel diameter: 7.625
-	 * Calibrating ratio: 0.955
-	 */
-	public static final double InchesPerRev = 0.995 * Math.PI * 7.625 * 15 / 22;
+
 	public static final double robotWidth = 26.0;
+
+	public static final double InchesPerRev = 4 * Math.PI;
+
 	
 	//PID Preferences Defaults
 	private static final double TALON_CURVEDRIVE_LOW_POSITION_P_DEFAULT = 0.1;
@@ -91,6 +88,8 @@ public class Chassis extends PIDSubsystem {
 	private static final double SUBSYSTEM_STRAIGHT_LOW_D_DEFAULT = 0.125;
 
 	
+	private static int m_driveMultiplier;
+	
 	private Chassis()
 	{
 		super("Chassis", 0.05, 0.01, 0.15);
@@ -106,6 +105,9 @@ public class Chassis extends PIDSubsystem {
 		m_leftMotorFront.reverseSensor(false);
 		m_rightMotorFront.reverseSensor(true);
 		
+		m_leftMotorFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		m_rightMotorFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		
 		m_leftMotorFront.configEncoderCodesPerRev(RobotMap.RATIO_DRIVECODESPERREV);
 		m_rightMotorFront.configEncoderCodesPerRev(RobotMap.RATIO_DRIVECODESPERREV);
 		
@@ -117,11 +119,12 @@ public class Chassis extends PIDSubsystem {
 		m_rightMotorRear.changeControlMode(TalonControlMode.Follower);
 		m_rightMotorRear.set(RobotMap.CAN_RIGHTMOTORFRONT);
 		
+
 		m_drive = new RobotDrive(m_leftMotorFront, m_rightMotorFront);
 		m_drive.setSafetyEnabled(false);
 
 		m_shifter = new Solenoid(RobotMap.CAN_PNMMODULE, RobotMap.PNM_GEARSHIFTER);
-		m_bShiftedLow = false;
+		m_bShiftedHigh = false;
 		
 		
 		try{
@@ -145,96 +148,74 @@ public class Chassis extends PIDSubsystem {
 		
 		moveSpeed = 0;
 		prevAbsBias = 0;
+		
 		m_dir = TurnDirection.kStraight;
+		
+		m_driveMultiplier = 1;
 	}
 	
-	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		setDefaultCommand(new DefaultDrive());
-	}
-	
-	//Drive methods for the two forms of control used. Two of each type exist to allow a 2 arg call to default to non-squared inputs
-	public static void DriveTank(double moveL, double moveR, boolean squaredInputs)
-	{
-		m_drive.tankDrive(moveL, moveR, squaredInputs);
-	}
-	
-	public static void DriveTank(double moveL, double moveR)
-	{
-		DriveTank(moveL, moveR, false);
-	}
-	
-	public static void DriveArcade(double move, double turn, boolean squaredInputs)
-	{
-		m_drive.arcadeDrive(move, turn, squaredInputs);
-	}
-	
-	public static void DriveArcade(double move, double turn)
-	{
-		DriveArcade(move, turn, false);
-	}
-	
-	public static void Shift(boolean shiftDown)
-	{
-		m_shifter.set(shiftDown);
-		m_bShiftedLow = shiftDown;
-	}
-	
-	//Getters
-	public static boolean GetShiftedDown(){return m_bShiftedLow;}
-	
-	
-	/**
-	 * Returns the current speed of the front left motor
-	 * @return Current speed of the front left motor (unknown units)
-	 */
-	public static double GetSpeedL()
-	{
-		return m_leftMotorFront.getSpeed() * InchesPerRev;
-	}
-	
-	/**
-	 * Returns the current speed of the front right motor
-	 * @return Current speed of the front right motor (unknown units)
-	 */
-	public static double GetSpeedR()
-	{
-		return m_rightMotorFront.getSpeed() * InchesPerRev;	
-	}
-	
-	public static double GetSpeed()
-	{
-		//The right encoder is nonfunctional, just use the left speed.
-		//return (GetSpeedL() + GetSpeedR())/2.0;
-		return GetSpeedL();
-	}
-	
-	/**
-	 * 
-	 * @return Current distance of the front left motor in inches
-	 */
-	public static double GetDistanceL()
-	{
-		return m_leftMotorFront.getPosition() * InchesPerRev;
-	}
-	
-	/**
-	 * 
-	 * @return Current distance of the front right motor in inches
-	 */
-	public static double GetDistanceR()
-	{
-		return m_rightMotorFront.getPosition() * InchesPerRev;
-	}
-	
-	
-	public static double GetDistance()
-	{
-		//Returns the average of the left and right speeds
-		return (GetDistanceL() + GetDistanceR()) / 2.0;
-	}
-	
-	/**
+    public void initDefaultCommand() {
+        // Set the default command for a subsystem here.
+        setDefaultCommand(new DefaultDrive());
+    }
+    
+    //Drive methods for the two forms of control used. Two of each type exist to allow a 2 arg call to default to non-squared inputs
+    public static void DriveTank(double moveL, double moveR, boolean squaredInputs)
+    {
+    	m_drive.tankDrive(moveL, moveR, squaredInputs);
+    }
+    
+    public static void DriveTank(double moveL, double moveR)
+    {
+    	m_drive.tankDrive(moveL, moveR, false);
+    }
+    
+    public static void DriveArcade(double move, double turn, boolean squaredInputs)
+    {
+    	m_drive.arcadeDrive(move, turn, squaredInputs);
+    }
+    
+    public static void DriveArcade(double move, double turn)
+    {
+    	m_drive.arcadeDrive(move, turn, false);
+    }
+    
+    public static void Shift(boolean shiftDown)
+    {
+    	m_shifter.set(shiftDown);
+    	m_bShiftedHigh = shiftDown;
+    }
+    
+    public static boolean GetShiftedDown(){return m_bShiftedHigh;}
+    
+    
+    /**
+     * Returns the current speed of the front left motor
+     * @return Current speed of the front left motor (unknown units)
+     */
+    public static double GetSpeedL()
+    {
+    	return m_leftMotorFront.getSpeed() * InchesPerRev / 50.0;
+    }
+    
+    /**
+     * Returns the current speed of the front right motor
+     * @return Current speed of the front right motor (unknown units)
+     */
+    public static double GetSpeedR()
+    {
+    	return m_rightMotorFront.getSpeed() * InchesPerRev / 50.0;	
+    }
+    
+    public static double GetSpeed()
+    {
+    	//The right encoder is nonfunctional, just use the left speed.
+    	//return (GetSpeedL() + GetSpeedR())/2.0;
+    	return GetSpeedL();
+    }
+
+    
+    /**
      * Returns the current voltage being output by the front left talon
      * @return voltage being output by talon in volts
      */
@@ -297,6 +278,31 @@ public class Chassis extends PIDSubsystem {
     public static double GetRearCurrentR() {
     	return m_rightMotorRear.getOutputCurrent();
     }
+
+	/**
+	 * 
+	 * @return Current distance of the front left motor in inches
+	 */
+	public static double GetDistanceL()
+	{
+		return m_leftMotorFront.getPosition() * InchesPerRev;
+	}
+	
+	/**
+	 * 
+	 * @return Current distance of the front right motor in inches
+	 */
+	public static double GetDistanceR()
+	{
+		return m_rightMotorFront.getPosition() * InchesPerRev;
+	}
+	
+	
+	public static double GetDistance()
+	{
+		//Returns the average of the left and right speeds
+		return (GetDistanceL() + GetDistanceR()) / 2.0;
+	}
 	
 	public static double GetAngle()
 	{
@@ -376,7 +382,7 @@ public class Chassis extends PIDSubsystem {
 	
 	public static void SetPIDValues()
 	{
-		if(!m_bShiftedLow){
+		if(!m_bShiftedHigh){
 			if(m_dir.equals(TurnDirection.kStraight)){
 				GetInstance().getPIDController().setPID(
 					Preferences.getInstance().getDouble("Chassis High Straight P",SUBSYSTEM_STRAIGHT_HIGH_P_DEFAULT),
@@ -469,7 +475,7 @@ public class Chassis extends PIDSubsystem {
 	 */
 	private static void setTalonPID()
 	{
-		if(m_bShiftedLow){
+		if(m_bShiftedHigh){
 			switch(m_dir){
 			case kLeft:
 				m_rightMotorFront.setPID(
@@ -614,6 +620,16 @@ public class Chassis extends PIDSubsystem {
 		m_rightMotorRear.enableBrakeMode(!coast);
 
 	}
+    
+    public static void ReverseDrive(){
+    	m_driveMultiplier *= -1;
+    }
+    
+    public static int getReverseMultiplier()
+    {
+    	return m_driveMultiplier;
+    }
 }
+
 
 

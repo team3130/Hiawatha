@@ -15,6 +15,8 @@ public class TestSpeedPoints extends Command {
 	Timer timer;
 	
 	public TestSpeedPoints() {
+    	this.setRunWhenDisabled(true);
+		
 		requires(WheelSpeedCalculationsLeft.GetInstance());
 		requires(WheelSpeedCalculationsRight.GetInstance());
 		

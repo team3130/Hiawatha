@@ -1,7 +1,9 @@
 package org.usfirst.frc.team3130.robot;
 
 
+import org.usfirst.frc.team3130.robot.autoCommands.CameraAim;
 import org.usfirst.frc.team3130.robot.autoCommands.DriveToGear;
+
 import org.usfirst.frc.team3130.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -54,16 +56,20 @@ public class OI {
 	private static JoystickButton intakeIn;
 	private static JoystickButton intakeOut;
 	private static JoystickTrigger climberUp;
-	private static JoystickTrigger climberDown;
 	private static JoystickButton hopperRun;
 	private static JoystickButton testShooterWheels;
 	private static JoystickButton pinchGear;
 	private static JoystickButton lowerGearActive;
 	private static JoystickButton spinIndexer;
 
+	private static JoystickButton testCurvePreferences;
+	private static JoystickButton reverseDrive;
+
 	private static JoystickButton shiftUp;
 	private static JoystickButton shiftDown;
 	private static JoystickButton gearAssist;
+	
+	private static JoystickButton aim;
 	
 	//Define Commands
 	WipeStopPointsL wipeLPoints;
@@ -71,6 +77,9 @@ public class OI {
 	AddPointL		addLPoint;
 	AddPointR		addRPoint;
 	TestSpeedPoints	testCurve;
+	
+	private static JoystickButton btn10;
+	private static HoldAngleTest turn;
 	
 	private OI()
 	{
@@ -83,16 +92,19 @@ public class OI {
 		intakeIn = new JoystickButton(gamepad, RobotMap.BTN_INTAKEUP);
 		intakeOut = new JoystickButton(gamepad, RobotMap.BTN_INTAKEDOWN);
 		climberUp = new JoystickTrigger(gamepad, RobotMap.BTN_CLIMBERUP);
-		climberDown = new JoystickTrigger(gamepad, RobotMap.BTN_CLIMBERDOWN);
 		hopperRun = new JoystickButton(gamepad, RobotMap.BTN_HOPPERDRIVE);
 		testShooterWheels = new JoystickButton(gamepad, RobotMap.BTN_TESTSHOOTERWHEELS);
 		pinchGear = new JoystickButton(stickL, RobotMap.BTN_PINCHGEAR);
 		lowerGearActive = new JoystickButton(stickR, RobotMap.BTN_LOWERGEARACTIVE);
 		spinIndexer = new JoystickButton(gamepad, RobotMap.BTN_RUNINDEXER);
+		testCurvePreferences = new JoystickButton(gamepad, RobotMap.BTN_TESTCURVEPREFERENCES);
+		reverseDrive = new JoystickButton(stickR, RobotMap.BTN_REVERSEDRIVE);
 		
 		gearAssist = new JoystickButton(stickR, RobotMap.BTN_GEARASSIST);
 		shiftUp = new JoystickButton(stickR, RobotMap.BTN_SHIFTUP);
 		shiftDown = new JoystickButton(stickL, RobotMap.BTN_SHIFTDOWN);
+		
+		aim = new JoystickButton(stickR, RobotMap.BTN_AIMSHOOT);
 		
 		//Create Commands
 		wipeLPoints	= new WipeStopPointsL();
@@ -101,21 +113,29 @@ public class OI {
 		addRPoint	= new AddPointR();
 		testCurve	= new TestSpeedPoints();
 		
+		btn10 = new JoystickButton(stickR, 10);
+		turn = new HoldAngleTest();
+		turn.SetParam(90);
 		
 		//Bind Joystick Buttons to Commands
 		intakeIn.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Up Speed", .6)));
 		intakeOut.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Down Speed", -.6)));
 		climberUp.whileActive(new ClimbUp());
-		climberDown.whileActive(new ClimbDown());
 		hopperRun.whileHeld(new BasicSpinMotor(Robot.btHopper, Preferences.getInstance().getDouble("Hopper Stirrer PercentVBus", 0.5)));
 		testShooterWheels.whileHeld(new RunWheelsManual());
 		pinchGear.whileHeld(new BasicActuate(Robot.bcGearPinch));
 		lowerGearActive.whileHeld(new LowerGearPickup());
 		spinIndexer.whileHeld(new RunIndexer());
+		testCurvePreferences.whileHeld(new SpeedCurveShoot());
+		reverseDrive.whenPressed(new ReverseDrive());
+		gearAssist.whileHeld(new DriveToGear());
 		
 		shiftUp.whenPressed(new DriveShiftUp());
 		shiftDown.whenPressed(new DriveShiftDown());
-		gearAssist.whileHeld(new DriveToGear());
+		
+		aim.whileHeld(new CameraAim());
+		
+		btn10.whileHeld(turn);
 		
 		//Place Commands on SMD
 		SmartDashboard.putData("Wipe Left Points", wipeLPoints);
