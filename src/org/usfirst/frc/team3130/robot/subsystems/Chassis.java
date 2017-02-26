@@ -385,9 +385,9 @@ public class Chassis extends PIDSubsystem {
 		if(!m_bShiftedHigh){
 			if(m_dir.equals(TurnDirection.kStraight)){
 				GetInstance().getPIDController().setPID(
-					Preferences.getInstance().getDouble("Chassis High Straight P",SUBSYSTEM_STRAIGHT_HIGH_P_DEFAULT),
-					Preferences.getInstance().getDouble("Chassis High Straight I",SUBSYSTEM_STRAIGHT_HIGH_I_DEFAULT),
-					Preferences.getInstance().getDouble("Chassis High Straight D",SUBSYSTEM_STRAIGHT_HIGH_D_DEFAULT)
+					Preferences.getInstance().getDouble("ChassisHighP",SUBSYSTEM_STRAIGHT_HIGH_P_DEFAULT),
+					Preferences.getInstance().getDouble("ChassisHighI",SUBSYSTEM_STRAIGHT_HIGH_I_DEFAULT),
+					Preferences.getInstance().getDouble("ChassisHighD",SUBSYSTEM_STRAIGHT_HIGH_D_DEFAULT)
 				);
 			}else{
 				GetInstance().getPIDController().setPID(
@@ -399,9 +399,9 @@ public class Chassis extends PIDSubsystem {
 		}else{
 			if(m_dir.equals(TurnDirection.kStraight)){
 				GetInstance().getPIDController().setPID(
-					Preferences.getInstance().getDouble("Chassis Low Straight P",SUBSYSTEM_STRAIGHT_LOW_P_DEFAULT),
-					Preferences.getInstance().getDouble("Chassis Low Straight I",SUBSYSTEM_STRAIGHT_LOW_I_DEFAULT),
-					Preferences.getInstance().getDouble("Chassis Low Straight D",SUBSYSTEM_STRAIGHT_LOW_D_DEFAULT)
+					Preferences.getInstance().getDouble("ChassisLowP",SUBSYSTEM_STRAIGHT_LOW_P_DEFAULT),
+					Preferences.getInstance().getDouble("ChassisLowI",SUBSYSTEM_STRAIGHT_LOW_I_DEFAULT),
+					Preferences.getInstance().getDouble("ChassisLowD",SUBSYSTEM_STRAIGHT_LOW_D_DEFAULT)
 				);
 			}else{
 				GetInstance().getPIDController().setPID(
@@ -447,25 +447,7 @@ public class Chassis extends PIDSubsystem {
 		setTalonPID();
 	}
 	
-	//PID Accessor functions for the Talons
-	/*
-	/**
-	 * Sets the control mode of the left talon
-	 * @param mode the control method to be used to drive the left talon
-	 *
-	public static void setLeftMotorMode(TalonControlMode mode)
-	{
-		m_leftMotorFront.changeControlMode(mode);
-	}
-	
-	/**
-	 * Sets the control mode of the left talon
-	 * @param mode the control method to be used to drive the right talon
-	 *
-	public static void setRightMotorMode(TalonControlMode mode)
-	{
-		m_rightMotorFront.changeControlMode(mode);
-	}*/
+
 	
 	/**
 	 * Sets the PID Values of both talons
