@@ -27,11 +27,11 @@ public class DefaultDrive extends Command {
 
     	
     	int dirMultiplier = -1* Chassis.getReverseMultiplier();
-    	double moveSpeedL = dirMultiplier * OI.gamepad.getRawAxis(RobotMap.LST_AXS_LJOYSTICKY);
-    	double moveSpeedR = dirMultiplier * OI.gamepad.getRawAxis(RobotMap.LST_AXS_RJOYSTICKY);
+    	double moveSpeed = dirMultiplier * OI.gamepad.getRawAxis(RobotMap.LST_AXS_LJOYSTICKY);
+    	double turnSpeed = -OI.gamepad.getRawAxis(RobotMap.LST_AXS_RJOYSTICKY);
     	
     	//Explicitly turning on Quadratic inputs for drivers, as all other systems will use nonQuadratic
-    	Chassis.DriveTank(moveSpeedL, moveSpeedR, true);
+    	Chassis.DriveArcade(moveSpeed, turnSpeed, true);
     }
 
     // Make this return true when this Command no longer needs to run execute()
