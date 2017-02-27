@@ -2,6 +2,7 @@ package org.usfirst.frc.team3130.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import org.usfirst.frc.team3130.misc.LinearInterp;
 import org.usfirst.frc.team3130.robot.*;
 import org.usfirst.frc.team3130.robot.commands.DefaultDrive;
 
@@ -84,7 +85,6 @@ public class Chassis extends PIDSubsystem {
 	private static final double SUBSYSTEM_STRAIGHT_HIGH_D_DEFAULT = 0.09;
 
 	private static final double SUBSYSTEM_STRAIGHT_LOW_P_DEFAULT = 0.085;
-	private static final double SUBSYSTEM_STRAIGHT_LOW_I_DEFAULT = 0.02;
 	private static final double SUBSYSTEM_STRAIGHT_LOW_D_DEFAULT = 0.125;
 
 	
@@ -380,7 +380,15 @@ public class Chassis extends PIDSubsystem {
 		m_rightMotorFront.setPosition(0);
 	}
 	
-	public static void SetPIDValues()
+	
+	private static double GetI(double angle)
+	{
+		double workingAngle = Math.abs(angle);
+		if(workingAngle > 20) return 7.0E-7;
+		return (-.000999965*workingAngle + 0.02);
+	}
+	
+	public static void SetPIDValues(double angle)
 	{
 		if(m_bShiftedHigh){
 			if(m_dir.equals(TurnDirection.kStraight)){
@@ -400,7 +408,7 @@ public class Chassis extends PIDSubsystem {
 			if(m_dir.equals(TurnDirection.kStraight)){
 				GetInstance().getPIDController().setPID(
 					Preferences.getInstance().getDouble("ChassisLowP",SUBSYSTEM_STRAIGHT_LOW_P_DEFAULT),
-					Preferences.getInstance().getDouble("ChassisLowI",SUBSYSTEM_STRAIGHT_LOW_I_DEFAULT),
+					GetI(angle),
 					Preferences.getInstance().getDouble("ChassisLowD",SUBSYSTEM_STRAIGHT_LOW_D_DEFAULT)
 				);
 			}else{
@@ -415,7 +423,7 @@ public class Chassis extends PIDSubsystem {
 	
 	public static void HoldAngle(double angle)
 	{
-		SetPIDValues();
+		SetPIDValues(angle);
 		if(m_dir.equals(TurnDirection.kStraight))GetInstance().getPIDController().setSetpoint(GetAngle() + angle);
 		else GetInstance().getPIDController().setSetpoint(angle);
 		GetInstance().getPIDController().enable();

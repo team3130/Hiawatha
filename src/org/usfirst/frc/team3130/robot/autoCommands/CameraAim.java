@@ -47,7 +47,7 @@ public class CameraAim extends Command {
     	Chassis.setTurnDir(TurnDirection.kStraight);
     	ShooterWheelsLeft.setPID();
     	ShooterWheelsRight.setPID();
-    	Chassis.SetPIDValues();
+    	Chassis.SetPIDValues(21);
         Chassis.TalonsToCoast(false);
     }
 
