@@ -87,7 +87,7 @@ public class AutoDriveStraightToPoint extends PIDCommand {
 	@Override
 	protected void usePIDOutput(double output) {
 		if(output > m_speed) output = m_speed;
-		else if(output < m_speed) output = -m_speed;
+		else if(output < -m_speed) output = -m_speed;
 		
 		Chassis.DriveStraight(output);
 	}
