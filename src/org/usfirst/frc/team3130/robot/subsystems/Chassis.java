@@ -2,7 +2,6 @@ package org.usfirst.frc.team3130.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
 
-import org.usfirst.frc.team3130.misc.LinearInterp;
 import org.usfirst.frc.team3130.robot.*;
 import org.usfirst.frc.team3130.robot.commands.DefaultDrive;
 

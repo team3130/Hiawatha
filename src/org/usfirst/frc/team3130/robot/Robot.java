@@ -4,12 +4,12 @@ package org.usfirst.frc.team3130.robot;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team3130.robot.autoCommands.AutoBasicActuate;
 import org.usfirst.frc.team3130.robot.autoCommands.DumbGearAuto;
 import org.usfirst.frc.team3130.robot.commands.ResetSolenoids;
 import org.usfirst.frc.team3130.robot.commands.RobotSensors;
@@ -67,6 +67,7 @@ public class Robot extends IterativeRobot {
 		CameraServer.getInstance().startAutomaticCapture();
 
 		chooser = new SendableChooser<String>();
+		chooser.addDefault("No Auton", "No Auto");
 		chooser.addObject("Dumb Gear", "Dumb Gear Auto");
 		SmartDashboard.putData("Auto mode", chooser);
 	}
@@ -90,6 +91,8 @@ public class Robot extends IterativeRobot {
 			case "Dumb Gear Auto":
 				autonomousCommand = new DumbGearAuto();
 				break;
+			case "No Auton":
+				autonomousCommand = new AutoBasicActuate(bcGearPinch, true);
 			default:
 				autonomousCommand = null;
 		}
