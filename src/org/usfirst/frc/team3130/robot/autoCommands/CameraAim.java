@@ -10,6 +10,7 @@ import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsRight;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis.TurnDirection;
 
 import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -21,6 +22,8 @@ public class CameraAim extends Command {
 	private final double DEFAULTTHRESHOLD = 0.5;
 	private final double SHOOTERTHRESHOLD = 5.0;
 	private final double DEFAULTBOILERDISTANCE = 120;
+	private Timer timer;
+	boolean hasAimed;
 	
     public CameraAim() {
         requires(Chassis.GetInstance());
@@ -28,6 +31,7 @@ public class CameraAim extends Command {
         requires(ShooterWheelsRight.GetInstance());
         requires(WheelSpeedCalculationsLeft.GetInstance());
         requires(WheelSpeedCalculationsRight.GetInstance());
+        timer = new Timer();
 
     }
 
@@ -49,13 +53,22 @@ public class CameraAim extends Command {
     	ShooterWheelsRight.setPID();
     	Chassis.SetPIDValues(21);
         Chassis.TalonsToCoast(false);
+        timer.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	m_yaw = -JetsonInterface.getDouble("Boiler Yaw", 0);
-    	Chassis.HoldAngle((180.0/Math.PI) * m_yaw);
-    	Chassis.DriveStraight(OI.stickL.getY());
+    	if(!hasAimed || timer.get() > Preferences.getInstance().getDouble("Aim Timeout", .5)){
+    		if(Math.abs(JetsonInterface.getDouble("Boiler Sys Time", 0) - JetsonInterface.getDouble("Boiler Time", 0)) < 0.25){
+		    	m_yaw = JetsonInterface.getDouble("Boiler Yaw", 0);
+		    	Chassis.HoldAngle((180.0/Math.PI) * m_yaw);
+    		}
+    		timer.reset();
+    		timer.start();
+    		hasAimed = true;
+    	}
+    	
+    	Chassis.DriveStraight(-OI.stickL.getY());
     	
     	double dist = JetsonInterface.getDouble("Boiler Distance", DEFAULTBOILERDISTANCE);
     	ShooterWheelsLeft.setSpeed(WheelSpeedCalculationsLeft.GetSpeed(dist));
@@ -71,6 +84,7 @@ public class CameraAim extends Command {
     protected void end() {
     	ShooterWheelsLeft.stop();
     	ShooterWheelsRight.stop();
+    	hasAimed = false;
     }
 
     // Called when another command which requires one or more of the same

@@ -385,7 +385,7 @@ public class Chassis extends PIDSubsystem {
 	{
 		double workingAngle = Math.abs(angle);
 		if(workingAngle > 20) return 7.0E-7;
-		return (-.000999965*workingAngle + 0.02);
+		return (-.000999965*workingAngle + 0.002);
 	}
 	
 	public static void SetPIDValues(double angle)
