@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team3130.robot.autoCommands.DumbGearAuto;
 import org.usfirst.frc.team3130.robot.commands.ResetSolenoids;
 import org.usfirst.frc.team3130.robot.commands.RobotSensors;
 import org.usfirst.frc.team3130.robot.subsystems.*;
@@ -24,7 +25,7 @@ import org.usfirst.frc.team3130.robot.subsystems.*;
 public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
-	SendableChooser<CommandGroup> chooser;
+	SendableChooser<String> chooser;
 	RobotSensors robotSensors;
 
 	public static BasicCylinder bcGearPinch;	//Disabled Open
@@ -65,8 +66,8 @@ public class Robot extends IterativeRobot {
 		// Simplest camera feed. Remove if not needed.
 		CameraServer.getInstance().startAutomaticCapture();
 
-		chooser = new SendableChooser<CommandGroup>();
-		// chooser.addObject("My Auto", new MyAutoCommand());
+		chooser = new SendableChooser<String>();
+		chooser.addObject("Dumb Gear", "Dumb Gear Auto");
 		SmartDashboard.putData("Auto mode", chooser);
 	}
 
@@ -84,16 +85,14 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = (Command) chooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
+		
+		switch(chooser.getSelected()){
+			case "Dumb Gear Auto":
+				autonomousCommand = new DumbGearAuto();
+				break;
+			default:
+				autonomousCommand = null;
+		}
 		
 		if (autonomousCommand != null)
 			autonomousCommand.start();

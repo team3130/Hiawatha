@@ -102,8 +102,8 @@ public class Chassis extends PIDSubsystem {
 		//Configure encoders
 		m_leftMotorFront.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		m_rightMotorFront.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		m_leftMotorFront.reverseSensor(false);
-		m_rightMotorFront.reverseSensor(true);
+		m_leftMotorFront.reverseSensor(true);
+		m_rightMotorFront.reverseSensor(false);
 		
 		m_leftMotorFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		m_rightMotorFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);

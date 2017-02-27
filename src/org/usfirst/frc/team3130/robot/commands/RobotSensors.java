@@ -75,6 +75,8 @@ public class RobotSensors extends Command {
     	//SmartDashboard.putNumber("Rear Left Current", Chassis.GetRearCurrentL());
     	//SmartDashboard.putNumber("Rear Right Current", Chassis.GetRearCurrentR());
     	SmartDashboard.putNumber("Angle", Chassis.GetAngle());
+    	SmartDashboard.putNumber("Left Distance", Chassis.GetDistanceL());
+    	SmartDashboard.putNumber("Right Distance", Chassis.GetDistanceR());
     	
     	
     	//Shooter Altitude
