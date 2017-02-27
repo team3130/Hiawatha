@@ -382,7 +382,7 @@ public class Chassis extends PIDSubsystem {
 	
 	public static void SetPIDValues()
 	{
-		if(!m_bShiftedHigh){
+		if(m_bShiftedHigh){
 			if(m_dir.equals(TurnDirection.kStraight)){
 				GetInstance().getPIDController().setPID(
 					Preferences.getInstance().getDouble("ChassisHighP",SUBSYSTEM_STRAIGHT_HIGH_P_DEFAULT),

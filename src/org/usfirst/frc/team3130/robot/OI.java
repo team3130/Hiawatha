@@ -115,7 +115,7 @@ public class OI {
 		
 		btn10 = new JoystickButton(stickR, 10);
 		turn = new HoldAngleTest();
-		turn.SetParam(Preferences.getInstance().getDouble("HoldAngle Angle", 15));
+		turn.SetParam(Preferences.getInstance().getDouble("HoldAngle Angle", 45));
 		
 		//Bind Joystick Buttons to Commands
 		intakeIn.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Up Speed", .6)));
