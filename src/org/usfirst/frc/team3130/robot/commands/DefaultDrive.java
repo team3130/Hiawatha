@@ -23,7 +23,8 @@ public class DefaultDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double moveSpeed = -OI.stickL.getY();
+    	int dirMultiplier = -1* Chassis.getReverseMultiplier();
+    	double moveSpeed = dirMultiplier * OI.stickL.getY();
     	double turnSpeed = -OI.stickR.getX();
     	double turnThrottle = (-0.5 * OI.stickR.getRawAxis(3)) + 0.5;
     	

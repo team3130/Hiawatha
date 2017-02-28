@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team3130.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -9,7 +10,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team3130.robot.autoCommands.AutoBasicActuate;
 import org.usfirst.frc.team3130.robot.commands.ResetSolenoids;
 import org.usfirst.frc.team3130.robot.commands.RobotSensors;
 import org.usfirst.frc.team3130.robot.subsystems.*;
@@ -29,10 +29,12 @@ public class Robot extends IterativeRobot {
 
 	public static BasicCylinder bcGearPinch;	//Disabled Open
 	public static BasicCylinder bcGearLift;		//Disabled Up
-	public static BasicCylinder bcGearDoors;	//Disabled Up
-	public static BasicCylinder bcGearShield;	//Disabled In
+	public static BasicCANTalon btHopper;
+	public static BasicCANTalon btGearBar;
+	public static BasicCANTalon btIntake;
+	public static BasicCANTalon btLeftIndex;
+	public static BasicCANTalon btRightIndex;
 	
-	private static AutoBasicActuate gearDoorsDownEnable;
 	private static ResetSolenoids resetGear;
 	
 	@Override
@@ -40,24 +42,25 @@ public class Robot extends IterativeRobot {
 		robotSensors = new RobotSensors();
 		robotSensors.start();
 
-		bcGearPinch = new BasicCylinder(RobotMap.PNM_GEARPINCH);
-		bcGearLift = new BasicCylinder(RobotMap.PNM_GEARLIFT);
-		bcGearDoors = new BasicCylinder(RobotMap.PNM_GEARDOOR);
-		bcGearShield = new BasicCylinder(RobotMap.PNM_TOPGEARSHIELD);
+		bcGearPinch = new BasicCylinder(RobotMap.PNM_GEARPINCH, "Gear", "Pinch Cylinder");
+		bcGearLift = new BasicCylinder(RobotMap.PNM_GEARLIFT, "Gear", "Lift Cylinder");
 		
-		gearDoorsDownEnable = new AutoBasicActuate(bcGearDoors, true);
+		btHopper = new BasicCANTalon(RobotMap.CAN_HOPPERSTIR, "Hopper", "Hopper Motor");
+		btGearBar = new BasicCANTalon(RobotMap.CAN_GEARBAR, "Gear", "Gear Bar");
+		btIntake = new BasicCANTalon(RobotMap.CAN_INTAKEMOTOR, "Intake", "Intake Motor");
+		btLeftIndex = new BasicCANTalon(RobotMap.CAN_INDEXMOTORLEFT, "Indexer", "Left Index Motor");
+		btRightIndex = new BasicCANTalon(RobotMap.CAN_INDEXMOTORRIGHT, "Indexer", "Right Index Motor");
+
 		resetGear = new ResetSolenoids();
 		
 		OI.GetInstance();
 		Chassis.GetInstance();
 		Climber.GetInstance();
-		Hopper.GetInstance();
-		IndexMotorLeft.GetInstance();
-		IndexMotorRight.GetInstance();
-		Intake.GetInstance();
 		ShooterWheelsLeft.GetInstance();
 		ShooterWheelsRight.GetInstance();
-		
+
+		// Simplest camera feed. Remove if not needed.
+		CameraServer.getInstance().startAutomaticCapture();
 
 		chooser = new SendableChooser<CommandGroup>();
 		// chooser.addObject("My Auto", new MyAutoCommand());
@@ -88,7 +91,6 @@ public class Robot extends IterativeRobot {
 		 */
 
 		// schedule the autonomous command (example)
-		gearDoorsDownEnable.start();
 		
 		if (autonomousCommand != null)
 			autonomousCommand.start();
@@ -111,7 +113,6 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		
-		gearDoorsDownEnable.start();
 	}
 
 	/**

@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 
 /**
@@ -36,7 +37,7 @@ public class Chassis extends PIDSubsystem {
 	private static AHRS m_navX;
 	
 	//Create and define all standard data types needed
-	private static boolean m_bShiftedLow;
+	private static boolean m_bShiftedHigh;
 	private static double moveSpeed;
 	private static double prevAbsBias;
 	private static boolean m_bNavXPresent;
@@ -46,8 +47,10 @@ public class Chassis extends PIDSubsystem {
 	 * Wheel diameter: 7.625
 	 * Calibrating ratio: 0.955
 	 */
-	public static final double InchesPerRev = 0.995 * Math.PI * 7.625 * 15 / 22;
+	public static final double InchesPerRev = 4 * Math.PI;
 	
+	
+	private static int m_driveMultiplier;
 	
 	private Chassis()
 	{
@@ -59,6 +62,10 @@ public class Chassis extends PIDSubsystem {
 		m_rightMotorRear = new CANTalon(RobotMap.CAN_RIGHTMOTORREAR);
 		m_leftMotorFront.reverseSensor(false);
 		m_rightMotorFront.reverseSensor(true);
+		
+		m_leftMotorFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		m_rightMotorFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		
 		m_leftMotorFront.configEncoderCodesPerRev(RobotMap.RATIO_DRIVECODESPERREV);
 		m_rightMotorFront.configEncoderCodesPerRev(RobotMap.RATIO_DRIVECODESPERREV);
 		
@@ -68,14 +75,13 @@ public class Chassis extends PIDSubsystem {
 		m_rightMotorRear.changeControlMode(TalonControlMode.Follower);
 		m_rightMotorRear.set(RobotMap.CAN_RIGHTMOTORFRONT);
 		
-
 		
 		m_drive = new RobotDrive(m_leftMotorFront, m_rightMotorFront);
 		m_drive.setSafetyEnabled(false);
 		m_shifter = new Solenoid(RobotMap.CAN_PNMMODULE, RobotMap.PNM_GEARSHIFTER);
-		m_bShiftedLow = false;
+		m_bShiftedHigh = false;
 		
-		/*
+		
 		try{
 			//Connect to navX Gyro on MXP port.
 			m_navX = new AHRS(SPI.Port.kMXP);
@@ -87,7 +93,7 @@ public class Chassis extends PIDSubsystem {
 			str_error += ex.getLocalizedMessage();
 			DriverStation.reportError(str_error, true);
 			m_bNavXPresent = false;
-		}*/
+		}
 		
 		//Add systems to LiveWindow
 		LiveWindow.addActuator("Chassis", "Left Front Talon", m_leftMotorFront);
@@ -97,6 +103,7 @@ public class Chassis extends PIDSubsystem {
 		
 		moveSpeed = 0;
 		prevAbsBias = 0;
+		m_driveMultiplier = 1;
 	}
 	
     public void initDefaultCommand() {
@@ -112,7 +119,7 @@ public class Chassis extends PIDSubsystem {
     
     public static void DriveTank(double moveL, double moveR)
     {
-    	DriveTank(moveL, moveR, false);
+    	m_drive.tankDrive(moveL, moveR, false);
     }
     
     public static void DriveArcade(double move, double turn, boolean squaredInputs)
@@ -122,16 +129,16 @@ public class Chassis extends PIDSubsystem {
     
     public static void DriveArcade(double move, double turn)
     {
-    	DriveArcade(move, turn, false);
+    	m_drive.arcadeDrive(move, turn, false);
     }
     
     public static void Shift(boolean shiftDown)
     {
     	m_shifter.set(shiftDown);
-    	m_bShiftedLow = shiftDown;
+    	m_bShiftedHigh = shiftDown;
     }
     
-    public static boolean GetShiftedDown(){return m_bShiftedLow;}
+    public static boolean GetShiftedDown(){return m_bShiftedHigh;}
     
     
     /**
@@ -303,7 +310,7 @@ public class Chassis extends PIDSubsystem {
     
     public static void SetPIDValues()
     {
-    	if(m_bShiftedLow){
+    	if(m_bShiftedHigh){
     		GetInstance().getPIDController().setPID(
     				Preferences.getInstance().getDouble("ChassisHighP",0.075),
     				Preferences.getInstance().getDouble("ChassisHighI",0.01),
@@ -334,6 +341,16 @@ public class Chassis extends PIDSubsystem {
     	m_rightMotorFront.enableBrakeMode(!coast);
     	m_rightMotorRear.enableBrakeMode(!coast);
     }
+    
+    public static void ReverseDrive(){
+    	m_driveMultiplier *= -1;
+    }
+    
+    public static int getReverseMultiplier()
+    {
+    	return m_driveMultiplier;
+    }
 }
+
 
 

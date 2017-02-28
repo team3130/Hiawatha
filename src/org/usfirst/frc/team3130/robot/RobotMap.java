@@ -3,7 +3,7 @@ package org.usfirst.frc.team3130.robot;
 public class RobotMap {
 	//Constant Ratios
 			public static final int RATIO_WINCHCODESPERREV = 1024;
-			public static final int RATIO_DRIVECODESPERREV = 360;
+			public static final int RATIO_DRIVECODESPERREV = 2048;
 
 		//DIO Ports
 			public static final int DIO_JETSONPWRON = 0;
@@ -27,15 +27,14 @@ public class RobotMap {
 			public static final int CAN_INDEXMOTORLEFT = 10;
 			public static final int CAN_SHOOTERWHEELSLEFT = 11;
 			public static final int CAN_SHOOTERWHEELSRIGHT = 12;
+			public static final int CAN_GEARBAR = 13;
 			public static final int CAN_INDEXMOTORRIGHT = 45;
 
 		
 		//Pnuematics Ports
 			public static final int PNM_GEARSHIFTER = 0;
 			public static final int PNM_GEARLIFT = 1;
-			public static final int PNM_GEARPINCH = 6;
-			public static final int PNM_GEARDOOR = 3;
-			public static final int PNM_TOPGEARSHIELD = 4;
+			public static final int PNM_GEARPINCH = 2;
 		
 		//Analog Input
 			//Prefix ANG_
@@ -77,8 +76,7 @@ public class RobotMap {
 			//Intake
 			public static final int BTN_INTAKEUP = LST_BTN_A;
 			public static final int BTN_INTAKEDOWN = LST_BTN_B;
-			public static final int BTN_CLIMBERUP = LST_AXS_RTRIGGER;	//TODO: Get Actual Button
-			public static final int BTN_CLIMBERDOWN = LST_AXS_LTRIGGER;//TODO: Get Actual Button
+			public static final int BTN_CLIMBERUP = LST_AXS_LTRIGGER;
 			
 			//Hopper
 			public static final int BTN_HOPPERDRIVE = LST_BTN_RBUMPER;//TODO: Get Actual Button
@@ -94,4 +92,7 @@ public class RobotMap {
 			
 			public static final int BTN_SHIFTDOWN = 3;	//Joystick L
 			public static final int BTN_SHIFTUP = 2;	//Joystick R
+			
+			//Drive
+			public static final int BTN_REVERSEDRIVE = 5; //Joystick R
 }
