@@ -53,15 +53,17 @@ public class CameraAim extends Command {
     	ShooterWheelsRight.setPID();
     	Chassis.SetPIDValues(21);
         Chassis.TalonsToCoast(false);
+    	hasAimed = false;
         timer.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(!hasAimed || timer.get() > Preferences.getInstance().getDouble("Aim Timeout", .5)){
-    		if(Math.abs(JetsonInterface.getDouble("Boiler Sys Time", 0) - JetsonInterface.getDouble("Boiler Time", 0)) < 0.25){
-		    	m_yaw = JetsonInterface.getDouble("Boiler Yaw", 0);
-		    	Chassis.HoldAngle((180.0/Math.PI) * m_yaw);
+    		if(Math.abs(JetsonInterface.getDouble("Boiler Sys Time", 9999) - JetsonInterface.getDouble("Boiler Time", 0)) < 0.25){
+		    	m_yaw = JetsonInterface.getDouble("Boiler Yaw", 0)
+		    			+ (180/Math.PI)*Preferences.getInstance().getDouble("Boiler Camera Bias", 0);
+		    	Chassis.HoldAngle(m_yaw);
     		}
     		timer.reset();
     		timer.start();
@@ -84,7 +86,6 @@ public class CameraAim extends Command {
     protected void end() {
     	ShooterWheelsLeft.stop();
     	ShooterWheelsRight.stop();
-    	hasAimed = false;
     }
 
     // Called when another command which requires one or more of the same
