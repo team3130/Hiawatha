@@ -16,6 +16,7 @@ public class Blinky extends Subsystem {
 	
 	private static SerialPort comms;
 	private static String currCom = "S";
+	private static boolean randLights = false;
 	
 	private static Blinky m_pInstance;
 	public static Blinky GetInstance(){
@@ -38,6 +39,16 @@ public class Blinky extends Subsystem {
 		currCom = command;
 		return;
 		}
+	}
+	
+	public static void randomToggle(){
+		if(randLights == true){
+			randLights = false;
+		}else randLights = true;
+	}
+	
+	public static boolean random(){
+		return randLights;
 	}
 }
 

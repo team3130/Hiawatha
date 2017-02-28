@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class BlinkyController extends Command {
 
 	//private boolean changed = false;
+	private String lastComm = "1";
 	
 	
     public BlinkyController() {
@@ -18,16 +19,26 @@ public class BlinkyController extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Blinky.runLights("S");
+    	Blinky.runLights("1");
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     //Set the pyramid of commands to execute with the top being priority and bottom not mattering
     protected void execute() {
-    	if(Chassis.GetShiftedDown()) Blinky.runLights("6");
-    	else if( ShooterWheelsLeft.GetError() > 5 ) Blinky.runLights("1");
-    	
-    	
+    	if(!Blinky.random()){
+    	if(lastComm != "2" && Chassis.GetShiftedDown()) {
+    		Blinky.runLights("2");
+    		lastComm = "2";
+    	}
+    	else if(lastComm != "3" && !Chassis.GetShiftedDown()) {
+    		Blinky.runLights("3");
+    		lastComm = "3";
+    	}
+    	} else if(lastComm != "S" && Blinky.random()){
+    		Blinky.runLights("S");
+    		lastComm = "S";
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -58,6 +58,7 @@ public class Robot extends IterativeRobot {
 		Climber.GetInstance();
 		ShooterWheelsLeft.GetInstance();
 		ShooterWheelsRight.GetInstance();
+		Blinky.GetInstance();
 
 		// Simplest camera feed. Remove if not needed.
 		CameraServer.getInstance().startAutomaticCapture();

@@ -61,6 +61,7 @@ public class OI {
 
 	private static JoystickButton shiftUp;
 	private static JoystickButton shiftDown;
+	private static JoystickButton randTog;
 	
 	private static JoystickButton btn10;
 	private static HoldAngleTest turn;
@@ -85,6 +86,7 @@ public class OI {
 		
 		shiftUp = new JoystickButton(stickR, RobotMap.BTN_SHIFTUP);
 		shiftDown = new JoystickButton(stickL, RobotMap.BTN_SHIFTDOWN);
+		randTog = new JoystickButton(gamepad, RobotMap.BTN_FUNLIGHTTOGGLE );
 		
 		btn10 = new JoystickButton(stickR, 10);
 		turn = new HoldAngleTest();

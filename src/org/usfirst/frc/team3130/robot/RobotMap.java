@@ -95,4 +95,7 @@ public class RobotMap {
 			
 			//Drive
 			public static final int BTN_REVERSEDRIVE = 5; //Joystick R
+			
+			//Lights
+			public static final int BTN_FUNLIGHTTOGGLE = LST_BTN_BACK;
 }
