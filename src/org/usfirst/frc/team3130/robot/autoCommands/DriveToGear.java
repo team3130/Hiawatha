@@ -57,7 +57,7 @@ public class DriveToGear extends Command {
     	double angle = alpha - beta - yaw;	//Extends theta's endpoint to be coincident to alpha's, then goes back alpha degrees
     	if(!hasAimed || timer.get() > Preferences.getInstance().getDouble("Gear Timeout", .5)){
     		if(Math.abs(JetsonInterface.getDouble("Gear Sys Time", 0) - JetsonInterface.getDouble("Gear Time", 0)) < Preferences.getInstance().getDouble("Gear Time", 0.25)){
-    			Chassis.HoldAngle(angle * (180/Math.PI));
+    			Chassis.HoldAngle(angle);
     		}
     		timer.reset();
     		timer.start();
