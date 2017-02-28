@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
@@ -81,6 +82,9 @@ public class OI {
 	private static JoystickButton btn10;
 	private static DriveStraightTest straight;
 	
+	public static SendableChooser<String> gearStartPos;
+	public static SendableChooser<String> fieldSide;
+	
 	private OI()
 	{
 		//Create Joysticks
@@ -136,6 +140,17 @@ public class OI {
 		aim.whileHeld(new CameraAim());
 		
 		btn10.whileHeld(straight);
+		
+		
+		gearStartPos = new SendableChooser<>();
+		gearStartPos.addObject("Left Peg", "Left");
+		gearStartPos.addDefault("Center Peg", "Center");
+		gearStartPos.addObject("Right Peg", "Right");
+		
+		fieldSide = new SendableChooser<>();
+		fieldSide.addObject("Blue Side", "Blue");
+		fieldSide.addObject("Field Side", "Red");
+		
 		
 		//Place Commands on SMD
 		SmartDashboard.putData("Wipe Left Points", wipeLPoints);
