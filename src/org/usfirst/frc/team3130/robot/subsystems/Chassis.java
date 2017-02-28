@@ -84,6 +84,8 @@ public class Chassis extends PIDSubsystem {
 	private static final double SUBSYSTEM_STRAIGHT_HIGH_D_DEFAULT = 0.09;
 
 	private static final double SUBSYSTEM_STRAIGHT_LOW_P_DEFAULT = 0.085;
+	private static final double SUBSYSTEM_STRAIGHT_LOW_I_DEFAULT = 7.0E-7;
+	private static final double SUBSYSTEM_STRAIGHT_LOW_I_ZERO = 0.002;
 	private static final double SUBSYSTEM_STRAIGHT_LOW_D_DEFAULT = 0.125;
 
 	
@@ -383,9 +385,14 @@ public class Chassis extends PIDSubsystem {
 	
 	private static double GetI(double angle)
 	{
+		double maxAngle = 20;
 		double workingAngle = Math.abs(angle);
-		if(workingAngle > 20) return 7.0E-7;
-		return (-.000999965*workingAngle + 0.002);
+		double defaultI = Preferences.getInstance().getDouble("ChassisLowI", SUBSYSTEM_STRAIGHT_LOW_I_DEFAULT);
+		if(workingAngle > maxAngle) return defaultI;
+
+		double zeroI = Preferences.getInstance().getDouble("ChassisLowIZero", SUBSYSTEM_STRAIGHT_LOW_I_ZERO);
+		return defaultI + zeroI*(1.0 - workingAngle/maxAngle);
+		//return (-.000999965*workingAngle + 0.002);
 	}
 	
 	public static void SetPIDValues(double angle)
