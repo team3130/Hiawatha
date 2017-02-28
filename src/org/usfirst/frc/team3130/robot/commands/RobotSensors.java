@@ -64,8 +64,8 @@ public class RobotSensors extends Command {
     	
     	
     	//Chassis
-    	//SmartDashboard.putNumber("Front Left Wheel Speed", Chassis.GetSpeedL());
-    	//SmartDashboard.putNumber("Front Right Wheel Speed", Chassis.GetSpeedR());
+    	SmartDashboard.putNumber("Front Left Wheel Speed", Chassis.GetSpeedL());
+    	SmartDashboard.putNumber("Front Right Wheel Speed", Chassis.GetSpeedR());
     	//SmartDashboard.putNumber("Front Left Voltage", Chassis.GetFrontVoltL());
     	//SmartDashboard.putNumber("Front Right Voltage", Chassis.GetFrontVoltR());
     	//SmartDashboard.putNumber("Rear Left Voltage", Chassis.GetRearVoltL());

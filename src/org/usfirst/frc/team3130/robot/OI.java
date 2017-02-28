@@ -79,7 +79,7 @@ public class OI {
 	TestSpeedPoints	testCurve;
 	
 	private static JoystickButton btn10;
-	private static HoldAngleTest turn;
+	private static DriveStraightTest straight;
 	
 	private OI()
 	{
@@ -114,8 +114,8 @@ public class OI {
 		testCurve	= new TestSpeedPoints();
 		
 		btn10 = new JoystickButton(stickR, 10);
-		turn = new HoldAngleTest();
-		turn.SetParam(Preferences.getInstance().getDouble("HoldAngle Angle", 10));
+		straight = new DriveStraightTest();
+		straight.SetParam(Preferences.getInstance().getDouble("TestDistance Distance", 40), 1, 0, Preferences.getInstance().getDouble("TestDistance Speed", .667), false);
 		
 		//Bind Joystick Buttons to Commands
 		intakeIn.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Up Speed", .6)));
@@ -135,7 +135,7 @@ public class OI {
 		
 		aim.whileHeld(new CameraAim());
 		
-		btn10.whileHeld(turn);
+		btn10.whileHeld(straight);
 		
 		//Place Commands on SMD
 		SmartDashboard.putData("Wipe Left Points", wipeLPoints);

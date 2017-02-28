@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3130.robot.autoCommands;
+package org.usfirst.frc.team3130.robot.commands;
 
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis.TurnDirection;
@@ -6,11 +6,12 @@ import org.usfirst.frc.team3130.robot.subsystems.Chassis.TurnDirection;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.PIDCommand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class AutoDriveStraightToPoint extends PIDCommand {
+public class DriveStraightTest extends PIDCommand {
 	
 	private Timer timer;
 	
@@ -18,11 +19,13 @@ public class AutoDriveStraightToPoint extends PIDCommand {
 	private double m_angle;
 	private double m_threshold;
 	private double m_speed;
-	private boolean m_shiftLow;
+	private boolean m_shiftHigh;
+	
+	private double prevDist;
 	
 	
 	
-    public AutoDriveStraightToPoint() {
+    public DriveStraightTest() {
 		super(0.1, 0, 0);	//TODO: Tune Pid Numbers
 		
 		timer = new Timer();
@@ -35,11 +38,13 @@ public class AutoDriveStraightToPoint extends PIDCommand {
     	m_angle = angle;
     	m_threshold = threshold;
     	m_speed = speed;
-    	m_shiftLow = shiftLow;
+    	m_shiftHigh = shiftLow;
     }
     
     // Called just before this Command runs the first time
     protected void initialize() {
+    	prevDist = Chassis.GetDistance();
+    	
     	getPIDController().reset();
     	
     	getPIDController().setSetpoint(m_distance + Chassis.GetDistance());
@@ -47,7 +52,7 @@ public class AutoDriveStraightToPoint extends PIDCommand {
     	setPID();
         Chassis.TalonsToCoast(false);
     	
-    	Chassis.Shift(m_shiftLow);
+    	Chassis.Shift(m_shiftHigh);
 	Chassis.setTurnDir(TurnDirection.kStraight);
     	Chassis.HoldAngle(m_angle);
 
@@ -64,11 +69,13 @@ public class AutoDriveStraightToPoint extends PIDCommand {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return getPIDController().onTarget();
+        //return getPIDController().onTarget();
+    	return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	SmartDashboard.putNumber("Distance Change", Chassis.GetDistance()-prevDist);
     	Chassis.ReleaseAngle();
     	Chassis.DriveTank(0, 0);
     }
@@ -94,7 +101,7 @@ public class AutoDriveStraightToPoint extends PIDCommand {
 	
 	private void setPID()
 	{
-		if(!m_shiftLow){
+		if(!m_shiftHigh){
 			getPIDController().setPID(
 					Preferences.getInstance().getDouble("LowGear Auton Drive P", 0.1), 
 					Preferences.getInstance().getDouble("LowGear Auton Drive I", 0), 

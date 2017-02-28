@@ -17,6 +17,8 @@ public class DumbGearAuto extends CommandGroup {
 	private AutoBasicActuate dropGear;
 	private AutoBasicActuate closePinch;
 	private AutoBasicActuate closePinchStart;
+	private AutoBasicActuate dropPinch;
+	private AutoBasicActuate upPinch;
 	
 	public DumbGearAuto() {
 		requires(Chassis.GetInstance());
@@ -28,18 +30,22 @@ public class DumbGearAuto extends CommandGroup {
 		dropGear = new AutoBasicActuate(Robot.bcGearPinch, false);
 		closePinch = new AutoBasicActuate(Robot.bcGearPinch, true);
 		closePinchStart = new AutoBasicActuate(Robot.bcGearPinch, true);
+		dropPinch = new AutoBasicActuate(Robot.bcGearLift, true);
+		upPinch = new AutoBasicActuate(Robot.bcGearLift, false);
 		
 		addSequential(closePinchStart, 0.5);
-		addSequential(new AutoDelay(), 1);
-		addSequential(toPeg, 15);
-		addSequential(new AutoDelay(), 1);
-		addSequential(ontoPeg, 15);
-		addSequential(new AutoDelay(), 1);
+		//addSequential(new AutoDelay(), 1);
+		addSequential(toPeg, 5);
+		//addSequential(new AutoDelay(), 1);
+		addSequential(ontoPeg, 5);
+		//addSequential(new AutoDelay(), 1);
 		addSequential(dropGear, 0.5);
-		addSequential(new AutoDelay(), 1);
-		addSequential(offPeg, 15);
-		addSequential(new AutoDelay(), 1);
+		addSequential(dropPinch, 0.5);
+		//addSequential(new AutoDelay(), 1);
+		addSequential(offPeg, 5);
+		//addSequential(new AutoDelay(), 1);
 		addSequential(closePinch, 0.5);
+		addSequential(upPinch, 0.5);
 	}
 	
 	@Override
