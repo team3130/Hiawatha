@@ -2,6 +2,7 @@ package org.usfirst.frc.team3130.robot;
 
 
 import org.usfirst.frc.team3130.robot.commands.*;
+import org.usfirst.frc.team3130.robot.subsystems.Blinky;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Preferences;
@@ -102,6 +103,7 @@ public class OI {
 		lowerGearActive.whileHeld(new LowerGearPickup());
 		spinIndexer.whileHeld(new RunIndexer());
 		reverseDrive.whenPressed(new ReverseDrive());
+		randTog.whenPressed(new randomToggle());
 		
 		shiftUp.whenPressed(new DriveShiftUp());
 		shiftDown.whenPressed(new DriveShiftDown());

@@ -35,9 +35,9 @@ public class BlinkyController extends Command {
     		Blinky.runLights("3");
     		lastComm = "3";
     	}
-    	} else if(lastComm != "S" && Blinky.random()){
-    		Blinky.runLights("S");
-    		lastComm = "S";
+    	} else if(lastComm != "5" && Blinky.random()){
+    		Blinky.runLights("5");
+    		lastComm = "5";
     	}
     }
 
