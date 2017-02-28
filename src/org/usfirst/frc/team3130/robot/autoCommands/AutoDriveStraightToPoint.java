@@ -32,7 +32,7 @@ public class AutoDriveStraightToPoint extends PIDCommand {
 
     public void SetParam(double setpoint, double threshold, double angle, double speed, boolean shiftLow){
     	m_distance = setpoint;
-    	m_angle = angle;
+    	m_angle = (Math.PI/180)*angle;
     	m_threshold = threshold;
     	m_speed = speed;
     	m_shiftLow = shiftLow;

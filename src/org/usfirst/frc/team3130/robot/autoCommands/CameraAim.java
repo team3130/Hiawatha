@@ -61,7 +61,7 @@ public class CameraAim extends Command {
     	if(!hasAimed || timer.get() > Preferences.getInstance().getDouble("Aim Timeout", .5)){
     		if(Math.abs(JetsonInterface.getDouble("Boiler Sys Time", 0) - JetsonInterface.getDouble("Boiler Time", 0)) < 0.25){
 		    	m_yaw = JetsonInterface.getDouble("Boiler Yaw", 0);
-		    	Chassis.HoldAngle((180.0/Math.PI) * m_yaw);
+		    	Chassis.HoldAngle(m_yaw);
     		}
     		timer.reset();
     		timer.start();
