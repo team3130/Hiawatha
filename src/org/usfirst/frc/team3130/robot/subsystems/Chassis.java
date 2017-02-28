@@ -367,6 +367,7 @@ public class Chassis extends PIDSubsystem {
 	public static void ReleaseAngle()
 	{
 		GetInstance().getPIDController().disable();
+		GetInstance().getPIDController().reset();
 		prevAbsBias = 0;
 		m_leftMotorFront.changeControlMode(TalonControlMode.PercentVbus);
 		m_rightMotorFront.changeControlMode(TalonControlMode.PercentVbus);

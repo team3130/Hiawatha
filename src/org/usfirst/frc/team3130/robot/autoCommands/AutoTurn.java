@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3130.robot.autoCommands;
 
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
+import org.usfirst.frc.team3130.robot.subsystems.Chassis.TurnDirection;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -22,8 +23,9 @@ public class AutoTurn extends Command {
     
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Chassis.setTurnDir(TurnDirection.kStraight);
     	Chassis.HoldAngle(m_angle);
-    	Chassis.GetInstance().setAbsoluteTolerance(0.5);
+    	Chassis.GetInstance().setAbsoluteTolerance(1);
     	Chassis.DriveStraight(0);
     }
 
@@ -33,7 +35,7 @@ public class AutoTurn extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Chassis.GetInstance().getPIDController().onTarget();
     }
 
     // Called once after isFinished returns true

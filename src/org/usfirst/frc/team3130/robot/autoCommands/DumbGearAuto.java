@@ -53,10 +53,10 @@ public class DumbGearAuto extends CommandGroup {
 		switch(OI.gearStartPos.getSelected()){
 			case "Left":
 				//turnToPeg.SetParam(Preferences.getInstance().getDouble("AimFromGear Close Angle", -10));
-				turnToPeg.SetParam(Preferences.getInstance().getDouble("TurnToGear Left", 30));
+				turnToPeg.SetParam(Preferences.getInstance().getDouble("TurnToGear Left", -52));
 				
 				toPeg.SetParam(
-						Preferences.getInstance().getDouble("DumbGear toPeg Dist Outside", -88), 
+						Preferences.getInstance().getDouble("DumbGear toPeg Dist Outside", -100), 
 						Preferences.getInstance().getDouble("DumbGear toPeg Thresh Outside", 1), 
 						0, 
 						Preferences.getInstance().getDouble("DumbGear toPeg Speed Outside", 1),
@@ -64,8 +64,8 @@ public class DumbGearAuto extends CommandGroup {
 				);
 				
 				ontoPeg.SetParam(
-						Preferences.getInstance().getDouble("DumbGear ontoPeg Dist Outside", -20), 
-						Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh Outside", 1), 
+						Preferences.getInstance().getDouble("DumbGear ontoPeg Dist Outside", -41), 
+						Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh Outside", 1.5), 
 						0, 
 						Preferences.getInstance().getDouble("DumbGear ontoPeg Speed Outside", .333) ,
 						false
@@ -115,8 +115,10 @@ public class DumbGearAuto extends CommandGroup {
 				//turnToPeg.SetParam(Preferences.getInstance().getDouble("AimFromGear Center Angle", 135));
 				turnToPeg.SetParam(Preferences.getInstance().getDouble("TurnToGear Right", -30));
 				
+				turnToPeg.SetParam(Preferences.getInstance().getDouble("TurnToGear Left", 52));
+				
 				toPeg.SetParam(
-						Preferences.getInstance().getDouble("DumbGear toPeg Dist Outside", -88), 
+						Preferences.getInstance().getDouble("DumbGear toPeg Dist Outside", -100), 
 						Preferences.getInstance().getDouble("DumbGear toPeg Thresh Outside", 1), 
 						0, 
 						Preferences.getInstance().getDouble("DumbGear toPeg Speed Outside", 1),
@@ -124,8 +126,8 @@ public class DumbGearAuto extends CommandGroup {
 				);
 				
 				ontoPeg.SetParam(
-						Preferences.getInstance().getDouble("DumbGear ontoPeg Dist Outside", -20), 
-						Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh Outside", 1), 
+						Preferences.getInstance().getDouble("DumbGear ontoPeg Dist Outside", -41), 
+						Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh Outside", 1.5), 
 						0, 
 						Preferences.getInstance().getDouble("DumbGear ontoPeg Speed Outside", .333) ,
 						false

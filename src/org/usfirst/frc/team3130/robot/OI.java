@@ -146,10 +146,12 @@ public class OI {
 		gearStartPos.addObject("Left Peg", "Left");
 		gearStartPos.addDefault("Center Peg", "Center");
 		gearStartPos.addObject("Right Peg", "Right");
+		SmartDashboard.putData("Gear Pos Chooser",gearStartPos);
 		
 		fieldSide = new SendableChooser<>();
 		fieldSide.addObject("Blue Side", "Blue");
 		fieldSide.addObject("Field Side", "Red");
+		SmartDashboard.putData("Field Side",fieldSide);
 		
 		
 		//Place Commands on SMD
