@@ -19,7 +19,7 @@ public class HoldAngleTest extends Command {
 
     public void SetParam(double angle)
     {
-    	m_angle = angle;
+    	m_angle = (Math.PI/180)*angle;
     }
     
     // Called just before this Command runs the first time
