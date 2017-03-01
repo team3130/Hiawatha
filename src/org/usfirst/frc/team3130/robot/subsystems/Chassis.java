@@ -45,7 +45,7 @@ public class Chassis extends PIDSubsystem {
 	//Create and define all standard data types needed
 	private static boolean m_bShiftedHigh;
 	private static double moveSpeed;
-	private static double prevAbsBias;
+	private static double prevSpeedLimit;
 	private static boolean m_bNavXPresent;
 
 	public static final double robotWidth = 26.0;
@@ -148,7 +148,7 @@ public class Chassis extends PIDSubsystem {
 		LiveWindow.addActuator("Chassis", "Right Rear TalonSRX", m_rightMotorRear);
 		
 		moveSpeed = 0;
-		prevAbsBias = 0;
+		prevSpeedLimit = 0;
 		
 		m_dir = TurnDirection.kStraight;
 		
@@ -351,13 +351,13 @@ public class Chassis extends PIDSubsystem {
 		//TODO: Replace this with a system that works under the curve drive, currently implemented under the else
 		if(m_dir.equals(TurnDirection.kStraight)){	//Maintnance of the Old Drive Straight Angle control.
 			//Chassis ramp rate is the limit on the voltage change per cycle to prevent skidding.
-			final double speedLimit = prevAbsBias + Preferences.getInstance().getDouble("ChassisRampRate", 0.25);
+			final double speedLimit = prevSpeedLimit + Preferences.getInstance().getDouble("ChassisRampRate", 0.25);
 			if (bias >  speedLimit) bias = speedLimit;
 			if (bias < -speedLimit) bias = -speedLimit;
 			double speed_L = moveSpeed-bias;
 			double speed_R = moveSpeed+bias;
 			DriveTank(speed_L, speed_R, false);
-			prevAbsBias = Math.abs(bias);
+			prevSpeedLimit = Math.abs(speedLimit);
 		}else{
 			setSpeedTalon(bias);
 		}
@@ -372,7 +372,7 @@ public class Chassis extends PIDSubsystem {
 	{
 		GetInstance().getPIDController().disable();
 		GetInstance().getPIDController().reset();
-		prevAbsBias = 0;
+		prevSpeedLimit = 0;
 		m_leftMotorFront.changeControlMode(TalonControlMode.PercentVbus);
 		m_rightMotorFront.changeControlMode(TalonControlMode.PercentVbus);
 	}
@@ -434,8 +434,10 @@ public class Chassis extends PIDSubsystem {
 	{
 		double workingAngle = (180/Math.PI)*angle;
 		SetPIDValues(workingAngle);
-		if(m_dir.equals(TurnDirection.kStraight))GetInstance().getPIDController().setSetpoint(GetAngle() + workingAngle);
-		else GetInstance().getPIDController().setSetpoint(workingAngle);
+		if(m_dir.equals(TurnDirection.kStraight))
+			GetInstance().getPIDController().setSetpoint(GetAngle() + workingAngle);
+		else
+			GetInstance().getPIDController().setSetpoint(workingAngle);
 		GetInstance().getPIDController().enable();
 	}
 	
@@ -552,8 +554,11 @@ public class Chassis extends PIDSubsystem {
 	 */
 	public static void setPositionTalon(double set)
 	{
-		if(m_dir.equals(TurnDirection.kRight))m_leftMotorFront.set(set);
-		else if(m_dir.equals(TurnDirection.kLeft))m_rightMotorFront.set(set);
+		if(m_dir.equals(TurnDirection.kRight))
+			m_leftMotorFront.set(set);
+		else
+		if(m_dir.equals(TurnDirection.kLeft))
+			m_rightMotorFront.set(set);
 	}
 	
 	
@@ -573,8 +578,11 @@ public class Chassis extends PIDSubsystem {
 	 */
 	public static void setSpeedTalon(double set)
 	{
-		if(m_dir.equals(TurnDirection.kRight))m_rightMotorFront.set(set);
-		else if(m_dir.equals(TurnDirection.kLeft))m_leftMotorFront.set(set);
+		if(m_dir.equals(TurnDirection.kRight))
+			m_rightMotorFront.set(set);
+		else
+		if(m_dir.equals(TurnDirection.kLeft))
+			m_leftMotorFront.set(set);
 	}
 	
 	/**

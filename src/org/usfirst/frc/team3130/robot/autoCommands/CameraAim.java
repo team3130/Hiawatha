@@ -41,9 +41,11 @@ public class CameraAim extends Command {
      */
     public boolean onTarget()
     {
-    	return (m_yaw < Preferences.getInstance().getDouble("Boiler Threshold", DEFAULTTHRESHOLD))
-    			&& Math.abs(ShooterWheelsLeft.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)
-    			&& Math.abs(ShooterWheelsRight.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD);
+    	return (
+    			Math.abs(m_yaw) < Preferences.getInstance().getDouble("Boiler Threshold", DEFAULTTHRESHOLD)
+    		&&	Math.abs(ShooterWheelsLeft.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)
+    		&&	Math.abs(ShooterWheelsRight.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)
+    	);
     }
     
     // Called just before this Command runs the first time
@@ -63,6 +65,10 @@ public class CameraAim extends Command {
     		if(Math.abs(JetsonInterface.getDouble("Boiler Sys Time", 9999) - JetsonInterface.getDouble("Boiler Time", 0)) < 0.25){
 		    	m_yaw = JetsonInterface.getDouble("Boiler Yaw", 0);
 		    	Chassis.HoldAngle(m_yaw);
+		    	
+		    	double dist = JetsonInterface.getDouble("Boiler Distance", DEFAULTBOILERDISTANCE);
+		    	ShooterWheelsLeft.setSpeed(WheelSpeedCalculationsLeft.GetSpeed(dist));
+		    	ShooterWheelsRight.setSpeed(WheelSpeedCalculationsRight.GetSpeed(dist));
     		}
     		timer.reset();
     		timer.start();
@@ -70,10 +76,6 @@ public class CameraAim extends Command {
     	}
     	
     	Chassis.DriveStraight(-OI.stickL.getY());
-    	
-    	double dist = JetsonInterface.getDouble("Boiler Distance", DEFAULTBOILERDISTANCE);
-    	ShooterWheelsLeft.setSpeed(WheelSpeedCalculationsLeft.GetSpeed(dist));
-    	ShooterWheelsRight.setSpeed(WheelSpeedCalculationsRight.GetSpeed(dist));
     }
 
     // Make this return true when this Command no longer needs to run execute()
