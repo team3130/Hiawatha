@@ -194,7 +194,8 @@ public class Chassis extends PIDSubsystem {
      */
     public static double GetSpeedL()
     {
-    	return m_leftMotorFront.getSpeed() * InchesPerRev / 50.0;
+    	// The speed units will be in the sensor's native ticks per 100ms.
+    	return 10.0 * m_leftMotorFront.getSpeed() * InchesPerRev / RobotMap.RATIO_DRIVECODESPERREV;
     }
     
     /**
@@ -203,14 +204,15 @@ public class Chassis extends PIDSubsystem {
      */
     public static double GetSpeedR()
     {
-    	return m_rightMotorFront.getSpeed() * InchesPerRev / 50.0;	
+    	// The speed units will be in the sensor's native ticks per 100ms.
+    	return 10.0 * m_rightMotorFront.getSpeed() * InchesPerRev / RobotMap.RATIO_DRIVECODESPERREV;	
     }
     
     public static double GetSpeed()
     {
     	//The right encoder is nonfunctional, just use the left speed.
     	//return (GetSpeedL() + GetSpeedR())/2.0;
-    	return GetSpeedL();
+    	return 0.5 * (GetSpeedL() + GetSpeedR());
     }
 
     
