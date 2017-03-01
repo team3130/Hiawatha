@@ -47,8 +47,10 @@ public class DriveToGear extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//Implemented from https://i.imgur.com/B9THPiA.png
-    	double cr = -JetsonInterface.getDouble("Peg Crossrange", 0);	//TODO: get implemented on Jetson end
-    	double dr = JetsonInterface.getDouble("Peg Downrange", 1);	//TODO: switch to x offset once updated on Jetson end
+    	double cr = 0;
+    	// When the peg orientation can be tracked more stable use this cross range
+    	// double cr = -JetsonInterface.getDouble("Peg Crossrange", 0);
+    	double dr = JetsonInterface.getDouble("Peg Downrange", 1);
     	double yaw = -JetsonInterface.getDouble("Peg Yaw", 0);
     	
     	double alpha = Math.atan2(cr, dr);
@@ -56,7 +58,7 @@ public class DriveToGear extends Command {
     	
     	double angle = alpha - beta - yaw;	//Extends theta's endpoint to be coincident to alpha's, then goes back alpha degrees
     	if(!hasAimed || timer.get() > Preferences.getInstance().getDouble("Gear Timeout", .5)){
-    		if(Math.abs(JetsonInterface.getDouble("Gear Sys Time", 0) - JetsonInterface.getDouble("Gear Time", 0)) < Preferences.getInstance().getDouble("Gear Time", 0.25)){
+    		if(Math.abs(JetsonInterface.getDouble("Gear Sys Time", 0) - JetsonInterface.getDouble("Gear Time", 9999)) < Preferences.getInstance().getDouble("Gear Time", 0.25)){
     			Chassis.HoldAngle(angle);
     		}
     		timer.reset();
