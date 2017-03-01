@@ -43,7 +43,7 @@ public class DumbGearAuto extends CommandGroup {
 		addSequential(dropGear, 0.5);
 		addSequential(dropPinch, 0.5);
 		addSequential(offPeg, 5);
-		addSequential(closePinch, 0.5);
+		//addSequential(closePinch, 0.5);
 		addSequential(upPinch, 0.5);
 	}
 	
