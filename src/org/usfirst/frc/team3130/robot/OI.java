@@ -80,7 +80,7 @@ public class OI {
 	TestSpeedPoints	testCurve;
 	
 	private static JoystickButton btn10;
-	private static DriveStraightTest straight;
+	private static HoldAngleTest turn;
 	
 	public static SendableChooser<String> gearStartPos;
 	public static SendableChooser<String> fieldSide;
@@ -118,8 +118,8 @@ public class OI {
 		testCurve	= new TestSpeedPoints();
 		
 		btn10 = new JoystickButton(stickR, 10);
-		straight = new DriveStraightTest();
-		straight.SetParam(Preferences.getInstance().getDouble("TestDistance Distance", 40), 1, 0, Preferences.getInstance().getDouble("TestDistance Speed", .667), false);
+		turn = new HoldAngleTest();
+		turn.SetParam(Preferences.getInstance().getDouble("TestAngle Angle", 40));
 		
 		//Bind Joystick Buttons to Commands
 		intakeIn.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Up Speed", .6)));
@@ -139,7 +139,7 @@ public class OI {
 		
 		aim.whileHeld(new CameraAim());
 		
-		btn10.whileHeld(straight);
+		btn10.whileHeld(turn);
 		
 		
 		gearStartPos = new SendableChooser<>();
