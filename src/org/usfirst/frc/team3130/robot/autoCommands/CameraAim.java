@@ -65,15 +65,17 @@ public class CameraAim extends Command {
     		if(Math.abs(JetsonInterface.getDouble("Boiler Sys Time", 9999) - JetsonInterface.getDouble("Boiler Time", 0)) < 0.25){
 		    	m_yaw = JetsonInterface.getDouble("Boiler Yaw", 0);
 		    	Chassis.HoldAngle(m_yaw);
-		    	
-		    	double dist = JetsonInterface.getDouble("Boiler Distance", DEFAULTBOILERDISTANCE);
-		    	ShooterWheelsLeft.setSpeed(WheelSpeedCalculationsLeft.GetSpeed(dist));
-		    	ShooterWheelsRight.setSpeed(WheelSpeedCalculationsRight.GetSpeed(dist));
-    		}
+		   	}
+    		
     		timer.reset();
     		timer.start();
     		hasAimed = true;
     	}
+
+    	
+    	double dist = JetsonInterface.getDouble("Boiler Distance", DEFAULTBOILERDISTANCE);
+    	ShooterWheelsLeft.setSpeed(WheelSpeedCalculationsLeft.GetSpeed(dist));
+    	ShooterWheelsRight.setSpeed(WheelSpeedCalculationsRight.GetSpeed(dist));
     	
     	Chassis.DriveStraight(-OI.stickL.getY());
     }

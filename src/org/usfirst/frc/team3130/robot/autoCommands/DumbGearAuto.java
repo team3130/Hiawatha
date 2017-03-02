@@ -113,7 +113,7 @@ public class DumbGearAuto extends CommandGroup {
 				
 			case "Right":
 				//turnToPeg.SetParam(Preferences.getInstance().getDouble("AimFromGear Center Angle", 135));
-				turnToPeg.SetParam(Preferences.getInstance().getDouble("TurnToGear Right", -30));
+				turnToPeg.SetParam(Preferences.getInstance().getDouble("TurnToGear Right", 52));
 				
 				toPeg.SetParam(
 						Preferences.getInstance().getDouble("DumbGear toPeg Dist Outside", -100), 
