@@ -13,7 +13,6 @@ public class LowerGearPickup extends CommandGroup {
 	private PickupGear backToDefault;
 	
     public LowerGearPickup() {
-    	requires(Robot.bcGearLift);
     	requires(Robot.bcGearPinch);
     	requires(Robot.btGearBar);
 
@@ -21,7 +20,6 @@ public class LowerGearPickup extends CommandGroup {
     	
     	addParallel(new AutoBasicActuate(Robot.bcGearPinch, false), 0.1);
     	addParallel(new BasicSpinMotor(Robot.btGearBar, .8));	//TODO: Determine Polarity
-    	addSequential(new AutoBasicActuate(Robot.bcGearLift, true), 0.1);
     }
     
     @Override
