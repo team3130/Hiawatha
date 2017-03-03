@@ -130,7 +130,7 @@ public class OI {
 		hopperRun.whileHeld(new BasicSpinMotor(Robot.btHopper, Preferences.getInstance().getDouble("Hopper Stirrer PercentVBus", 0.5)));
 		testShooterWheels.whileHeld(new RunWheelsManual());
 		pinchGear.whileHeld(new BasicActuate(Robot.bcGearPinch));
-		lowerGearActive.whileHeld(new BasicActuate(Robot.bcGearLift));
+		actuateGearLift.whileHeld(new BasicActuate(Robot.bcGearLift));
 		lowerGearActive.whileHeld(new LowerGearPickup());
 		spinIndexer.whileHeld(new RunIndexer());
 		testCurvePreferences.whileHeld(new SpeedCurveShoot());
