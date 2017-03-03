@@ -91,7 +91,6 @@ public class RobotMap {
 			public static final int BTN_AIMDRIVE = 5;		//Joystick R
 			
 			//Gear Control
-			public static final int BTN_GEARLIFT = LST_BTN_X;
 			public static final int BTN_PINCHGEAR = 1;	//Joystick L
 			public static final int BTN_LOWERGEARACTIVE = 1;	//Joystick R
 			
