@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team3130.robot.autoCommands.AutoBasicActuate;
 import org.usfirst.frc.team3130.robot.autoCommands.DumbGearAuto;
+import org.usfirst.frc.team3130.robot.autoCommands.GearAnd10;
 import org.usfirst.frc.team3130.robot.commands.ResetSolenoids;
 import org.usfirst.frc.team3130.robot.commands.RobotSensors;
 import org.usfirst.frc.team3130.robot.subsystems.*;
@@ -71,6 +72,7 @@ public class Robot extends IterativeRobot {
 		chooser = new SendableChooser<String>();
 		chooser.addDefault("No Auton", "No Auto");
 		chooser.addObject("Dumb Gear", "Dumb Gear Auto");
+		chooser.addObject("Gear and 10", "Gear and 10");
 		SmartDashboard.putData("Auto mode", chooser);
 	}
 
@@ -95,6 +97,9 @@ public class Robot extends IterativeRobot {
 				break;
 			case "No Auton":
 				autonomousCommand = new AutoBasicActuate(bcGearPinch, true);
+			case "Gear and 10":
+				autonomousCommand = new GearAnd10();
+				break;
 			default:
 				autonomousCommand = null;
 		}
