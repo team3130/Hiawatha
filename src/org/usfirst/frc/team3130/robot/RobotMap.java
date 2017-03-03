@@ -88,6 +88,7 @@ public class RobotMap {
 			public static final int BTN_RUNINDEXER = LST_BTN_RBUMPER;
 			public static final int BTN_TESTCURVEPREFERENCES = LST_BTN_START;
 			public static final int BTN_AIMSHOOT = 4;		//Joystick R
+			public static final int BTN_AIMDRIVE = 5;		//Joystick R
 			
 			//Gear Control
 			public static final int BTN_GEARLIFT = LST_BTN_X;

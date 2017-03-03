@@ -2,6 +2,7 @@ package org.usfirst.frc.team3130.robot;
 
 
 import org.usfirst.frc.team3130.robot.autoCommands.CameraAim;
+import org.usfirst.frc.team3130.robot.autoCommands.CameraDrive;
 import org.usfirst.frc.team3130.robot.autoCommands.DriveToGear;
 
 import org.usfirst.frc.team3130.robot.commands.*;
@@ -72,6 +73,7 @@ public class OI {
 	private static JoystickButton gearAssist;
 	
 	private static JoystickButton aim;
+	private static JoystickButton aimDrive;
 	
 	//Define Commands
 	WipeStopPointsL wipeLPoints;
@@ -111,6 +113,7 @@ public class OI {
 		shiftDown = new JoystickButton(stickL, RobotMap.BTN_SHIFTDOWN);
 		
 		aim = new JoystickButton(stickR, RobotMap.BTN_AIMSHOOT);
+		aim = new JoystickButton(stickR, RobotMap.BTN_AIMDRIVE);
 		
 		//Create Commands
 		wipeLPoints	= new WipeStopPointsL();
@@ -141,6 +144,7 @@ public class OI {
 		shiftDown.whenPressed(new DriveShiftDown());
 		
 		aim.whileHeld(new CameraAim());
+		aimDrive.whileHeld(new CameraDrive());
 		
 		btn10.whileHeld(turn);
 		
