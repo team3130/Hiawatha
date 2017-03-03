@@ -16,6 +16,7 @@ public class CameraDrive extends PIDCommand {
 	private double m_distance;
 	private double m_speed;
 	private final double DEFAULTTHRESHOLD = 2;
+	private final double DEFAULTSWEETSPOT = 107.6;
 	private Timer timer;
 	boolean hasAimed;
 	
@@ -61,7 +62,11 @@ public class CameraDrive extends PIDCommand {
 		    	m_distance = JetsonInterface.getDouble("Boiler Distance", 0);
 		    	if(Math.abs(Chassis.GetSpeed()) < Preferences.getInstance().getDouble("Drive Stop Speed", 1)
 		    			&& 48 < m_distance && m_distance < 240) {
-		        	getPIDController().setSetpoint(m_distance + Chassis.GetDistance());
+		        	getPIDController().setSetpoint(
+		        			Chassis.GetDistance() +
+		        			m_distance -
+		        			Preferences.getInstance().getDouble("Camera Drive Sweet", DEFAULTSWEETSPOT)
+		        			);
 		    		getPIDController().enable();
 		    	}
 		   	}
