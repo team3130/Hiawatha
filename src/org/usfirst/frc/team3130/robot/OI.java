@@ -150,7 +150,7 @@ public class OI {
 		
 		fieldSide = new SendableChooser<>();
 		fieldSide.addObject("Blue Side", "Blue");
-		fieldSide.addObject("Field Side", "Red");
+		fieldSide.addObject("Red Side", "Red");
 		SmartDashboard.putData("Field Side",fieldSide);
 		
 		

@@ -25,6 +25,7 @@ public class DumbGearAuto extends CommandGroup {
 	public DumbGearAuto() {
 		requires(Chassis.GetInstance());
 		requires(Robot.bcGearPinch);
+		requires(Robot.bcGearLift);
 		
 		toPeg = new AutoDriveStraightToPoint();
 		ontoPeg = new AutoDriveStraightToPoint();
