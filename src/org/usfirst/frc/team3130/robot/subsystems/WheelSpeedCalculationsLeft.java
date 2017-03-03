@@ -1,15 +1,11 @@
 package org.usfirst.frc.team3130.robot.subsystems;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.stream.Stream;
 
 import org.usfirst.frc.team3130.misc.LinearInterp;
 
@@ -181,8 +177,8 @@ public class WheelSpeedCalculationsLeft extends Subsystem {
 	public static void WipeData()
 	{
 		data_MainStorage.clear();
-		data_MainStorage.add(new DataPoint(0,0));	//TODO: Get resonable closest range values
-		data_MainStorage.add(new DataPoint(1000, 0));	//TODO: Get resonable farthest range values
+		data_MainStorage.add(new DataPoint(0,3000));	//TODO: Get resonable closest range values
+		data_MainStorage.add(new DataPoint(1000, 4000));	//TODO: Get resonable farthest range values
 		SaveToFile();
 	}
 

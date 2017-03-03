@@ -177,8 +177,8 @@ public class WheelSpeedCalculationsRight extends Subsystem {
 	public static void WipeData()
 	{
 		data_MainStorage.clear();
-		data_MainStorage.add(new DataPoint(0,0));	//TODO: Get resonable closest range values
-		data_MainStorage.add(new DataPoint(1000, 0));	//TODO: Get resonable farthest range values
+		data_MainStorage.add(new DataPoint(0,3000));	//TODO: Get resonable closest range values
+		data_MainStorage.add(new DataPoint(1000, 4000));	//TODO: Get resonable farthest range values
 		SaveToFile();
 	}
 
