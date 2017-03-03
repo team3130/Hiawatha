@@ -113,7 +113,7 @@ public class OI {
 		shiftDown = new JoystickButton(stickL, RobotMap.BTN_SHIFTDOWN);
 		
 		aim = new JoystickButton(stickR, RobotMap.BTN_AIMSHOOT);
-		aim = new JoystickButton(stickR, RobotMap.BTN_AIMDRIVE);
+		aimDrive = new JoystickButton(stickR, RobotMap.BTN_AIMDRIVE);
 		
 		//Create Commands
 		wipeLPoints	= new WipeStopPointsL();
