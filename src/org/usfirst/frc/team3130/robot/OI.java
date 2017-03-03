@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3130.robot;
 
 
+import org.usfirst.frc.team3130.robot.autoCommands.AutoDriveStraightToPoint;
 import org.usfirst.frc.team3130.robot.autoCommands.CameraAim;
 import org.usfirst.frc.team3130.robot.autoCommands.CameraDrive;
 import org.usfirst.frc.team3130.robot.autoCommands.DriveToGear;
@@ -83,7 +84,7 @@ public class OI {
 	TestSpeedPoints	testCurve;
 	
 	private static JoystickButton btn10;
-	private static HoldAngleTest turn;
+	private static AutoDriveStraightToPoint test;
 	
 	public static SendableChooser<String> gearStartPos;
 	public static SendableChooser<String> fieldSide;
@@ -122,8 +123,8 @@ public class OI {
 		testCurve	= new TestSpeedPoints();
 		
 		btn10 = new JoystickButton(stickR, 10);
-		turn = new HoldAngleTest();
-		turn.SetParam(Preferences.getInstance().getDouble("TestAngle Angle", 40));
+		test = new AutoDriveStraightToPoint();
+		test.SetParam(-17, 10, 0, .4, false);
 		
 		//Bind Joystick Buttons to Commands
 		intakeIn.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Up Speed", .6)));
@@ -144,7 +145,7 @@ public class OI {
 		aim.whileHeld(new CameraAim());
 		aimDrive.whileHeld(new CameraDrive());
 		
-		btn10.whileHeld(turn);
+		btn10.whenPressed(test);
 		
 		
 		gearStartPos = new SendableChooser<>();
