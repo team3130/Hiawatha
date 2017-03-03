@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team3130.robot;
 
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -64,8 +65,9 @@ public class Robot extends IterativeRobot {
 		WheelSpeedCalculationsLeft.GetInstance();
 
 		// Simplest camera feed. Remove if not needed.
-		CameraServer.getInstance().startAutomaticCapture();
-
+		UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
+		camera1.setResolution(320, 480);
+		
 		chooser = new SendableChooser<String>();
 		chooser.addDefault("No Auton", "No Auto");
 		chooser.addObject("Dumb Gear", "Dumb Gear Auto");
