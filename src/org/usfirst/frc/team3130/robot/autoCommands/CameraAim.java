@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class CameraAim extends Command {
 
-	private double m_yaw;
+	private double m_yaw = 1 ;
 	private final double DEFAULTTHRESHOLD = 0.5;
 	private final double SHOOTERTHRESHOLD = 5.0;
 	private final double DEFAULTBOILERDISTANCE = 120;
@@ -42,9 +42,10 @@ public class CameraAim extends Command {
     public boolean onTarget()
     {
     	return (
-    			Math.abs(m_yaw) < Preferences.getInstance().getDouble("Boiler Threshold", DEFAULTTHRESHOLD)
-    		&&	Math.abs(ShooterWheelsLeft.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)
-    		&&	Math.abs(ShooterWheelsRight.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)
+    			hasAimed
+    		&&	(Math.abs(m_yaw) < Preferences.getInstance().getDouble("Boiler Threshold", DEFAULTTHRESHOLD))
+    		&&	(Math.abs(ShooterWheelsLeft.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD))
+    		&&	(Math.abs(ShooterWheelsRight.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD))
     	);
     }
     
@@ -63,7 +64,7 @@ public class CameraAim extends Command {
     protected void execute() {
     	if(!hasAimed || timer.get() > Preferences.getInstance().getDouble("Aim Timeout", .5)){
     		if(Math.abs(JetsonInterface.getDouble("Boiler Sys Time", 9999) - JetsonInterface.getDouble("Boiler Time", 0)) < 0.25){
-		    	m_yaw = JetsonInterface.getDouble("Boiler Yaw", 0);
+		    	m_yaw = JetsonInterface.getDouble("Boiler Yaw", 1);
 		    	Chassis.HoldAngle(m_yaw);
 		   	}
     		
