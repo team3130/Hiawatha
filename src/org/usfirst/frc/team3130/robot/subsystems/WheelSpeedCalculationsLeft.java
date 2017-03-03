@@ -159,7 +159,7 @@ public class WheelSpeedCalculationsLeft extends Subsystem {
 		try(BufferedReader br = new BufferedReader(new FileReader(FILEPATH))) {
 		    for(String line; (line = br.readLine()) != null; ) {
 		    	System.out.println(line);
-		        data_MainStorage.add(new DataPoint(line));
+		        if(!line.equals(""))data_MainStorage.add(new DataPoint(line));
 		    }
 		    // line is not visible here.
 		}catch (IOException e) {
