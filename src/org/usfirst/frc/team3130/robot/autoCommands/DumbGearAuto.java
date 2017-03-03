@@ -25,6 +25,7 @@ public class DumbGearAuto extends CommandGroup {
 	public DumbGearAuto() {
 		requires(Chassis.GetInstance());
 		requires(Robot.bcGearPinch);
+		requires(Robot.bcGearLift);
 		
 		toPeg = new AutoDriveStraightToPoint();
 		ontoPeg = new AutoDriveStraightToPoint();
@@ -43,7 +44,7 @@ public class DumbGearAuto extends CommandGroup {
 		addSequential(dropGear, 0.5);
 		addSequential(dropPinch, 0.5);
 		addSequential(offPeg, 5);
-		addSequential(closePinch, 0.5);
+		//addSequential(closePinch, 0.5);
 		addSequential(upPinch, 0.5);
 	}
 	
@@ -113,9 +114,7 @@ public class DumbGearAuto extends CommandGroup {
 				
 			case "Right":
 				//turnToPeg.SetParam(Preferences.getInstance().getDouble("AimFromGear Center Angle", 135));
-				turnToPeg.SetParam(Preferences.getInstance().getDouble("TurnToGear Right", -30));
-				
-				turnToPeg.SetParam(Preferences.getInstance().getDouble("TurnToGear Left", 52));
+				turnToPeg.SetParam(Preferences.getInstance().getDouble("TurnToGear Right", 52));
 				
 				toPeg.SetParam(
 						Preferences.getInstance().getDouble("DumbGear toPeg Dist Outside", -100), 

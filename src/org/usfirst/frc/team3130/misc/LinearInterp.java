@@ -48,10 +48,14 @@ public class LinearInterp {
 	 */
 	private boolean IsInputSane()
 	{
-		if(dist.size() == 0 || speed.size()==0)
-			return false;
-		if(dist.size() == speed.size())
-			return false;
+		if(dist.size() == 0 || speed.size()==0){
+			System.out.println("Empty Array");
+			return false;}
+		if(dist.size() != speed.size()){
+			System.out.println(dist.size());
+			System.out.println(speed.size());
+			System.out.println("Diff Sizes");
+			return false;}
 		
 		return IsSorted(dist);
 	}

@@ -22,6 +22,7 @@ public class SpeedCurveShoot extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	System.out.println("Testing");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -38,12 +39,13 @@ public class SpeedCurveShoot extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	ShooterWheelsLeft.setSpeed(0);
-    	ShooterWheelsRight.setSpeed(0);
+    	ShooterWheelsLeft.stop();
+    	ShooterWheelsRight.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3130.robot.subsystems;
 
-import java.io.FileNotFoundException;
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -154,34 +154,23 @@ public class WheelSpeedCalculationsRight extends Subsystem {
 	{
 		data_MainStorage.clear();
 		
-		FileReader in = null;
-		try{
-			in = new FileReader(FILEPATH);
-		}catch(FileNotFoundException ex){
-			ex.printStackTrace();
-			return;
-		}
+		System.out.println("Open Read");
 		
-		String point = "";
-		try {
-			while(in.ready()){
-				point += String.valueOf(in.read());
-				if(point.charAt(point.length()-1) == '\n')
-				{
-					//Shave the new line off
-					point = point.substring(0, point.length()-1);
-					//Create a new point and add it to the storage array
-					data_MainStorage.add(new DataPoint(point));
-					//Reset the point string
-					point = "";
-				}
-			}
-			in.close();
-		} catch (IOException e) {
+		try(BufferedReader br = new BufferedReader(new FileReader(FILEPATH))) {
+		    for(String line; (line = br.readLine()) != null; ) {
+		    	System.out.println(line);
+		        data_MainStorage.add(new DataPoint(line));
+		    }
+		    // line is not visible here.
+		}catch (IOException e) {
 			e.printStackTrace();
 		}
 		
+		System.out.println("DoneReading");
 		data_MainStorage.sort(compPoint);
+		for (DataPoint dataPoint : data_MainStorage) {
+			System.out.println(dataPoint);
+		}
 		ReloadCurve();
 	}
 
