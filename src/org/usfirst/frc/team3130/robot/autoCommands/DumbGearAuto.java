@@ -58,7 +58,7 @@ public class DumbGearAuto extends CommandGroup {
 					turnToPeg.SetParam(Preferences.getInstance().getDouble("TurnToGear Left", -45));
 					
 					toPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear toPeg Dist RedLeft", -75), 
+							Preferences.getInstance().getDouble("DumbGear toPeg Dist RedLeft", -57.5), 
 							Preferences.getInstance().getDouble("DumbGear toPeg Thresh RedLeft", 1), 
 							0, 
 							Preferences.getInstance().getDouble("DumbGear toPeg Speed RedLeft", 1),
@@ -67,7 +67,7 @@ public class DumbGearAuto extends CommandGroup {
 					
 					ontoPeg.SetParam(
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist RedLeft", -92.8), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh RedLeft", 1.5), 
+							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh RedLeft", 3.0), 
 							0, 
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed RedLeft", .4) ,
 							false
@@ -88,7 +88,7 @@ public class DumbGearAuto extends CommandGroup {
 					turnToPeg.SetParam(0);
 					
 					toPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear toPeg Dist", -93), 
+							Preferences.getInstance().getDouble("DumbGear toPeg Dist", -93+17.5), 
 							Preferences.getInstance().getDouble("DumbGear toPeg Thresh", 1), 
 							0, 
 							Preferences.getInstance().getDouble("DumbGear toPeg Speed", 1),
@@ -97,7 +97,7 @@ public class DumbGearAuto extends CommandGroup {
 					
 					ontoPeg.SetParam(
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist", -17), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh", 1), 
+							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh", 3.0), 
 							0, 
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed", .4) ,
 							false
@@ -118,7 +118,7 @@ public class DumbGearAuto extends CommandGroup {
 					turnToPeg.SetParam(Preferences.getInstance().getDouble("TurnToGear Right", 45));
 					
 					toPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear toPeg Dist RedRight", -75), 
+							Preferences.getInstance().getDouble("DumbGear toPeg Dist RedRight", -75+17.5), 
 							Preferences.getInstance().getDouble("DumbGear toPeg Thresh RedRight", 1), 
 							0, 
 							Preferences.getInstance().getDouble("DumbGear toPeg Speed RedRight", 1),
@@ -127,7 +127,7 @@ public class DumbGearAuto extends CommandGroup {
 					
 					ontoPeg.SetParam(
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist RedRight", -92.8), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh RedRight", 1.5), 
+							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh RedRight", 3.0), 
 							0, 
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed RedRight", .4) ,
 							false
@@ -150,7 +150,7 @@ public class DumbGearAuto extends CommandGroup {
 					turnToPeg.SetParam(Preferences.getInstance().getDouble("TurnToGear Left", -45));
 					
 					toPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear toPeg Dist BlueLeft", -74), 
+							Preferences.getInstance().getDouble("DumbGear toPeg Dist BlueLeft", -74+17.5), 
 							Preferences.getInstance().getDouble("DumbGear toPeg Thresh BlueLeft", 1), 
 							0, 
 							Preferences.getInstance().getDouble("DumbGear toPeg Speed BlueLeft", 1),
@@ -159,7 +159,7 @@ public class DumbGearAuto extends CommandGroup {
 					
 					ontoPeg.SetParam(
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist BlueLeft", -95.3), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh BlueLeft", 1.5), 
+							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh BlueLeft", 3.0), 
 							0, 
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed BlueLeft", .4) ,
 							false
@@ -180,7 +180,7 @@ public class DumbGearAuto extends CommandGroup {
 					turnToPeg.SetParam(0);
 					
 					toPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear toPeg Dist", -93), 
+							Preferences.getInstance().getDouble("DumbGear toPeg Dist", -93+17.5), 
 							Preferences.getInstance().getDouble("DumbGear toPeg Thresh", 1), 
 							0, 
 							Preferences.getInstance().getDouble("DumbGear toPeg Speed", 1),
@@ -189,7 +189,7 @@ public class DumbGearAuto extends CommandGroup {
 					
 					ontoPeg.SetParam(
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist", -17), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh", 1), 
+							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh", 3.0), 
 							0, 
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed", .4) ,
 							false
@@ -210,7 +210,7 @@ public class DumbGearAuto extends CommandGroup {
 					turnToPeg.SetParam(Preferences.getInstance().getDouble("TurnToGear Right", 45));
 					
 					toPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear toPeg Dist BlueRight", -74), 
+							Preferences.getInstance().getDouble("DumbGear toPeg Dist BlueRight", -74+17.5), 
 							Preferences.getInstance().getDouble("DumbGear toPeg Thresh BlueRight", 1), 
 							0, 
 							Preferences.getInstance().getDouble("DumbGear toPeg Speed BlueRight", 1),
@@ -219,7 +219,7 @@ public class DumbGearAuto extends CommandGroup {
 					
 					ontoPeg.SetParam(
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist BlueRight", -93.8), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh BlueRight", 1.5), 
+							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh BlueRight", 3.0), 
 							0, 
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed BlueRight", .4) ,
 							false
