@@ -2,7 +2,6 @@ package org.usfirst.frc.team3130.robot.autoCommands;
 
 import org.usfirst.frc.team3130.robot.OI;
 import org.usfirst.frc.team3130.robot.Robot;
-import org.usfirst.frc.team3130.robot.commands.ClimbUp;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.subsystems.Climber;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
@@ -22,7 +21,6 @@ public class GearAnd10 extends CommandGroup {
 	private AutoDriveStraightToPoint backMore;
 	private AutoTurn faceTarget;
 	private SmartShoot shoot;
-	private ClimbUp rotateClimber;
 	private CameraDrive closeToTarget;
 	
     public GearAnd10() {
@@ -42,10 +40,8 @@ public class GearAnd10 extends CommandGroup {
         backMore = new AutoDriveStraightToPoint();
         faceTarget = new AutoTurn();
         shoot = new SmartShoot();
-        rotateClimber = new ClimbUp();
         closeToTarget = new CameraDrive();
         
-        //addParallel(rotateClimber, 1);  
         addSequential(placeGear);
         if((OI.fieldSide.getSelected().equals("Red") && OI.gearStartPos.getSelected().equals("Left"))
         		|| (OI.fieldSide.getSelected().equals("Blue") && OI.gearStartPos.getSelected().equals("Right"))){

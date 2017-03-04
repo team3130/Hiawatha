@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3130.robot.autoCommands.AutoBasicActuate;
 import org.usfirst.frc.team3130.robot.autoCommands.DumbGearAuto;
 import org.usfirst.frc.team3130.robot.autoCommands.GearAnd10;
-import org.usfirst.frc.team3130.robot.commands.ResetSolenoids;
 import org.usfirst.frc.team3130.robot.commands.RobotSensors;
 import org.usfirst.frc.team3130.robot.subsystems.*;
 
@@ -37,8 +36,7 @@ public class Robot extends IterativeRobot {
 	public static BasicCANTalon btIntake;
 	public static BasicCANTalon btLeftIndex;
 	public static BasicCANTalon btRightIndex;
-	
-	private static ResetSolenoids resetGear;
+
 	
 	@Override
 	public void robotInit() {
@@ -54,8 +52,7 @@ public class Robot extends IterativeRobot {
 		btLeftIndex = new BasicCANTalon(RobotMap.CAN_INDEXMOTORLEFT, "Indexer", "Left Index Motor");
 		btRightIndex = new BasicCANTalon(RobotMap.CAN_INDEXMOTORRIGHT, "Indexer", "Right Index Motor");
 
-		resetGear = new ResetSolenoids();
-		
+			
 		OI.GetInstance();
 		Chassis.GetInstance();
 		Climber.GetInstance();

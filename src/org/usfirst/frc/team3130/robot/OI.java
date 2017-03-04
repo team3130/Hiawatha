@@ -63,7 +63,6 @@ public class OI {
 	private static JoystickButton testShooterWheels;
 	private static JoystickButton pinchGear;
 	private static JoystickButton lowerGearActive;
-	private static JoystickButton actuateGearLift;
 	private static JoystickButton spinIndexer;
 
 	private static JoystickButton testCurvePreferences;

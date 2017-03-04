@@ -17,7 +17,6 @@ public class DumbGearAuto extends CommandGroup {
 	private AutoDriveStraightToPoint offPeg;
 	private AutoTurn turnToPeg;
 	private AutoBasicActuate dropGear;
-	private AutoBasicActuate closePinch;
 	private AutoBasicActuate closePinchStart;
 	private AutoBasicActuate dropPinch;
 	private AutoBasicActuate upPinch;
@@ -32,7 +31,6 @@ public class DumbGearAuto extends CommandGroup {
 		offPeg = new AutoDriveStraightToPoint();
 		turnToPeg = new AutoTurn();
 		dropGear = new AutoBasicActuate(Robot.bcGearPinch, false);
-		closePinch = new AutoBasicActuate(Robot.bcGearPinch, true);
 		closePinchStart = new AutoBasicActuate(Robot.bcGearPinch, true);
 		dropPinch = new AutoBasicActuate(Robot.bcGearLift, true);
 		upPinch = new AutoBasicActuate(Robot.bcGearLift, false);
@@ -44,7 +42,6 @@ public class DumbGearAuto extends CommandGroup {
 		addSequential(dropGear, 0.5);
 		addSequential(dropPinch, 0.5);
 		addSequential(offPeg, 3);
-		//addSequential(closePinch, 0.5);
 		addSequential(upPinch, 0.5);
 	}
 	
