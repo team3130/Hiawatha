@@ -9,6 +9,7 @@ import java.util.Comparator;
 
 import org.usfirst.frc.team3130.misc.LinearInterp;
 
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -109,6 +110,11 @@ public class WheelSpeedCalculationsLeft extends Subsystem {
 	
  	public static void AddPoint(double dist, double speed)
  	{
+ 		for(DataPoint p : data_MainStorage){
+ 			if(Math.abs(p.distance - dist) < Preferences.getInstance().getDouble("DataPoint Distance Variance", .01))
+ 				return;
+ 		}
+ 		
  		data_MainStorage.add(new DataPoint(dist, speed));
  		data_MainStorage.sort(compPoint);
  		SmartDashboard.putNumber("Number of Points", data_MainStorage.size());
