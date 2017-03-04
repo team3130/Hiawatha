@@ -66,7 +66,7 @@ public class AutoDriveStraightToPoint extends PIDCommand {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return getPIDController().onTarget()
-        		&& Math.abs(Chassis.GetSpeed()) < Preferences.getInstance().getDouble("Drive Stop Speed", 1);
+        		&& Math.abs(Chassis.GetSpeed()) < Preferences.getInstance().getDouble("Drive Stop Speed", .25);
     }
 
     // Called once after isFinished returns true

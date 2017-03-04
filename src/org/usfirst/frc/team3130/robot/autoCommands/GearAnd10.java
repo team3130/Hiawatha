@@ -45,7 +45,7 @@ public class GearAnd10 extends CommandGroup {
         rotateClimber = new ClimbUp();
         closeToTarget = new CameraDrive();
         
-        addParallel(rotateClimber, 1);  
+        //addParallel(rotateClimber, 1);  
         addSequential(placeGear);
         if((OI.fieldSide.getSelected().equals("Red") && OI.gearStartPos.getSelected().equals("Left"))
         		|| (OI.fieldSide.getSelected().equals("Blue") && OI.gearStartPos.getSelected().equals("Right"))){
