@@ -82,8 +82,11 @@ public class OI {
 	AddPointR		addRPoint;
 	TestSpeedPoints	testCurve;
 	
-	private static JoystickButton btn10;
-	private static AutoDriveStraightToPoint test;
+	private static JoystickButton btn10L;
+	private static AutoDriveStraightToPoint testL;
+	
+	private static JoystickButton btn10R;
+	private static HoldAngleTest testR;
 	
 	public static SendableChooser<String> gearStartPos;
 	public static SendableChooser<String> fieldSide;
@@ -121,9 +124,13 @@ public class OI {
 		addRPoint	= new AddPointR();
 		testCurve	= new TestSpeedPoints();
 		
-		btn10 = new JoystickButton(stickR, 10);
-		test = new AutoDriveStraightToPoint();
-		test.SetParam(-17, 10, .4, false);
+		btn10L = new JoystickButton(stickL, 10);
+		testL = new AutoDriveStraightToPoint();
+		testL.SetParam(-17, 10, .4, false);
+		
+		btn10R = new JoystickButton(stickR,10);
+		testR = new HoldAngleTest();
+		testR.SetParam(45);
 		
 		//Bind Joystick Buttons to Commands
 		intakeIn.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Up Speed", .6)));
@@ -144,7 +151,8 @@ public class OI {
 		aim.whileHeld(new CameraAim());
 		aimDrive.whileHeld(new CameraDrive());
 		
-		btn10.whenPressed(test);
+		btn10L.whenPressed(testL);
+		btn10R.whileHeld(testR);
 		
 		
 		gearStartPos = new SendableChooser<>();
