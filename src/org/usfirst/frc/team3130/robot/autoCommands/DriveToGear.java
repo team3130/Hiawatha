@@ -66,7 +66,7 @@ public class DriveToGear extends Command {
 				timer_cameraLag.start();
 			}
 				
-			if(!hasAimed && timer_cameraLag.get() > Preferences.getInstance().getDouble("Peg Camera Lag", .15)		//Check for safe current data before turing off of it
+			if(timer_cameraLag.get() > Preferences.getInstance().getDouble("Peg Camera Lag", .15)		//Check for safe current data before turing off of it
 					&& Math.abs(JetsonInterface.getDouble("Peg Sys Time", 0) - JetsonInterface.getDouble("Peg Time", 9999)) < Preferences.getInstance().getDouble("Gear Time", 0.25)){
 				System.out.println("Time Valid");
 				Chassis.HoldAngle(angle);
