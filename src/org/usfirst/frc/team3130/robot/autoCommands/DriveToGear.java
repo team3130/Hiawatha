@@ -19,13 +19,15 @@ public class DriveToGear extends Command {
 	private double speed;
 	private boolean setSpeed;
 	
-	private Timer timer;
+	private Timer timer_Timeout;
+	private Timer timer_cameraLag;
 	private boolean hasAimed;
 	
 	public DriveToGear() {
 		requires(Chassis.GetInstance());
 		setSpeed = false;
-		timer = new Timer();
+		timer_Timeout = new Timer();
+		timer_cameraLag = new Timer();
 	}
 
 	public void setParam(double speed)
@@ -42,7 +44,7 @@ public class DriveToGear extends Command {
 		Chassis.SetPIDValues(21);
 		Chassis.TalonsToCoast(false);
 		hasAimed = false;
-		timer.start();
+		timer_Timeout.start();
 		Chassis.HoldAngle(0);
 	}
 
@@ -59,14 +61,19 @@ public class DriveToGear extends Command {
 		double beta = Math.atan2(2*cr, dr);
 		
 		double angle = alpha - beta - yaw;	//Extends theta's endpoint to be coincident to alpha's, then goes back alpha degrees
-		if(!hasAimed || timer.get() > Preferences.getInstance().getDouble("Gear Timeout", 2)){
-			if(Math.abs(JetsonInterface.getDouble("Peg Sys Time", 0) - JetsonInterface.getDouble("Peg Time", 9999)) < Preferences.getInstance().getDouble("Gear Time", 0.25)){
+		if(!hasAimed || timer_Timeout.hasPeriodPassed(Preferences.getInstance().getDouble("Gear Timeout", 2))){
+			if(timer_cameraLag.get()==0 && Math.abs(Chassis.GetRate()) <= Preferences.getInstance().getDouble("Turning stopped", .1)){		//Check for finished moving before aiming againg
+				timer_cameraLag.start();
+			}
+				
+			if(!hasAimed && timer_cameraLag.get() > Preferences.getInstance().getDouble("Peg Camera Lag", .15)		//Check for safe current data before turing off of it
+					&& Math.abs(JetsonInterface.getDouble("Peg Sys Time", 0) - JetsonInterface.getDouble("Peg Time", 9999)) < Preferences.getInstance().getDouble("Gear Time", 0.25)){
 				System.out.println("Time Valid");
 				Chassis.HoldAngle(angle);
+				timer_cameraLag.stop();
+				timer_cameraLag.reset();
 			}
 			System.out.println("Out of Timeout");
-			timer.reset();
-			timer.start();
 			hasAimed = true;
 		}
 		//if(!setSpeed) speed = -OI.stickL.getY();
@@ -80,8 +87,8 @@ public class DriveToGear extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		timer.stop();
-		timer.reset();
+		timer_Timeout.stop();
+		timer_Timeout.reset();
 	}
 
 	// Called when another command which requires one or more of the same
