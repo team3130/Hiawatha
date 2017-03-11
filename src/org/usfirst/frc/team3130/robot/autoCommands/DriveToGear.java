@@ -41,7 +41,9 @@ public class DriveToGear extends Command {
     	ShooterWheelsRight.setPID();
     	Chassis.SetPIDValues(21);
         Chassis.TalonsToCoast(false);
+        hasAimed = false;
         timer.start();
+        Chassis.HoldAngle(0);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -49,7 +51,7 @@ public class DriveToGear extends Command {
     	//Implemented from https://i.imgur.com/B9THPiA.png
     	double cr = 0;
     	// When the peg orientation can be tracked more stable use this cross range
-    	// double cr = -JetsonInterface.getDouble("Peg Crossrange", 0);
+    	//double cr = -JetsonInterface.getDouble("Peg Crossrange", 0);
     	double dr = JetsonInterface.getDouble("Peg Downrange", 1);
     	double yaw = -JetsonInterface.getDouble("Peg Yaw", 0);
     	
@@ -58,9 +60,11 @@ public class DriveToGear extends Command {
     	
     	double angle = alpha - beta - yaw;	//Extends theta's endpoint to be coincident to alpha's, then goes back alpha degrees
     	if(!hasAimed || timer.get() > Preferences.getInstance().getDouble("Gear Timeout", .5)){
-    		if(Math.abs(JetsonInterface.getDouble("Gear Sys Time", 0) - JetsonInterface.getDouble("Gear Time", 9999)) < Preferences.getInstance().getDouble("Gear Time", 0.25)){
+    		if(Math.abs(JetsonInterface.getDouble("Peg Sys Time", 0) - JetsonInterface.getDouble("Peg Time", 9999)) < Preferences.getInstance().getDouble("Gear Time", 0.25)){
+    			System.out.println("Time Valid");
     			Chassis.HoldAngle(angle);
     		}
+    		System.out.println("Out of Timeout");
     		timer.reset();
     		timer.start();
     		hasAimed = true;
