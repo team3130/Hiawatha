@@ -43,8 +43,7 @@ public class FortyBallAuton extends CommandGroup {
 		drive_toHopper.SetParam(
 				Preferences.getInstance().getDouble("Auto To Hopper Dist", 120), 
 				Preferences.getInstance().getDouble("Auto To Hopper Threshold", 1), 
-				0,				//Drive Straight 
-				Preferences.getInstance().getDouble("Auto To Hopper Speed", .7), 
+				Preferences.getInstance().getDouble("Auto To Hopper Speed", .7),				//Drive Straight 
 				false			//High Gear
 		);
 	}

@@ -45,7 +45,6 @@ public class GearPlaceAuto extends CommandGroup {
 		drive_closeToGear.SetParam(
 				Preferences.getInstance().getDouble("GearPlace closeToPeg Dist", -60), 
 				Preferences.getInstance().getDouble("GearPlace closeToPeg Threshold", 1), 
-				0, 
 				Preferences.getInstance().getDouble("GearPlace closeToPeg Speed", .7), 
 				false
 		);
@@ -53,7 +52,6 @@ public class GearPlaceAuto extends CommandGroup {
 		drive_ontoPeg.SetParam(
 				Preferences.getInstance().getDouble("GearPlace ontoPeg Dist", -8),
 				Preferences.getInstance().getDouble("GearPlace ontoPeg Threshold", .5),
-				0,
 				Preferences.getInstance().getDouble("GearPlace ontoPeg Speed", .25),
 				false
 		);
@@ -61,8 +59,7 @@ public class GearPlaceAuto extends CommandGroup {
 		drive_offPeg.SetParam(
 				Preferences.getInstance().getDouble("GearPlace offPeg Dist", 10),
 				Preferences.getInstance().getDouble("GearPlace offPeg Threshold", .5), 
-				0, 
-				Preferences.getInstance().getDouble("GearPlace offPeg Speed", .25),
+				Preferences.getInstance().getDouble("GearPlace offPeg Speed", .25), 
 				false
 		);
 	}	

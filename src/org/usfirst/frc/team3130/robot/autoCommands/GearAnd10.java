@@ -58,7 +58,6 @@ public class GearAnd10 extends CommandGroup {
     	backMore.SetParam(
     			Preferences.getInstance().getDouble("GearAnd10 Extra Back Distance", 12), 
     			Preferences.getInstance().getDouble("GearAnd10 Extra Back Thresh", 2), 
-    			0, 
     			Preferences.getInstance().getDouble("GearAnd10 Extra Back Speed", .5), 
     			false
     	);

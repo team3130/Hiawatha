@@ -52,8 +52,7 @@ public class ShootAfterHopper extends CommandGroup {
     	drive_backFromHopper.SetParam(
     			Preferences.getInstance().getDouble("Drive Back Hopper Dist", -12), 
     			Preferences.getInstance().getDouble("Drive Back Hopper Threshold", 1), 
-    			0, 				//Drive Straight
-    			Preferences.getInstance().getDouble("Drive Back Hopper Speed", .66), 
+    			Preferences.getInstance().getDouble("Drive Back Hopper Speed", .66), 				//Drive Straight
     			Chassis.GetShiftedDown()	//Stay in current gear
     	);
     	

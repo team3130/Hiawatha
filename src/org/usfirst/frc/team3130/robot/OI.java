@@ -123,7 +123,7 @@ public class OI {
 		
 		btn10 = new JoystickButton(stickR, 10);
 		test = new AutoDriveStraightToPoint();
-		test.SetParam(-17, 10, 0, .4, false);
+		test.SetParam(-17, 10, .4, false);
 		
 		//Bind Joystick Buttons to Commands
 		intakeIn.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Up Speed", .6)));
