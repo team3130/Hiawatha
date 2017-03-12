@@ -22,6 +22,7 @@ public class DriveToGear extends Command {
 	private Timer timer_Timeout;
 	private Timer timer_cameraLag;
 	private boolean hasAimed;
+	private boolean hasTurned;
 	
 	public DriveToGear() {
 		requires(Chassis.GetInstance());
@@ -44,6 +45,7 @@ public class DriveToGear extends Command {
 		Chassis.SetPIDValues(21);
 		Chassis.TalonsToCoast(false);
 		hasAimed = false;
+		hasTurned = false;
 		timer_Timeout.start();
 		Chassis.HoldAngle(0);
 	}
@@ -51,38 +53,45 @@ public class DriveToGear extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		//Implemented from https://i.imgur.com/B9THPiA.png
-		double cr = 0;
+		//double cr = 0;
 		// When the peg orientation can be tracked more stable use this cross range
 		//double cr = -JetsonInterface.getDouble("Peg Crossrange", 0);
-		double dr = JetsonInterface.getDouble("Peg Downrange", 1);
-		double yaw = -JetsonInterface.getDouble("Peg Yaw", 0);
+		//double dr = JetsonInterface.getDouble("Peg Downrange", 1);
+		//double yaw = -JetsonInterface.getDouble("Peg Yaw", 0);
 		
-		double alpha = Math.atan2(cr, dr);
-		double beta = Math.atan2(2*cr, dr);
+		//double alpha = Math.atan2(cr, dr);
+		//double beta = Math.atan2(2*cr, dr);
 		
-		double angle = alpha - beta - yaw;	//Extends theta's endpoint to be coincident to alpha's, then goes back alpha degrees
-		if(!hasAimed || timer_Timeout.hasPeriodPassed(Preferences.getInstance().getDouble("Gear Timeout", 2))){
-			if(timer_cameraLag.get()==0 && Math.abs(Chassis.GetRate()) <= Preferences.getInstance().getDouble("Turning stopped", .1)){		//Check for finished moving before aiming againg
+		//double angle = alpha - beta - yaw;	//Extends theta's endpoint to be coincident to alpha's, then goes back alpha degrees
+		if(hasAimed) {
+			if(hasTurned){
+				if(timer_cameraLag.get() > Preferences.getInstance().getDouble("Peg Camera Lag", .15)){	//Check for safe current data before turing off of it
+					hasTurned = false;
+					hasAimed = false;
+				}
+			}
+			else 
+			if(Math.abs(Chassis.GetRate()) <= Preferences.getInstance().getDouble("Turning stopped", .1)){		//Check for finished moving before aiming againg
+				hasTurned = true;
+				timer_cameraLag.reset();
 				timer_cameraLag.start();
 			}
-				
-			if(timer_cameraLag.get() > Preferences.getInstance().getDouble("Peg Camera Lag", .15)		//Check for safe current data before turing off of it
-					&& Math.abs(JetsonInterface.getDouble("Peg Sys Time", 0) - JetsonInterface.getDouble("Peg Time", 9999)) < Preferences.getInstance().getDouble("Gear Time", 0.25)){
-				System.out.println("Time Valid");
-				Chassis.HoldAngle(angle);
-				timer_cameraLag.stop();
-				timer_cameraLag.reset();
-			}
-			System.out.println("Out of Timeout");
+		}
+		else
+		if(Math.abs(JetsonInterface.getDouble("Peg Sys Time", 0) - JetsonInterface.getDouble("Peg Time", 9999)) < Preferences.getInstance().getDouble("Gear Time", 0.25)) {
+			Chassis.HoldAngle(JetsonInterface.getDouble("Peg Yaw", 0));
 			hasAimed = true;
 		}
-		//if(!setSpeed) speed = -OI.stickL.getY();
+		else {
+			// Not aimed, not turned, no vision available -- nothing to do.
+		}
+
 		Chassis.DriveStraight(-OI.stickL.getY());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return JetsonInterface.getDouble("Peg Downrange", 12) < 3;
+		return false; // JetsonInterface.getDouble("Peg Downrange", 12) < 3;
 	}
 
 	// Called once after isFinished returns true
