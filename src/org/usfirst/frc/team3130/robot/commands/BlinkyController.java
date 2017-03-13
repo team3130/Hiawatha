@@ -10,7 +10,7 @@ public class BlinkyController extends Command {
 
 	//private boolean changed = false;
 	private String lastComm = "1";
-	
+	private Boolean failed = true;
 	
     public BlinkyController() {
         // Use requires() here to declare subsystem dependencies
@@ -19,8 +19,10 @@ public class BlinkyController extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	try{
     	Blinky.runLights("1");
-    	
+    	failed = false;
+    	}finally{}
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -43,11 +45,12 @@ public class BlinkyController extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return false || failed;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	try{Blinky.runLights("5");}finally{}
     }
 
     // Called when another command which requires one or more of the same
