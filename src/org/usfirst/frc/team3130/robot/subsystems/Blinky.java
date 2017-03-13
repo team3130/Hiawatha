@@ -36,7 +36,7 @@ public class Blinky extends Subsystem {
 		arduinoConnected = true;
 		} catch(Exception ex){
 			//If connection fails log the error and fall back to encoder based angles.
-			String str_error = "Error instantiating navX from MXP: ";
+			String str_error = "Error instantiating Blinky Class from the Subsystem of the magically thing called robotics code: ";
 			str_error += ex.getLocalizedMessage();
 			DriverStation.reportError(str_error, true);
 			comms = null;
