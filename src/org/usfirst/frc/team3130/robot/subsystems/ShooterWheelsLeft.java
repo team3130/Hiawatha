@@ -35,6 +35,7 @@ public class ShooterWheelsLeft extends Subsystem {
     	m_wheelControl.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	m_wheelControl.configEncoderCodesPerRev(18);	//After going through gear ratio 18 ticks per rev
     	m_wheelControl.reverseSensor(true);
+    	m_wheelControl.enableBrakeMode(false);
     	
     	LiveWindow.addActuator("Shooter", "Wheels Left", m_wheelControl);
     }

@@ -61,6 +61,5 @@ public class JetsonInterface extends Subsystem {
     {
     	jetsonTable.putNumber(key, data);
     }
-    
 }
 

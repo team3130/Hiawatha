@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AutoAim extends Command {
+public class AutoDelay extends Command {
 
-    public AutoAim() {
+    public AutoDelay() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }

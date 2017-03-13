@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import java.lang.Math;
 import org.usfirst.frc.team3130.robot.OI;
 import org.usfirst.frc.team3130.robot.subsystems.*;
+import org.usfirst.frc.team3130.robot.subsystems.Chassis.TurnDirection;
 
 /**
  * Turns the robot 180 degrees and makes the front the back
@@ -18,9 +19,10 @@ public class ReverseDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Chassis.setTurnDir(TurnDirection.kStraight);
     	Chassis.TalonsToCoast(true);
     	Chassis.DriveTank(0,0);
-    	Chassis.HoldAngle(180);
+    	Chassis.HoldAngle(Math.PI);
     	Chassis.ReverseDrive();
     }
 

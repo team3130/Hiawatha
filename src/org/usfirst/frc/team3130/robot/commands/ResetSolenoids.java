@@ -16,11 +16,8 @@ public class ResetSolenoids extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	/*
-    	Robot.bcGearDoors.actuate(false);
     	Robot.bcGearLift.actuate(false);
-    	Robot.bcGearPinch.actuate(false);
-    	Robot.bcGearShield.actuate(false);*/
+    	Robot.bcGearPinch.actuate(true);
     }
 
     // Called repeatedly when this Command is scheduled to run

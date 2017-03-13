@@ -13,8 +13,8 @@ public class LowerGearPickup extends CommandGroup {
 	private PickupGear backToDefault;
 	
     public LowerGearPickup() {
-    	requires(Robot.bcGearLift);
     	requires(Robot.bcGearPinch);
+    	requires(Robot.bcGearLift);
     	requires(Robot.btGearBar);
 
     	backToDefault = new PickupGear();
