@@ -1,16 +1,18 @@
 
 package org.usfirst.frc.team3130.robot;
 
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team3130.robot.commands.ResetSolenoids;
+import org.usfirst.frc.team3130.robot.autoCommands.AutoBasicActuate;
+import org.usfirst.frc.team3130.robot.autoCommands.DumbGearAuto;
+import org.usfirst.frc.team3130.robot.autoCommands.GearAnd10;
 import org.usfirst.frc.team3130.robot.commands.RobotSensors;
 import org.usfirst.frc.team3130.robot.subsystems.*;
 
@@ -24,7 +26,7 @@ import org.usfirst.frc.team3130.robot.subsystems.*;
 public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
-	SendableChooser<CommandGroup> chooser;
+	SendableChooser<String> chooser;
 	RobotSensors robotSensors;
 
 	public static BasicCylinder bcGearPinch;	//Disabled Open
@@ -34,8 +36,7 @@ public class Robot extends IterativeRobot {
 	public static BasicCANTalon btIntake;
 	public static BasicCANTalon btLeftIndex;
 	public static BasicCANTalon btRightIndex;
-	
-	private static ResetSolenoids resetGear;
+
 	
 	@Override
 	public void robotInit() {
@@ -51,27 +52,34 @@ public class Robot extends IterativeRobot {
 		btLeftIndex = new BasicCANTalon(RobotMap.CAN_INDEXMOTORLEFT, "Indexer", "Left Index Motor");
 		btRightIndex = new BasicCANTalon(RobotMap.CAN_INDEXMOTORRIGHT, "Indexer", "Right Index Motor");
 
-		resetGear = new ResetSolenoids();
-		
+			
 		OI.GetInstance();
 		Chassis.GetInstance();
 		Climber.GetInstance();
+		JetsonInterface.GetInstance();
 		ShooterWheelsLeft.GetInstance();
 		ShooterWheelsRight.GetInstance();
 		Blinky.GetInstance();
 
-		// Simplest camera feed. Remove if not needed.
-		CameraServer.getInstance().startAutomaticCapture();
+		WheelSpeedCalculationsRight.GetInstance();
+		WheelSpeedCalculationsLeft.GetInstance();
 
-		chooser = new SendableChooser<CommandGroup>();
-		// chooser.addObject("My Auto", new MyAutoCommand());
+
+		// Simplest camera feed. Remove if not needed.
+		UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
+		camera1.setResolution(320, 480);
+		
+		chooser = new SendableChooser<String>();
+		chooser.addDefault("No Auton", "No Auto");
+		chooser.addObject("Dumb Gear", "Dumb Gear Auto");
+		chooser.addObject("Gear and 10", "Gear and 10");
 		SmartDashboard.putData("Auto mode", chooser);
 	}
 
 	
 	@Override
 	public void disabledInit() {
-		resetGear.start();
+		//resetGear.start();
 	}
 
 	@Override
@@ -82,16 +90,19 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = (Command) chooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
+		
+		switch(chooser.getSelected()){
+			case "Dumb Gear Auto":
+				autonomousCommand = new DumbGearAuto();
+				break;
+			case "No Auton":
+				autonomousCommand = new AutoBasicActuate(bcGearPinch, true);
+			case "Gear and 10":
+				autonomousCommand = new GearAnd10();
+				break;
+			default:
+				autonomousCommand = null;
+		}
 		
 		if (autonomousCommand != null)
 			autonomousCommand.start();

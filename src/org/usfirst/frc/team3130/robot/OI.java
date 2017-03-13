@@ -1,6 +1,11 @@
 package org.usfirst.frc.team3130.robot;
 
 
+import org.usfirst.frc.team3130.robot.autoCommands.AutoDriveStraightToPoint;
+import org.usfirst.frc.team3130.robot.autoCommands.CameraAim;
+import org.usfirst.frc.team3130.robot.autoCommands.CameraDrive;
+import org.usfirst.frc.team3130.robot.autoCommands.DriveToGear;
+
 import org.usfirst.frc.team3130.robot.commands.*;
 import org.usfirst.frc.team3130.robot.subsystems.Blinky;
 
@@ -8,6 +13,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class OI {
@@ -58,14 +65,36 @@ public class OI {
 	private static JoystickButton pinchGear;
 	private static JoystickButton lowerGearActive;
 	private static JoystickButton spinIndexer;
+
+	private static JoystickButton testCurvePreferences;
 	private static JoystickButton reverseDrive;
 
 	private static JoystickButton shiftUp;
 	private static JoystickButton shiftDown;
+
 	private static JoystickButton randTog;
+
+	private static JoystickButton gearAssist;
 	
-	private static JoystickButton btn10;
-	private static HoldAngleTest turn;
+	private static JoystickButton aim;
+	private static JoystickButton aimDrive;
+	
+	//Define Commands
+	WipeStopPointsL wipeLPoints;
+	WipeStopPointsR wipeRPoints;
+	AddPointL		addLPoint;
+	AddPointR		addRPoint;
+	TestSpeedPoints	testCurve;
+
+	
+	private static JoystickButton btn10L;
+	private static AutoDriveStraightToPoint testL;
+	
+	private static JoystickButton btn10R;
+	private static HoldAngleTest testR;
+	
+	public static SendableChooser<String> gearStartPos;
+	public static SendableChooser<String> fieldSide;
 	
 	private OI()
 	{
@@ -83,15 +112,31 @@ public class OI {
 		pinchGear = new JoystickButton(stickL, RobotMap.BTN_PINCHGEAR);
 		lowerGearActive = new JoystickButton(stickR, RobotMap.BTN_LOWERGEARACTIVE);
 		spinIndexer = new JoystickButton(gamepad, RobotMap.BTN_RUNINDEXER);
+		testCurvePreferences = new JoystickButton(gamepad, RobotMap.BTN_TESTCURVEPREFERENCES);
 		reverseDrive = new JoystickButton(stickR, RobotMap.BTN_REVERSEDRIVE);
 		
+		gearAssist = new JoystickButton(stickR, RobotMap.BTN_GEARASSIST);
 		shiftUp = new JoystickButton(stickR, RobotMap.BTN_SHIFTUP);
 		shiftDown = new JoystickButton(stickL, RobotMap.BTN_SHIFTDOWN);
 		randTog = new JoystickButton(gamepad, RobotMap.BTN_FUNLIGHTTOGGLE );
 		
-		btn10 = new JoystickButton(stickR, 10);
-		turn = new HoldAngleTest();
-		turn.SetParam(90);
+		aim = new JoystickButton(stickR, RobotMap.BTN_AIMSHOOT);
+		aimDrive = new JoystickButton(stickR, RobotMap.BTN_AIMDRIVE);
+		
+		//Create Commands
+		wipeLPoints	= new WipeStopPointsL();
+		wipeRPoints	= new WipeStopPointsR();
+		addLPoint	= new AddPointL();
+		addRPoint	= new AddPointR();
+		testCurve	= new TestSpeedPoints();
+		
+		btn10L = new JoystickButton(stickL, 10);
+		testL = new AutoDriveStraightToPoint();
+		testL.SetParam(-17, 10, .4, false);
+		
+		btn10R = new JoystickButton(stickR,10);
+		testR = new HoldAngleTest();
+		testR.SetParam(45);
 		
 		//Bind Joystick Buttons to Commands
 		intakeIn.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Up Speed", .6)));
@@ -104,10 +149,39 @@ public class OI {
 		spinIndexer.whileHeld(new RunIndexer());
 		reverseDrive.whenPressed(new ReverseDrive());
 		randTog.whenPressed(new randomToggle());
+
+		testCurvePreferences.whileHeld(new SpeedCurveShoot());
+		//reverseDrive.whenPressed(new ReverseDrive());
+		gearAssist.whileHeld(new DriveToGear());
 		
 		shiftUp.whenPressed(new DriveShiftUp());
 		shiftDown.whenPressed(new DriveShiftDown());
-		btn10.whileHeld(turn);
+		
+		aim.whileHeld(new CameraAim());
+		aimDrive.whileHeld(new CameraDrive());
+		
+		btn10L.whenPressed(testL);
+		btn10R.whileHeld(testR);
+		
+		
+		gearStartPos = new SendableChooser<>();
+		gearStartPos.addObject("Left Peg", "Left");
+		gearStartPos.addDefault("Center Peg", "Center");
+		gearStartPos.addObject("Right Peg", "Right");
+		SmartDashboard.putData("Gear Pos Chooser",gearStartPos);
+		
+		fieldSide = new SendableChooser<>();
+		fieldSide.addObject("Blue Side", "Blue");
+		fieldSide.addObject("Red Side", "Red");
+		SmartDashboard.putData("Field Side",fieldSide);
+		
+		
+		//Place Commands on SMD
+		SmartDashboard.putData("Wipe Left Points", wipeLPoints);
+		SmartDashboard.putData("Wipe Right Points", wipeRPoints);
+		SmartDashboard.putData("Add Left Point", addLPoint);
+		SmartDashboard.putData("Add Right Point", addRPoint);
+		SmartDashboard.putData("Test Speed Curve", testCurve);
 	}
 }
 
