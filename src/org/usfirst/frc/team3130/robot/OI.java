@@ -142,7 +142,7 @@ public class OI {
 		lowerGearActive.whileHeld(new LowerGearPickup());
 		spinIndexer.whileHeld(new RunIndexer());
 		testCurvePreferences.whileHeld(new SpeedCurveShoot());
-		reverseDrive.whenPressed(new ReverseDrive());
+		//reverseDrive.whenPressed(new ReverseDrive());
 		gearAssist.whileHeld(new DriveToGear());
 		
 		shiftUp.whenPressed(new DriveShiftUp());

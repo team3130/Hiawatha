@@ -57,7 +57,7 @@ public class CameraDrive extends PIDCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(!hasAimed || timer.get() > Preferences.getInstance().getDouble("Aim Timeout", .5)){
+    	if(!hasAimed){
     		if(Math.abs(JetsonInterface.getDouble("Boiler Sys Time", 9999) - JetsonInterface.getDouble("Boiler Time", 0)) < 0.25){
 		    	m_distance = JetsonInterface.getDouble("Boiler Distance", 0);
 		    	if(Math.abs(Chassis.GetSpeed()) < Preferences.getInstance().getDouble("Drive Stop Speed", 1)
@@ -68,12 +68,9 @@ public class CameraDrive extends PIDCommand {
 		        			Preferences.getInstance().getDouble("Camera Drive Sweet", DEFAULTSWEETSPOT)
 		        			);
 		    		getPIDController().enable();
+		    		hasAimed = true;
 		    	}
 		   	}
-    		
-    		timer.reset();
-    		timer.start();
-    		hasAimed = true;
     	}
     }
 
