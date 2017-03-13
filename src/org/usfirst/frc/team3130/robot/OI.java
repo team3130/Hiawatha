@@ -147,7 +147,7 @@ public class OI {
 		pinchGear.whileHeld(new BasicActuate(Robot.bcGearPinch));
 		lowerGearActive.whileHeld(new LowerGearPickup());
 		spinIndexer.whileHeld(new RunIndexer());
-		reverseDrive.whenPressed(new ReverseDrive());
+		//reverseDrive.whenPressed(new ReverseDrive());
 		randTog.whenPressed(new randomToggle());
 
 		testCurvePreferences.whileHeld(new SpeedCurveShoot());
