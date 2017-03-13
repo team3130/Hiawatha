@@ -48,13 +48,15 @@ public class GearAnd10 extends CommandGroup {
         	addSequential(backMore, 2);
         }
         addSequential(faceTarget, 2);
-        addSequential(closeToTarget, 1);
+        addSequential(closeToTarget, 3);
         addSequential(shoot);
     }
     
     @Override
     protected void initialize()
     {
+    	shoot.setParam(Preferences.getInstance().getDouble("GearAnd10 Index Speed", 0.5));
+
     	backMore.SetParam(
     			Preferences.getInstance().getDouble("GearAnd10 Extra Back Distance", 12), 
     			Preferences.getInstance().getDouble("GearAnd10 Extra Back Thresh", 2), 
