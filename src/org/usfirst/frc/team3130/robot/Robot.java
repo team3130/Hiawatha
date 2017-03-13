@@ -80,6 +80,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledInit() {
 		//resetGear.start();
+		Blinky.runLights("5");
 	}
 
 	@Override

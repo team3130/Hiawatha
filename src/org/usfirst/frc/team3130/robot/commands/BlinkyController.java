@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class BlinkyController extends Command {
 
 	//private boolean changed = false;
-	private String lastComm = "1";
+	private String lastComm = "5";
 	private Boolean failed = true;
 	
     public BlinkyController() {
@@ -20,7 +20,7 @@ public class BlinkyController extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	try{
-    	Blinky.runLights("1");
+    	Blinky.runLights("5");
     	failed = false;
     	}finally{}
     }
@@ -50,7 +50,7 @@ public class BlinkyController extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	try{Blinky.runLights("5");}finally{}
+    	
     }
 
     // Called when another command which requires one or more of the same
