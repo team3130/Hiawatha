@@ -181,10 +181,10 @@ public class Chassis extends PIDSubsystem {
     	m_drive.arcadeDrive(move, turn, false);
     }
     
-    public static void Shift(boolean shiftDown)
+    public static void Shift(boolean shiftUp)
     {
-    	m_shifter.set(shiftDown);
-    	m_bShiftedHigh = shiftDown;
+    	m_shifter.set(shiftUp);
+    	m_bShiftedHigh = shiftUp;
     }
     
     public static boolean GetShiftedDown(){return m_bShiftedHigh;}
