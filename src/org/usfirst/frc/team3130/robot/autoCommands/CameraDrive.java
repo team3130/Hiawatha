@@ -42,7 +42,7 @@ public class CameraDrive extends PIDCommand {
     	getPIDController().reset();
     	getPIDController().disable();
     	
-    	Chassis.Shift(true);
+    	Chassis.Shift(false);
     	Chassis.setTurnDir(TurnDirection.kStraight);
     	Chassis.HoldAngle(0);
     	
