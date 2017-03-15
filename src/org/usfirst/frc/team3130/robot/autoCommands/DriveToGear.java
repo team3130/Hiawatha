@@ -23,6 +23,7 @@ public class DriveToGear extends Command {
 	private Timer timer_cameraLag;
 	private boolean hasAimed;
 	private boolean hasTurned;
+	private boolean onTarget;
 	
 	public DriveToGear() {
 		requires(Chassis.GetInstance());
@@ -46,6 +47,7 @@ public class DriveToGear extends Command {
 		Chassis.TalonsToCoast(false);
 		hasAimed = false;
 		hasTurned = false;
+		onTarget = false;
 		timer_Timeout.start();
 		Chassis.HoldAngle(0);
 	}
@@ -68,6 +70,7 @@ public class DriveToGear extends Command {
 				if(timer_cameraLag.get() > Preferences.getInstance().getDouble("Peg Camera Lag", .15)){	//Check for safe current data before turing off of it
 					hasTurned = false;
 					hasAimed = false;
+					onTarget = true;
 				}
 			}
 			else 
@@ -79,19 +82,29 @@ public class DriveToGear extends Command {
 		}
 		else
 		if(Math.abs(JetsonInterface.getDouble("Peg Sys Time", 0) - JetsonInterface.getDouble("Peg Time", 9999)) < Preferences.getInstance().getDouble("Gear Time", 0.25)) {
-			Chassis.HoldAngle(JetsonInterface.getDouble("Peg Yaw", 0));
+			double yaw = JetsonInterface.getDouble("Peg Yaw", 0);
+			Chassis.HoldAngle(yaw);
 			hasAimed = true;
+			if(Math.abs(yaw) > Preferences.getInstance().getDouble("Peg Camera Thresh", 1)) {
+				onTarget = false;
+			}
 		}
 		else {
 			// Not aimed, not turned, no vision available -- nothing to do.
 		}
 
-		Chassis.DriveStraight(-OI.stickL.getY());
+		if(setSpeed) {
+			Chassis.DriveStraight(speed);
+		}
+		else {
+			Chassis.DriveStraight(-OI.stickL.getY());
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return false; // JetsonInterface.getDouble("Peg Downrange", 12) < 3;
+		if(setSpeed) return onTarget;
+		else return false;
 	}
 
 	// Called once after isFinished returns true
