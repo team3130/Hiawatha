@@ -25,7 +25,12 @@ public class BasicSpinMotor extends Command {
         percent = percentage;
         this.motor=motor;
     }
-
+    
+    public void ChangePercent(double percentage)
+    {
+    	percent = percentage;
+    }
+    
     // Called just before this Command runs the first time
     protected void initialize() {
     	motor.spinMotor(percent);
