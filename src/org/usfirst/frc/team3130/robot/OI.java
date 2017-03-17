@@ -54,6 +54,7 @@ public class OI {
 	public static Joystick stickL;
 	public static Joystick stickR;
 	public static Joystick gamepad;
+	public static Joystick customClimb;
 	
 	//Define Joystick Buttons
 	private static JoystickButton intakeIn;
@@ -116,6 +117,8 @@ public class OI {
 		
 		aim = new JoystickButton(stickR, RobotMap.BTN_AIMSHOOT);
 		aimDrive = new JoystickButton(stickR, RobotMap.BTN_AIMDRIVE);
+		
+		customClimb = new Joystick(RobotMap.LST_AXS_CLIMB);
 		
 		//Create Commands
 		wipeLPoints	= new WipeStopPointsL();

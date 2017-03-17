@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3130.robot.commands;
 
 import org.usfirst.frc.team3130.robot.subsystems.Climber;
+import org.usfirst.frc.team3130.robot.*;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
@@ -21,6 +22,7 @@ public class ClimbUp extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Climber.Climb(OI.customClimb.getRawAxis(-1 * Math.abs(RobotMap.LST_AXS_CLIMB)));
     }
 
     // Make this return true when this Command no longer needs to run execute()
