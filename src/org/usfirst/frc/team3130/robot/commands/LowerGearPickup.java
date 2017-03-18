@@ -20,7 +20,7 @@ public class LowerGearPickup extends CommandGroup {
     	requires(Robot.btGearBar);
 
     	backToDefault = new PickupGear();
-    	new BasicSpinMotor(Robot.btGearBar, Preferences.getInstance().getDouble("Gear Motor PercentVBus", .8));
+    	spinBar = new BasicSpinMotor(Robot.btGearBar, Preferences.getInstance().getDouble("Gear Motor PercentVBus", .8));
     	
     	addParallel(new AutoBasicActuate(Robot.bcGearPinch, false), 0.1);
     	addParallel(spinBar);

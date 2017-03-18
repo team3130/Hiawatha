@@ -134,6 +134,7 @@ public class OI {
 		intakeIn.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Up Speed", .6)));
 		intakeOut.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Down Speed", -.6)));
 		hopperRun.whileHeld(new BasicSpinMotor(Robot.btHopper, Preferences.getInstance().getDouble("Hopper Stirrer PercentVBus", 0.5)));
+		hopperRun.whileHeld(new BasicSpinMotor(Robot.btHopper2, Preferences.getInstance().getDouble("Hopper2 PercentVBus", 0.8)));
 		testShooterWheels.whileHeld(new RunWheelsManual());
 		pinchGear.whileHeld(new BasicActuate(Robot.bcGearPinch));
 		lowerGearActive.whileHeld(new LowerGearPickup());
