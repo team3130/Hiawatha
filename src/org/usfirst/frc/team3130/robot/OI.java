@@ -59,6 +59,7 @@ public class OI {
 	private static JoystickButton intakeIn;
 	private static JoystickButton intakeOut;
 	private static JoystickButton hopperRun;
+	private static JoystickButton hopperRun2;
 	private static JoystickButton testShooterWheels;
 	private static JoystickButton pinchGear;
 	private static JoystickButton lowerGearActive;
@@ -101,6 +102,7 @@ public class OI {
 		intakeIn = new JoystickButton(gamepad, RobotMap.BTN_INTAKEUP);
 		intakeOut = new JoystickButton(gamepad, RobotMap.BTN_INTAKEDOWN);
 		hopperRun = new JoystickButton(gamepad, RobotMap.BTN_HOPPERDRIVE);
+		hopperRun2 = new JoystickButton(gamepad, RobotMap.BTN_HOPPERDRIVE);
 		testShooterWheels = new JoystickButton(gamepad, RobotMap.BTN_TESTSHOOTERWHEELS);
 		pinchGear = new JoystickButton(stickL, RobotMap.BTN_PINCHGEAR);
 		lowerGearActive = new JoystickButton(stickR, RobotMap.BTN_LOWERGEARACTIVE);
@@ -134,7 +136,7 @@ public class OI {
 		intakeIn.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Up Speed", .6)));
 		intakeOut.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Down Speed", -.6)));
 		hopperRun.whileHeld(new BasicSpinMotor(Robot.btHopper, Preferences.getInstance().getDouble("Hopper Stirrer PercentVBus", 0.5)));
-		hopperRun.whileHeld(new BasicSpinMotor(Robot.btHopper2, Preferences.getInstance().getDouble("Hopper2 PercentVBus", 0.8)));
+		hopperRun2.whileHeld(new BasicSpinMotor(Robot.btHopper2, Preferences.getInstance().getDouble("Hopper2 PercentVBus", 0.8)));
 		testShooterWheels.whileHeld(new RunWheelsManual());
 		pinchGear.whileHeld(new BasicActuate(Robot.bcGearPinch));
 		lowerGearActive.whileHeld(new LowerGearPickup());
