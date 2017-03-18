@@ -1,9 +1,9 @@
 package org.usfirst.frc.team3130.robot.commands;
 
 import org.usfirst.frc.team3130.robot.subsystems.Climber;
-import org.usfirst.frc.team3130.robot.*;
+import org.usfirst.frc.team3130.robot.OI;
+import org.usfirst.frc.team3130.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -17,12 +17,11 @@ public class ClimbUp extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Climber.Climb(Preferences.getInstance().getDouble("Climber Up Speed", -1.0));
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Climber.Climb(OI.customClimb.getRawAxis(-1 * Math.abs(RobotMap.LST_AXS_CLIMB)));
+    	Climber.Climb(-0.5 * OI.gamepad.getRawAxis(RobotMap.AXS_CLIMB) +0.5 );
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -54,12 +54,10 @@ public class OI {
 	public static Joystick stickL;
 	public static Joystick stickR;
 	public static Joystick gamepad;
-	public static Joystick customClimb;
 	
 	//Define Joystick Buttons
 	private static JoystickButton intakeIn;
 	private static JoystickButton intakeOut;
-	private static JoystickTrigger climberUp;
 	private static JoystickButton hopperRun;
 	private static JoystickButton testShooterWheels;
 	private static JoystickButton pinchGear;
@@ -102,7 +100,6 @@ public class OI {
 		//Create Joystick Buttons
 		intakeIn = new JoystickButton(gamepad, RobotMap.BTN_INTAKEUP);
 		intakeOut = new JoystickButton(gamepad, RobotMap.BTN_INTAKEDOWN);
-		climberUp = new JoystickTrigger(gamepad, RobotMap.BTN_CLIMBERUP);
 		hopperRun = new JoystickButton(gamepad, RobotMap.BTN_HOPPERDRIVE);
 		testShooterWheels = new JoystickButton(gamepad, RobotMap.BTN_TESTSHOOTERWHEELS);
 		pinchGear = new JoystickButton(stickL, RobotMap.BTN_PINCHGEAR);
@@ -117,8 +114,6 @@ public class OI {
 		
 		aim = new JoystickButton(stickR, RobotMap.BTN_AIMSHOOT);
 		aimDrive = new JoystickButton(stickR, RobotMap.BTN_AIMDRIVE);
-		
-		customClimb = new Joystick(RobotMap.LST_AXS_CLIMB);
 		
 		//Create Commands
 		wipeLPoints	= new WipeStopPointsL();
@@ -138,7 +133,6 @@ public class OI {
 		//Bind Joystick Buttons to Commands
 		intakeIn.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Up Speed", .6)));
 		intakeOut.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Down Speed", -.6)));
-		climberUp.whileActive(new ClimbUp());
 		hopperRun.whileHeld(new BasicSpinMotor(Robot.btHopper, Preferences.getInstance().getDouble("Hopper Stirrer PercentVBus", 0.5)));
 		testShooterWheels.whileHeld(new RunWheelsManual());
 		pinchGear.whileHeld(new BasicActuate(Robot.bcGearPinch));

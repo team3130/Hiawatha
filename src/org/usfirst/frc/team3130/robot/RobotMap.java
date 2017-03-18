@@ -30,6 +30,7 @@ public class RobotMap {
 			public static final int CAN_SHOOTERWHEELSLEFT = 11;
 			public static final int CAN_SHOOTERWHEELSRIGHT = 12;
 			public static final int CAN_GEARBAR = 13;
+			public static final int CAN_HOPPER2 = 14;
 			public static final int CAN_INDEXMOTORRIGHT = 45;
 
 		
@@ -78,7 +79,6 @@ public class RobotMap {
 			//Intake
 			public static final int BTN_INTAKEUP = LST_BTN_A;
 			public static final int BTN_INTAKEDOWN = LST_BTN_B;
-			public static final int BTN_CLIMBERUP = LST_AXS_LTRIGGER;
 			
 			//Hopper
 			public static final int BTN_HOPPERDRIVE = LST_BTN_RBUMPER;//TODO: Get Actual Button
@@ -105,5 +105,5 @@ public class RobotMap {
 			public static final int BTN_REVERSEDRIVE = 5; //Joystick R
 			
 			//Climb
-			public static final int LST_AXS_CLIMB = LST_AXS_RJOYSTICKY;
+			public static final int AXS_CLIMB = LST_AXS_RJOYSTICKY;
 }

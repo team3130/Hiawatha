@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3130.robot.subsystems;
 
 import org.usfirst.frc.team3130.robot.RobotMap;
+import org.usfirst.frc.team3130.robot.commands.ClimbUp;
 
 import com.ctre.CANTalon;
 
@@ -32,8 +33,7 @@ public class Climber extends Subsystem {
     private static CANTalon m_liftMotor2;
     
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new ClimbUp());
     }
     
     private Climber()
