@@ -15,8 +15,15 @@ public abstract class ContinuousDrive extends Command {
 	boolean heldAngle = false;
 	boolean done = false;
 	
+	ContinuousDrive prev = null;
+	
 	public ContinuousDrive() {
 		requires(Chassis.GetInstance());
+	}
+	
+	public ContinuousDrive(ContinuousDrive previousCommand){
+		requires(Chassis.GetInstance());
+		prev = previousCommand;
 	}
 	
 	protected abstract double getPos();
@@ -70,4 +77,6 @@ public abstract class ContinuousDrive extends Command {
 	{
 		return Math.abs(valPrev+(done?valFinal:getPos())) - Math.abs(valEnd);
 	}
+	
+	public abstract double getEndAngle();
 }

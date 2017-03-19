@@ -441,6 +441,17 @@ public class Chassis extends PIDSubsystem {
 		GetInstance().getPIDController().enable();
 	}
 	
+	public static void HoldAbsAngle(double angle)
+	{
+		double workingAngle = (180/Math.PI)*angle;
+		SetPIDValues(workingAngle);
+		if(m_dir.equals(TurnDirection.kStraight))
+			GetInstance().getPIDController().setSetpoint(workingAngle);
+		else
+			GetInstance().getPIDController().setSetpoint(workingAngle);
+		GetInstance().getPIDController().enable();
+	}
+	
 	public static void DriveStraight(double move) { moveSpeed = move; }
 	
 	/**

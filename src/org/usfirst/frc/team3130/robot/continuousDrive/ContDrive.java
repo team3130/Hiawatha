@@ -7,8 +7,15 @@ import org.usfirst.frc.team3130.robot.subsystems.Chassis;
  */
 public class ContDrive extends ContinuousDrive{
 
+	private double angle;
+	
     public ContDrive() {
         super();
+    }
+    
+    public ContDrive(ContinuousDrive previous)
+    {
+    	super(previous);
     }
 
 	@Override
@@ -24,7 +31,11 @@ public class ContDrive extends ContinuousDrive{
     // Called just before this Command runs the first time
     protected void initialize() {
     	super.initialize();
-    	Chassis.HoldAngle(0);
+    	
+    	if(prev!=null) angle=prev.getEndAngle();
+    	else angle = Chassis.GetAngle() * (Math.PI/180f);
+    	
+    	Chassis.HoldAbsAngle(angle);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -42,5 +53,10 @@ public class ContDrive extends ContinuousDrive{
     protected void interrupted() {
     	end();
     }
+
+	@Override
+	public double getEndAngle() {
+		return angle;
+	}
 
 }

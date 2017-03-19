@@ -8,6 +8,8 @@ import org.usfirst.frc.team3130.robot.subsystems.Chassis;
  */
 public class ContTurnDist extends ContTurn{
 	
+	private double endAngle;
+	
     public ContTurnDist() {
         super();
     }
@@ -21,6 +23,7 @@ public class ContTurnDist extends ContTurn{
     // Called just before this Command runs the first time
     protected void initialize() {
     	super.initialize();
+    	endAngle += Chassis.GetAngle() * (Math.PI/180f);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -43,5 +46,11 @@ public class ContTurnDist extends ContTurn{
 	public void SetParam(double percentVBus, double angle) {
 		super.SetParam(percentVBus, RobotMap.DIM_ROBOTWHEELTOWHEEL * angle);
 		valEnd = Math.abs(valEnd);
+		endAngle = -angle;
+	}
+
+	@Override
+	public double getEndAngle() {
+		return endAngle;
 	}
 }

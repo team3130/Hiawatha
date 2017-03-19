@@ -16,21 +16,24 @@ public class TestContinuous extends CommandGroup {
 	private ContDrive drive2;
 	private ContTurnHeading turnHeading;
 	private AutoDelay wait;
+	private AutoDelay wait2;
 	
     public TestContinuous() {
         requires(Chassis.GetInstance());
         
         drive1 = new ContDrive();
         turnDist = new ContTurnDist();
-        drive2 = new ContDrive();
+        drive2 = new ContDrive(turnDist);
         turnHeading = new ContTurnHeading();
         wait = new AutoDelay();
+        wait2 = new AutoDelay();
         
         addSequential(drive1);
         addSequential(turnDist);
-        addSequential(wait, 3);
+        
         addSequential(drive2);
         addSequential(turnHeading);
+        addSequential(wait,1);
     }
     
     @Override
