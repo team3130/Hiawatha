@@ -24,12 +24,14 @@ public class DriveToGear extends Command {
 	private boolean hasAimed;
 	private boolean hasTurned;
 	private boolean onTarget;
+	private double prevYaw;
+	private double prevTime;
 	
 	public DriveToGear() {
 		requires(Chassis.GetInstance());
 		setSpeed = false;
 		timer_Timeout = new Timer();
-		timer_cameraLag = new Timer();
+		//timer_cameraLag = new Timer();
 	}
 
 	public void setParam(double speed)
@@ -48,6 +50,8 @@ public class DriveToGear extends Command {
 		hasAimed = false;
 		hasTurned = false;
 		onTarget = false;
+		prevYaw = 0;
+		prevTime = 0;
 		timer_Timeout.start();
 		Chassis.HoldAngle(0);
 	}
@@ -65,19 +69,29 @@ public class DriveToGear extends Command {
 		//double beta = Math.atan2(2*cr, dr);
 		
 		//double angle = alpha - beta - yaw;	//Extends theta's endpoint to be coincident to alpha's, then goes back alpha degrees
-		if(hasAimed) {
+		
+		if(hasAimed){
 			if(hasTurned){
-				if(timer_cameraLag.get() > Preferences.getInstance().getDouble("Peg Camera Lag", .15)){	//Check for safe current data before turing off of it
+				double yaw = JetsonInterface.getDouble("Peg Yaw", 0);
+				if(Math.abs(yaw - prevYaw) < Preferences.getInstance().getDouble("Yaw Threshold", 1)){	//Check for safe current data before turing off of it
 					hasTurned = false;
 					hasAimed = false;
 					onTarget = true;
 				}
+				else {
+					double time = JetsonInterface.getDouble("Peg Time", 9999);
+					if (time > prevTime) {
+						prevYaw = yaw;
+						prevTime = time;
+					}
+				}
 			}
+			
 			else 
 			if(Math.abs(Chassis.GetRate()) <= Preferences.getInstance().getDouble("Turning stopped", .1)){		//Check for finished moving before aiming againg
 				hasTurned = true;
-				timer_cameraLag.reset();
-				timer_cameraLag.start();
+				//timer_cameraLag.reset();
+				//timer_cameraLag.start();
 			}
 		}
 		else
