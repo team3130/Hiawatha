@@ -21,7 +21,7 @@ public class ClimbUp extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Climber.Climb(-0.5 * OI.gamepad.getRawAxis(RobotMap.AXS_CLIMB) +0.5 );
+    	Climber.Climb(Math.abs(OI.gamepad.getRawAxis(RobotMap.AXS_CLIMB)));
     }
 
     // Make this return true when this Command no longer needs to run execute()
