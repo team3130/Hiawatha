@@ -83,7 +83,7 @@ public class OI {
 	TestSpeedPoints	testCurve;
 	
 	private static JoystickButton btn10L;
-	private static AutoDriveStraightToPoint testL;
+	private static TestContinuous testL;
 	
 	private static JoystickButton btn10R;
 	private static HoldAngleTest testR;
@@ -125,8 +125,8 @@ public class OI {
 		testCurve	= new TestSpeedPoints();
 		
 		btn10L = new JoystickButton(stickL, 10);
-		testL = new AutoDriveStraightToPoint();
-		testL.SetParam(-17, 10, .4, false);
+		testL = new TestContinuous();
+		//testL.SetParam(-17, 10, .4, false);
 		
 		btn10R = new JoystickButton(stickR,10);
 		testR = new HoldAngleTest();
@@ -151,7 +151,7 @@ public class OI {
 		aim.whileHeld(new CameraAim());
 		aimDrive.whileHeld(new CameraDrive());
 		
-		btn10L.whenPressed(testL);
+		btn10L.whileHeld(testL);
 		btn10R.whileHeld(testR);
 		
 		
