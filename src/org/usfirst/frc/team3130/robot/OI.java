@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3130.robot;
 
 
-import org.usfirst.frc.team3130.robot.autoCommands.AutoDriveStraightToPoint;
 import org.usfirst.frc.team3130.robot.autoCommands.CameraAim;
 import org.usfirst.frc.team3130.robot.autoCommands.CameraDrive;
 import org.usfirst.frc.team3130.robot.autoCommands.DriveToGear;
