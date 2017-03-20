@@ -13,7 +13,7 @@ public class ContTurnHeading extends ContTurn{
 
 	protected double getPos()
 	{
-		return Chassis.GetAngle();
+		return Chassis.GetAngle() * (Math.PI/180f);
 	}
 	
 	// Called just before this Command runs the first time
