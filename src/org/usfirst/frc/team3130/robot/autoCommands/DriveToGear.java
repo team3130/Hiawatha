@@ -117,8 +117,8 @@ public class DriveToGear extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if(setSpeed) return onTarget;
-		else return false;
+		if(setSpeed) return JetsonInterface.getDouble("Peg Distance", 5) < 45;
+		return false;
 	}
 
 	// Called once after isFinished returns true

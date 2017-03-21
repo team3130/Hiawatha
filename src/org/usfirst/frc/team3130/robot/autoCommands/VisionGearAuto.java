@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class VisionGearAuto extends CommandGroup {
 	
 	private DriveToGear uptoPeg;
+	private DriveToGear finalAim;
+	private AutoDelay wait;
 	private ContDrive toPeg;
 	private AutoDriveStraightToPoint ontoPeg;
 	private AutoDriveStraightToPoint offPeg;
@@ -30,6 +32,8 @@ public class VisionGearAuto extends CommandGroup {
 		requires(Robot.bcGearLift);
 		
 		uptoPeg = new DriveToGear();
+		finalAim = new DriveToGear();
+		wait = new AutoDelay();
 		toPeg = new ContDrive();
 		ontoPeg = new AutoDriveStraightToPoint();
 		offPeg = new AutoDriveStraightToPoint();
@@ -42,7 +46,9 @@ public class VisionGearAuto extends CommandGroup {
 		addSequential(closePinchStart, 0.5);
 		addSequential(toPeg, 3);
 		if(!OI.gearStartPos.getSelected().equals("Center")) addSequential(turnToPeg, 3);
-		addSequential(uptoPeg, 3);
+		addSequential(uptoPeg, 5);
+		addSequential(wait, .5);
+		addSequential(finalAim, .5);
 		addSequential(ontoPeg, 3);
 		addSequential(dropGear, 0.5);
 		addSequential(dropPinch, 0.5);
@@ -53,23 +59,23 @@ public class VisionGearAuto extends CommandGroup {
 	@Override
 	protected void initialize()
 	{
-		uptoPeg.setParam(.7);
+		uptoPeg.setParam(.2);
 		
 		if(OI.fieldSide.getSelected().equals("Red")){
 			switch(OI.gearStartPos.getSelected()){
 				case "Left":
 					//turnToPeg.SetParam(Preferences.getInstance().getDouble("AimFromGear Close Angle", -10));
-					turnToPeg.SetParam(1, Preferences.getInstance().getDouble("TurnToGear Left", -45));
+					turnToPeg.SetParam(1, Preferences.getInstance().getDouble("TurnToGear Left", -45)*(Math.PI/180f));
 					
 					toPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear toPeg Speed RedLeft", .7),
+							-Preferences.getInstance().getDouble("DumbGear toPeg Speed RedLeft", .7),
 							Preferences.getInstance().getDouble("DumbGear toPeg Dist RedLeft", -79+17.5)
 					);
 					
 					ontoPeg.SetParam(
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist RedLeft", -92.8), 
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh RedLeft", 10.0), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed RedLeft", .4), 
+							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed RedLeft", .2), 
 							false
 					);
 					
@@ -87,7 +93,7 @@ public class VisionGearAuto extends CommandGroup {
 					turnToPeg.SetParam(1, 0);
 					
 					toPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear toPeg Speed", .7),
+							-Preferences.getInstance().getDouble("DumbGear toPeg Speed", .7),
 							Preferences.getInstance().getDouble("DumbGear toPeg Dist", -93+17.5+12)
 					);
 					
@@ -109,10 +115,10 @@ public class VisionGearAuto extends CommandGroup {
 					
 				case "Right":
 					//turnToPeg.SetParam(Preferences.getInstance().getDouble("AimFromGear Center Angle", 135));
-					turnToPeg.SetParam(1, Preferences.getInstance().getDouble("TurnToGear Right", 45));
+					turnToPeg.SetParam(1, Preferences.getInstance().getDouble("TurnToGear Right", 45)*(Math.PI/180f));
 					
 					toPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear toPeg Speed RedRight", .7),
+							-Preferences.getInstance().getDouble("DumbGear toPeg Speed RedRight", .7),
 							Preferences.getInstance().getDouble("DumbGear toPeg Dist RedRight", -79+17.5)
 					);
 					
@@ -136,17 +142,17 @@ public class VisionGearAuto extends CommandGroup {
 			switch(OI.gearStartPos.getSelected()){
 				case "Left":
 					//turnToPeg.SetParam(Preferences.getInstance().getDouble("AimFromGear Close Angle", -10));
-					turnToPeg.SetParam(1, Preferences.getInstance().getDouble("TurnToGear Left", -45));
+					turnToPeg.SetParam(1, Preferences.getInstance().getDouble("TurnToGear Left", -45)*(Math.PI/180f));
 					
 					toPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear toPeg Speed BlueLeft", .7), 
+							-Preferences.getInstance().getDouble("DumbGear toPeg Speed BlueLeft", .7), 
 							Preferences.getInstance().getDouble("DumbGear toPeg Dist BlueLeft", -79+17.5)
 					);
 					
 					ontoPeg.SetParam(
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist BlueLeft", -95.3), 
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh BlueLeft", 10.0), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed BlueLeft", .4), 
+							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed BlueLeft", .2), 
 							false
 					);
 					
@@ -164,14 +170,14 @@ public class VisionGearAuto extends CommandGroup {
 					turnToPeg.SetParam(1, 0);
 					
 					toPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear toPeg Speed", .7), 
+							-Preferences.getInstance().getDouble("DumbGear toPeg Speed", .7), 
 							Preferences.getInstance().getDouble("DumbGear toPeg Dist", -93+17.5)
 					);
 					
 					ontoPeg.SetParam(
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist", -17), 
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh", 10.0), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed", .4), 
+							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed", .2), 
 							false
 					);
 					
@@ -186,17 +192,17 @@ public class VisionGearAuto extends CommandGroup {
 					
 				case "Right":
 					//turnToPeg.SetParam(Preferences.getInstance().getDouble("AimFromGear Center Angle", 135));
-					turnToPeg.SetParam(1, Preferences.getInstance().getDouble("TurnToGear Right", 45));
+					turnToPeg.SetParam(1, Preferences.getInstance().getDouble("TurnToGear Right", 45)*(Math.PI/180f));
 					
 					toPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear toPeg Speed BlueRight", .7), 
+							-Preferences.getInstance().getDouble("DumbGear toPeg Speed BlueRight", .7), 
 							Preferences.getInstance().getDouble("DumbGear toPeg Dist BlueRight", -79+17.5)
 					);
 					
 					ontoPeg.SetParam(
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist BlueRight", -93.8), 
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh BlueRight", 10.0), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed BlueRight", .4), 
+							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed BlueRight", .2), 
 							false
 					);
 					

@@ -70,6 +70,7 @@ public class OI {
 	private static JoystickButton shiftUp;
 	private static JoystickButton shiftDown;
 	private static JoystickButton gearAssist;
+	private static DriveToGear gearDrive;
 	
 	private static JoystickButton aim;
 	private static JoystickButton aimDrive;
@@ -123,6 +124,9 @@ public class OI {
 		addRPoint	= new AddPointR();
 		testCurve	= new TestSpeedPoints();
 		
+		gearDrive 	= new DriveToGear();
+		gearDrive.setParam(Preferences.getInstance().getDouble("Gear Test Drive Speed", .2));
+		
 		btn10L = new JoystickButton(stickL, 10);
 		testL = new TestContinuous();
 		//testL.SetParam(-17, 10, .4, false);
@@ -142,7 +146,7 @@ public class OI {
 		spinIndexer.whileHeld(new RunIndexer());
 		testCurvePreferences.whileHeld(new SpeedCurveShoot());
 		//reverseDrive.whenPressed(new ReverseDrive());
-		gearAssist.whileHeld(new DriveToGear());
+		gearAssist.whileHeld(gearDrive);
 		
 		shiftUp.whenPressed(new DriveShiftUp());
 		shiftDown.whenPressed(new DriveShiftDown());
