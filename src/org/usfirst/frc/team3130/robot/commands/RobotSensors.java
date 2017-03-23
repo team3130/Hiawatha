@@ -7,6 +7,7 @@ import org.usfirst.frc.team3130.robot.subsystems.*;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
@@ -92,6 +93,14 @@ public class RobotSensors extends Command {
     	SmartDashboard.putBoolean("Gear Pinch State", Robot.bcGearPinch.getState());
     	
     	SmartDashboard.putBoolean("GearShift State", !Chassis.GetShiftedDown());
+    	
+    	if (Math.abs(JetsonInterface.getDouble("Peg Sys Time", 0) - JetsonInterface.getDouble("Peg Time", 9999)) < .15) {
+    		SmartDashboard.putBoolean("Gear Target Acquired", true);
+    	}
+    	else {
+    		SmartDashboard.putBoolean("Gear Target Acquired", false);
+    	}
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
