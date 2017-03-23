@@ -49,7 +49,7 @@ public class VisionGearAuto extends CommandGroup {
 		addSequential(uptoPeg, 5);
 		addSequential(wait, .5);
 		addSequential(finalAim, .5);
-		addSequential(ontoPeg, 3);
+		addSequential(ontoPeg, 2);
 		addSequential(dropGear, 0.5);
 		addSequential(dropPinch, 0.5);
 		addSequential(offPeg, 3);
@@ -74,8 +74,8 @@ public class VisionGearAuto extends CommandGroup {
 					
 					ontoPeg.SetParam(
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist RedLeft", -92.8), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh RedLeft", 10.0), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed RedLeft", .2), 
+							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh RedLeft", 40.0), 
+							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed RedLeft", .4), 
 							false
 					);
 					
@@ -124,7 +124,7 @@ public class VisionGearAuto extends CommandGroup {
 					
 					ontoPeg.SetParam(
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist RedRight", -92.8), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh RedRight", 10.0), 
+							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh RedRight", 40.0), 
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed RedRight", .4), 
 							false
 					);
@@ -151,8 +151,8 @@ public class VisionGearAuto extends CommandGroup {
 					
 					ontoPeg.SetParam(
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist BlueLeft", -95.3), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh BlueLeft", 10.0), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed BlueLeft", .2), 
+							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh BlueLeft", 40.0), 
+							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed BlueLeft", .4), 
 							false
 					);
 					
@@ -177,7 +177,7 @@ public class VisionGearAuto extends CommandGroup {
 					ontoPeg.SetParam(
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist", -17), 
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh", 10.0), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed", .2), 
+							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed", .4), 
 							false
 					);
 					
@@ -201,8 +201,8 @@ public class VisionGearAuto extends CommandGroup {
 					
 					ontoPeg.SetParam(
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist BlueRight", -93.8), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh BlueRight", 10.0), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed BlueRight", .2), 
+							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh BlueRight", 40.0), 
+							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed BlueRight", .4), 
 							false
 					);
 					
