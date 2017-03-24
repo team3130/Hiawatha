@@ -32,24 +32,24 @@ public class RobotSensors extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	SmartDashboard.putNumber("Recovery Time", 0.0);
+    	//SmartDashboard.putNumber("Recovery Time", 0.0);
     	timer.reset();
-    	
+    	/*
     	jetsonPwr.disablePWM();
     	jetsonPwr.set(false);
     	jetsonTimer.reset();
-    	jetsonTimer.start();
+    	jetsonTimer.start();*/
     	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//Jetson
-    	if(!jetsonOn && timer.get() > 0.5){
+    	/*if(!jetsonOn && timer.get() > 0.5){
     		jetsonPwr.set(true);
     		jetsonTimer.stop();
     		jetsonOn = true;
-    	}
+    	}*/
     	
     	SmartDashboard.putNumber("Shooter Left Wheel Speed", ShooterWheelsLeft.getSpeed());
     	SmartDashboard.putNumber("Shooter Left Wheel Setpoint", ShooterWheelsLeft.GetSetpoint());
@@ -65,8 +65,8 @@ public class RobotSensors extends Command {
     	
     	
     	//Chassis
-    	SmartDashboard.putNumber("Front Left Wheel Speed", Chassis.GetSpeedL());
-    	SmartDashboard.putNumber("Front Right Wheel Speed", Chassis.GetSpeedR());
+    	//SmartDashboard.putNumber("Front Left Wheel Speed", Chassis.GetSpeedL());
+    	//SmartDashboard.putNumber("Front Right Wheel Speed", Chassis.GetSpeedR());
     	//SmartDashboard.putNumber("Front Left Voltage", Chassis.GetFrontVoltL());
     	//SmartDashboard.putNumber("Front Right Voltage", Chassis.GetFrontVoltR());
     	//SmartDashboard.putNumber("Rear Left Voltage", Chassis.GetRearVoltL());
@@ -75,9 +75,9 @@ public class RobotSensors extends Command {
     	//SmartDashboard.putNumber("Front Right Current", Chassis.GetFrontCurrentR());
     	//SmartDashboard.putNumber("Rear Left Current", Chassis.GetRearCurrentL());
     	//SmartDashboard.putNumber("Rear Right Current", Chassis.GetRearCurrentR());
-    	SmartDashboard.putNumber("Angle", Chassis.GetAngle());
-    	SmartDashboard.putNumber("Left Distance", Chassis.GetDistanceL());
-    	SmartDashboard.putNumber("Right Distance", Chassis.GetDistanceR());
+    	//SmartDashboard.putNumber("Angle", Chassis.GetAngle());
+    	//SmartDashboard.putNumber("Left Distance", Chassis.GetDistanceL());
+    	//SmartDashboard.putNumber("Right Distance", Chassis.GetDistanceR());
     	
     	
     	//Shooter Altitude

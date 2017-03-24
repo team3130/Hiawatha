@@ -75,7 +75,7 @@ public class DriveStraightTest extends PIDCommand {
 
     // Called once after isFinished returns true
     protected void end() {
-    	SmartDashboard.putNumber("Distance Change", Chassis.GetDistance()-prevDist);
+    	//SmartDashboard.putNumber("Distance Change", Chassis.GetDistance()-prevDist);
     	Chassis.ReleaseAngle();
     	Chassis.DriveTank(0, 0);
     }
