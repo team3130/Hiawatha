@@ -165,14 +165,14 @@ public class DumbGearAuto extends CommandGroup {
 					turnToPeg.SetParam(0);
 					
 					toPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear toPeg Dist", -93+17.5), 
+							Preferences.getInstance().getDouble("DumbGear toPeg Dist", -93+17.5+12), 
 							Preferences.getInstance().getDouble("DumbGear toPeg Thresh", 3), 
 							Preferences.getInstance().getDouble("DumbGear toPeg Speed", .7), 
 							false
 					);
 					
 					ontoPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist", -17), 
+							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist", -12), 
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh", 10.0), 
 							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed", .4), 
 							false
