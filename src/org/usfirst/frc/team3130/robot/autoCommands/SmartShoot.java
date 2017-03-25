@@ -23,7 +23,7 @@ public class SmartShoot extends CommandGroup {
     public SmartShoot() {
         requires(ShooterWheelsRight.GetInstance());
         requires(ShooterWheelsLeft.GetInstance());
-        requires(Robot.btHopper);
+        requires(Robot.btHopper2);
         requires(Robot.btRightIndex);
         requires(Robot.btLeftIndex);
         requires(WheelSpeedCalculationsLeft.GetInstance());
@@ -31,7 +31,7 @@ public class SmartShoot extends CommandGroup {
         
         aim = new CameraAim();
         shoot = new AutoSmartShoot();
-        feedShooters = new BasicSpinMotor(Robot.btHopper, .5);
+        feedShooters = new BasicSpinMotor(Robot.btHopper2, .5);
         
         addParallel(aim);
         addParallel(feedShooters);
