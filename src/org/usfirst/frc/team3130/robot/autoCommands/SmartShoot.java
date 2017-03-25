@@ -18,6 +18,7 @@ public class SmartShoot extends CommandGroup {
 	private AutoSmartShoot shoot;
 	private BasicSpinMotor feedShooters;
 	private BasicSpinMotor runHopper2;
+
 	
 	private double indexPercent;
 	
