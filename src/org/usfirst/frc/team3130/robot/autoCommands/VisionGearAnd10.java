@@ -30,6 +30,7 @@ public class VisionGearAnd10 extends CommandGroup {
         requires(ShooterWheelsRight.GetInstance());
         requires(ShooterWheelsLeft.GetInstance());
         requires(Robot.btHopper);
+        requires(Robot.btHopper2);
         requires(Robot.btRightIndex);
         requires(Robot.btLeftIndex);
         requires(WheelSpeedCalculationsLeft.GetInstance());
