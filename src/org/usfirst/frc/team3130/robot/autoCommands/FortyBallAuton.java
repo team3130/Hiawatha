@@ -20,6 +20,7 @@ public class FortyBallAuton extends CommandGroup {
 
 	private ContDrive                   driveForward;
     private ContTurnDist                turn_towardsHopper;
+    private AutoBasicActuate            dropPinch;
     private ContDrive                   drive_toHopper;
 	private ShootAfterHopper			auto_shootFromHopper;
 	
@@ -36,11 +37,13 @@ public class FortyBallAuton extends CommandGroup {
 		
 		driveForward = new ContDrive();
 	    turn_towardsHopper = new ContTurnDist();
+	    dropPinch = new AutoBasicActuate(Robot.bcGearLift, true);
 	    drive_toHopper = new ContDrive();
 		auto_shootFromHopper = new ShootAfterHopper();
 
 		addSequential(driveForward);
 		addSequential(turn_towardsHopper);
+		addParallel(dropPinch);
 		addSequential(drive_toHopper);
 		
 		addSequential(auto_shootFromHopper);

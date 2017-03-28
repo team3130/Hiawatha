@@ -32,6 +32,7 @@ public class ShootAfterHopper extends CommandGroup {
 		requires(ShooterWheelsLeft.GetInstance());
 		requires(Robot.btIntake);
 		requires(Robot.btHopper);
+		requires(Robot.btHopper2);
 		
 		drive_backFromHopper = new AutoDriveStraightToPoint();
 		drive_turnToGoal = new AutoTurn();
