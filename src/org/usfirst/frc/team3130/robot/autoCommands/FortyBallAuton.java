@@ -1,11 +1,14 @@
 package org.usfirst.frc.team3130.robot.autoCommands;
 
+import org.usfirst.frc.team3130.robot.OI;
 import org.usfirst.frc.team3130.robot.Robot;
+
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsRight;
 import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsLeft;
 import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsRight;
+import org.usfirst.frc.team3130.robot.continuousDrive.*;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -15,7 +18,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class FortyBallAuton extends CommandGroup {
 
-	private AutoDriveStraightToPoint 	drive_toHopper;
+	private ContDrive                   driveForward;
+    private ContTurnDist                turn_towardsHopper;
+    private AutoBasicActuate            dropPinch;
+    private ContDrive                   drive_toHopper;
 	private ShootAfterHopper			auto_shootFromHopper;
 	
 	public FortyBallAuton() {
@@ -29,22 +35,30 @@ public class FortyBallAuton extends CommandGroup {
 		requires(Robot.btIntake);
 		requires(Robot.btHopper);
 		
-		drive_toHopper = new AutoDriveStraightToPoint();
+		driveForward = new ContDrive();
+	    turn_towardsHopper = new ContTurnDist();
+	    dropPinch = new AutoBasicActuate(Robot.bcGearLift, true);
+	    drive_toHopper = new ContDrive();
 		auto_shootFromHopper = new ShootAfterHopper();
 
+		addSequential(driveForward);
+		addSequential(turn_towardsHopper);
+		addParallel(dropPinch);
+		addSequential(drive_toHopper);
 		
-		addSequential(drive_toHopper, 4);
 		addSequential(auto_shootFromHopper);
 	}
 	
 	@Override
 	protected void initialize()
 	{
-		drive_toHopper.SetParam(
-				Preferences.getInstance().getDouble("Auto To Hopper Dist", 120), 
-				Preferences.getInstance().getDouble("Auto To Hopper Threshold", 1), 
-				Preferences.getInstance().getDouble("Auto To Hopper Speed", .7),				//Drive Straight 
-				false			//High Gear
-		);
+		driveForward.SetParam(.6, 30);//TODO: find this value (distance out to hopper)
+		if (OI.fieldSide.getSelected() == "Red") {
+			turn_towardsHopper.SetParam(.8, -90*Math.PI/180f); //TODO: check if direction is correct
+		}
+		else {
+			turn_towardsHopper.SetParam(.8, 90*Math.PI/180f);
+		}
+        drive_toHopper.SetParam(.6, 30);//TODO: find this value (distance over to hopper)
 	}
 }
