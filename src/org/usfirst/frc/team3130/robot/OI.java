@@ -63,6 +63,7 @@ public class OI {
 	private static JoystickButton pinchGear;
 	private static JoystickButton lowerGearActive;
 	private static JoystickButton spinIndexer;
+	private static JoystickButton toggleMysteryCylinder;
 
 	private static JoystickButton testCurvePreferences;
 	private static JoystickButton reverseDrive;
@@ -109,6 +110,7 @@ public class OI {
 		spinIndexer = new JoystickButton(gamepad, RobotMap.BTN_RUNINDEXER);
 		testCurvePreferences = new JoystickButton(gamepad, RobotMap.BTN_TESTCURVEPREFERENCES);
 		reverseDrive = new JoystickButton(stickR, RobotMap.BTN_REVERSEDRIVE);
+		toggleMysteryCylinder = new JoystickButton(gamepad, RobotMap.BTN_RUNMYSTERY);
 		
 		gearAssist = new JoystickButton(stickR, RobotMap.BTN_GEARASSIST);
 		shiftUp = new JoystickButton(stickR, RobotMap.BTN_SHIFTUP);
@@ -147,6 +149,7 @@ public class OI {
 		testCurvePreferences.whileHeld(new SpeedCurveShoot());
 		//reverseDrive.whenPressed(new ReverseDrive());
 		gearAssist.whileHeld(gearDrive);
+		toggleMysteryCylinder.toggleWhenPressed(new BasicActuate(Robot.bcMystery));
 		
 		shiftUp.whenPressed(new DriveShiftUp());
 		shiftDown.whenPressed(new DriveShiftDown());

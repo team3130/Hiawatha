@@ -38,7 +38,8 @@ public class RobotMap {
 			public static final int PNM_GEARSHIFTER = 0;
 			public static final int PNM_GEARLIFT = 1;
 			public static final int PNM_GEARPINCH = 2;
-		
+			public static final int PNM_MYSTERYCYLINDER = 3;//TODO: Fix Name
+			
 		//Analog Input
 			//Prefix ANG_
 		
@@ -106,4 +107,6 @@ public class RobotMap {
 			
 			//Climb
 			public static final int AXS_CLIMB = LST_AXS_LTRIGGER;
+
+			public static final int BTN_RUNMYSTERY = LST_BTN_Y;
 }
