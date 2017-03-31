@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3130.robot.autoCommands;
 
+import org.usfirst.frc.team3130.robot.OI;
 import org.usfirst.frc.team3130.robot.Robot;
 import org.usfirst.frc.team3130.robot.commands.BasicSpinMotor;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
@@ -38,18 +39,20 @@ public class ShootAfterHopper extends CommandGroup {
 		drive_turnToGoal = new AutoTurn();
 		shoot_aimAndShoot = new SmartShoot();
 		intake_recoverStartBalls = new BasicSpinMotor(Robot.btIntake, .6);
+		delay_Generic = new AutoDelay(2);
 
-		addSequential(delay_Generic, 1);
+		addSequential(delay_Generic, 2);
 		addSequential(drive_backFromHopper, 1);
 		addSequential(drive_turnToGoal, 1);
 		addParallel(shoot_aimAndShoot);
-		addSequential(delay_Generic, 1.5);
+		//addSequential(delay_Generic, 1);
 		addSequential(intake_recoverStartBalls, 3);
     }
     
     @Override
     protected void initialize()
     {
+    	
     	drive_backFromHopper.SetParam(
     			Preferences.getInstance().getDouble("Drive Back Hopper Dist", -12), 
     			Preferences.getInstance().getDouble("Drive Back Hopper Threshold", 1), 
@@ -57,7 +60,13 @@ public class ShootAfterHopper extends CommandGroup {
     			Chassis.GetShiftedDown()	//Stay in current gear
     	);
     	
-    	drive_turnToGoal.SetParam(Preferences.getInstance().getDouble("Auto Shoot Turn Angle", 90));
+    	
+    	if(OI.fieldSide.getSelected() == "Red") {
+    		drive_turnToGoal.SetParam(Preferences.getInstance().getDouble("Auto Shoot Turn Angle", 90));
+    	}
+    	else {
+    	drive_turnToGoal.SetParam(Preferences.getInstance().getDouble("Auto Shoot Turn Angle", -90));
+    	}
     	
     	shoot_aimAndShoot.setParam(Preferences.getInstance().getDouble("Auto Shoot Index Percent", .2));
     }

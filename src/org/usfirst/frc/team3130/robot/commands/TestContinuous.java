@@ -23,7 +23,7 @@ public class TestContinuous extends CommandGroup {
 		turnDist = new ContTurnDist();
 		drive2 = new ContDrive(turnDist);
 		turnHeading = new ContTurnHeading();
-		wait = new AutoDelay();
+		wait = new AutoDelay(1);
 		
 		addSequential(drive1);
 		addSequential(turnDist);

@@ -35,10 +35,10 @@ public class AutoSmartShoot extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		
-		if(aimer.onTarget()){
+		//if(aimer.onTarget()){
 			Robot.btLeftIndex.spinMotor(percentage);
 			Robot.btRightIndex.spinMotor(percentage);
-		}
+		//}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

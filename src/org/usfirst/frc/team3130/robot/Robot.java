@@ -15,6 +15,7 @@ import org.usfirst.frc.team3130.robot.autoCommands.DumbGearAuto;
 import org.usfirst.frc.team3130.robot.autoCommands.GearAnd10;
 import org.usfirst.frc.team3130.robot.autoCommands.VisionGearAnd10;
 import org.usfirst.frc.team3130.robot.autoCommands.VisionGearAuto;
+import org.usfirst.frc.team3130.robot.autoCommands.FortyBallAuton;
 import org.usfirst.frc.team3130.robot.commands.RobotSensors;
 import org.usfirst.frc.team3130.robot.subsystems.*;
 
@@ -78,6 +79,7 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Gear and 10", "Gear and 10");
 		chooser.addObject("Vision Gear", "Vision Gear Auto");
 		chooser.addObject("Vision Gear and 10", "Vision and 10");
+		chooser.addObject("Forty Ball", "Forty Ball");
 		SmartDashboard.putData("Auto mode", chooser);
 	}
 
@@ -111,6 +113,9 @@ public class Robot extends IterativeRobot {
 				break;
 			case "Vision and 10":
 				autonomousCommand = new VisionGearAnd10();
+				break;
+			case "Forty Ball":
+				autonomousCommand = new FortyBallAuton();
 				break;
 			default:
 				autonomousCommand = null;

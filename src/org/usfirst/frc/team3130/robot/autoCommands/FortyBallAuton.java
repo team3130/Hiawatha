@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3130.robot.autoCommands;
 
 import org.usfirst.frc.team3130.robot.OI;
+
 import org.usfirst.frc.team3130.robot.Robot;
 
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
@@ -9,6 +10,7 @@ import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsRight;
 import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsLeft;
 import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsRight;
 import org.usfirst.frc.team3130.robot.continuousDrive.*;
+import org.usfirst.frc.team3130.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -18,11 +20,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class FortyBallAuton extends CommandGroup {
 
-	private ContDrive                   driveForward;
-    private ContTurnDist                turn_towardsHopper;
+	private AutoDriveStraightToPoint                  driveForward;
+    private AutoTurn               turn_towardsHopper;
     private AutoBasicActuate            dropPinch;
-    private ContDrive                   drive_toHopper;
+    private AutoDriveStraightToPoint                   drive_toHopper;
 	private ShootAfterHopper			auto_shootFromHopper;
+	private RunIndexer index;
 	
 	public FortyBallAuton() {
 		requires(Chassis.GetInstance());
@@ -35,30 +38,43 @@ public class FortyBallAuton extends CommandGroup {
 		requires(Robot.btIntake);
 		requires(Robot.btHopper);
 		
-		driveForward = new ContDrive();
-	    turn_towardsHopper = new ContTurnDist();
+		driveForward = new AutoDriveStraightToPoint();
+	    turn_towardsHopper = new AutoTurn();
 	    dropPinch = new AutoBasicActuate(Robot.bcGearLift, true);
-	    drive_toHopper = new ContDrive();
+	    drive_toHopper = new AutoDriveStraightToPoint();
 		auto_shootFromHopper = new ShootAfterHopper();
+		index = new RunIndexer();
 
+		
 		addSequential(driveForward);
 		addSequential(turn_towardsHopper);
 		addParallel(dropPinch);
 		addSequential(drive_toHopper);
 		
+		addParallel(index);
 		addSequential(auto_shootFromHopper);
 	}
 	
 	@Override
 	protected void initialize()
 	{
-		driveForward.SetParam(.6, 30);//TODO: find this value (distance out to hopper)
+		driveForward.SetParam(
+				Preferences.getInstance().getDouble("Forty Ball Forward Dist", -82), 
+				Preferences.getInstance().getDouble("Forty Ball Thresh", 3), 
+				Preferences.getInstance().getDouble("Forty Ball Speed", .7), 
+				false
+		);
 		if (OI.fieldSide.getSelected() == "Red") {
-			turn_towardsHopper.SetParam(.8, -90*Math.PI/180f); //TODO: check if direction is correct
+			turn_towardsHopper.SetParam(Preferences.getInstance().getDouble("TurnToHopper Left", -90));
 		}
 		else {
-			turn_towardsHopper.SetParam(.8, 90*Math.PI/180f);
+			turn_towardsHopper.SetParam(Preferences.getInstance().getDouble("TurnToHopper Right", 90));
 		}
-        drive_toHopper.SetParam(.6, 30);//TODO: find this value (distance over to hopper)
+        drive_toHopper.SetParam(
+				Preferences.getInstance().getDouble("Forty Ball Over Dist", -38), 
+				Preferences.getInstance().getDouble("Forty Ball Thresh", 3), 
+				Preferences.getInstance().getDouble("Forty Ball Speed", .7), 
+				false
+		);
 	}
 }

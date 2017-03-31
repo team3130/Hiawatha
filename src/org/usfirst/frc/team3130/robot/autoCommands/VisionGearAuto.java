@@ -33,7 +33,7 @@ public class VisionGearAuto extends CommandGroup {
 		
 		uptoPeg = new DriveToGear();
 		finalAim = new DriveToGear();
-		wait = new AutoDelay();
+		wait = new AutoDelay(.5);
 		toPeg = new ContDrive();
 		ontoPeg = new AutoDriveStraightToPoint();
 		offPeg = new AutoDriveStraightToPoint();
