@@ -21,7 +21,8 @@ public class ShootAfterHopper extends CommandGroup {
 	private AutoTurn					drive_turnToGoal;
 	private SmartShoot					shoot_aimAndShoot;
 	private BasicSpinMotor				intake_recoverStartBalls;
-	private AutoDelay					delay_Generic;
+	private AutoDelay					delay_Generic1;
+	private AutoDelay					delay_Generic2;
 	
     public ShootAfterHopper() {
 		requires(Chassis.GetInstance());
@@ -39,13 +40,14 @@ public class ShootAfterHopper extends CommandGroup {
 		drive_turnToGoal = new AutoTurn();
 		shoot_aimAndShoot = new SmartShoot();
 		intake_recoverStartBalls = new BasicSpinMotor(Robot.btIntake, .6);
-		delay_Generic = new AutoDelay(2);
+		delay_Generic1 = new AutoDelay();
+		delay_Generic2 = new AutoDelay();
 
-		addSequential(delay_Generic, 2);
+		addSequential(delay_Generic1, 2);
 		addSequential(drive_backFromHopper, 1);
 		addSequential(drive_turnToGoal, 1);
 		addParallel(shoot_aimAndShoot);
-		//addSequential(delay_Generic, 1);
+		addSequential(delay_Generic2, 1);
 		addSequential(intake_recoverStartBalls, 3);
     }
     

@@ -18,10 +18,8 @@ public class SmartShoot extends CommandGroup {
 	private CameraAim aim;
 	private AutoSmartShoot shoot;
 	private BasicSpinMotor feedShooters;
-	private BasicSpinMotor runHopper2;
-	private AutoDelay delay;
-	private RunIndexer indexers;
-
+	private AutoDelay wait;
+	private BasicSpinMotor hopper2;
 	
 	private double indexPercent = .7;
 	
@@ -37,17 +35,15 @@ public class SmartShoot extends CommandGroup {
         
         aim = new CameraAim();
         shoot = new AutoSmartShoot();
-        indexers = new RunIndexer();
         feedShooters = new BasicSpinMotor(Robot.btHopper, .5);
-        runHopper2 = new BasicSpinMotor(Robot.btHopper2, -0.5);
-        delay = new AutoDelay(1);
+        wait = new AutoDelay();
+        hopper2 = new BasicSpinMotor(Robot.btHopper2, .8);
         
         addParallel(aim);
         addParallel(feedShooters);
-        addParallel(indexers);
-        addParallel(runHopper2);
-        addSequential(shoot);
-        
+        addParallel(shoot);
+        addSequential(wait, 1);
+        addParallel(hopper2);
         
     }
     

@@ -9,8 +9,6 @@ import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsRight;
 import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsLeft;
 import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsRight;
-import org.usfirst.frc.team3130.robot.continuousDrive.*;
-import org.usfirst.frc.team3130.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -20,12 +18,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class FortyBallAuton extends CommandGroup {
 
-	private AutoDriveStraightToPoint                  driveForward;
-    private AutoTurn               turn_towardsHopper;
+	private AutoDriveStraightToPoint    driveForward;
+    private AutoTurn               		turn_towardsHopper;
     private AutoBasicActuate            dropPinch;
-    private AutoDriveStraightToPoint                   drive_toHopper;
+    private AutoDriveStraightToPoint    drive_toHopper;
 	private ShootAfterHopper			auto_shootFromHopper;
-	private RunIndexer index;
 	
 	public FortyBallAuton() {
 		requires(Chassis.GetInstance());
@@ -43,15 +40,12 @@ public class FortyBallAuton extends CommandGroup {
 	    dropPinch = new AutoBasicActuate(Robot.bcGearLift, true);
 	    drive_toHopper = new AutoDriveStraightToPoint();
 		auto_shootFromHopper = new ShootAfterHopper();
-		index = new RunIndexer();
 
 		
 		addSequential(driveForward);
 		addSequential(turn_towardsHopper);
 		addParallel(dropPinch);
 		addSequential(drive_toHopper);
-		
-		addParallel(index);
 		addSequential(auto_shootFromHopper);
 	}
 	
