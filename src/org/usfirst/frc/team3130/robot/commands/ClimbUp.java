@@ -4,6 +4,7 @@ import org.usfirst.frc.team3130.robot.subsystems.Climber;
 import org.usfirst.frc.team3130.robot.OI;
 import org.usfirst.frc.team3130.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -21,7 +22,7 @@ public class ClimbUp extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Climber.Climb(Math.abs(OI.gamepad.getRawAxis(RobotMap.AXS_CLIMB)));
+    	Climber.Climb(Math.abs(OI.gamepad.getRawAxis(RobotMap.AXS_CLIMB))*Preferences.getInstance().getDouble("Climber Max", 0.65));
     }
 
     // Make this return true when this Command no longer needs to run execute()
