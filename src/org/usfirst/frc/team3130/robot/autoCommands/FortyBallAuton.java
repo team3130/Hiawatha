@@ -44,7 +44,7 @@ public class FortyBallAuton extends CommandGroup {
 		
 		addSequential(driveForward,1);
 		addSequential(turn_towardsHopper,2);
-		addParallel(dropPinch);
+		//addParallel(dropPinch);
 		addSequential(drive_toHopper,1);
 		addSequential(auto_shootFromHopper);
 	}
