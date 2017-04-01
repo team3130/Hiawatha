@@ -90,6 +90,7 @@ public class RobotMap {
 			public static final int BTN_TESTCURVEPREFERENCES = LST_BTN_START;
 			public static final int BTN_AIMSHOOT = 4;		//Joystick R
 			public static final int BTN_AIMDRIVE = 5;		//Joystick R
+			public static final int BTN_ACTUATESHOOTERALTITUDE = LST_BTN_Y;
 			
 			//Gear Control
 			public static final int BTN_PINCHGEAR = 1;	//Joystick L
@@ -108,5 +109,5 @@ public class RobotMap {
 			//Climb
 			public static final int AXS_CLIMB = LST_AXS_LTRIGGER;
 
-			public static final int BTN_RUNMYSTERY = LST_BTN_Y;
+
 }
