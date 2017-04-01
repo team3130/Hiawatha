@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3130.robot.commands;
 
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
-import org.usfirst.frc.team3130.robot.autoCommands.AutoDelay;
 import org.usfirst.frc.team3130.robot.continuousDrive.*;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -14,7 +13,7 @@ public class TestContinuous extends CommandGroup {
 	private ContTurnDist turnDist;
 	private ContDrive drive2;
 	private ContTurnHeading turnHeading;
-	private AutoDelay wait;
+	private ContDelay wait;
 	
 	public TestContinuous() {
 		requires(Chassis.GetInstance());
@@ -23,7 +22,7 @@ public class TestContinuous extends CommandGroup {
 		turnDist = new ContTurnDist();
 		drive2 = new ContDrive(turnDist);
 		turnHeading = new ContTurnHeading();
-		wait = new AutoDelay();
+		wait = new ContDelay();
 		
 		addSequential(drive1);
 		addSequential(turnDist);

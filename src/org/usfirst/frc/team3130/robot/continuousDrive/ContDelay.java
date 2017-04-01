@@ -1,17 +1,19 @@
-package org.usfirst.frc.team3130.robot.autoCommands;
+package org.usfirst.frc.team3130.robot.continuousDrive;
 
-import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 
 /**
  *
  */
-public class AutoDelay extends Command {
+public class ContDelay extends ContinuousDrive {
 
-    public AutoDelay() {
+    public ContDelay() {
+        requires(Chassis.GetInstance());
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Chassis.DriveArcade(0, 0);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -31,4 +33,14 @@ public class AutoDelay extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     }
+
+	@Override
+	protected double getPos() {
+		return 0;
+	}
+
+	@Override
+	public double getEndAngle() {
+		return Chassis.GetAngle() * (Math.PI/180f);
+	}
 }
