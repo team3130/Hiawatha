@@ -39,7 +39,7 @@ public class SmartShoot extends CommandGroup {
         shoot = new AutoSmartShoot();
         feedShooters = new BasicSpinMotor(Robot.btHopper, .5);
         wait = new AutoDelay();
-        hopper2 = new BasicSpinMotor(Robot.btHopper2, .8);
+        hopper2 = new BasicSpinMotor(Robot.btHopper2, -.8);
         
         addParallel(aim);
         addParallel(feedShooters);

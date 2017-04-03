@@ -48,7 +48,7 @@ public class ShootAfterHopper extends CommandGroup {
 		addSequential(drive_turnToGoal, 1);
 		addParallel(shoot_aimAndShoot);
 		addSequential(delay_Generic2, 1);
-		addSequential(intake_recoverStartBalls, 3);
+		addSequential(intake_recoverStartBalls);
     }
     
     @Override
@@ -56,7 +56,7 @@ public class ShootAfterHopper extends CommandGroup {
     {
     	
     	drive_backFromHopper.SetParam(
-    			Preferences.getInstance().getDouble("Drive Back Hopper Dist", -12), 
+    			Preferences.getInstance().getDouble("Drive Back Hopper Dist", 24), 
     			Preferences.getInstance().getDouble("Drive Back Hopper Threshold", 1), 
     			Preferences.getInstance().getDouble("Drive Back Hopper Speed", .66), 				//Drive Straight
     			Chassis.GetShiftedDown()	//Stay in current gear

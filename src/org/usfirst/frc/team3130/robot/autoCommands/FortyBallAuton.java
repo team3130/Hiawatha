@@ -53,7 +53,7 @@ public class FortyBallAuton extends CommandGroup {
 	protected void initialize()
 	{
 		driveForward.SetParam(
-				Preferences.getInstance().getDouble("Forty Ball Forward Dist", -85), 
+				Preferences.getInstance().getDouble("Forty Ball Forward Dist", -52), 
 				Preferences.getInstance().getDouble("Forty Ball Thresh", 20), 
 				Preferences.getInstance().getDouble("Forty Ball Speed", .7), 
 				false
