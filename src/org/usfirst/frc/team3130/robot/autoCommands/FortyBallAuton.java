@@ -20,7 +20,7 @@ public class FortyBallAuton extends CommandGroup {
 
 	private AutoDriveStraightToPoint    driveForward;
     private AutoTurn               		turn_towardsHopper;
-    //private AutoBasicActuate            dropPinch;
+    private AutoBasicActuate            clampPinch;
     private AutoDriveStraightToPoint    drive_toHopper;
 	private ShootAfterHopper			auto_shootFromHopper;
 	
@@ -37,14 +37,13 @@ public class FortyBallAuton extends CommandGroup {
 		
 		driveForward = new AutoDriveStraightToPoint();
 	    turn_towardsHopper = new AutoTurn();
-	    //dropPinch = new AutoBasicActuate(Robot.bcGearLift, true);
+	    clampPinch = new AutoBasicActuate(Robot.bcGearPinch, true);
 	    drive_toHopper = new AutoDriveStraightToPoint();
 		auto_shootFromHopper = new ShootAfterHopper();
 
-		
+		addParallel(clampPinch, 1);
 		addSequential(driveForward,1);
 		addSequential(turn_towardsHopper,2);
-		//addParallel(dropPinch);
 		addSequential(drive_toHopper,1);
 		addSequential(auto_shootFromHopper);
 	}
@@ -65,8 +64,8 @@ public class FortyBallAuton extends CommandGroup {
 			turn_towardsHopper.SetParam(Preferences.getInstance().getDouble("TurnToHopper Right", 90));
 		}
         drive_toHopper.SetParam(
-				Preferences.getInstance().getDouble("Forty Ball Over Dist", -38), 
-				Preferences.getInstance().getDouble("Forty Ball Thresh", 15), 
+				Preferences.getInstance().getDouble("Forty Ball Over Dist", -40), 
+				Preferences.getInstance().getDouble("Forty Ball Thresh", 20), 
 				Preferences.getInstance().getDouble("Forty Ball Speed", .7), 
 				false
 		);

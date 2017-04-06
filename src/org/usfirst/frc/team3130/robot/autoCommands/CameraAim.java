@@ -45,12 +45,16 @@ public class CameraAim extends Command {
      */
     public boolean onTarget()
     {
-    	return (
-    			isActive
-    		&&	(Math.abs(m_yaw) < (Preferences.getInstance().getDouble("Boiler Threshold", DEFAULTTHRESHOLD)) * (Math.PI/180.0))
-    		&&	(Math.abs(ShooterWheelsLeft.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD))
-    		&&	(Math.abs(ShooterWheelsRight.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD))
-    	);
+    	boolean onTarget = (isActive
+        		&&	(Math.abs(m_yaw) < (Preferences.getInstance().getDouble("Boiler Threshold", DEFAULTTHRESHOLD)) * (Math.PI/180.0))
+        		&&	(Math.abs(ShooterWheelsLeft.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD))
+        		&&	(Math.abs(ShooterWheelsRight.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
+        
+        SmartDashboard.putBoolean("Ready to Shoot", onTarget);
+    	SmartDashboard.putBoolean("LeftShooter Upto Speed", (Math.abs(ShooterWheelsLeft.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
+    	SmartDashboard.putBoolean("RightShooter Upto Speed", (Math.abs(ShooterWheelsRight.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
+    	
+    	return onTarget;
     }
     
     // Called just before this Command runs the first time
@@ -98,6 +102,8 @@ public class CameraAim extends Command {
 
     	SmartDashboard.putBoolean("Boiler aim", onTarget());
     	Chassis.DriveStraight(-OI.stickL.getY());
+    	
+    	onTarget();
     }
 
     // Make this return true when this Command no longer needs to run execute()
