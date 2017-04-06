@@ -3,6 +3,7 @@ package org.usfirst.frc.team3130.robot.autoCommands;
 import org.usfirst.frc.team3130.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -36,9 +37,11 @@ public class AutoSmartShoot extends Command {
 	protected void execute() {
 		
 		if(aimer.onTarget()){
+			SmartDashboard.putBoolean("Running Indexers", true);
 			Robot.btLeftIndex.spinMotor(percentage);
 			Robot.btRightIndex.spinMotor(percentage);
 		}else{
+			SmartDashboard.putBoolean("Running Indexers", false);
 			Robot.btLeftIndex.spinMotor(0);
 			Robot.btRightIndex.spinMotor(0);
 		}
