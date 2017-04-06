@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class CameraAim extends Command {
 
 	private double m_yaw = 0 ;
-	private final double DEFAULTTHRESHOLD = 0.8;
+	private final double DEFAULTTHRESHOLD = 2;
 	private final double SHOOTERTHRESHOLD = 150;
 	private final double DEFAULTBOILERDISTANCE = 120;
 	private Timer timer;
