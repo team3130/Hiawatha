@@ -21,6 +21,8 @@ public class SmartShoot extends CommandGroup {
 	private BasicSpinMotor feedShooters;
 	private AutoDelay wait;
 	private BasicSpinMotor hopper2;
+	private AutoDelay wait2;
+	private JostleIntake spinIntake;
 	
 	private double indexPercent = .7;
 	
@@ -31,6 +33,7 @@ public class SmartShoot extends CommandGroup {
         requires(Robot.btHopper2);
         requires(Robot.btRightIndex);
         requires(Robot.btLeftIndex);
+        requires(Robot.btIntake);
         requires(WheelSpeedCalculationsLeft.GetInstance());
         requires(WheelSpeedCalculationsRight.GetInstance());
         requires(Chassis.GetInstance());
@@ -40,13 +43,16 @@ public class SmartShoot extends CommandGroup {
         feedShooters = new BasicSpinMotor(Robot.btHopper, .5);
         wait = new AutoDelay();
         hopper2 = new BasicSpinMotor(Robot.btHopper2, -.8);
+        wait2 = new AutoDelay();
+        spinIntake = new JostleIntake();
         
         addParallel(aim);
         addParallel(feedShooters);
         addParallel(shoot);
         addSequential(wait, 1);
         addParallel(hopper2);
-        
+        addSequential(wait2,1);
+        addParallel(spinIntake);
     }
     
     public void setParam(double indexPercent){
