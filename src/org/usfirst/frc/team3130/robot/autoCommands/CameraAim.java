@@ -35,7 +35,6 @@ public class CameraAim extends Command {
         requires(ShooterWheelsRight.GetInstance());
         requires(WheelSpeedCalculationsLeft.GetInstance());
         requires(WheelSpeedCalculationsRight.GetInstance());
-        requires(Robot.bcShooterAltitude);
         timer = new Timer();
     }
 
@@ -67,7 +66,6 @@ public class CameraAim extends Command {
     	hasAimed = false;
     	hasTurned = false;
     	isActive = false;
-    	Robot.bcShooterAltitude.actuate(true);
         timer.start();
     }
 

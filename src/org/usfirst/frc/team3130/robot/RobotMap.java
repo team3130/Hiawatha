@@ -38,7 +38,6 @@ public class RobotMap {
 			public static final int PNM_GEARSHIFTER = 0;
 			public static final int PNM_GEARLIFT = 1;
 			public static final int PNM_GEARPINCH = 2;
-			public static final int PNM_MYSTERYCYLINDER = 3;//TODO: Fix Name
 			
 		//Analog Input
 			//Prefix ANG_
@@ -90,7 +89,6 @@ public class RobotMap {
 			public static final int BTN_TESTCURVEPREFERENCES = LST_BTN_START;
 			public static final int BTN_AIMSHOOT = 4;		//Joystick R
 			public static final int BTN_AIMDRIVE = 5;		//Joystick R
-			public static final int BTN_ACTUATESHOOTERALTITUDE = LST_BTN_Y;
 			
 			//Gear Control
 			public static final int BTN_PINCHGEAR = 1;	//Joystick L
