@@ -77,6 +77,7 @@ public class OI {
 	private static JoystickButton aimDrive;
 	
 	private static JoystickButton driveBack;
+	private static JoystickButton driveBackEnd;
 	
 	//Define Commands
 	WipeStopPointsL wipeLPoints;
@@ -122,6 +123,7 @@ public class OI {
 		aimDrive = new JoystickButton(stickR, RobotMap.BTN_AIMDRIVE);
 		
 		driveBack = new JoystickButton(gamepad, RobotMap.BTN_DRIVEBACK);
+		driveBackEnd = new JoystickButton(gamepad, RobotMap.BTN_DRIVEBACK);
 		
 		//Create Commands
 		wipeLPoints	= new WipeStopPointsL();
@@ -164,6 +166,7 @@ public class OI {
 		aimDrive.whileHeld(new CameraDrive());
 		
 		driveBack.whenPressed(driveBackwards);
+		driveBackEnd.whenReleased(new DefaultDrive());
 		
 		btn10L.whileHeld(testL);
 		btn10R.whileHeld(testR);
