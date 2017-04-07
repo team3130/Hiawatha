@@ -5,6 +5,7 @@ import org.usfirst.frc.team3130.robot.autoCommands.CameraAim;
 import org.usfirst.frc.team3130.robot.autoCommands.CameraDrive;
 import org.usfirst.frc.team3130.robot.autoCommands.DriveToGear;
 
+import org.usfirst.frc.team3130.robot.autoCommands.*;
 import org.usfirst.frc.team3130.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -76,12 +77,15 @@ public class OI {
 	private static JoystickButton aim;
 	private static JoystickButton aimDrive;
 	
+	private static JoystickButton driveBack;
+	
 	//Define Commands
 	WipeStopPointsL wipeLPoints;
 	WipeStopPointsR wipeRPoints;
 	AddPointL		addLPoint;
 	AddPointR		addRPoint;
 	TestSpeedPoints	testCurve;
+	AutoDriveStraightToPoint driveBackwards;
 	
 	private static JoystickButton btn10L;
 	private static TestContinuous testL;
@@ -119,12 +123,17 @@ public class OI {
 		aim = new JoystickButton(stickR, RobotMap.BTN_AIMSHOOT);
 		aimDrive = new JoystickButton(stickR, RobotMap.BTN_AIMDRIVE);
 		
+		driveBack = new JoystickButton(gamepad, RobotMap.BTN_DRIVEBACK);
+		
 		//Create Commands
 		wipeLPoints	= new WipeStopPointsL();
 		wipeRPoints	= new WipeStopPointsR();
 		addLPoint	= new AddPointL();
 		addRPoint	= new AddPointR();
 		testCurve	= new TestSpeedPoints();
+		driveBackwards = new AutoDriveStraightToPoint();
+		
+		driveBackwards.SetParam(Preferences.getInstance().getDouble("Drive Back Dist", -30), 10, 0.8, false);
 		
 		gearDrive 	= new DriveToGear();
 		gearDrive.setParam(Preferences.getInstance().getDouble("Gear Test Drive Speed", .2));
@@ -156,6 +165,8 @@ public class OI {
 		
 		aim.whileHeld(new CameraAim());
 		aimDrive.whileHeld(new CameraDrive());
+		
+		driveBack.whenPressed(driveBackwards);
 		
 		btn10L.whileHeld(testL);
 		btn10R.whileHeld(testR);
