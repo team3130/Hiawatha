@@ -46,5 +46,10 @@ public class BasicCANTalon extends Subsystem {
     {
     	return mc_spinnyMotor.get();
     }
+    
+    public double getCurrent()
+    {
+    	return mc_spinnyMotor.getOutputCurrent();
+    }
 }
 

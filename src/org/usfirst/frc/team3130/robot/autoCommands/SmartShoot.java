@@ -35,7 +35,7 @@ public class SmartShoot extends CommandGroup {
         requires(WheelSpeedCalculationsRight.GetInstance());
         requires(Chassis.GetInstance());
         
-        aim = new CameraAim();
+        aim = new CameraAim("Auton");
         shoot = new AutoSmartShoot();
         feedShooters = new BasicSpinMotor(Robot.btHopper, .5);
         wait = new AutoDelay();

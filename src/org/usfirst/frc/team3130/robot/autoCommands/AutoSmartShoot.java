@@ -37,14 +37,12 @@ public class AutoSmartShoot extends Command {
 	protected void execute() {
 		
 		if(aimer.onTarget()){
-			SmartDashboard.putBoolean("Running Indexers", true);
 			Robot.btLeftIndex.spinMotor(percentage);
 			Robot.btRightIndex.spinMotor(percentage);
-		}else{
-			SmartDashboard.putBoolean("Running Indexers", false);
+		}/*else{
 			Robot.btLeftIndex.spinMotor(0);
 			Robot.btRightIndex.spinMotor(0);
-		}
+		}*/
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

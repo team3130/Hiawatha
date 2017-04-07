@@ -28,6 +28,7 @@ public class CameraAim extends Command {
 	boolean hasAimed;
 	boolean hasTurned;
 	boolean isActive;
+	private String instance = "";
 	
     public CameraAim() {
         requires(Chassis.GetInstance());
@@ -36,6 +37,16 @@ public class CameraAim extends Command {
         requires(WheelSpeedCalculationsLeft.GetInstance());
         requires(WheelSpeedCalculationsRight.GetInstance());
         timer = new Timer();
+    }
+    
+    public CameraAim(String instance){
+        requires(Chassis.GetInstance());
+        requires(ShooterWheelsLeft.GetInstance());
+        requires(ShooterWheelsRight.GetInstance());
+        requires(WheelSpeedCalculationsLeft.GetInstance());
+        requires(WheelSpeedCalculationsRight.GetInstance());
+        timer = new Timer();
+        this.instance = instance;
     }
 
     /**
@@ -49,9 +60,18 @@ public class CameraAim extends Command {
         		&&	(Math.abs(ShooterWheelsLeft.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD))
         		&&	(Math.abs(ShooterWheelsRight.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
         
-        SmartDashboard.putBoolean("Ready to Shoot", onTarget);
-    	SmartDashboard.putBoolean("LeftShooter Upto Speed", (Math.abs(ShooterWheelsLeft.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
-    	SmartDashboard.putBoolean("RightShooter Upto Speed", (Math.abs(ShooterWheelsRight.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
+    	if(instance != ""){
+    		if(Math.abs(JetsonInterface.getDouble("Boiler Sys Time", 9999) - JetsonInterface.getDouble("Boiler Time", 0)) < 0.25){
+    			SmartDashboard.putBoolean("Boiler Seen" + instance, true);
+    		}
+    		else{
+    			SmartDashboard.putBoolean("Boiler Seen" + instance, false);
+    		}
+    	}
+    	
+        SmartDashboard.putBoolean("Ready to Shoot" + instance, onTarget);
+    	SmartDashboard.putBoolean("LeftShooter Upto Speed" + instance, (Math.abs(ShooterWheelsLeft.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
+    	SmartDashboard.putBoolean("RightShooter Upto Speed" + instance, (Math.abs(ShooterWheelsRight.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
     	
     	return onTarget;
     }

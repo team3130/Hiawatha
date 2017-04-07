@@ -64,7 +64,7 @@ public class FortyBallAuton extends CommandGroup {
 			turn_towardsHopper.SetParam(Preferences.getInstance().getDouble("TurnToHopper Right", 90));
 		}
         drive_toHopper.SetParam(
-				Preferences.getInstance().getDouble("Forty Ball Over Dist", -40), 
+				Preferences.getInstance().getDouble("Forty Ball Over Dist", -50), 
 				Preferences.getInstance().getDouble("Forty Ball Thresh", 20), 
 				Preferences.getInstance().getDouble("Forty Ball Speed", .7), 
 				false

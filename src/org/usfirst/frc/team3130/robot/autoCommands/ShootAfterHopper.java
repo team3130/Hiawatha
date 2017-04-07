@@ -70,6 +70,6 @@ public class ShootAfterHopper extends CommandGroup {
     	drive_turnToGoal.SetParam(Preferences.getInstance().getDouble("Auto Shoot Turn Angle", -80));
     	}
     	
-    	shoot_aimAndShoot.setParam(Preferences.getInstance().getDouble("Auto Shoot Index Percent", .2));
+    	shoot_aimAndShoot.setParam(Preferences.getInstance().getDouble("Auto Shoot Index Percent", .7));
     }
 }

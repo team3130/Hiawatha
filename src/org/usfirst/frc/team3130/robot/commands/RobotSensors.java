@@ -51,6 +51,9 @@ public class RobotSensors extends Command {
     		jetsonOn = true;
     	}*/
     	
+    	SmartDashboard.putNumber("Left Index Current", Robot.btLeftIndex.getCurrent());
+    	SmartDashboard.putNumber("Right Index Current", Robot.btRightIndex.getCurrent());
+    	
     	SmartDashboard.putNumber("Shooter Left Wheel Speed", ShooterWheelsLeft.getSpeed());
     	SmartDashboard.putNumber("Shooter Left Wheel Setpoint", ShooterWheelsLeft.GetSetpoint());
     	//SmartDashboard.putNumber("Shooter Left Wheel Voltage", ShooterWheelsLeft.GetVolt());
