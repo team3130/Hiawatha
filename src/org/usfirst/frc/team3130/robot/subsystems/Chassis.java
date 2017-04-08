@@ -50,7 +50,7 @@ public class Chassis extends PIDSubsystem {
 
 	public static final double robotWidth = 26.0;
 
-	public static final double InchesPerRev = Preferences.getInstance().getDouble("Wheel Diameter", 3.720) * Math.PI;
+	public static final double InchesPerRev = Preferences.getInstance().getDouble("Wheel Diameter", 3.697) * Math.PI;
 
 	
 	//PID Preferences Defaults
