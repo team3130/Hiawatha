@@ -6,7 +6,6 @@ import org.usfirst.frc.team3130.robot.subsystems.Chassis.TurnDirection;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.PIDCommand;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -21,6 +20,7 @@ public class DriveStraightTest extends PIDCommand {
 	private double m_speed;
 	private boolean m_shiftHigh;
 	
+	@SuppressWarnings("unused")
 	private double prevDist;
 	
 	

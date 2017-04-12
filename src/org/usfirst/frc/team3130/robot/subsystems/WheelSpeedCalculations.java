@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-import org.usfirst.frc.team3130.misc.LinearInterp;
 import org.usfirst.frc.team3130.misc.SplineInterpolator;
 
 import edu.wpi.first.wpilibj.Preferences;

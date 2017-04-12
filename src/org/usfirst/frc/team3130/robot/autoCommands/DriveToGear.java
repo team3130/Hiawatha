@@ -20,10 +20,8 @@ public class DriveToGear extends Command {
 	private boolean setSpeed;
 	
 	private Timer timer_Timeout;
-	private Timer timer_cameraLag;
 	private boolean hasAimed;
 	private boolean hasTurned;
-	private boolean onTarget;
 	private double prevYaw;
 	private double prevTime;
 	
@@ -49,7 +47,6 @@ public class DriveToGear extends Command {
 		Chassis.TalonsToCoast(false);
 		hasAimed = false;
 		hasTurned = false;
-		onTarget = false;
 		prevYaw = 0;
 		prevTime = 0;
 		timer_Timeout.start();
@@ -76,7 +73,6 @@ public class DriveToGear extends Command {
 				if(Math.abs(yaw - prevYaw) < Preferences.getInstance().getDouble("Yaw Threshold", 1)){	//Check for safe current data before turing off of it
 					hasTurned = false;
 					hasAimed = false;
-					onTarget = true;
 				}
 				else {
 					double time = JetsonInterface.getDouble("Peg Time", 9999);
@@ -100,7 +96,6 @@ public class DriveToGear extends Command {
 			Chassis.HoldAngle(yaw);
 			hasAimed = true;
 			if(Math.abs(yaw) > Preferences.getInstance().getDouble("Peg Camera Thresh", 1)) {
-				onTarget = false;
 			}
 		}
 		else {

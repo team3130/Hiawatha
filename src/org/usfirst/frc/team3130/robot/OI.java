@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class OI {
+	@SuppressWarnings("unused")
 	private class JoystickTrigger extends Trigger{
 
 		private Joystick stick;
@@ -66,8 +67,6 @@ public class OI {
 	private static JoystickButton spinIndexer;
 
 	private static JoystickButton testCurvePreferences;
-	private static JoystickButton reverseDrive;
-
 	private static JoystickButton shiftUp;
 	private static JoystickButton shiftDown;
 	private static JoystickButton gearAssist;
@@ -113,7 +112,7 @@ public class OI {
 		lowerGearActive = new JoystickButton(stickR, RobotMap.BTN_LOWERGEARACTIVE);
 		spinIndexer = new JoystickButton(gamepad, RobotMap.BTN_RUNINDEXER);
 		testCurvePreferences = new JoystickButton(gamepad, RobotMap.BTN_TESTCURVEPREFERENCES);
-		reverseDrive = new JoystickButton(stickR, RobotMap.BTN_REVERSEDRIVE);
+		new JoystickButton(stickR, RobotMap.BTN_REVERSEDRIVE);
 		
 		gearAssist = new JoystickButton(stickR, RobotMap.BTN_GEARASSIST);
 		shiftUp = new JoystickButton(stickR, RobotMap.BTN_SHIFTUP);
