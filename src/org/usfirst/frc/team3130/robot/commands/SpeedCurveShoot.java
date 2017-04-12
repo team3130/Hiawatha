@@ -1,9 +1,8 @@
 package org.usfirst.frc.team3130.robot.commands;
 
+import org.usfirst.frc.team3130.robot.Robot;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsRight;
-import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsLeft;
-import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsRight;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
@@ -14,8 +13,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class SpeedCurveShoot extends Command {
 
     public SpeedCurveShoot() {
-        requires(WheelSpeedCalculationsRight.GetInstance());
-        requires(WheelSpeedCalculationsLeft.GetInstance());
+        requires(Robot.wscRight);
+        requires(Robot.wscLeft);
         requires(ShooterWheelsLeft.GetInstance());
         requires(ShooterWheelsRight.GetInstance());
     }
@@ -28,8 +27,8 @@ public class SpeedCurveShoot extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double dist = Preferences.getInstance().getDouble("Distance", 120);
-    	ShooterWheelsLeft.setSpeed(WheelSpeedCalculationsLeft.GetSpeed(dist));
-    	ShooterWheelsRight.setSpeed(WheelSpeedCalculationsRight.GetSpeed(dist));
+    	ShooterWheelsLeft.setSpeed(Robot.wscLeft.GetSpeed(dist));
+    	ShooterWheelsRight.setSpeed(Robot.wscRight.GetSpeed(dist));
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -5,8 +5,6 @@ import org.usfirst.frc.team3130.robot.commands.BasicSpinMotor;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsRight;
-import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsLeft;
-import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsRight;
 import org.usfirst.frc.team3130.robot.commands.*;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -34,8 +32,8 @@ public class SmartShoot extends CommandGroup {
         requires(Robot.btRightIndex);
         requires(Robot.btLeftIndex);
         requires(Robot.btIntake);
-        requires(WheelSpeedCalculationsLeft.GetInstance());
-        requires(WheelSpeedCalculationsRight.GetInstance());
+        requires(Robot.wscLeft);
+        requires(Robot.wscRight);
         requires(Chassis.GetInstance());
         
         aim = new CameraAim("Auton");

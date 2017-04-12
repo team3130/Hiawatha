@@ -80,10 +80,10 @@ public class OI {
 	private static JoystickButton driveBackEnd;
 	
 	//Define Commands
-	WipeStopPointsL wipeLPoints;
-	WipeStopPointsR wipeRPoints;
-	AddPointL		addLPoint;
-	AddPointR		addRPoint;
+	WipeStopPoints wipeLPoints;
+	WipeStopPoints wipeRPoints;
+	AddPoint		addLPoint;
+	AddPoint		addRPoint;
 	TestSpeedPoints	testCurve;
 	AutoDriveStraightToPoint driveBackwards;
 	
@@ -126,10 +126,10 @@ public class OI {
 		driveBackEnd = new JoystickButton(gamepad, RobotMap.BTN_DRIVEBACK);
 		
 		//Create Commands
-		wipeLPoints	= new WipeStopPointsL();
-		wipeRPoints	= new WipeStopPointsR();
-		addLPoint	= new AddPointL();
-		addRPoint	= new AddPointR();
+		wipeLPoints	= new WipeStopPoints(Robot.wscLeft);
+		wipeRPoints	= new WipeStopPoints(Robot.wscRight);
+		addLPoint	= new AddPoint(Robot.wscLeft);
+		addRPoint	= new AddPoint(Robot.wscRight);
 		testCurve	= new TestSpeedPoints();
 		driveBackwards = new AutoDriveStraightToPoint();
 		

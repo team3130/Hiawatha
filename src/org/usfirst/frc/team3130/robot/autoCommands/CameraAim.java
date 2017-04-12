@@ -6,8 +6,6 @@ import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.subsystems.JetsonInterface;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsRight;
-import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsLeft;
-import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsRight;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis.TurnDirection;
 
 import edu.wpi.first.wpilibj.Preferences;
@@ -34,8 +32,8 @@ public class CameraAim extends Command {
         requires(Chassis.GetInstance());
         requires(ShooterWheelsLeft.GetInstance());
         requires(ShooterWheelsRight.GetInstance());
-        requires(WheelSpeedCalculationsLeft.GetInstance());
-        requires(WheelSpeedCalculationsRight.GetInstance());
+        requires(Robot.wscLeft);
+        requires(Robot.wscRight);
         timer = new Timer();
     }
     
@@ -43,8 +41,8 @@ public class CameraAim extends Command {
         requires(Chassis.GetInstance());
         requires(ShooterWheelsLeft.GetInstance());
         requires(ShooterWheelsRight.GetInstance());
-        requires(WheelSpeedCalculationsLeft.GetInstance());
-        requires(WheelSpeedCalculationsRight.GetInstance());
+        requires(Robot.wscLeft);
+        requires(Robot.wscRight);
         timer = new Timer();
         this.instance = instance;
     }
@@ -115,8 +113,8 @@ public class CameraAim extends Command {
 	   	}
     	
     	double dist = JetsonInterface.getDouble("Boiler Distance", DEFAULTBOILERDISTANCE);
-    	ShooterWheelsLeft.setSpeed(WheelSpeedCalculationsLeft.GetSpeed(dist));
-    	ShooterWheelsRight.setSpeed(WheelSpeedCalculationsRight.GetSpeed(dist));
+    	ShooterWheelsLeft.setSpeed(Robot.wscLeft.GetSpeed(dist));
+    	ShooterWheelsRight.setSpeed(Robot.wscRight.GetSpeed(dist));
 
     	SmartDashboard.putBoolean("Boiler aim", onTarget());
     	Chassis.DriveStraight(-OI.stickL.getY());

@@ -1,7 +1,7 @@
 package org.usfirst.frc.team3130.robot.commands;
 
 import org.usfirst.frc.team3130.robot.subsystems.JetsonInterface;
-import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsLeft;
+import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculations;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
@@ -9,11 +9,14 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AddPointL extends Command {
+public class AddPoint extends Command {
 
-    public AddPointL() {
+	private WheelSpeedCalculations m_wscTarget;
+	
+    public AddPoint(WheelSpeedCalculations wscTarget) {
     	this.setRunWhenDisabled(true);
-        requires(WheelSpeedCalculationsLeft.GetInstance());
+    	m_wscTarget = wscTarget;
+        requires(m_wscTarget);
     }
 
     // Called once when the command executes
@@ -21,7 +24,7 @@ public class AddPointL extends Command {
     	double dist = JetsonInterface.getDouble("Boiler Distance", 120);
     	//double dist = Preferences.getInstance().getDouble("Distance", 120);
     	double speed = Preferences.getInstance().getDouble("Left Speed Setpoint", 0);
-    	WheelSpeedCalculationsLeft.AddPoint(dist, speed);
+    	m_wscTarget.AddPoint(dist, speed);
     }
 
 	@Override

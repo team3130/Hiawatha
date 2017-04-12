@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import org.usfirst.frc.team3130.misc.LinearInterp;
+import org.usfirst.frc.team3130.misc.SplineInterpolator;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -16,23 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class WheelSpeedCalculationsLeft extends Subsystem {
-
-	//Instance Handling
-    private static WheelSpeedCalculationsLeft m_pInstance;
-    /**
-     * A system for getting an instance of this class.
-     * The function provides a method by which the class is setup as a singleton
-     * with only a single copy of it existing in memory.
-     * <p> It will return a reference to the class, which is shared amoungst all callers of GetInstance()
-     * 
-     * @return the reference to the class refered to in GetInstance. In this case, WheelSpeedCalculationsLeft.
-     */
-    public static WheelSpeedCalculationsLeft GetInstance()
-    {
-    	if(m_pInstance == null) m_pInstance = new WheelSpeedCalculationsLeft();
-    	return m_pInstance;
-    }
+public class WheelSpeedCalculations extends Subsystem {
 	
 	private static Comparator<DataPoint> compPoint = new Comparator<DataPoint>() {
 		@Override
@@ -89,17 +74,19 @@ public class WheelSpeedCalculationsLeft extends Subsystem {
 		}
 	}
 
-	private static ArrayList<DataPoint> data_MainStorage;
-	private static LinearInterp speedCurve;
-	private static final String FILEPATH = "home/lvuser/speed-storage-left.ini";
+	private ArrayList<DataPoint> data_MainStorage;
+	private SplineInterpolator speedCurve;
+	private final String FILEPATH;
 
-	private WheelSpeedCalculationsLeft()
+	public WheelSpeedCalculations(String path)
 	{
 		data_MainStorage = new ArrayList<DataPoint>();
 		
 		ReadFile();
 		speedCurve = null;
 		ReloadCurve();
+		
+		FILEPATH = path;
 	}
 	
  	public void initDefaultCommand() {
@@ -108,7 +95,7 @@ public class WheelSpeedCalculationsLeft extends Subsystem {
 	}
 	
 	
- 	public static void AddPoint(double dist, double speed)
+ 	public void AddPoint(double dist, double speed)
  	{
  		for(DataPoint p : data_MainStorage){
  			if(Math.abs(p.distance - dist) < Preferences.getInstance().getDouble("DataPoint Distance Variance", .01))
@@ -122,7 +109,7 @@ public class WheelSpeedCalculationsLeft extends Subsystem {
  		ReloadCurve();
  	}
  	
-	public static void ReloadCurve()
+	public void ReloadCurve()
 	{
 		ArrayList<Double> data_Dist = new ArrayList<Double>();
 		ArrayList<Double> data_Speed = new ArrayList<Double>();
@@ -133,10 +120,10 @@ public class WheelSpeedCalculationsLeft extends Subsystem {
 			data_Speed.add(pt.speed);
 		}
 		
-		speedCurve = new LinearInterp(data_Dist, data_Speed);
+		speedCurve = SplineInterpolator.createMonotoneCubicSpline(data_Dist, data_Speed);
 	}
 
-	public static void SaveToFile()
+	public void SaveToFile()
 	{
 		FileWriter out = null;
 		try{
@@ -156,7 +143,7 @@ public class WheelSpeedCalculationsLeft extends Subsystem {
 		}
 	}
 	
-	public static void ReadFile()
+	public void ReadFile()
 	{
 		data_MainStorage.clear();
 		
@@ -180,7 +167,7 @@ public class WheelSpeedCalculationsLeft extends Subsystem {
 		ReloadCurve();
 	}
 
-	public static void WipeData()
+	public void WipeData()
 	{
 		data_MainStorage.clear();
 		data_MainStorage.add(new DataPoint(0,3000));	//TODO: Get resonable closest range values
@@ -188,12 +175,8 @@ public class WheelSpeedCalculationsLeft extends Subsystem {
 		SaveToFile();
 	}
 
-	public static double GetSpeed(Double dist)
+	public double GetSpeed(Double dist)
 	{
-		if(speedCurve != null && speedCurve.IsSane()){
-			return speedCurve.GetY(dist);
-		}
-		return -1;
+		return speedCurve.interpolate(dist);
 	}
 }
-

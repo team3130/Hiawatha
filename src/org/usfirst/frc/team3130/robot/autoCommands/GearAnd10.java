@@ -6,8 +6,6 @@ import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.subsystems.Climber;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsRight;
-import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsLeft;
-import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsRight;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -32,8 +30,8 @@ public class GearAnd10 extends CommandGroup {
         requires(Robot.btHopper);
         requires(Robot.btRightIndex);
         requires(Robot.btLeftIndex);
-        requires(WheelSpeedCalculationsLeft.GetInstance());
-        requires(WheelSpeedCalculationsRight.GetInstance());
+        requires(Robot.wscLeft);
+        requires(Robot.wscRight);
         requires(Climber.GetInstance());
         
         placeGear = new DumbGearAuto();
