@@ -6,7 +6,6 @@ import org.usfirst.frc.team3130.robot.subsystems.*;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Timer;
 
@@ -16,40 +15,24 @@ import edu.wpi.first.wpilibj.Timer;
 public class RobotSensors extends Command {
 	
 	Timer timer = new Timer();
-	Timer jetsonTimer;
-	DigitalOutput jetsonPwr;
 	
 	boolean measuring = false;
-	boolean jetsonOn = false;
 	
     public RobotSensors() {
     	//Ensure permanent running
     	this.setRunWhenDisabled(true);
     	this.setInterruptible(false);
-    	jetsonTimer = new Timer();
-    	jetsonPwr = new DigitalOutput(RobotMap.DIO_JETSONPWRON);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	//SmartDashboard.putNumber("Recovery Time", 0.0);
     	timer.reset();
-    	/*
-    	jetsonPwr.disablePWM();
-    	jetsonPwr.set(false);
-    	jetsonTimer.reset();
-    	jetsonTimer.start();*/
     	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Jetson
-    	/*if(!jetsonOn && timer.get() > 0.5){
-    		jetsonPwr.set(true);
-    		jetsonTimer.stop();
-    		jetsonOn = true;
-    	}*/
     	
     	SmartDashboard.putNumber("Left Index Current", Robot.btLeftIndex.getCurrent());
     	SmartDashboard.putNumber("Right Index Current", Robot.btRightIndex.getCurrent());
