@@ -57,8 +57,8 @@ public class CameraAim extends Command {
     {
     	boolean onTarget = (isActive
         		&&	(Math.abs(m_yaw) < ((Preferences.getInstance().getDouble("Boiler Threshold", DEFAULTTHRESHOLD)) * (Math.PI/180.0)))
-        		&&	(Math.abs(ShooterWheelsLeft.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD))
-        		&&	(Math.abs(ShooterWheelsRight.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
+        		&&	(Math.abs(ShooterWheelsLeft.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
+        		//&&	(Math.abs(ShooterWheelsRight.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
         
     	if(instance != ""){
     		if(Math.abs(JetsonInterface.getDouble("Boiler Sys Time", 9999) - JetsonInterface.getDouble("Boiler Time", 0)) < 0.25){
