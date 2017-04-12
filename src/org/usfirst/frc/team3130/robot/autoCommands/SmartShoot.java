@@ -7,7 +7,6 @@ import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsRight;
 import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsLeft;
 import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsRight;
-import org.usfirst.frc.team3130.robot.commands.*;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

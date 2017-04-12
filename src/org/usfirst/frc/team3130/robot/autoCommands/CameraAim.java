@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3130.robot.autoCommands;
 
 import org.usfirst.frc.team3130.robot.OI;
-import org.usfirst.frc.team3130.robot.Robot;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.subsystems.JetsonInterface;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
