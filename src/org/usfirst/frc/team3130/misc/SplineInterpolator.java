@@ -13,7 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lecho.lib.hellocharts.utils;
+
+//In accordance with the license this is a notice that this file was modified by FRC Team 3130
+
+package org.usfirst.frc.team3130.misc;
 
 import java.util.List;
 
@@ -23,11 +26,11 @@ import java.util.List;
  */
 public class SplineInterpolator {
 
-	private final List<Float> mX;
-	private final List<Float> mY;
-	private final float[] mM;
+	private final List<Double> mX;
+	private final List<Double> mY;
+	private final double[] mM;
 
-	private SplineInterpolator(List<Float> x, List<Float> y, float[] m) {
+	private SplineInterpolator(List<Double> x, List<Double> y, double[] m) {
 		mX = x;
 		mY = y;
 		mM = m;
@@ -51,19 +54,19 @@ public class SplineInterpolator {
 	 * @throws IllegalArgumentException
 	 *             if the X or Y arrays are null, have different lengths or have fewer than 2 values.
 	 */
-	public static SplineInterpolator createMonotoneCubicSpline(List<Float> x, List<Float> y) {
+	public static SplineInterpolator createMonotoneCubicSpline(List<Double> x, List<Double> y) {
 		if (x == null || y == null || x.size() != y.size() || x.size() < 2) {
 			throw new IllegalArgumentException("There must be at least two control "
 					+ "points and the arrays must be of equal length.");
 		}
 
 		final int n = x.size();
-		float[] d = new float[n - 1]; // could optimize this out
-		float[] m = new float[n];
+		double[] d = new double[n - 1]; // could optimize this out
+		double[] m = new double[n];
 
 		// Compute slopes of secant lines between successive points.
 		for (int i = 0; i < n - 1; i++) {
-			float h = x.get(i + 1) - x.get(i);
+			double h = x.get(i + 1) - x.get(i);
 			if (h <= 0f) {
 				throw new IllegalArgumentException("The control points must all "
 						+ "have strictly increasing X values.");
@@ -84,11 +87,11 @@ public class SplineInterpolator {
 				m[i] = 0f;
 				m[i + 1] = 0f;
 			} else {
-				float a = m[i] / d[i];
-				float b = m[i + 1] / d[i];
-				float h = (float) Math.hypot(a, b);
+				double a = m[i] / d[i];
+				double b = m[i + 1] / d[i];
+				double h = Math.hypot(a, b);
 				if (h > 9f) {
-					float t = 3f / h;
+					double t = 3f / h;
 					m[i] = t * a * d[i];
 					m[i + 1] = t * b * d[i];
 				}
@@ -104,10 +107,10 @@ public class SplineInterpolator {
 	 *            The X value.
 	 * @return The interpolated Y = f(X) value.
 	 */
-	public float interpolate(float x) {
+	public double interpolate(double x) {
 		// Handle the boundary cases.
 		final int n = mX.size();
-		if (Float.isNaN(x)) {
+		if (Double.isNaN(x)) {
 			return x;
 		}
 		if (x <= mX.get(0)) {
@@ -128,8 +131,8 @@ public class SplineInterpolator {
 		}
 
 		// Perform cubic Hermite spline interpolation.
-		float h = mX.get(i + 1) - mX.get(i);
-		float t = (x - mX.get(i)) / h;
+		double h = mX.get(i + 1) - mX.get(i);
+		double t = (x - mX.get(i)) / h;
 		return (mY.get(i) * (1 + 2 * t) + h * mM[i] * t) * (1 - t) * (1 - t)
 				+ (mY.get(i + 1) * (3 - 2 * t) + h * mM[i + 1] * (t - 1)) * t * t;
 	}
