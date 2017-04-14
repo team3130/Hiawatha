@@ -18,7 +18,7 @@ public class AddPointL extends Command {
 
     // Called once when the command executes
     protected void initialize() {
-    	double dist = JetsonInterface.getDouble("Boiler Distance", 120);
+    	double dist = JetsonInterface.getDouble("Boiler Groundrange", 120);
     	//double dist = Preferences.getInstance().getDouble("Distance", 120);
     	double speed = Preferences.getInstance().getDouble("Left Speed Setpoint", 0);
     	WheelSpeedCalculationsLeft.AddPoint(dist, speed);
