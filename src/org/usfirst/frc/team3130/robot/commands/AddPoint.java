@@ -21,7 +21,7 @@ public class AddPoint extends Command {
 
     // Called once when the command executes
     protected void initialize() {
-    	double dist = JetsonInterface.getDouble("Boiler Distance", 120);
+    	double dist = JetsonInterface.getDouble("Boiler Groundrange", 120);
     	//double dist = Preferences.getInstance().getDouble("Distance", 120);
     	double speed = Preferences.getInstance().getDouble("Left Speed Setpoint", 0);
     	m_wscTarget.AddPoint(dist, speed);
