@@ -27,6 +27,8 @@ public class CameraAim extends Command {
 	boolean hasTurned;
 	boolean isActive;
 	private String instance = "";
+	private double m_dist;
+	private double m_posStart;
 	
     public CameraAim() {
         requires(Chassis.GetInstance());
@@ -85,6 +87,9 @@ public class CameraAim extends Command {
     	hasTurned = false;
     	isActive = false;
         timer.start();
+        
+        m_dist = JetsonInterface.getDouble("Boiler Groundrange", DEFAULTBOILERDISTANCE);
+        m_posStart = Chassis.GetDistance();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -112,7 +117,7 @@ public class CameraAim extends Command {
     		isActive = true;
 	   	}
     	
-    	double dist = JetsonInterface.getDouble("Boiler Distance", DEFAULTBOILERDISTANCE);
+		double dist = m_dist + (m_posStart - Chassis.GetDistance());
     	ShooterWheelsLeft.setSpeed(Robot.wscLeft.GetSpeed(dist));
     	ShooterWheelsRight.setSpeed(Robot.wscRight.GetSpeed(dist));
 
