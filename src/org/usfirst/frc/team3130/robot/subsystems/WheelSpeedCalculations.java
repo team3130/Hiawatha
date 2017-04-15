@@ -79,13 +79,12 @@ public class WheelSpeedCalculations extends Subsystem {
 
 	public WheelSpeedCalculations(String path)
 	{
-		data_MainStorage = new ArrayList<DataPoint>();
+		FILEPATH = path;
 		
+		data_MainStorage = new ArrayList<DataPoint>();
 		ReadFile();
 		speedCurve = null;
 		ReloadCurve();
-		
-		FILEPATH = path;
 	}
 	
  	public void initDefaultCommand() {
