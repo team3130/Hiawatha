@@ -40,7 +40,8 @@ public class Robot extends IterativeRobot {
 	public static BasicCANTalon btIntake;
 	public static BasicCANTalon btLeftIndex;
 	public static BasicCANTalon btRightIndex;
-
+	public static WheelSpeedCalculations wscLeft;
+	public static WheelSpeedCalculations wscRight;
 	
 	@Override
 	public void robotInit() {
@@ -57,6 +58,8 @@ public class Robot extends IterativeRobot {
 		btLeftIndex = new BasicCANTalon(RobotMap.CAN_INDEXMOTORLEFT, "Indexer", "Left Index Motor");
 		btRightIndex = new BasicCANTalon(RobotMap.CAN_INDEXMOTORRIGHT, "Indexer", "Right Index Motor");
 
+		wscLeft = new WheelSpeedCalculations("home/lvuser/speed-storage-left.ini");
+		wscRight = new WheelSpeedCalculations("home/lvuser/speed-storage-right.ini");
 			
 		OI.GetInstance();
 		Chassis.GetInstance();
@@ -64,8 +67,6 @@ public class Robot extends IterativeRobot {
 		JetsonInterface.GetInstance();
 		ShooterWheelsLeft.GetInstance();
 		ShooterWheelsRight.GetInstance();
-		WheelSpeedCalculationsRight.GetInstance();
-		WheelSpeedCalculationsLeft.GetInstance();
 
 		// Simplest camera feed. Remove if not needed.
 		UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();

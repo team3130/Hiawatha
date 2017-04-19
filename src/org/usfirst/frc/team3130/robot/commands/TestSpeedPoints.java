@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3130.robot.commands;
 
-import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsLeft;
-import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsRight;
+import org.usfirst.frc.team3130.robot.Robot;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -17,8 +16,8 @@ public class TestSpeedPoints extends Command {
 	public TestSpeedPoints() {
     	this.setRunWhenDisabled(true);
 		
-		requires(WheelSpeedCalculationsLeft.GetInstance());
-		requires(WheelSpeedCalculationsRight.GetInstance());
+		requires(Robot.wscLeft);
+		requires(Robot.wscRight);
 		
 		timer = new Timer();
 	}
@@ -32,8 +31,8 @@ public class TestSpeedPoints extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		double dist = 80 + timer.get()*43;
-		SmartDashboard.putNumber("Left SpeedCurve Test", WheelSpeedCalculationsLeft.GetSpeed(dist));
-		SmartDashboard.putNumber("Right SpeedCurve Test", WheelSpeedCalculationsRight.GetSpeed(dist));
+		SmartDashboard.putNumber("Left SpeedCurve Test", Robot.wscLeft.GetSpeed(dist));
+		SmartDashboard.putNumber("Right SpeedCurve Test", Robot.wscRight.GetSpeed(dist));
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

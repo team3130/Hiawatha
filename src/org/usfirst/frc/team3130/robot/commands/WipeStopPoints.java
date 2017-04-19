@@ -1,22 +1,25 @@
 package org.usfirst.frc.team3130.robot.commands;
 
-import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsLeft;
+import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculations;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class WipeStopPointsL extends Command {
+public class WipeStopPoints extends Command {
 
-    public WipeStopPointsL() {
+	private WheelSpeedCalculations m_wscTarget;
+	
+    public WipeStopPoints(WheelSpeedCalculations wscTarget) {
     	this.setRunWhenDisabled(true);
-        requires(WheelSpeedCalculationsLeft.GetInstance());
+    	m_wscTarget = wscTarget;
+        requires(m_wscTarget);
     }
 
     // Called once when the command executes
     protected void initialize() {
-    	WheelSpeedCalculationsLeft.WipeData();
+    	m_wscTarget.WipeData();
     }
 
 	@Override

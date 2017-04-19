@@ -4,9 +4,6 @@ import org.usfirst.frc.team3130.robot.Robot;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsRight;
-import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsLeft;
-import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculationsRight;
-
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -25,8 +22,8 @@ public class GearAnd40Auton extends CommandGroup {
 		requires(Chassis.GetInstance());
 		requires(Robot.btLeftIndex);
 		requires(Robot.btRightIndex);
-		requires(WheelSpeedCalculationsRight.GetInstance());
-		requires(WheelSpeedCalculationsLeft.GetInstance());
+		requires(Robot.wscRight);
+		requires(Robot.wscLeft);
 		requires(ShooterWheelsRight.GetInstance());
 		requires(ShooterWheelsLeft.GetInstance());
 		requires(Robot.btIntake);
