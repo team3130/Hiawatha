@@ -85,6 +85,7 @@ public class OI {
 	AddPointR		addRPoint;
 	TestSpeedPoints	testCurve;
 	AutoDriveStraightToPoint driveBackwards;
+	private CameraAim buttonAimer;
 	
 	private static JoystickButton btn10L;
 	private static TestContinuous testL;
@@ -112,7 +113,6 @@ public class OI {
 		lowerGearActive = new JoystickButton(stickR, RobotMap.BTN_LOWERGEARACTIVE);
 		spinIndexer = new JoystickButton(gamepad, RobotMap.BTN_RUNINDEXER);
 		testCurvePreferences = new JoystickButton(gamepad, RobotMap.BTN_TESTCURVEPREFERENCES);
-		new JoystickButton(stickR, RobotMap.BTN_REVERSEDRIVE);
 		
 		gearAssist = new JoystickButton(stickR, RobotMap.BTN_GEARASSIST);
 		shiftUp = new JoystickButton(stickR, RobotMap.BTN_SHIFTUP);
@@ -131,6 +131,7 @@ public class OI {
 		addRPoint	= new AddPointR();
 		testCurve	= new TestSpeedPoints();
 		driveBackwards = new AutoDriveStraightToPoint();
+		buttonAimer = new CameraAim();
 		
 		driveBackwards.SetParam(Preferences.getInstance().getDouble("Drive Back Dist", -30), 10, 0.8, false);
 		
@@ -153,15 +154,14 @@ public class OI {
 		testShooterWheels.whileHeld(new RunWheelsManual());
 		pinchGear.whileHeld(new BasicActuate(Robot.bcGearPinch));
 		lowerGearActive.whileHeld(new LowerGearPickup());
-		spinIndexer.whileHeld(new RunIndexer());
+		spinIndexer.whileHeld(new RunIndexer(buttonAimer));
 		testCurvePreferences.whileHeld(new SpeedCurveShoot());
-		//reverseDrive.whenPressed(new ReverseDrive());
 		gearAssist.whileHeld(gearDrive);
 		
 		shiftUp.whenPressed(new DriveShiftUp());
 		shiftDown.whenPressed(new DriveShiftDown());
 		
-		aim.whileHeld(new CameraAim());
+		aim.whileHeld(buttonAimer);
 		aimDrive.whileHeld(new CameraDrive());
 		
 		driveBack.whenPressed(driveBackwards);
