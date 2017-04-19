@@ -14,10 +14,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class VisionGearAuto extends CommandGroup {
 	
-	private DriveToGear uptoPeg;
 	private DriveToGear finalAim;
 	private AutoDelay wait;
 	private ContDrive toPeg;
+	private ContDrive uptoPeg;
 	private AutoDriveStraightToPoint ontoPeg;
 	private AutoDriveStraightToPoint offPeg;
 	private ContTurnDist turnToPeg;
@@ -31,7 +31,7 @@ public class VisionGearAuto extends CommandGroup {
 		requires(Robot.bcGearPinch);
 		requires(Robot.bcGearLift);
 		
-		uptoPeg = new DriveToGear();
+		uptoPeg = new ContDrive();
 		finalAim = new DriveToGear();
 		wait = new AutoDelay();
 		toPeg = new ContDrive();
@@ -59,7 +59,7 @@ public class VisionGearAuto extends CommandGroup {
 	@Override
 	protected void initialize()
 	{
-		uptoPeg.setParam(.2);
+		uptoPeg.SetParam(.7, Preferences.getInstance().getDouble("VisionGear uptoPeg Dist", -48));
 		
 		if(OI.fieldSide.getSelected().equals("Red")){
 			switch(OI.gearStartPos.getSelected()){
