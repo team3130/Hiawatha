@@ -30,6 +30,7 @@ public class AutoSmartShoot extends Command {
 	
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		aimer.setMode(CameraAim.AimingMode.kVision);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -38,6 +39,7 @@ public class AutoSmartShoot extends Command {
 		if(aimer.onTarget()){
 			Robot.btLeftIndex.spinMotor(percentage);
 			Robot.btRightIndex.spinMotor(percentage);
+			aimer.setMode(CameraAim.AimingMode.kEncoders);
 		}/*else{
 			Robot.btLeftIndex.spinMotor(0);
 			Robot.btRightIndex.spinMotor(0);

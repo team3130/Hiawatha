@@ -31,6 +31,9 @@ public class CameraAim extends Command {
 	private String instance = "";
 	private double m_dist;
 	private double m_posStart;
+	public enum AimingMode { kVision, kEncoders }
+	private AimingMode m_mode;
+	private double m_angle;
 	
     public CameraAim() {
         requires(Chassis.GetInstance());
@@ -49,6 +52,11 @@ public class CameraAim extends Command {
         requires(WheelSpeedCalculationsRight.GetInstance());
         timer = new Timer();
         this.instance = instance;
+    }
+
+    public void setMode(AimingMode mode)
+    {
+    	m_mode = mode;
     }
 
     /**
@@ -88,6 +96,8 @@ public class CameraAim extends Command {
     	hasAimed = false;
     	hasTurned = false;
     	isActive = false;
+    	m_mode = AimingMode.kVision;
+    	m_angle = Chassis.GetAngle();
         timer.start();
         
         m_dist = JetsonInterface.getDouble("Boiler Groundrange", DEFAULTBOILERDISTANCE)
@@ -111,14 +121,28 @@ public class CameraAim extends Command {
         		timer.reset();
         		timer.start();
         		hasTurned = true;
+        		m_angle = Chassis.GetAngle();
     		}
     	}
-    	else
-		if(Math.abs(JetsonInterface.getDouble("Boiler Sys Time", 9999) - JetsonInterface.getDouble("Boiler Time", 0)) < 0.25){
-	    	Chassis.HoldAngle(m_yaw);
-    		hasAimed = true;
-    		isActive = true;
-	   	}
+    	else{
+    		switch(m_mode) {
+    			case kVision:
+    				if(Math.abs(JetsonInterface.getDouble("Boiler Sys Time", 9999) - JetsonInterface.getDouble("Boiler Time", 0)) < 0.25){
+    					Chassis.HoldAngle(m_yaw);
+    					hasAimed = true;
+    					isActive = true;
+    				}
+    				break;
+    			case kEncoders:
+    				double angleDiff = Chassis.GetAngle() - m_angle;
+    				if(Math.abs(angleDiff) > Preferences.getInstance().getDouble("Boiler Threshold", DEFAULTTHRESHOLD)) {
+    					Chassis.HoldAngle((Math.PI/180f)*angleDiff);
+    					hasAimed = true;
+    					isActive = true;
+    				}
+    				break;
+    		}
+    	}    	
     	
     	double dist = m_dist + (m_posStart - Chassis.GetDistance());
     	ShooterWheelsLeft.setSpeed(WheelSpeedCalculationsLeft.GetSpeed(dist));
