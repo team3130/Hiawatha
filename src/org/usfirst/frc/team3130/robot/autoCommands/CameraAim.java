@@ -121,7 +121,12 @@ public class CameraAim extends Command {
         		timer.reset();
         		timer.start();
         		hasTurned = true;
-        		m_angle = Chassis.GetAngle();
+        		if(m_mode == AimingMode.kVision) {
+        			m_angle = (Math.PI/180f)*Chassis.GetAngle();
+        	        m_dist = JetsonInterface.getDouble("Boiler Groundrange", DEFAULTBOILERDISTANCE)
+        	        		*(1/Preferences.getInstance().getDouble("Vision to Inches", RobotMap.RATIO_VISIONTOINCHES));
+        	        m_posStart = Chassis.GetDistance();
+        		}
     		}
     	}
     	else{
@@ -134,9 +139,9 @@ public class CameraAim extends Command {
     				}
     				break;
     			case kEncoders:
-    				double angleDiff = Chassis.GetAngle() - m_angle;
-    				if(Math.abs(angleDiff) > Preferences.getInstance().getDouble("Boiler Threshold", DEFAULTTHRESHOLD)) {
-    					Chassis.HoldAngle((Math.PI/180f)*angleDiff);
+    				m_yaw = (Math.PI/180f)*Chassis.GetAngle() - m_angle;
+    				if(Math.abs(m_yaw) > Preferences.getInstance().getDouble("Boiler Threshold", DEFAULTTHRESHOLD)) {
+    					Chassis.HoldAngle(m_yaw);
     					hasAimed = true;
     					isActive = true;
     				}
@@ -149,7 +154,12 @@ public class CameraAim extends Command {
     	ShooterWheelsRight.setSpeed(WheelSpeedCalculationsRight.GetSpeed(dist));
 
     	SmartDashboard.putBoolean("Boiler aim", onTarget());
-    	Chassis.DriveStraight(-OI.stickL.getY());
+    	if(isActive) {
+    		Chassis.DriveStraight(-OI.stickL.getY());
+    	}
+    	else {
+    		Chassis.DriveArcade(-OI.stickL.getY(), 0, true);
+    	}
     	
     	onTarget();
     }
