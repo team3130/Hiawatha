@@ -40,7 +40,7 @@ public class FortyBallAuton extends CommandGroup {
 		auto_shootFromHopper = new ShootAfterHopper();
 
 		addParallel(clampPinch, 1);
-		addSequential(driveForward,1);
+		addSequential(driveForward,3);
 		addSequential(turn_towardsHopper,2);
 		addSequential(drive_toHopper,1);
 		addSequential(auto_shootFromHopper);
@@ -50,7 +50,7 @@ public class FortyBallAuton extends CommandGroup {
 	protected void initialize()
 	{
 		driveForward.SetParam(
-				Preferences.getInstance().getDouble("Forty Ball Forward Dist", -76), 
+				Preferences.getInstance().getDouble("Forty Ball Forward Dist", -130), 
 				Preferences.getInstance().getDouble("Forty Ball Thresh", 20), 
 				Preferences.getInstance().getDouble("Forty Ball Speed", .7), 
 				false

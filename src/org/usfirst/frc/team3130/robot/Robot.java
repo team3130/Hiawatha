@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3130.robot.autoCommands.AutoBasicActuate;
 import org.usfirst.frc.team3130.robot.autoCommands.DumbGearAuto;
 import org.usfirst.frc.team3130.robot.autoCommands.GearAnd10;
+import org.usfirst.frc.team3130.robot.autoCommands.SideGearDriveAuto;
+import org.usfirst.frc.team3130.robot.autoCommands.SideGearHopperAuto;
 import org.usfirst.frc.team3130.robot.autoCommands.VisionGearAnd10;
 import org.usfirst.frc.team3130.robot.autoCommands.VisionGearAuto;
 import org.usfirst.frc.team3130.robot.autoCommands.FortyBallAuton;
@@ -79,6 +81,8 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Vision Gear", "Vision Gear Auto");
 		chooser.addObject("Vision Gear and 10", "Vision and 10");
 		chooser.addObject("Forty Ball", "Forty Ball");
+		chooser.addObject("Side Gear and Drive", "Gear and Drive");
+		chooser.addObject("Side Gear Hopper", "Side Gear Hopper");
 		SmartDashboard.putData("Auto mode", chooser);
 	}
 
@@ -115,6 +119,12 @@ public class Robot extends IterativeRobot {
 				break;
 			case "Forty Ball":
 				autonomousCommand = new FortyBallAuton();
+				break;
+			case "Gear and Drive":
+				autonomousCommand = new SideGearDriveAuto();
+				break;
+			case "Side Gear Hopper":
+				autonomousCommand = new SideGearHopperAuto();
 				break;
 			default:
 				autonomousCommand = null;
