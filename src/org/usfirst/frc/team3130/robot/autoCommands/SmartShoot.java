@@ -19,6 +19,8 @@ public class SmartShoot extends CommandGroup {
 	private BasicSpinMotor hopper2;
 	private AutoDelay wait2;
 	private JostleIntake spinIntake;
+	private AutoBasicActuate actuateHopperUp;
+	private AutoBasicActuate actuateHopperDown;
 	
 	private double indexPercent = .7;
 	
@@ -32,6 +34,7 @@ public class SmartShoot extends CommandGroup {
         requires(Robot.btIntake);
         requires(Robot.wscLeft);
         requires(Robot.wscRight);
+        requires(Robot.bcHopperFloor);
         requires(Chassis.GetInstance());
         
         aim = new CameraAim("Auton");
@@ -41,12 +44,15 @@ public class SmartShoot extends CommandGroup {
         hopper2 = new BasicSpinMotor(Robot.btHopper2, -.8);
         wait2 = new AutoDelay();
         spinIntake = new JostleIntake();
+        actuateHopperUp = new AutoBasicActuate(Robot.bcHopperFloor, true);
+        actuateHopperDown = new AutoBasicActuate(Robot.bcHopperFloor, false);
         
         addParallel(aim);
         addParallel(feedShooters);
         addParallel(shoot);
         addSequential(wait, 1);
         addParallel(hopper2);
+        addParallel(actuateHopperUp);
         addSequential(wait2,1);
         addParallel(spinIntake);
     }
@@ -59,5 +65,11 @@ public class SmartShoot extends CommandGroup {
     protected void initialize()
     {
     	shoot.setParam(indexPercent, aim);
+    }
+    
+    @Override
+    protected void end()
+    {
+    	actuateHopperDown.start();
     }
 }

@@ -36,6 +36,7 @@ public class Robot extends IterativeRobot {
 
 	public static BasicCylinder bcGearPinch;	//Disabled Open
 	public static BasicCylinder bcGearLift;		//Disabled Up
+	public static BasicCylinder bcHopperFloor;	//Disabled Down
 	public static BasicCANTalon btHopper;
 	public static BasicCANTalon btHopper2;
 	public static BasicCANTalon btGearBar;
@@ -52,6 +53,7 @@ public class Robot extends IterativeRobot {
 
 		bcGearPinch = new BasicCylinder(RobotMap.PNM_GEARPINCH, "Gear", "Pinch Cylinder");
 		bcGearLift = new BasicCylinder(RobotMap.PNM_GEARLIFT, "Gear", "Lift Cylinder");
+		bcHopperFloor = new BasicCylinder(RobotMap.PNM_HOPPERFLOOR, "Hopper", "Floor Cylinder");
 		
 		btHopper = new BasicCANTalon(RobotMap.CAN_HOPPERSTIR, "Hopper", "Hopper Motor");
 		btHopper2 = new BasicCANTalon(RobotMap.CAN_HOPPER2, "Hopper", "Hopper2 Motor");

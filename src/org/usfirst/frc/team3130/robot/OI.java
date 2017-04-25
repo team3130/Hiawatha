@@ -1,10 +1,6 @@
 package org.usfirst.frc.team3130.robot;
 
 
-import org.usfirst.frc.team3130.robot.autoCommands.CameraAim;
-import org.usfirst.frc.team3130.robot.autoCommands.CameraDrive;
-import org.usfirst.frc.team3130.robot.autoCommands.DriveToGear;
-
 import org.usfirst.frc.team3130.robot.autoCommands.*;
 import org.usfirst.frc.team3130.robot.commands.*;
 
@@ -43,6 +39,23 @@ public class OI {
 		
 	}
 	
+	private class POVTrigger extends Trigger{
+
+		private Joystick stick;
+		private int POV;
+		
+		public POVTrigger(Joystick stick, int POV) {
+			this.stick = stick;
+			this.POV = POV;
+		}
+		
+		@Override
+		public boolean get() {
+			return stick.getPOV(0)==POV;
+		}
+		
+	}
+	
 	//Instance Handling
     private static OI m_pInstance;
     public static OI GetInstance()
@@ -77,6 +90,8 @@ public class OI {
 	
 	private static JoystickButton driveBack;
 	private static JoystickButton driveBackEnd;
+	private static POVTrigger hopperDown;
+	private static POVTrigger hopperUp;
 	
 	//Define Commands
 	WipeStopPoints wipeLPoints;
@@ -124,6 +139,9 @@ public class OI {
 		driveBack = new JoystickButton(gamepad, RobotMap.BTN_DRIVEBACK);
 		driveBackEnd = new JoystickButton(gamepad, RobotMap.BTN_DRIVEBACK);
 		
+		hopperDown = new POVTrigger(gamepad, RobotMap.POV_HOPPERDOWN);
+		hopperUp = new POVTrigger(gamepad, RobotMap.POV_HOPPERUP);
+		
 		//Create Commands
 		wipeLPoints	= new WipeStopPoints(Robot.wscLeft);
 		wipeRPoints	= new WipeStopPoints(Robot.wscRight);
@@ -166,6 +184,9 @@ public class OI {
 		
 		driveBack.whenPressed(driveBackwards);
 		driveBackEnd.whenReleased(new DefaultDrive());
+		
+		hopperUp.whenActive(new AutoBasicActuate(Robot.bcHopperFloor, true));
+		hopperDown.whenActive(new AutoBasicActuate(Robot.bcHopperFloor, false));
 		
 		btn10L.whileHeld(testL);
 		btn10R.whileHeld(testR);

@@ -14,9 +14,6 @@ public class RobotMap {
 		//Relay
 			//Prefix RLY_
 			
-		//Motors-PWM
-			public static final int PWM_SHOOTERALTITUDE = 1;
-			
 		//Motors-CAN
 			public static final int CAN_PNMMODULE = 1;
 			public static final int CAN_LEFTMOTORFRONT = 2;
@@ -39,6 +36,7 @@ public class RobotMap {
 			public static final int PNM_GEARSHIFTER = 0;
 			public static final int PNM_GEARLIFT = 1;
 			public static final int PNM_GEARPINCH = 2;
+			public static final int PNM_HOPPERFLOOR = 5;
 			
 		//Analog Input
 			//Prefix ANG_
@@ -83,6 +81,8 @@ public class RobotMap {
 			
 			//Hopper
 			public static final int BTN_HOPPERDRIVE = LST_BTN_RBUMPER;//TODO: Get Actual Button
+			public static final int POV_HOPPERUP = LST_POV_N;
+			public static final int POV_HOPPERDOWN = LST_POV_S;
 			
 			//Shooter
 			public static final int BTN_TESTSHOOTERWHEELS = LST_BTN_LBUMPER;
