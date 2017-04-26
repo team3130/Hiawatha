@@ -44,8 +44,8 @@ public class SmartShoot extends CommandGroup {
         hopper2 = new BasicSpinMotor(Robot.btHopper2, -.8);
         wait2 = new AutoDelay();
         spinIntake = new JostleIntake();
-        actuateHopperUp = new AutoBasicActuate(Robot.bcHopperFloor, true);
-        actuateHopperDown = new AutoBasicActuate(Robot.bcHopperFloor, false);
+        actuateHopperUp = new AutoBasicActuate(Robot.bcHopperFloor, false);
+        actuateHopperDown = new AutoBasicActuate(Robot.bcHopperFloor, true);
         
         addParallel(aim);
         addParallel(feedShooters);

@@ -185,8 +185,8 @@ public class OI {
 		driveBack.whenPressed(driveBackwards);
 		driveBackEnd.whenReleased(new DefaultDrive());
 		
-		hopperUp.whenActive(new AutoBasicActuate(Robot.bcHopperFloor, true));
-		hopperDown.whenActive(new AutoBasicActuate(Robot.bcHopperFloor, false));
+		hopperUp.whenActive(new AutoBasicActuate(Robot.bcHopperFloor, false));
+		hopperDown.whenActive(new AutoBasicActuate(Robot.bcHopperFloor, true));
 		
 		btn10L.whileHeld(testL);
 		btn10R.whileHeld(testR);

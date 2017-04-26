@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class FortyBallAuton extends CommandGroup {
 
+	private AutoBasicActuate			hopperDown;
 	private AutoDriveStraightToPoint    driveForward;
     private AutoTurn               		turn_towardsHopper;
     private AutoBasicActuate            clampPinch;
@@ -32,13 +33,16 @@ public class FortyBallAuton extends CommandGroup {
 		requires(ShooterWheelsLeft.GetInstance());
 		requires(Robot.btIntake);
 		requires(Robot.btHopper);
+		requires(Robot.bcHopperFloor);
 		
+		hopperDown = new AutoBasicActuate(Robot.bcHopperFloor, true);
 		driveForward = new AutoDriveStraightToPoint();
 	    turn_towardsHopper = new AutoTurn();
 	    clampPinch = new AutoBasicActuate(Robot.bcGearPinch, true);
 	    drive_toHopper = new AutoDriveStraightToPoint();
 		auto_shootFromHopper = new ShootAfterHopper();
 
+		addParallel(hopperDown, 1);
 		addParallel(clampPinch, 1);
 		addSequential(driveForward,3);
 		addSequential(turn_towardsHopper,2);
@@ -64,7 +68,7 @@ public class FortyBallAuton extends CommandGroup {
         drive_toHopper.SetParam(
 				Preferences.getInstance().getDouble("Forty Ball Over Dist", -50), 
 				Preferences.getInstance().getDouble("Forty Ball Thresh", 20), 
-				Preferences.getInstance().getDouble("Forty Ball Speed", .7), 
+				Preferences.getInstance().getDouble("Forty Ball Speed", .5), 
 				false
 		);
 	}
