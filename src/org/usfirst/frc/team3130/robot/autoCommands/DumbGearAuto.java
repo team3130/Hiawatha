@@ -48,172 +48,87 @@ public class DumbGearAuto extends CommandGroup {
 	@Override
 	protected void initialize()
 	{
-		if(OI.fieldSide.getSelected().equals("Red")){
-			switch(OI.gearStartPos.getSelected()){
-				case "Left":
-					//turnToPeg.SetParam(Preferences.getInstance().getDouble("AimFromGear Close Angle", -10));
-					turnToPeg.SetParam(Preferences.getInstance().getDouble("TurnToGear Left", -45));
-					
-					toPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear toPeg Dist RedLeft", -67), 
-							Preferences.getInstance().getDouble("DumbGear toPeg Thresh RedLeft", 3), 
-							Preferences.getInstance().getDouble("DumbGear toPeg Speed RedLeft", .7), 
-							false
-					);
-					
-					ontoPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist RedLeft", -92.8), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh RedLeft", 40.0), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed RedLeft", .6), 
-							false
-					);
-					
-					offPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear offPeg Dist RedLeft", 25), 
-							Preferences.getInstance().getDouble("DumbGear offPeg Thresh RedLeft", 3), 
-							Preferences.getInstance().getDouble("DumbGear offPeg Speed RedLeft", .333), 
-							false
-					);
-					
-					break;
-							
-				case "Center":
-					//turnToPeg.SetParam(Preferences.getInstance().getDouble("AimFromGear Center Angle", 60));
-					turnToPeg.SetParam(0);
-					
-					toPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear toPeg Dist", -93+17.5+12), 
-							Preferences.getInstance().getDouble("DumbGear toPeg Thresh", 3), 
-							Preferences.getInstance().getDouble("DumbGear toPeg Speed", .7), 
-							false
-					);
-					
-					ontoPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist", -12), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh", 10.0), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed", .4), 
-							false
-					);
-					
-					offPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear offPeg Dist", 20), 
-							Preferences.getInstance().getDouble("DumbGear offPeg Thresh", 3), 
-							Preferences.getInstance().getDouble("DumbGear offPeg Speed", .333), 
-							false
-					);
-					
-					break;
-					
-				case "Right":
-					//turnToPeg.SetParam(Preferences.getInstance().getDouble("AimFromGear Center Angle", 135));
-					turnToPeg.SetParam(Preferences.getInstance().getDouble("TurnToGear Right", 45));
-					
-					toPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear toPeg Dist RedRight", -73), 
-							Preferences.getInstance().getDouble("DumbGear toPeg Thresh RedRight", 3), 
-							Preferences.getInstance().getDouble("DumbGear toPeg Speed RedRight", .7), 
-							false
-					);
-					
-					ontoPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist RedRight", -92.8), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh RedRight", 40.0), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed RedRight", .6), 
-							false
-					);
-					
-					offPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear offPeg Dist RedRight", 25), 
-							Preferences.getInstance().getDouble("DumbGear offPeg Thresh RedRight", 3), 
-							Preferences.getInstance().getDouble("DumbGear offPeg Speed RedRight", .333), 
-							false
-					);
-					
-					break;
-			}
-		}else{
-			switch(OI.gearStartPos.getSelected()){
-				case "Left":
-					//turnToPeg.SetParam(Preferences.getInstance().getDouble("AimFromGear Close Angle", -10));
-					turnToPeg.SetParam(Preferences.getInstance().getDouble("TurnToGear Left", -45));
-					
-					toPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear toPeg Dist BlueLeft", -67), 
-							Preferences.getInstance().getDouble("DumbGear toPeg Thresh BlueLeft", 3), 
-							Preferences.getInstance().getDouble("DumbGear toPeg Speed BlueLeft", .7), 
-							false
-					);
-					
-					ontoPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist BlueLeft", -95.3), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh BlueLeft", 40.0), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed BlueLeft", .6), 
-							false
-					);
-					
-					offPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear offPeg Dist BlueLeft", 25), 
-							Preferences.getInstance().getDouble("DumbGear offPeg Thresh BlueLeft", 3), 
-							Preferences.getInstance().getDouble("DumbGear offPeg Speed BlueLeft", .333), 
-							false
-					);
-					
-					break;
-							
-				case "Center":
-					//turnToPeg.SetParam(Preferences.getInstance().getDouble("AimFromGear Center Angle", 60));
-					turnToPeg.SetParam(0);
-					
-					toPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear toPeg Dist", -93+17.5+12), 
-							Preferences.getInstance().getDouble("DumbGear toPeg Thresh", 3), 
-							Preferences.getInstance().getDouble("DumbGear toPeg Speed", .7), 
-							false
-					);
-					
-					ontoPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist", -12), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh", 10.0), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed", .4), 
-							false
-					);
-					
-					offPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear offPeg Dist", 20), 
-							Preferences.getInstance().getDouble("DumbGear offPeg Thresh", 3), 
-							Preferences.getInstance().getDouble("DumbGear offPeg Speed", .333), 
-							false
-					);
-					
-					break;
-					
-				case "Right":
-					//turnToPeg.SetParam(Preferences.getInstance().getDouble("AimFromGear Center Angle", 135));
-					turnToPeg.SetParam(Preferences.getInstance().getDouble("TurnToGear Right", 45));
-					
-					toPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear toPeg Dist BlueRight", -73), 
-							Preferences.getInstance().getDouble("DumbGear toPeg Thresh BlueRight", 3), 
-							Preferences.getInstance().getDouble("DumbGear toPeg Speed BlueRight", .7), 
-							false
-					);
-					
-					ontoPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Dist BlueRight", -93.8), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh BlueRight", 40.0), 
-							Preferences.getInstance().getDouble("DumbGear ontoPeg Speed BlueRight", .6), 
-							false
-					);
-					
-					offPeg.SetParam(
-							Preferences.getInstance().getDouble("DumbGear offPeg Dist BlueRight", 25), 
-							Preferences.getInstance().getDouble("DumbGear offPeg Thresh BlueRight", 3), 
-							Preferences.getInstance().getDouble("DumbGear offPeg Speed BlueRight", .333), 
-							false
-					);
-					
-					break;
-			}
+		switch(OI.gearStartPos.getSelected()){
+			case "Left":
+				//turnToPeg.SetParam(Preferences.getInstance().getDouble("AimFromGear Close Angle", -10));
+				turnToPeg.SetParam(Preferences.getInstance().getDouble("TurnToGear Left", -45));
+				
+				toPeg.SetParam(
+						Preferences.getInstance().getDouble("DumbGear toPeg Dist Left", -69), 
+						Preferences.getInstance().getDouble("DumbGear toPeg Thresh Left", 3), 
+						Preferences.getInstance().getDouble("DumbGear toPeg Speed Left", .7), 
+						false
+				);
+				
+				ontoPeg.SetParam(
+						Preferences.getInstance().getDouble("DumbGear ontoPeg Dist Left", -92.8), 
+						Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh Left", 40.0), 
+						Preferences.getInstance().getDouble("DumbGear ontoPeg Speed Left", .6), 
+						false
+				);
+				
+				offPeg.SetParam(
+						Preferences.getInstance().getDouble("DumbGear offPeg Dist Left", 25), 
+						Preferences.getInstance().getDouble("DumbGear offPeg Thresh Left", 3), 
+						Preferences.getInstance().getDouble("DumbGear offPeg Speed Left", .333), 
+						false
+				);
+				
+				break;
+						
+			case "Center":
+				//turnToPeg.SetParam(Preferences.getInstance().getDouble("AimFromGear Center Angle", 60));
+				turnToPeg.SetParam(0);
+				
+				toPeg.SetParam(
+						Preferences.getInstance().getDouble("DumbGear toPeg Dist", -93+17.5+12), 
+						Preferences.getInstance().getDouble("DumbGear toPeg Thresh", 3), 
+						Preferences.getInstance().getDouble("DumbGear toPeg Speed", .7), 
+						false
+				);
+				
+				ontoPeg.SetParam(
+						Preferences.getInstance().getDouble("DumbGear ontoPeg Dist", -12), 
+						Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh", 10.0), 
+						Preferences.getInstance().getDouble("DumbGear ontoPeg Speed", .4), 
+						false
+				);
+				
+				offPeg.SetParam(
+						Preferences.getInstance().getDouble("DumbGear offPeg Dist", 20), 
+						Preferences.getInstance().getDouble("DumbGear offPeg Thresh", 3), 
+						Preferences.getInstance().getDouble("DumbGear offPeg Speed", .333), 
+						false
+				);
+				
+				break;
+				
+			case "Right":
+				//turnToPeg.SetParam(Preferences.getInstance().getDouble("AimFromGear Center Angle", 135));
+				turnToPeg.SetParam(Preferences.getInstance().getDouble("TurnToGear Right", 45));
+				
+				toPeg.SetParam(
+						Preferences.getInstance().getDouble("DumbGear toPeg Dist Right", -69), 
+						Preferences.getInstance().getDouble("DumbGear toPeg Thresh Right", 3), 
+						Preferences.getInstance().getDouble("DumbGear toPeg Speed Right", .7), 
+						false
+				);
+				
+				ontoPeg.SetParam(
+						Preferences.getInstance().getDouble("DumbGear ontoPeg Dist Right", -92.8), 
+						Preferences.getInstance().getDouble("DumbGear ontoPeg Thresh Right", 40.0), 
+						Preferences.getInstance().getDouble("DumbGear ontoPeg Speed Right", .6), 
+						false
+				);
+				
+				offPeg.SetParam(
+						Preferences.getInstance().getDouble("DumbGear offPeg Dist Right", 25), 
+						Preferences.getInstance().getDouble("DumbGear offPeg Thresh Right", 3), 
+						Preferences.getInstance().getDouble("DumbGear offPeg Speed Right", .333), 
+						false
+				);
+				
+				break;
 		}
 	}
 }
