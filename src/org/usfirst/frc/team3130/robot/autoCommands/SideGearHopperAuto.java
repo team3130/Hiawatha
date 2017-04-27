@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3130.robot.autoCommands;
 
+import org.usfirst.frc.team3130.robot.OI;
 import org.usfirst.frc.team3130.robot.Robot;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.continuousDrive.ContTurnDist;
@@ -50,12 +51,20 @@ public class SideGearHopperAuto extends CommandGroup {
     @Override
     protected void initialize()
     {
-    	turnToField.SetParam(.5, -120*(Math.PI/180f));
+    	if(OI.fieldSide.getSelected() == "Blue"){
+    		turnToField.SetParam(.5, -120*(Math.PI/180f));
+    		turnToHopper.SetParam(.5, 90*(Math.PI/180f));
+    		turnBackToField.SetParam(.5, -90*(Math.PI/180f));
+    	}
+    	else{
+    		turnToField.SetParam(.5, 120*(Math.PI/180f));
+    		turnToHopper.SetParam(.5, -90*(Math.PI/180f));
+    		turnBackToField.SetParam(.5, 90*(Math.PI/180f));
+    	}
+    	
     	driveUptoHopper.SetParam(.7, 58);
-    	turnToHopper.SetParam(.5, 90*(Math.PI/180f));
     	driveHitHopper.SetParam(.7, 57);
     	driveOffHopper.SetParam(-.7, -59);
-    	turnBackToField.SetParam(.5, -90*(Math.PI/180f));
     	driveDownField.SetParam(.85, Preferences.getInstance().getDouble("Side Gear Drive Dist", 220)-60);
     }
 }
