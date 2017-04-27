@@ -56,6 +56,6 @@ public class SideGearHopperAuto extends CommandGroup {
     	driveHitHopper.SetParam(.7, 57);
     	driveOffHopper.SetParam(-.7, -59);
     	turnBackToField.SetParam(.5, -90*(Math.PI/180f));
-    	driveDownField.SetParam(.85, Preferences.getInstance().getDouble("Side Gear Drive Dist", 200)-60);
+    	driveDownField.SetParam(.85, Preferences.getInstance().getDouble("Side Gear Drive Dist", 220)-60);
     }
 }

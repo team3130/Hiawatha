@@ -35,6 +35,6 @@ public class SideGearDriveAuto extends CommandGroup {
     protected void initialize()
     {
     	turnToField.SetParam(.5, -120*(Math.PI/180f));
-    	driveDownField.SetParam(.7, Preferences.getInstance().getDouble("Side Gear Drive Dist", 200));
+    	driveDownField.SetParam(.7, Preferences.getInstance().getDouble("Side Gear Drive Dist", 220));
     }
 }
