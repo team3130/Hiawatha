@@ -3,7 +3,7 @@ package org.usfirst.frc.team3130.robot.autoCommands;
 import org.usfirst.frc.team3130.robot.OI;
 
 import org.usfirst.frc.team3130.robot.Robot;
-
+import org.usfirst.frc.team3130.robot.continuousDrive.ContDrive;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsRight;
@@ -22,6 +22,7 @@ public class FortyBallAuton extends CommandGroup {
     private AutoBasicActuate            clampPinch;
     private AutoDriveStraightToPoint    drive_toHopper;
 	private ShootAfterHopper			auto_shootFromHopper;
+	private ContDrive					drive_pressToButton;
 	
 	public FortyBallAuton() {
 		requires(Chassis.GetInstance());
@@ -41,12 +42,14 @@ public class FortyBallAuton extends CommandGroup {
 	    clampPinch = new AutoBasicActuate(Robot.bcGearPinch, true);
 	    drive_toHopper = new AutoDriveStraightToPoint();
 		auto_shootFromHopper = new ShootAfterHopper();
+		drive_pressToButton = new ContDrive();
 
 		addParallel(hopperDown, 1);
 		addParallel(clampPinch, 1);
 		addSequential(driveForward,3);
 		addSequential(turn_towardsHopper,2);
-		addSequential(drive_toHopper,1);
+		addSequential(drive_toHopper,2);
+		addSequential(drive_pressToButton, .5);
 		addSequential(auto_shootFromHopper);
 	}
 	
@@ -54,7 +57,7 @@ public class FortyBallAuton extends CommandGroup {
 	protected void initialize()
 	{
 		driveForward.SetParam(
-				Preferences.getInstance().getDouble("Forty Ball Forward Dist", -130), 
+				Preferences.getInstance().getDouble("Forty Ball Forward Dist", -126), 
 				Preferences.getInstance().getDouble("Forty Ball Thresh", 20), 
 				Preferences.getInstance().getDouble("Forty Ball Speed", .7), 
 				false
@@ -66,10 +69,12 @@ public class FortyBallAuton extends CommandGroup {
 			turn_towardsHopper.SetParam(Preferences.getInstance().getDouble("TurnToHopper Right", 90));
 		}
         drive_toHopper.SetParam(
-				Preferences.getInstance().getDouble("Forty Ball Over Dist", -50), 
+				Preferences.getInstance().getDouble("Forty Ball Over Dist", -60), 
 				Preferences.getInstance().getDouble("Forty Ball Thresh", 20), 
 				Preferences.getInstance().getDouble("Forty Ball Speed", .5), 
 				false
 		);
+        
+        drive_pressToButton.SetParam(.3, 12);
 	}
 }

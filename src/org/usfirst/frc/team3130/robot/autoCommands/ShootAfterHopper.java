@@ -2,6 +2,7 @@ package org.usfirst.frc.team3130.robot.autoCommands;
 
 import org.usfirst.frc.team3130.robot.OI;
 import org.usfirst.frc.team3130.robot.Robot;
+import org.usfirst.frc.team3130.robot.commands.BasicSpinMotor;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsRight;
@@ -18,6 +19,8 @@ public class ShootAfterHopper extends CommandGroup {
 	private AutoTurn					drive_turnToGoal;
 	private SmartShoot					shoot_aimAndShoot;
 	private AutoDelay					delay_Generic1;
+	private CameraDrive					drive_toShoot;
+	private BasicSpinMotor				intake_Up;
 	
     public ShootAfterHopper() {
 		requires(Chassis.GetInstance());
@@ -35,10 +38,14 @@ public class ShootAfterHopper extends CommandGroup {
 		drive_turnToGoal = new AutoTurn();
 		shoot_aimAndShoot = new SmartShoot();
 		delay_Generic1 = new AutoDelay();
+		drive_toShoot = new CameraDrive();
+		intake_Up = new BasicSpinMotor(Robot.btIntake, .6);
 
-		addSequential(delay_Generic1, 2);
+		addSequential(delay_Generic1, 1.5);
+		addParallel(intake_Up);
 		addSequential(drive_backFromHopper, 1);
 		addSequential(drive_turnToGoal, 1);
+		addSequential(drive_toShoot, 2);
 		addParallel(shoot_aimAndShoot);
     }
     
