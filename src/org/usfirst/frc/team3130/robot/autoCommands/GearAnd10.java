@@ -67,7 +67,7 @@ public class GearAnd10 extends CommandGroup {
 				
 				switch(OI.gearStartPos.getSelected()){
 					case "Right":
-				    	faceTarget.SetParam(Preferences.getInstance().getDouble("GearAnd10 Turn Close", 15));
+				    	faceTarget.SetParam(-Preferences.getInstance().getDouble("GearAnd10 Turn Close", 15));
 						break;
 							
 					case "Center":
