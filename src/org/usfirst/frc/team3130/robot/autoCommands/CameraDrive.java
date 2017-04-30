@@ -16,7 +16,7 @@ public class CameraDrive extends PIDCommand {
 	private double m_distance;
 	private double m_speed;
 	private final double DEFAULTTHRESHOLD = 2;
-	private final double DEFAULTSWEETSPOT = 80;
+	private final double DEFAULTSWEETSPOT = 100;
 	private Timer timer;
 	boolean hasAimed;
 	
