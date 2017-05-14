@@ -71,6 +71,7 @@ public class Robot extends IterativeRobot {
 		JetsonInterface.GetInstance();
 		ShooterWheelsLeft.GetInstance();
 		ShooterWheelsRight.GetInstance();
+		Flashlight.GetInstance();
 
 		// Simplest camera feed. Remove if not needed.
 		UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
