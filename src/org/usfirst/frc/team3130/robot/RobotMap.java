@@ -12,6 +12,7 @@ public class RobotMap {
 			public static final int DIO_JETSONPWRON = 0;
 
 		//Relay
+			public static final int RLY_FLASHLIGHT = 1;
 			//Prefix RLY_
 			
 		//Motors-CAN
@@ -108,6 +109,9 @@ public class RobotMap {
 			
 			//Climb
 			public static final int AXS_CLIMB = LST_AXS_LTRIGGER;
+			
+			//Flashlight
+			public static final int BTN_FLASHLIGHTTOGGLE = LST_BTN_X;
 
 
 }

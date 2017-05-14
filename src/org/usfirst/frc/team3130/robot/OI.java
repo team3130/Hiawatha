@@ -79,6 +79,8 @@ public class OI {
 	private static JoystickButton lowerGearActive;
 	private static JoystickButton spinIndexer;
 
+	private static JoystickButton flashlightToggle;
+	
 	private static JoystickButton testCurvePreferences;
 	private static JoystickButton shiftUp;
 	private static JoystickButton shiftDown;
@@ -110,7 +112,6 @@ public class OI {
 	
 	public static SendableChooser<String> gearStartPos;
 	public static SendableChooser<String> fieldSide;
-	
 	private OI()
 	{
 		//Create Joysticks
@@ -141,6 +142,8 @@ public class OI {
 		
 		hopperDown = new POVTrigger(gamepad, RobotMap.POV_HOPPERDOWN);
 		hopperUp = new POVTrigger(gamepad, RobotMap.POV_HOPPERUP);
+
+		flashlightToggle = new JoystickButton(gamepad, RobotMap.BTN_FLASHLIGHTTOGGLE);
 		
 		//Create Commands
 		wipeLPoints	= new WipeStopPoints(Robot.wscLeft);
@@ -175,6 +178,9 @@ public class OI {
 		spinIndexer.whileHeld(new RunIndexer(buttonAimer));
 		testCurvePreferences.whileHeld(new SpeedCurveShoot());
 		gearAssist.whileHeld(gearDrive);
+		
+		flashlightToggle.whenPressed(new FlashlightToggle());
+		
 		
 		shiftUp.whenPressed(new DriveShiftUp());
 		shiftDown.whenPressed(new DriveShiftDown());
@@ -212,4 +218,3 @@ public class OI {
 		SmartDashboard.putData("Test Speed Curve", testCurve);
 	}
 }
-
