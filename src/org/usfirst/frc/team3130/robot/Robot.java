@@ -16,8 +16,10 @@ import org.usfirst.frc.team3130.robot.autoCommands.GearAnd10;
 import org.usfirst.frc.team3130.robot.autoCommands.SideGearDriveAuto;
 import org.usfirst.frc.team3130.robot.autoCommands.SideGearHopperAuto;
 import org.usfirst.frc.team3130.robot.autoCommands.VisionGearAnd10;
+import org.usfirst.frc.team3130.robot.autoCommands.NoVisionGearAnd10;
 import org.usfirst.frc.team3130.robot.autoCommands.VisionGearAuto;
 import org.usfirst.frc.team3130.robot.autoCommands.FortyBallAuton;
+import org.usfirst.frc.team3130.robot.autoCommands.NoVision40Ball;
 import org.usfirst.frc.team3130.robot.commands.RobotSensors;
 import org.usfirst.frc.team3130.robot.subsystems.*;
 
@@ -86,6 +88,8 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Forty Ball", "Forty Ball");
 		chooser.addObject("Side Gear and Drive", "Gear and Drive");
 		chooser.addObject("Side Gear Hopper", "Side Gear Hopper");
+		chooser.addObject("No Vision Gear and 10", "No Vision Gear and 10");
+		chooser.addObject("No Vision Forty Ball", "No Vision Forty Ball");
 		SmartDashboard.putData("Auto mode", chooser);
 	}
 
@@ -128,6 +132,12 @@ public class Robot extends IterativeRobot {
 				break;
 			case "Side Gear Hopper":
 				autonomousCommand = new SideGearHopperAuto();
+				break;
+			case "No Vision Gear and 10":
+				autonomousCommand = new NoVisionGearAnd10();
+			    break;
+			case "No Vision Forty Ball":
+				autonomousCommand = new NoVision40Ball();
 				break;
 			default:
 				autonomousCommand = null;
