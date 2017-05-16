@@ -10,16 +10,21 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class RunWheelsManual extends Command {
 
+	private double leftSpeed;
+	private double rightSpeed;
+	
     public RunWheelsManual() {
         requires(ShooterWheelsLeft.GetInstance());
         requires(ShooterWheelsRight.GetInstance());
     }
 
+    public void setParam(double lSpeed, double rSpeed){
+    	leftSpeed = lSpeed;
+    	rightSpeed = rSpeed;
+    }
+    
     // Called just before this Command runs the first time
     protected void initialize() {
-    	double leftSpeed = Preferences.getInstance().getDouble("Left Speed Setpoint", 1500);
-    	double rightSpeed = Preferences.getInstance().getDouble("Right Speed Setpoint", 1500);
-    	
     	ShooterWheelsLeft.setPID();
     	ShooterWheelsLeft.setSpeed(leftSpeed);
 
