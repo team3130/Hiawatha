@@ -21,7 +21,7 @@ public class NoVision40Ball extends CommandGroup {
     private AutoTurn               		turn_towardsHopper;
     private AutoBasicActuate            clampPinch;
     private AutoDriveStraightToPoint    drive_toHopper;
-	private ShootAfterHopper			auto_shootFromHopper;
+	private NoVisionShootAfterHopper	auto_shootFromHopper;
 	private ContDrive					drive_pressToButton;
 	
 	public NoVision40Ball() {
@@ -39,7 +39,7 @@ public class NoVision40Ball extends CommandGroup {
 	    turn_towardsHopper = new AutoTurn();
 	    clampPinch = new AutoBasicActuate(Robot.bcGearPinch, true);
 	    drive_toHopper = new AutoDriveStraightToPoint();
-		auto_shootFromHopper = new ShootAfterHopper();
+		auto_shootFromHopper = new NoVisionShootAfterHopper();
 		drive_pressToButton = new ContDrive();
 
 		addParallel(hopperDown, 1);

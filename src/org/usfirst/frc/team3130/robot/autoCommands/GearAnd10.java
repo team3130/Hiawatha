@@ -20,6 +20,7 @@ public class GearAnd10 extends CommandGroup {
 	private AutoTurn faceTarget;
 	private SmartShoot shoot;
 	private CameraDrive closeToTarget;
+	private AutoDelay wait;
 	
     public GearAnd10() {
 		requires(Chassis.GetInstance());
@@ -39,6 +40,7 @@ public class GearAnd10 extends CommandGroup {
         faceTarget = new AutoTurn();
         shoot = new SmartShoot();
         closeToTarget = new CameraDrive();
+        wait = new AutoDelay();
         
         addSequential(placeGear);
         if((OI.fieldSide.getSelected().equals("Red") && OI.gearStartPos.getSelected().equals("Left"))
@@ -47,6 +49,7 @@ public class GearAnd10 extends CommandGroup {
         }
         addSequential(faceTarget, 2);
         addSequential(closeToTarget, 3);
+        addSequential(wait, 1);
         addSequential(shoot);
     }
     
