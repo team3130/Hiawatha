@@ -1,11 +1,11 @@
 package org.usfirst.frc.team3130.robot.autoCommands;
 
 import org.usfirst.frc.team3130.robot.Robot;
+import org.usfirst.frc.team3130.robot.autoCommands.RunWheelsManual;
 import org.usfirst.frc.team3130.robot.commands.*;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsRight;
 
-import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -13,13 +13,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutoDumbShoot extends CommandGroup {
 
-	private double indexPercentage;
 	private double leftSpeed;
 	private double rightSpeed;
 	private BasicSpinMotor hopper;
 	private BasicSpinMotor hopper2;
-	private BasicSpinMotor rIndex;
-	private BasicSpinMotor lIndex;
+	private DumbIndexerRun indexers;
 	private JostleIntake spinIntake;
 	private RunWheelsManual shoot;
 	private AutoDelay wait;
@@ -35,8 +33,7 @@ public class AutoDumbShoot extends CommandGroup {
         
         hopper = new BasicSpinMotor(Robot.btHopper, .5);
         hopper2 = new BasicSpinMotor(Robot.btHopper2, -.8);
-        rIndex = new BasicSpinMotor(Robot.btLeftIndex, indexPercentage);
-        lIndex = new BasicSpinMotor(Robot.btRightIndex, indexPercentage);
+        indexers = new DumbIndexerRun();
         spinIntake = new JostleIntake();
         shoot = new RunWheelsManual();
         wait = new AutoDelay();
@@ -45,8 +42,7 @@ public class AutoDumbShoot extends CommandGroup {
         addParallel(hopper2);
         addParallel(shoot);
         addSequential(wait,1);
-        addParallel(rIndex);
-        addParallel(lIndex);
+        addParallel(indexers);
         addParallel(spinIntake);
         
     }
@@ -54,11 +50,9 @@ public class AutoDumbShoot extends CommandGroup {
     /**
      * The function takes a value from -1.0 to 1.0 which is the percentage of the 
      * voltage provided to the talon which should be passed on to the index motor.
-     * @param percent the percentage of the voltage available to the talon to drive at
      */
-    public void setParam(double percent, double lSpeed, double rSpeed)
+    public void setParam(double lSpeed, double rSpeed)
     {
-    	indexPercentage = percent;
     	leftSpeed = lSpeed;
     	rightSpeed = rSpeed;
     }
@@ -66,6 +60,7 @@ public class AutoDumbShoot extends CommandGroup {
     // Called just before this Command runs the first time
     protected void initialize() {
     	shoot.setParam(leftSpeed, rightSpeed);
+    	indexers.setParam(.8);
     }
 
     // Called repeatedly when this Command is scheduled to run

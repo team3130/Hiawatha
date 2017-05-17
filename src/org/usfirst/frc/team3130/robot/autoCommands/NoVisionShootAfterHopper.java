@@ -64,7 +64,6 @@ public class NoVisionShootAfterHopper extends CommandGroup {
     	}
     	
     	shoot.setParam(
-    			Preferences.getInstance().getDouble("Auto Shoot Index Percent", .7),
     			Preferences.getInstance().getDouble("Auto Shoot Right Speed", 1500),
     			Preferences.getInstance().getDouble("Auto Shoot Left Speed", 1500)
     			);
