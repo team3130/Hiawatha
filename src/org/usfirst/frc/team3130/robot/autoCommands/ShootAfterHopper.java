@@ -19,6 +19,7 @@ public class ShootAfterHopper extends CommandGroup {
 	private AutoTurn					drive_turnToGoal;
 	private SmartShoot					shoot_aimAndShoot;
 	private AutoDelay					delay_Generic1;
+	private AutoDelay					delay_waitData;
 	private CameraDrive					drive_toShoot;
 	private BasicSpinMotor				intake_Up;
 	
@@ -38,6 +39,7 @@ public class ShootAfterHopper extends CommandGroup {
 		drive_turnToGoal = new AutoTurn();
 		shoot_aimAndShoot = new SmartShoot();
 		delay_Generic1 = new AutoDelay();
+		delay_waitData = new AutoDelay();
 		drive_toShoot = new CameraDrive();
 		intake_Up = new BasicSpinMotor(Robot.btIntake, .6);
 
@@ -46,6 +48,7 @@ public class ShootAfterHopper extends CommandGroup {
 		addSequential(drive_backFromHopper, 1);
 		addSequential(drive_turnToGoal, 1);
 		addSequential(drive_toShoot, 2);
+		addSequential(delay_waitData, 1);
 		addParallel(shoot_aimAndShoot);
     }
     
