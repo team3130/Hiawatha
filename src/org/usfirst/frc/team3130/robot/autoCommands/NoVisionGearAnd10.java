@@ -43,7 +43,7 @@ public class NoVisionGearAnd10 extends CommandGroup {
         		|| (OI.fieldSide.getSelected().equals("Blue") && OI.gearStartPos.getSelected().equals("Right"))){
         	addSequential(backMore, 2);
         }
-        addSequential(faceTarget, 2);
+        addSequential(faceTarget, 5);
         addSequential(closeToTarget, 3);
         addSequential(shoot);
     }
@@ -52,8 +52,8 @@ public class NoVisionGearAnd10 extends CommandGroup {
     protected void initialize()
     {
     	shoot.setParam(
-    			Preferences.getInstance().getDouble("GearAnd10 Left Speed", 3450),
-    			Preferences.getInstance().getDouble("GearAnd10 Right Speed", 3450)
+    			Preferences.getInstance().getDouble("GearAnd10 Left Speed", 3600),
+    			Preferences.getInstance().getDouble("GearAnd10 Right Speed", 3575)
     	);
 
     	backMore.SetParam(
@@ -64,7 +64,7 @@ public class NoVisionGearAnd10 extends CommandGroup {
     	);
     	
     	closeToTarget.SetParam(
-    			Preferences.getInstance().getDouble("GearAnd10 Towards Boiler Dist", 50),
+    			Preferences.getInstance().getDouble("GearAnd10 Towards Boiler Dist", 20),
     			Preferences.getInstance().getDouble("GearAnd10 Towards Boiler Thresh", 2), 
     			Preferences.getInstance().getDouble("GearAnd10 Towards Boiler Speed", 0.5), 
     			false);
@@ -74,7 +74,7 @@ public class NoVisionGearAnd10 extends CommandGroup {
 				
 				switch(OI.gearStartPos.getSelected()){
 					case "Right":
-				    	faceTarget.SetParam(-Preferences.getInstance().getDouble("GearAnd10 Turn Close", 18));
+				    	faceTarget.SetParam(-Preferences.getInstance().getDouble("GearAnd10 Turn Close", 20.0));
 						break;
 							
 					case "Center":
@@ -91,7 +91,7 @@ public class NoVisionGearAnd10 extends CommandGroup {
 			case "Blue":
 				switch(OI.gearStartPos.getSelected()){
 				case "Left":
-			    	faceTarget.SetParam(Preferences.getInstance().getDouble("GearAnd10 Turn Close", 18));
+			    	faceTarget.SetParam(Preferences.getInstance().getDouble("GearAnd10 Turn Close", 20.0));
 					break;
 						
 				case "Center":
