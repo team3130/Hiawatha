@@ -15,7 +15,7 @@ import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 
 /**
- * Basically a copy of Greenwood's chassis at this point
+ * Everything that pertains to the chassis of the robot
  */
 
 public class Chassis extends PIDSubsystem {
@@ -91,6 +91,7 @@ public class Chassis extends PIDSubsystem {
 	
 	private static int m_driveMultiplier;
 	
+	//constructor
 	private Chassis()
 	{
 		super("Chassis", 0.05, 0.01, 0.15);
@@ -181,12 +182,17 @@ public class Chassis extends PIDSubsystem {
     	m_drive.arcadeDrive(move, turn, false);
     }
     
+    //shifts the robot either into high or low gear
     public static void Shift(boolean shiftUp)
     {
     	m_shifter.set(shiftUp);
     	m_bShiftedHigh = shiftUp;
     }
     
+    /**
+     * Returns the current shift of the robot
+     * @return Current shift of the robot
+     */
     public static boolean GetShiftedDown(){return m_bShiftedHigh;}
     
     
@@ -210,6 +216,10 @@ public class Chassis extends PIDSubsystem {
     	return 10.0 * m_rightMotorFront.getSpeed() * InchesPerRev / RobotMap.RATIO_DRIVECODESPERREV;	
     }
     
+    /**
+     * Returns the current speed of the robot by averaging the front left and right motors
+     * @return Current speed of the robot
+     */
     public static double GetSpeed()
     {
     	//The right encoder is nonfunctional, just use the left speed.
@@ -307,6 +317,10 @@ public class Chassis extends PIDSubsystem {
 		return (GetDistanceL() + GetDistanceR()) / 2.0;
 	}
 	
+	/**
+	 * Returns the current angle of the robot, usually from the navX
+	 * @return current angle of the robot
+	 */
 	public static double GetAngle()
 	{
 		if(m_bNavXPresent)
@@ -363,6 +377,10 @@ public class Chassis extends PIDSubsystem {
 		}
 	}
 	
+	/**
+	 * Returns the current error of the system (how far away the robot is from where we want it to be)
+	 * @return Current PID error of the system
+	 */
 	public static double GetPIDError()
 	{
 		return GetInstance().getSetpoint() - GetInstance().getPosition();
