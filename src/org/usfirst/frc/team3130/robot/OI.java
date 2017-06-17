@@ -200,14 +200,14 @@ public class OI {
 		
 		
 		gearStartPos = new SendableChooser<String>();
-		gearStartPos.addObject("Left Peg", "Left");
-		gearStartPos.addDefault("Center Peg", "Center");
-		gearStartPos.addObject("Right Peg", "Right");
+		//gearStartPos.addObject("Left Peg", "Left");
+		//gearStartPos.addObject("Center Peg", "Center");
+		gearStartPos.addDefault("Right Peg", "Right");
 		SmartDashboard.putData("Gear Pos Chooser",gearStartPos);
 		
 		fieldSide = new SendableChooser<String>();
 		fieldSide.addDefault("Blue Side", "Blue");
-		fieldSide.addObject("Red Side", "Red");
+		//fieldSide.addObject("Red Side", "Red");
 		SmartDashboard.putData("Field Side",fieldSide);
 		
 		
