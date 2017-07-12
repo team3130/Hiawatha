@@ -31,6 +31,10 @@ public class RobotMap {
 			public static final int CAN_GEARBAR = 13;
 			public static final int CAN_HOPPER2 = 14;
 			public static final int CAN_INDEXMOTORRIGHT = 45;
+			
+			public static final int CAN_TURRETINDEX = 666; //TODO: assign this number
+			public static final int CAN_TURRETHOP = 666; //TODO: assign this number
+			public static final int CAN_TURRETADJUST = 666; //TODO: assign this number
 
 		
 		//Pnuematics Ports
@@ -91,6 +95,11 @@ public class RobotMap {
 			public static final int BTN_TESTCURVEPREFERENCES = LST_BTN_START;
 			public static final int BTN_AIMSHOOT = 4;		//Joystick R
 			public static final int BTN_AIMDRIVE = 5;		//Joystick R
+			
+			//Turret
+			public static final int BTN_TURRETINDEX = 666; //TODO: determine this #
+			public static final int BTN_TURRETHOP = 666; //TODO: determine this #
+			
 			
 			//Gear Control
 			public static final int BTN_PINCHGEAR = 1;	//Joystick L

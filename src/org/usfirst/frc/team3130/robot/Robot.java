@@ -48,6 +48,9 @@ public class Robot extends IterativeRobot {
 	public static WheelSpeedCalculations wscLeft;
 	public static WheelSpeedCalculations wscRight;
 	
+	public static BasicCANTalon btTurretIndex;
+	public static BasicCANTalon btTurretHopper;
+	
 	@Override
 	public void robotInit() {
 		robotSensors = new RobotSensors();
@@ -63,9 +66,12 @@ public class Robot extends IterativeRobot {
 		btIntake = new BasicCANTalon(RobotMap.CAN_INTAKEMOTOR, "Intake", "Intake Motor");
 		btLeftIndex = new BasicCANTalon(RobotMap.CAN_INDEXMOTORLEFT, "Indexer", "Left Index Motor");
 		btRightIndex = new BasicCANTalon(RobotMap.CAN_INDEXMOTORRIGHT, "Indexer", "Right Index Motor");
-
+		
 		wscLeft = new WheelSpeedCalculations("home/lvuser/speed-storage-left.ini");
 		wscRight = new WheelSpeedCalculations("home/lvuser/speed-storage-right.ini");
+		
+		btTurretIndex = new BasicCANTalon(RobotMap.CAN_TURRETINDEX, "Turret Indexer", "Turret Index Motor");
+		btTurretHopper = new BasicCANTalon(RobotMap.CAN_TURRETHOP, "Turret Hopper", "Turret Hopper Motor");
 			
 		OI.GetInstance();
 		Chassis.GetInstance();

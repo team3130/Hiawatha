@@ -111,6 +111,10 @@ public class OI {
 	private static JoystickButton btn10R;
 	private static HoldAngleTest testR;
 	
+	
+	private static JoystickButton runTurretIndex;
+	private static JoystickButton runTurretHop;	
+	
 	public static SendableChooser<String> gearStartPos;
 	public static SendableChooser<String> fieldSide;
 	private OI()
@@ -145,6 +149,9 @@ public class OI {
 		hopperUp = new POVTrigger(gamepad, RobotMap.POV_HOPPERUP);
 
 		flashlightToggle = new JoystickButton(gamepad, RobotMap.BTN_FLASHLIGHTTOGGLE);
+		
+		runTurretIndex = new JoystickButton(/*TODO: figure this out*/ gamepad, RobotMap.BTN_TURRETINDEX);
+		runTurretHop = new JoystickButton(/*TODO: figure this out*/ gamepad, RobotMap.BTN_TURRETHOP);
 		
 		//Create Commands
 		wipeLPoints	= new WipeStopPoints(Robot.wscLeft);
@@ -181,6 +188,10 @@ public class OI {
 		gearAssist.whileHeld(gearDrive);
 		
 		flashlightToggle.whenPressed(new FlashlightToggle());
+		
+		
+		runTurretIndex.whileHeld(new BasicSpinMotor(Robot.btTurretIndex, Preferences.getInstance().getDouble("Turret Index Motor PercentVBus", 0.2)));
+		runTurretHop.whileHeld(new BasicSpinMotor(Robot.btTurretHopper, Preferences.getInstance().getDouble("Turret Hopper Motor PercentVBus", 0.2)));
 		
 		
 		shiftUp.whenPressed(new DriveShiftUp());
