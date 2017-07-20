@@ -12,11 +12,7 @@ import edu.wpi.first.wpilibj.buttons.Trigger;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- * This class is to bind commands to buttons
- * @author Ashley
- *
- */
+
 public class OI {
 	@SuppressWarnings("unused")
 	private class JoystickTrigger extends Trigger{

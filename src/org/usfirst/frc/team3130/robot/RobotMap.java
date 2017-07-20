@@ -1,11 +1,5 @@
 package org.usfirst.frc.team3130.robot;
 
-/**
- * This class is where we store all the constants, port numbers, and 
- * button numbers
- * @author Ashley
- *
- */
 public class RobotMap {
 	//Constant Ratios
 			public static final int RATIO_WINCHCODESPERREV = 1024;
