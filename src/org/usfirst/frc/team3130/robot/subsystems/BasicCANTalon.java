@@ -47,6 +47,12 @@ public class BasicCANTalon extends Subsystem {
     	return mc_spinnyMotor.get();
     }
     
+    /**
+     * Returns the current of the motor
+     * 
+     *
+     * @return the percentage of the current being fed to the controller that is passed to the motor.
+     */
     public double getCurrent()
     {
     	return mc_spinnyMotor.getOutputCurrent();
