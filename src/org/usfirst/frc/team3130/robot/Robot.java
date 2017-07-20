@@ -73,9 +73,9 @@ public class Robot extends IterativeRobot {
 		Flashlight.GetInstance();
 
 		// Simplest camera feed. Remove if not needed.
-		UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
-		camera1.setResolution(320, 480);
-		
+		//UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
+		//camera1.setResolution(320, 480);
+		/*
 		chooser = new SendableChooser<String>();
 		chooser.addDefault("No Auton", "No Auto");
 		chooser.addObject("Dumb Gear", "Dumb Gear Auto");
@@ -87,7 +87,7 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Side Gear Hopper", "Side Gear Hopper");
 		chooser.addObject("No Vision Gear and 10", "No Vision Gear and 10");
 		chooser.addObject("No Vision Forty Ball", "No Vision Forty Ball");
-		SmartDashboard.putData("Auto mode", chooser);
+		SmartDashboard.putData("Auto mode", chooser);*/
 	}
 
 	
@@ -104,7 +104,7 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void autonomousInit() {
-		
+		/*
 		switch(chooser.getSelected()){
 			case "Dumb Gear Auto":
 				autonomousCommand = new DumbGearAuto();
@@ -139,6 +139,8 @@ public class Robot extends IterativeRobot {
 			default:
 				autonomousCommand = null;
 		}
+		*/
+		autonomousCommand = new SideGearHopperAuto();
 		
 		if (autonomousCommand != null)
 			autonomousCommand.start();
