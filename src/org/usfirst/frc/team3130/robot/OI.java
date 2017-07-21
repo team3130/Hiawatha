@@ -142,8 +142,8 @@ public class OI {
 		aim = new JoystickButton(stickR, RobotMap.BTN_AIMSHOOT);
 		aimDrive = new JoystickButton(stickR, RobotMap.BTN_AIMDRIVE);
 		
-		driveBack = new JoystickButton(gamepad, RobotMap.BTN_DRIVEBACK);
-		driveBackEnd = new JoystickButton(gamepad, RobotMap.BTN_DRIVEBACK);
+		//driveBack = new JoystickButton(gamepad, RobotMap.BTN_DRIVEBACK);
+		//driveBackEnd = new JoystickButton(gamepad, RobotMap.BTN_DRIVEBACK);
 		
 		hopperDown = new POVTrigger(gamepad, RobotMap.POV_HOPPERDOWN);
 		hopperUp = new POVTrigger(gamepad, RobotMap.POV_HOPPERUP);
@@ -193,8 +193,8 @@ public class OI {
 		aim.whileHeld(buttonAimer);
 		aimDrive.whileHeld(new CameraDrive());
 		
-		driveBack.whenPressed(driveBackwards);
-		driveBackEnd.whenReleased(new DefaultDrive());
+		//driveBack.whenPressed(driveBackwards);
+		//driveBackEnd.whenReleased(new DefaultDrive());
 		
 		hopperUp.whenActive(new AutoBasicActuate(Robot.bcHopperFloor, false));
 		hopperDown.whenActive(new AutoBasicActuate(Robot.bcHopperFloor, true));

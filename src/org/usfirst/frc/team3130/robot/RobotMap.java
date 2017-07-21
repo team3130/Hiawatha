@@ -111,7 +111,7 @@ public class RobotMap {
 			
 			//Drive
 			public static final int BTN_REVERSEDRIVE = 5; //Joystick R
-			public static final int BTN_DRIVEBACK = LST_BTN_Y;
+			//public static final int BTN_DRIVEBACK = LST_BTN_Y;
 			
 			//Climb
 			public static final int AXS_CLIMB = LST_AXS_LTRIGGER;
