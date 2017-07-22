@@ -206,7 +206,7 @@ public class OI {
 		gearStartPos = new SendableChooser<String>();
 		//If hardcoding required, manually choose peg below
 		gearStartPos.addDefault("Left Peg", "Left");
-		//gearStartPos.addObject("Center Peg", "Center");
+		//gearStartPos.addDefault("Center Peg", "Center");
 		//gearStartPos.addDefault("Right Peg", "Right");
 		SmartDashboard.putData("Gear Pos Chooser",gearStartPos);
 		
