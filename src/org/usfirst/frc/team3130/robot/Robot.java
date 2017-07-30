@@ -73,8 +73,8 @@ public class Robot extends IterativeRobot {
 		Flashlight.GetInstance();
 
 		// Simplest camera feed. Remove if not needed.
-		//UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
-		//camera1.setResolution(240, 360);
+		UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
+		camera1.setResolution(360, 480);
 		/*
 		chooser = new SendableChooser<String>();
 		chooser.addDefault("No Auton", "No Auto");
@@ -142,8 +142,7 @@ public class Robot extends IterativeRobot {
 		}
 		*/
 		//Hardcode goes below, comment out switch above
-		autonomousCommand = new DumbGearAuto();
-		
+		autonomousCommand = new DumbGearAuto();		
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}
