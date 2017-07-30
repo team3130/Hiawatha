@@ -24,11 +24,8 @@ import org.usfirst.frc.team3130.robot.commands.RobotSensors;
 import org.usfirst.frc.team3130.robot.subsystems.*;
 
 /**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the IterativeRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the manifest file in the resource
- * directory.
+ * This is where we "tell" the robot what it has available to it, such as can talons,
+ * motors, etc.
  */
 public class Robot extends IterativeRobot {
 
@@ -83,8 +80,8 @@ public class Robot extends IterativeRobot {
 
 		// Simplest camera feed. Remove if not needed.
 		UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
-		camera1.setResolution(320, 480);
-		
+		camera1.setResolution(360, 480);
+		/*
 		chooser = new SendableChooser<String>();
 		chooser.addDefault("No Auton", "No Auto");
 		chooser.addObject("Dumb Gear", "Dumb Gear Auto");
@@ -96,7 +93,7 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Side Gear Hopper", "Side Gear Hopper");
 		chooser.addObject("No Vision Gear and 10", "No Vision Gear and 10");
 		chooser.addObject("No Vision Forty Ball", "No Vision Forty Ball");
-		SmartDashboard.putData("Auto mode", chooser);
+		//SmartDashboard.putData("Auto mode", chooser);*/
 	}
 
 	
@@ -114,6 +111,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		
+		/*
 		switch(chooser.getSelected()){
 			case "Dumb Gear Auto":
 				autonomousCommand = new DumbGearAuto();
@@ -148,7 +146,9 @@ public class Robot extends IterativeRobot {
 			default:
 				autonomousCommand = null;
 		}
-		
+		*/
+		//Hardcode goes below, comment out switch above
+		autonomousCommand = new DumbGearAuto();		
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}

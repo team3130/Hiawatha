@@ -12,7 +12,11 @@ import edu.wpi.first.wpilibj.buttons.Trigger;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-
+/**
+ * This class is to bind commands to buttons
+ * @author Ashley
+ *
+ */
 public class OI {
 	@SuppressWarnings("unused")
 	private class JoystickTrigger extends Trigger{
@@ -111,10 +115,6 @@ public class OI {
 	private static JoystickButton btn10R;
 	private static HoldAngleTest testR;
 	
-	
-	private static JoystickButton runTurretIndex;
-	private static JoystickButton runTurretHop;	
-	
 	public static SendableChooser<String> gearStartPos;
 	public static SendableChooser<String> fieldSide;
 	private OI()
@@ -142,16 +142,13 @@ public class OI {
 		aim = new JoystickButton(stickR, RobotMap.BTN_AIMSHOOT);
 		aimDrive = new JoystickButton(stickR, RobotMap.BTN_AIMDRIVE);
 		
-		driveBack = new JoystickButton(gamepad, RobotMap.BTN_DRIVEBACK);
-		driveBackEnd = new JoystickButton(gamepad, RobotMap.BTN_DRIVEBACK);
+		//driveBack = new JoystickButton(gamepad, RobotMap.BTN_DRIVEBACK);
+		//driveBackEnd = new JoystickButton(gamepad, RobotMap.BTN_DRIVEBACK);
 		
 		hopperDown = new POVTrigger(gamepad, RobotMap.POV_HOPPERDOWN);
 		hopperUp = new POVTrigger(gamepad, RobotMap.POV_HOPPERUP);
 
 		flashlightToggle = new JoystickButton(gamepad, RobotMap.BTN_FLASHLIGHTTOGGLE);
-		
-		runTurretIndex = new JoystickButton(/*TODO: figure this out*/ gamepad, RobotMap.BTN_TURRETINDEX);
-		runTurretHop = new JoystickButton(/*TODO: figure this out*/ gamepad, RobotMap.BTN_TURRETHOP);
 		
 		//Create Commands
 		wipeLPoints	= new WipeStopPoints(Robot.wscLeft);
@@ -190,37 +187,34 @@ public class OI {
 		flashlightToggle.whenPressed(new FlashlightToggle());
 		
 		
-		runTurretIndex.whileHeld(new BasicSpinMotor(Robot.btTurretIndex, Preferences.getInstance().getDouble("Turret Index Motor PercentVBus", 0.2)));
-		runTurretHop.whileHeld(new BasicSpinMotor(Robot.btTurretHopper, Preferences.getInstance().getDouble("Turret Hopper Motor PercentVBus", 0.2)));
-		
-		
 		shiftUp.whenPressed(new DriveShiftUp());
 		shiftDown.whenPressed(new DriveShiftDown());
 		
 		aim.whileHeld(buttonAimer);
 		aimDrive.whileHeld(new CameraDrive());
 		
-		driveBack.whenPressed(driveBackwards);
-		driveBackEnd.whenReleased(new DefaultDrive());
+		//driveBack.whenPressed(driveBackwards);
+		//driveBackEnd.whenReleased(new DefaultDrive());
 		
 		hopperUp.whenActive(new AutoBasicActuate(Robot.bcHopperFloor, false));
 		hopperDown.whenActive(new AutoBasicActuate(Robot.bcHopperFloor, true));
 		
-		btn10L.whileHeld(testL);
-		btn10R.whileHeld(testR);
+		//btn10L.whileHeld(testL);
+		//btn10R.whileHeld(testR);
 		
 		
 		gearStartPos = new SendableChooser<String>();
-		gearStartPos.addObject("Left Peg", "Left");
+		//If hardcoding required, manually choose peg below
+		//gearStartPos.addDefault("Left Peg", "Left");
 		gearStartPos.addDefault("Center Peg", "Center");
-		gearStartPos.addObject("Right Peg", "Right");
+		//gearStartPos.addDefault("Right Peg", "Right");
 		SmartDashboard.putData("Gear Pos Chooser",gearStartPos);
 		
 		fieldSide = new SendableChooser<String>();
-		fieldSide.addDefault("Blue Side", "Blue");
-		fieldSide.addObject("Red Side", "Red");
+		//If hardcoding required, manually choose fieldSide below
+		//fieldSide.addDefault("Blue Side", "Blue");
+		fieldSide.addDefault("Red Side", "Red");
 		SmartDashboard.putData("Field Side",fieldSide);
-		
 		
 		//Place Commands on SMD
 		SmartDashboard.putData("Wipe Left Points", wipeLPoints);
