@@ -1,5 +1,11 @@
 package org.usfirst.frc.team3130.robot;
 
+/**
+ * This class is where we store all the constants, port numbers, and 
+ * button numbers
+ * @author Ashley
+ *
+ */
 public class RobotMap {
 	//Constant Ratios
 			public static final int RATIO_WINCHCODESPERREV = 1024;
@@ -114,7 +120,7 @@ public class RobotMap {
 			
 			//Drive
 			public static final int BTN_REVERSEDRIVE = 5; //Joystick R
-			public static final int BTN_DRIVEBACK = LST_BTN_Y;
+			//public static final int BTN_DRIVEBACK = LST_BTN_Y;
 			
 			//Climb
 			public static final int AXS_CLIMB = LST_AXS_LTRIGGER;

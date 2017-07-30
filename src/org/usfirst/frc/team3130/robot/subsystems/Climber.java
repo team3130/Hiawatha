@@ -8,7 +8,7 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * Climber
  */
 public class Climber extends Subsystem {
 
@@ -36,10 +36,13 @@ public class Climber extends Subsystem {
         setDefaultCommand(new ClimbUp());
     }
     
+    //constructor
     private Climber()
     {
     	m_liftMotor1 = new CANTalon(RobotMap.CAN_CLIMBERMOTOR1);
     	m_liftMotor2 = new CANTalon(RobotMap.CAN_CLIMBERMOTOR2);
+    	m_liftMotor1.enableBrakeMode(true);
+    	m_liftMotor2.enableBrakeMode(true);
     }
     
     /**
@@ -52,6 +55,10 @@ public class Climber extends Subsystem {
     	m_liftMotor2.set(percentage);
     }
     
+    /**
+     * Returns the current in the lifting motor
+     * @return Current in amperes of the climbing motor
+     */
     public static double getLiftAmp() {
     	return m_liftMotor1.getOutputCurrent();
     }
