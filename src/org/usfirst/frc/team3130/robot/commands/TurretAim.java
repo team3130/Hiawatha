@@ -3,7 +3,7 @@ package org.usfirst.frc.team3130.robot.commands;
 import org.usfirst.frc.team3130.robot.OI;
 import org.usfirst.frc.team3130.robot.Robot;
 import org.usfirst.frc.team3130.robot.RobotMap;
-import org.usfirst.frc.team3130.robot.subsystems.Turret;
+import org.usfirst.frc.team3130.robot.subsystems.TurretAdjust;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.subsystems.JetsonInterface;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Aims the turret
+ * Aims the TurretAdjust
  */
 public class TurretAim extends Command {
 
@@ -34,8 +34,8 @@ public class TurretAim extends Command {
 	private double m_angle;
 	private double m_posStart;
 	
-    public TurretAim() {
-        requires(Turret.GetInstance());
+    public TurretAdjustAim() {
+        requires(TurretAdjust.GetInstance());
         requires(Chassis.GetInstance());
         requires(ShooterWheelsLeft.GetInstance());
         requires(ShooterWheelsRight.GetInstance());
@@ -44,8 +44,8 @@ public class TurretAim extends Command {
         timer = new Timer();
     }
     
-    public TurretAim(String instance){
-        requires(Turret.GetInstance());
+    public TurretAdjustAim(String instance){
+        requires(TurretAdjust.GetInstance());
         requires(Chassis.GetInstance());
         requires(ShooterWheelsLeft.GetInstance());
         requires(ShooterWheelsRight.GetInstance());
@@ -89,18 +89,18 @@ public class TurretAim extends Command {
     
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Turret.setTurnDir(true);
+    	TurretAdjust.setTurnDir(true);
     	ShooterWheelsLeft.setPID();
     	ShooterWheelsRight.setPID();
-    	Turret.setPIDValues();
+    	TurretAdjust.setPIDValues();
     	Chassis.SetPIDValues(21);
-    	Turret.talonsBrake(true);
+    	TurretAdjust.talonsBrake(true);
     	Chassis.TalonsToCoast(false);
     	hasAimed = false;
     	hasTurned = false;
     	isActive = false;
     	m_mode = AimingMode.kVision;
-    	m_angle = Turret.getAngle();
+    	m_angle = TurretAdjust.getAngle();
         timer.start();
         
         m_dist = JetsonInterface.getDouble("Boiler Groundrange", DEFAULTBOILERDISTANCE)
@@ -120,12 +120,12 @@ public class TurretAim extends Command {
     	    	}
     		}
    	    	else
-    		if(Math.abs(Turret.getRate()) <= Preferences.getInstance().getDouble("Turning stopped", .05)) {
+    		if(Math.abs(TurretAdjust.getRate()) <= Preferences.getInstance().getDouble("Turning stopped", .05)) {
         		timer.reset();
         		timer.start();
         		hasTurned = true;
         		if(m_mode == AimingMode.kVision) {
-        			m_angle = (Math.PI/180f)*Turret.getAngle();
+        			m_angle = (Math.PI/180f)*TurretAdjust.getAngle();
         	        m_dist = JetsonInterface.getDouble("Boiler Groundrange", DEFAULTBOILERDISTANCE)
         	        		*(1/Preferences.getInstance().getDouble("Vision to Inches", RobotMap.RATIO_VISIONTOINCHES));
         		}
@@ -135,14 +135,14 @@ public class TurretAim extends Command {
     		switch(m_mode) {
     			case kVision:
     				if(Math.abs(JetsonInterface.getDouble("Boiler Sys Time", 9999) - JetsonInterface.getDouble("Boiler Time", 0)) < 0.25){
-    					Turret.setAngle(m_yaw);
+    					TurretAdjust.setAngle(m_yaw);
     					isActive = true;
     				}
     				break;
     			case kEncoders:
-    				m_yaw = (Math.PI/180f)*Turret.getAngle() - m_angle;
+    				m_yaw = (Math.PI/180f)*TurretAdjust.getAngle() - m_angle;
     				if(Math.abs(m_yaw) > Preferences.getInstance().getDouble("Boiler Threshold", DEFAULTTHRESHOLD)) {
-    					Turret.setAngle(m_yaw);
+    					TurretAdjust.setAngle(m_yaw);
     					hasAimed = true;
     					isActive = true;
     				}
