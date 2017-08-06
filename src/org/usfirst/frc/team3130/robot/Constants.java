@@ -17,8 +17,17 @@ public class Constants extends ConstantsBase {
     public static double kTurretOnTargetTolerance = 1.0;
     public static double kTurretRotationsPerTick = 14.0 / 50.0 * 14.0 / 322.0;
 
+    //Turret PID
+    // Units: error is 4096 counts/rev. Max output is +/- 1023 units.
+    public static double kTurretKp = 0.7;
+    public static double kTurretKi = 0.0;
+    public static double kTurretKd = 30.0;
+    public static double kTurretKf = 0;
+    public static int kTurretIZone = (int) (1023.0 / kTurretKp);
+    public static double kTurretRampRate = 0;
+    public static int kTurretAllowableError = 100;
     
-	//camera in relation to turret.
+	//Camera in relation to turret.
 	//TODO:calibrate camera.
     public static double kCameraXOffset = -6.454;
     public static double kCameraYOffset = 0.0;

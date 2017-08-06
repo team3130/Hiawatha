@@ -40,7 +40,7 @@ public class RobotMap {
 			
 			public static final int CAN_TURRETINDEX = 666; //TODO: assign this number
 			public static final int CAN_TURRETHOP = 666; //TODO: assign this number
-			public static final int CAN_TURRETADJUST = 666; //TODO: assign this number
+			public static final int CAN_TURRETANGLE = 666; //TODO: assign this number
 
 		
 		//Pnuematics Ports

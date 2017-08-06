@@ -3,7 +3,7 @@ package org.usfirst.frc.team3130.robot.commands;
 import org.usfirst.frc.team3130.robot.OI;
 import org.usfirst.frc.team3130.robot.Robot;
 import org.usfirst.frc.team3130.robot.RobotMap;
-import org.usfirst.frc.team3130.robot.subsystems.TurretAdjust;
+import org.usfirst.frc.team3130.robot.subsystems.TurretAngle;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.subsystems.JetsonInterface;
 import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
@@ -15,8 +15,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Aims the TurretAdjust
+ * Aims the TurretAngle
  */
+
+//TODO:This command still needs reworking @author Eastan
+
 public class TurretAim extends Command {
 
 	private double m_yaw = 0;
@@ -34,8 +37,8 @@ public class TurretAim extends Command {
 	private double m_angle;
 	private double m_posStart;
 	
-    public TurretAdjustAim() {
-        requires(TurretAdjust.GetInstance());
+    public TurretAim() {
+        requires(TurretAngle.GetInstance());
         requires(Chassis.GetInstance());
         requires(ShooterWheelsLeft.GetInstance());
         requires(ShooterWheelsRight.GetInstance());
@@ -44,8 +47,8 @@ public class TurretAim extends Command {
         timer = new Timer();
     }
     
-    public TurretAdjustAim(String instance){
-        requires(TurretAdjust.GetInstance());
+    public TurretAim(String instance){
+        requires(TurretAngle.GetInstance());
         requires(Chassis.GetInstance());
         requires(ShooterWheelsLeft.GetInstance());
         requires(ShooterWheelsRight.GetInstance());
@@ -89,18 +92,20 @@ public class TurretAim extends Command {
     
     // Called just before this Command runs the first time
     protected void initialize() {
-    	TurretAdjust.setTurnDir(true);
+    	
+    	//TurretAngle already handles its own PID value settings
+    	
     	ShooterWheelsLeft.setPID();
     	ShooterWheelsRight.setPID();
-    	TurretAdjust.setPIDValues();
+    	
     	Chassis.SetPIDValues(21);
-    	TurretAdjust.talonsBrake(true);
+
     	Chassis.TalonsToCoast(false);
     	hasAimed = false;
     	hasTurned = false;
     	isActive = false;
     	m_mode = AimingMode.kVision;
-    	m_angle = TurretAdjust.getAngle();
+    	m_angle = TurretAngle.GetInstance().getAngleDegrees();
         timer.start();
         
         m_dist = JetsonInterface.getDouble("Boiler Groundrange", DEFAULTBOILERDISTANCE)
@@ -120,12 +125,12 @@ public class TurretAim extends Command {
     	    	}
     		}
    	    	else
-    		if(Math.abs(TurretAdjust.getRate()) <= Preferences.getInstance().getDouble("Turning stopped", .05)) {
+    		if(TurretAngle.GetInstance().isOnTarget()) {
         		timer.reset();
         		timer.start();
         		hasTurned = true;
         		if(m_mode == AimingMode.kVision) {
-        			m_angle = (Math.PI/180f)*TurretAdjust.getAngle();
+        			m_angle = (Math.PI/180f)*TurretAngle.GetInstance().getAngleDegrees();
         	        m_dist = JetsonInterface.getDouble("Boiler Groundrange", DEFAULTBOILERDISTANCE)
         	        		*(1/Preferences.getInstance().getDouble("Vision to Inches", RobotMap.RATIO_VISIONTOINCHES));
         		}
@@ -135,14 +140,14 @@ public class TurretAim extends Command {
     		switch(m_mode) {
     			case kVision:
     				if(Math.abs(JetsonInterface.getDouble("Boiler Sys Time", 9999) - JetsonInterface.getDouble("Boiler Time", 0)) < 0.25){
-    					TurretAdjust.setAngle(m_yaw);
+    					TurretAngle.GetInstance().setAngle(m_yaw);
     					isActive = true;
     				}
     				break;
     			case kEncoders:
-    				m_yaw = (Math.PI/180f)*TurretAdjust.getAngle() - m_angle;
+    				m_yaw = (Math.PI/180f)*TurretAngle.GetInstance().getAngleDegrees() - m_angle;
     				if(Math.abs(m_yaw) > Preferences.getInstance().getDouble("Boiler Threshold", DEFAULTTHRESHOLD)) {
-    					TurretAdjust.setAngle(m_yaw);
+    					TurretAngle.GetInstance().setAngle(m_yaw);
     					hasAimed = true;
     					isActive = true;
     				}
