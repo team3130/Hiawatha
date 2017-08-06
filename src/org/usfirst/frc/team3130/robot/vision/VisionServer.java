@@ -5,7 +5,7 @@ import org.usfirst.frc.team3130.robot.Constants;
 import org.usfirst.frc.team3130.robot.vision.messages.HeartbeatMessage;
 import org.usfirst.frc.team3130.robot.vision.messages.OffWireMessage;
 import org.usfirst.frc.team3130.robot.vision.messages.VisionMessage;
-import com.team254.lib.util.CrashTrackingRunnable;
+import org.usfirst.frc.team3130.util.CrashTrackingRunnable;
 import edu.wpi.first.wpilibj.Timer;
 
 import java.io.IOException;

@@ -46,9 +46,9 @@ public class TurretAdjust extends Subsystem {
 
 	/**
 	 * Goes to a position
-	 * @param angle the angle to go to in radians
+	 * @param angle the angle to go to in degrees
 	 */
-	void ToSetpoint(int angle)
+	void ToSetpoint(double angle)
 	{
 		turretAdjust.changeControlMode(CANTalon.TalonControlMode.Position);
 	}

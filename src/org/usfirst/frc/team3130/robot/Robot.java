@@ -23,6 +23,10 @@ import org.usfirst.frc.team3130.robot.autoCommands.NoVision40Ball;
 import org.usfirst.frc.team3130.robot.commands.RobotSensors;
 import org.usfirst.frc.team3130.robot.subsystems.*;
 
+import org.usfirst.frc.team3130.util.Looper;
+import org.usfirst.frc.team3130.robot.vision.VisionProcessor;
+
+
 /**
  * This is where we "tell" the robot what it has available to it, such as can talons,
  * motors, etc.
@@ -47,6 +51,11 @@ public class Robot extends IterativeRobot {
 	
 	public static BasicCANTalon btTurretIndex;
 	public static BasicCANTalon btTurretHopper;
+	
+    // Enabled looper is called at 10Hz whenever the robot is enabled, frequency can be changed in Constants.java: kLooperDt
+    Looper mEnabledLooper = new Looper();
+    // Disabled looper is called at 10Hz whenever the robot is disabled
+    Looper mDisabledLooper = new Looper();
 	
 	@Override
 	public void robotInit() {
@@ -78,6 +87,13 @@ public class Robot extends IterativeRobot {
 		ShooterWheelsRight.GetInstance();
 		Flashlight.GetInstance();
 
+		// Configure loopers
+		//remove turret resetter, RobotStateEstimator, and Superstructure (imports also removed) @author Eastan
+        //mEnabledLooper.register(new TurretResetter());
+        mEnabledLooper.register(VisionProcessor.getInstance());
+        //mEnabledLooper.register(RobotStateEstimator.getInstance());
+        //mEnabledLooper.register(Superstructure.getInstance().getLoop());
+        
 		// Simplest camera feed. Remove if not needed.
 		UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
 		camera1.setResolution(360, 480);

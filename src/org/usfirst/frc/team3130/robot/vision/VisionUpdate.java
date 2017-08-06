@@ -43,8 +43,9 @@ public class VisionUpdate {
      * @param Capture
      *            timestamp
      * @param JSON
-     *            blob with update string, example: { "capturedAgoMs" : 100,
-     *            "targets": [{"y": 5.4, "z": 5.5}] }
+     *            blob with update string, example: 
+     *            { "capturedAgoMs" : 100, "targets": [{"y": 5.4, "z": 5.5}] }
+     *            
      * @return VisionUpdate object
      */
     //
