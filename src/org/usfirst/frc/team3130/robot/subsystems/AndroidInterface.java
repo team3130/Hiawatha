@@ -1,10 +1,7 @@
 package org.usfirst.frc.team3130.robot.subsystems;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 import org.usfirst.frc.team3130.robot.vision.ShooterAimingParameters;
 import org.usfirst.frc.team3130.robot.vision.GoalTracker.TrackReport;
@@ -15,8 +12,6 @@ import org.usfirst.frc.team3130.util.Translation2d;
 
 
 import org.usfirst.frc.team3130.robot.vision.TargetInfo;
-
-import org.usfirst.frc.team3130.util.InterpolatingDouble;
 
 import org.usfirst.frc.team3130.util.RigidTransform2d;
 
