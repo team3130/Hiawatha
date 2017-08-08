@@ -6,7 +6,10 @@ public class Constants extends ConstantsBase {
 /*refactored for 3130
   @author Eastan
  */
-	
+	//Vision tracking centerpoint height on high efficiency boiler
+	//TODO:Calibrate height of centerpoint, in inches
+    public static double kCenterOfTargetHeight = 89.0; // inches
+    
     // Turret mechanical constants
 	//TODO:determine constants for turret.
     public static double kHardMaxTurretAngle = 109.5;

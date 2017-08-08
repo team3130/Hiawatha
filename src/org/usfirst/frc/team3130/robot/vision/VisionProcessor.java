@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3130.robot.vision;
-//TODO:Work still needed on vision processing (RobotState) @author Eastan
-import org.usfirst.frc.team3130.misc.RobotState;
+
+import org.usfirst.frc.team3130.robot.subsystems.AndroidInterface;
 import org.usfirst.frc.team3130.robot.vision.VisionUpdate;
 import org.usfirst.frc.team3130.robot.vision.VisionUpdateReceiver;
 import org.usfirst.frc.team3130.util.Loop;;
@@ -16,7 +16,7 @@ import org.usfirst.frc.team3130.util.Loop;;
 public class VisionProcessor implements Loop, VisionUpdateReceiver {
     static VisionProcessor instance_ = new VisionProcessor();
     VisionUpdate update_ = null;
-    RobotState robot_state_ = RobotState.getInstance();
+    AndroidInterface robot_state_ = AndroidInterface.GetInstance();
 
     public static VisionProcessor getInstance() {
         return instance_;
