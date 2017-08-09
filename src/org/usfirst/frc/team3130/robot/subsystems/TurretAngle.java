@@ -46,7 +46,7 @@ public class TurretAngle extends Subsystem {
   		return m_pInstance;
   	}
   	
-    TurretAngle() {
+    private TurretAngle() {
         // The turret has one Talon to control angle.
         m_turret = new CANTalon(RobotMap.CAN_TURRETANGLE);
         m_turret.enableBrakeMode(true);

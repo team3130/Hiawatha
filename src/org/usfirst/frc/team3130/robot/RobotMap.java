@@ -41,7 +41,8 @@ public class RobotMap {
 			public static final int CAN_TURRETINDEX = 666; //TODO: assign this number
 			public static final int CAN_TURRETHOP = 666; //TODO: assign this number
 			public static final int CAN_TURRETANGLE = 666; //TODO: assign this number
-
+			public static final int CAN_SHOOTERMASTER = 666; //TODO: assign this number
+			public static final int CAN_SHOOTERSLAVE = 666; //TODO: assign this number
 		
 		//Pnuematics Ports
 			public static final int PNM_GEARSHIFTER = 0;
@@ -105,7 +106,6 @@ public class RobotMap {
 			//Turret
 			public static final int BTN_TURRETINDEX = 666; //TODO: determine this #
 			public static final int BTN_TURRETHOP = 666; //TODO: determine this #
-			
 			
 			//Gear Control
 			public static final int BTN_PINCHGEAR = 1;	//Joystick L
