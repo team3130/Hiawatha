@@ -1,13 +1,17 @@
 package org.usfirst.frc.team3130.robot.commands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.usfirst.frc.team3130.robot.OI;
 import org.usfirst.frc.team3130.robot.Robot;
 import org.usfirst.frc.team3130.robot.RobotMap;
 import org.usfirst.frc.team3130.robot.subsystems.TurretAngle;
-import org.usfirst.frc.team3130.robot.subsystems.Chassis;
+import org.usfirst.frc.team3130.robot.subsystems.AndroidInterface;
 import org.usfirst.frc.team3130.robot.subsystems.JetsonInterface;
-import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
-import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsRight;
+import org.usfirst.frc.team3130.robot.vision.ShooterAimingParameters;
+
+
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Timer;
@@ -22,36 +26,30 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TurretAim extends Command {
 
-	private double m_yaw = 0;
-	private final double DEFAULTTHRESHOLD = 2;
-	private final double SHOOTERTHRESHOLD = 150;
-	private final double DEFAULTBOILERDISTANCE = 120;
+	protected ShooterAimingParameters shooter_aiming_parameters;
 	private Timer timer;
 	boolean hasAimed;
 	boolean hasTurned;
 	boolean isActive;
 	private String instance = "";
-	private double m_dist;
+
 	public enum AimingMode { kVision, kEncoders }
-	private AimingMode m_mode;
-	private double m_angle;
-	private double m_posStart;
+
 	
     public TurretAim() {
         requires(TurretAngle.GetInstance());
-        requires(Chassis.GetInstance());
-        requires(ShooterWheelsLeft.GetInstance());
-        requires(ShooterWheelsRight.GetInstance());
+
+
+
         requires(Robot.wscLeft);
         requires(Robot.wscRight);
         timer = new Timer();
     }
+   
     
     public TurretAim(String instance){
         requires(TurretAngle.GetInstance());
-        requires(Chassis.GetInstance());
-        requires(ShooterWheelsLeft.GetInstance());
-        requires(ShooterWheelsRight.GetInstance());
+
         requires(Robot.wscLeft);
         requires(Robot.wscRight);
         timer = new Timer();
@@ -64,43 +62,30 @@ public class TurretAim extends Command {
     }
 
     /**
-     * Tells if the Robot is on target and ready to shoot.
-     * @return if aimed correctly and wheel up to speed
+     * Tells if the Robot has seen a target recently
      */
-    public boolean onTarget()
+    public boolean seenTarget()
     {
-    	boolean onTarget = (isActive
-        		&&	(Math.abs(m_yaw) < ((Preferences.getInstance().getDouble("Boiler Threshold", DEFAULTTHRESHOLD)) * (Math.PI/180.0))));
-        		//&&	(Math.abs(ShooterWheelsLeft.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
-        		//&&	(Math.abs(ShooterWheelsRight.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
-        
-    	if(instance != ""){
-    		if(Math.abs(JetsonInterface.getDouble("Boiler Sys Time", 9999) - JetsonInterface.getDouble("Boiler Time", 0)) < 0.25){
+
+    	if(AndroidInterface.targetTracking() == true ){
+    		
     			SmartDashboard.putBoolean("Boiler Seen" + instance, true);
-    		}
-    		else{
+    			return true;
+    	}
+    	else{
     			SmartDashboard.putBoolean("Boiler Seen" + instance, false);
-    		}
+    		
     	}
     	
-        SmartDashboard.putBoolean("Ready to Shoot" + instance, onTarget);
-    	SmartDashboard.putBoolean("LeftShooter Upto Speed" + instance, (Math.abs(ShooterWheelsLeft.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
-    	SmartDashboard.putBoolean("RightShooter Upto Speed" + instance, (Math.abs(ShooterWheelsRight.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
-    	
-    	return onTarget;
+    	return false;
     }
     
     // Called just before this Command runs the first time
     protected void initialize() {
     	
     	//TurretAngle already handles its own PID value settings
-    	
-    	ShooterWheelsLeft.setPID();
-    	ShooterWheelsRight.setPID();
-    	
-    	Chassis.SetPIDValues(21);
+    	//TODO:Calibrate turret to absolute position
 
-    	Chassis.TalonsToCoast(false);
     	hasAimed = false;
     	hasTurned = false;
     	isActive = false;
@@ -110,64 +95,28 @@ public class TurretAim extends Command {
         
         m_dist = JetsonInterface.getDouble("Boiler Groundrange", DEFAULTBOILERDISTANCE)
         		*(1/Preferences.getInstance().getDouble("Vision to Inches", RobotMap.RATIO_VISIONTOINCHES));
-        m_posStart = Chassis.GetDistance();
+
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	m_yaw = JetsonInterface.getDouble("Boiler Yaw", 0);
-    	//SmartDashboard.putNumber("Boiler yaw", m_yaw * (180/Math.PI));
-    	if(hasAimed) {
-    		if(hasTurned) {
-    	    	if(timer.get() > Preferences.getInstance().getDouble("Aim Timeout", .5)){
-					hasTurned = false;
-					hasAimed = false;
-    	    	}
+    	double targetAngle;
+		double turretAngleValue;
+		List<ShooterAimingParameters> aimingReports;
+    	if(TurretAngle.GetInstance().isOnTarget() == false){
+    		aimingReports = AndroidInterface.GetInstance().getAim(); 
+    		if(!aimingReports.isEmpty()){
+    			
+    			//currently set to grab latest angle value of list
+    			targetAngle = (aimingReports.get((aimingReports.size() - 1)).getTurretAngle()).getDegrees();
+    			turretAngleValue = TurretAngle.GetInstance().getAngleDegrees();
+    			TurretAngle.GetInstance().setAngle(turretAngleValue-targetAngle);
+    			
     		}
-   	    	else
-    		if(TurretAngle.GetInstance().isOnTarget()) {
-        		timer.reset();
-        		timer.start();
-        		hasTurned = true;
-        		if(m_mode == AimingMode.kVision) {
-        			m_angle = (Math.PI/180f)*TurretAngle.GetInstance().getAngleDegrees();
-        	        m_dist = JetsonInterface.getDouble("Boiler Groundrange", DEFAULTBOILERDISTANCE)
-        	        		*(1/Preferences.getInstance().getDouble("Vision to Inches", RobotMap.RATIO_VISIONTOINCHES));
-        		}
-    		}
-    	}
-    	else{
-    		switch(m_mode) {
-    			case kVision:
-    				if(Math.abs(JetsonInterface.getDouble("Boiler Sys Time", 9999) - JetsonInterface.getDouble("Boiler Time", 0)) < 0.25){
-    					TurretAngle.GetInstance().setAngle(m_yaw);
-    					isActive = true;
-    				}
-    				break;
-    			case kEncoders:
-    				m_yaw = (Math.PI/180f)*TurretAngle.GetInstance().getAngleDegrees() - m_angle;
-    				if(Math.abs(m_yaw) > Preferences.getInstance().getDouble("Boiler Threshold", DEFAULTTHRESHOLD)) {
-    					TurretAngle.GetInstance().setAngle(m_yaw);
-    					hasAimed = true;
-    					isActive = true;
-    				}
-    				break;
-    		}
-    	}    	
     	
-		double dist = m_dist + (m_posStart - Chassis.GetDistance());
-    	ShooterWheelsLeft.setSpeed(Robot.wscLeft.GetSpeed(dist));
-    	ShooterWheelsRight.setSpeed(Robot.wscRight.GetSpeed(dist));
-
-    	SmartDashboard.putBoolean("Boiler aim", onTarget());
-    	if(isActive) {
-    		Chassis.DriveStraight(-OI.stickL.getY());
     	}
-    	else {
-    		Chassis.DriveArcade(-OI.stickL.getY(), 0, true);
-    	}
-    	
-    	onTarget();
+    	//check if on target here...
+    	seenTarget();
     }
 
     // Make this return true when this Command no longer needs to run execute()
