@@ -31,6 +31,7 @@ public class TurretAim extends Command {
 	boolean hasAimed;
 	boolean hasTurned;
 	boolean isActive;
+	double m_angle;
 	private String instance = "";
 
 	public enum AimingMode { kVision, kEncoders }
@@ -56,10 +57,6 @@ public class TurretAim extends Command {
         this.instance = instance;
     }
 
-    public void setMode(AimingMode mode)
-    {
-    	m_mode = mode;
-    }
 
     /**
      * Tells if the Robot has seen a target recently
@@ -89,12 +86,10 @@ public class TurretAim extends Command {
     	hasAimed = false;
     	hasTurned = false;
     	isActive = false;
-    	m_mode = AimingMode.kVision;
     	m_angle = TurretAngle.GetInstance().getAngleDegrees();
         timer.start();
         
-        m_dist = JetsonInterface.getDouble("Boiler Groundrange", DEFAULTBOILERDISTANCE)
-        		*(1/Preferences.getInstance().getDouble("Vision to Inches", RobotMap.RATIO_VISIONTOINCHES));
+
 
     }
 
@@ -127,8 +122,6 @@ public class TurretAim extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	isActive = false;
-    	ShooterWheelsLeft.stop();
-    	ShooterWheelsRight.stop();
     	SmartDashboard.putBoolean("Boiler aim", false);
     }
 

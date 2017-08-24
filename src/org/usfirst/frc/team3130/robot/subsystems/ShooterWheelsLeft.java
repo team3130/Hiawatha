@@ -31,7 +31,7 @@ public class ShooterWheelsLeft extends Subsystem {
     private static CANTalon m_wheelControl;
     
     private ShooterWheelsLeft() {
-    	m_wheelControl = new CANTalon(RobotMap.CAN_SHOOTERWHEELSLEFT);
+ //   	m_wheelControl = new CANTalon(RobotMap.CAN_SHOOTERWHEELSLEFT);
     	m_wheelControl.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	m_wheelControl.configEncoderCodesPerRev(18);	//After going through gear ratio 18 ticks per rev
     	m_wheelControl.reverseSensor(true);

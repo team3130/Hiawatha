@@ -47,7 +47,7 @@ public class RobotSensors extends Command {
     	//SmartDashboard.putNumber("Shooter Right Wheel Position", ShooterWheelsRight.GetPosition());
     	//SmartDashboard.putNumber("Shooter Right Wheel Current", ShooterWheelsRight.GetCurrent());
     	
-    	SmartDashboard.putBoolean("Boiler Seen", Math.abs(JetsonInterface.getDouble("Boiler Sys Time", 9999) - JetsonInterface.getDouble("Boiler Time", 0)) < 0.25);
+    	SmartDashboard.putBoolean("Boiler Seen", AndroidInterface.targetTracking() == true );
     	
     	//Chassis
     	//SmartDashboard.putNumber("Front Left Wheel Speed", Chassis.GetSpeedL());
