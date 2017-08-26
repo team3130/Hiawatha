@@ -3,8 +3,7 @@ package org.usfirst.frc.team3130.robot.autoCommands;
 import org.usfirst.frc.team3130.robot.Robot;
 import org.usfirst.frc.team3130.robot.autoCommands.RunWheelsManual;
 import org.usfirst.frc.team3130.robot.commands.*;
-import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
-import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsRight;
+import org.usfirst.frc.team3130.robot.subsystems.TurretAngle;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -25,8 +24,7 @@ public class AutoDumbShoot extends CommandGroup {
     public AutoDumbShoot() {
         requires(Robot.btLeftIndex);
         requires(Robot.btRightIndex);
-        requires(ShooterWheelsRight.GetInstance());
-        requires(ShooterWheelsLeft.GetInstance());
+        requires(TurretAngle.GetInstance());
         requires(Robot.btHopper);
         requires(Robot.btHopper2);
         requires(Robot.btIntake);

@@ -10,6 +10,8 @@ import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 
+//TODO:Replace with TurretAngle and TurretFlywheel
+//TODO: Rework all shooting related commands
 public class ShooterWheelsRight extends Subsystem {
 
 	//Instance Handling

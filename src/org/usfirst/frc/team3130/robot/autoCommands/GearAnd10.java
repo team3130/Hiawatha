@@ -4,8 +4,7 @@ import org.usfirst.frc.team3130.robot.OI;
 import org.usfirst.frc.team3130.robot.Robot;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.subsystems.Climber;
-import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
-import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsRight;
+import org.usfirst.frc.team3130.robot.subsystems.TurretAngle;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -26,8 +25,7 @@ public class GearAnd10 extends CommandGroup {
 		requires(Chassis.GetInstance());
 		requires(Robot.bcGearPinch);
 		requires(Robot.bcGearLift);
-        requires(ShooterWheelsRight.GetInstance());
-        requires(ShooterWheelsLeft.GetInstance());
+        requires(TurretAngle.GetInstance());
         requires(Robot.btHopper);
         requires(Robot.btRightIndex);
         requires(Robot.btLeftIndex);

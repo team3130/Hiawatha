@@ -5,8 +5,7 @@ import org.usfirst.frc.team3130.robot.Robot;
 import org.usfirst.frc.team3130.robot.RobotMap;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.subsystems.JetsonInterface;
-import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
-import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsRight;
+
 import org.usfirst.frc.team3130.robot.subsystems.Chassis.TurnDirection;
 
 import edu.wpi.first.wpilibj.Preferences;
@@ -36,8 +35,8 @@ public class CameraAim extends Command {
 	
     public CameraAim() {
         requires(Chassis.GetInstance());
-        requires(ShooterWheelsLeft.GetInstance());
-        requires(ShooterWheelsRight.GetInstance());
+        //requires(ShooterWheelsLeft.GetInstance());
+        //requires(ShooterWheelsRight.GetInstance());
         requires(Robot.wscLeft);
         requires(Robot.wscRight);
         timer = new Timer();
@@ -45,8 +44,8 @@ public class CameraAim extends Command {
     
     public CameraAim(String instance){
         requires(Chassis.GetInstance());
-        requires(ShooterWheelsLeft.GetInstance());
-        requires(ShooterWheelsRight.GetInstance());
+        //requires(ShooterWheelsLeft.GetInstance());
+        //requires(ShooterWheelsRight.GetInstance());
         requires(Robot.wscLeft);
         requires(Robot.wscRight);
         timer = new Timer();
@@ -79,8 +78,8 @@ public class CameraAim extends Command {
     	}
     	
         SmartDashboard.putBoolean("Ready to Shoot" + instance, onTarget);
-    	SmartDashboard.putBoolean("LeftShooter Upto Speed" + instance, (Math.abs(ShooterWheelsLeft.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
-    	SmartDashboard.putBoolean("RightShooter Upto Speed" + instance, (Math.abs(ShooterWheelsRight.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
+    	//SmartDashboard.putBoolean("LeftShooter Upto Speed" + instance, (Math.abs(ShooterWheelsLeft.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
+    	//SmartDashboard.putBoolean("RightShooter Upto Speed" + instance, (Math.abs(ShooterWheelsRight.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
     	
     	return onTarget;
     }
@@ -88,8 +87,8 @@ public class CameraAim extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Chassis.setTurnDir(TurnDirection.kStraight);
-    	ShooterWheelsLeft.setPID();
-    	ShooterWheelsRight.setPID();
+    	//ShooterWheelsLeft.setPID();
+    	//ShooterWheelsRight.setPID();
     	Chassis.SetPIDValues(21);
         Chassis.TalonsToCoast(false);
     	hasAimed = false;
@@ -149,8 +148,8 @@ public class CameraAim extends Command {
     	}    	
     	
 		double dist = m_dist + (m_posStart - Chassis.GetDistance());
-    	ShooterWheelsLeft.setSpeed(Robot.wscLeft.GetSpeed(dist));
-    	ShooterWheelsRight.setSpeed(Robot.wscRight.GetSpeed(dist));
+    	//ShooterWheelsLeft.setSpeed(Robot.wscLeft.GetSpeed(dist));
+    	//ShooterWheelsRight.setSpeed(Robot.wscRight.GetSpeed(dist));
 
     	SmartDashboard.putBoolean("Boiler aim", onTarget());
     	if(isActive) {
@@ -171,8 +170,8 @@ public class CameraAim extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	isActive = false;
-    	ShooterWheelsLeft.stop();
-    	ShooterWheelsRight.stop();
+    	//ShooterWheelsLeft.stop();
+    	//ShooterWheelsRight.stop();
     	SmartDashboard.putBoolean("Boiler aim", false);
     }
 

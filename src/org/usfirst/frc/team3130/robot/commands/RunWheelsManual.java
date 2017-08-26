@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class RunWheelsManual extends Command {
 	
     public RunWheelsManual() {
-        requires(ShooterWheelsLeft.GetInstance());
-        requires(ShooterWheelsRight.GetInstance());
+        //requires(ShooterWheelsLeft.GetInstance());
+        //requires(ShooterWheelsRight.GetInstance());
     }
 
     
@@ -21,8 +21,8 @@ public class RunWheelsManual extends Command {
     	double leftSpeed = Preferences.getInstance().getDouble("Left Speed Setpoint", 1500);
     	double rightSpeed = Preferences.getInstance().getDouble("Right Speed Setpoint", 1500);
     	
-    	ShooterWheelsLeft.setPID();
-    	ShooterWheelsLeft.setSpeed(leftSpeed);
+    	//ShooterWheelsLeft.setPID();
+    	//ShooterWheelsLeft.setSpeed(leftSpeed);
 
     	ShooterWheelsRight.setPID();
     	ShooterWheelsRight.setSpeed(rightSpeed);
@@ -41,8 +41,8 @@ public class RunWheelsManual extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	ShooterWheelsLeft.stop();
-    	ShooterWheelsRight.stop();
+    	//ShooterWheelsLeft.stop();
+    	//ShooterWheelsRight.stop();
     }
 
     // Called when another command which requires one or more of the same

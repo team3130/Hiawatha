@@ -3,8 +3,7 @@ package org.usfirst.frc.team3130.robot.autoCommands;
 import org.usfirst.frc.team3130.robot.OI;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.subsystems.JetsonInterface;
-import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
-import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsRight;
+
 import org.usfirst.frc.team3130.robot.subsystems.Chassis.TurnDirection;
 
 import edu.wpi.first.wpilibj.Preferences;
@@ -41,8 +40,6 @@ public class DriveToGear extends Command {
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		Chassis.setTurnDir(TurnDirection.kStraight);
-		ShooterWheelsLeft.setPID();
-		ShooterWheelsRight.setPID();
 		Chassis.SetPIDValues(21);
 		Chassis.TalonsToCoast(false);
 		hasAimed = false;

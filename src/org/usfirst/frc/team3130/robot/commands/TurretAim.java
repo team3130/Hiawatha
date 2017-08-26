@@ -97,21 +97,28 @@ public class TurretAim extends Command {
     protected void execute() {
     	double targetAngle;
 		double turretAngleValue;
-		List<ShooterAimingParameters> aimingReports;
-    	if(TurretAngle.GetInstance().isOnTarget() == false){
-    		aimingReports = AndroidInterface.GetInstance().getAim(); 
-    		if(!aimingReports.isEmpty()){
-    			
-    			//currently set to grab latest angle value of list
-    			targetAngle = (aimingReports.get((aimingReports.size() - 1)).getTurretAngle()).getDegrees();
-    			turretAngleValue = TurretAngle.GetInstance().getAngleDegrees();
-    			TurretAngle.GetInstance().setAngle(turretAngleValue-targetAngle);
-    			
-    		}
-    	
-    	}
-    	//check if on target here...
-    	seenTarget();
+		try {
+			List<ShooterAimingParameters> aimingReports;
+	    	if(TurretAngle.GetInstance().isOnTarget() == false){
+	    		aimingReports = AndroidInterface.GetInstance().getAim(); 
+	    		if(!aimingReports.isEmpty()){
+	    			
+	    			//currently set to grab latest angle value of list
+	    			targetAngle = (aimingReports.get((aimingReports.size() - 1)).getTurretAngle()).getDegrees();
+	    			turretAngleValue = TurretAngle.GetInstance().getAngleDegrees();
+	    			TurretAngle.GetInstance().setAngle(turretAngleValue-targetAngle);
+	    			
+	    		}
+	    	
+	    	}
+		}catch (NullPointerException e) {
+			
+		}finally {
+			//check if target is found here...
+	    	//(updates smartdashboard)
+	    	seenTarget();
+		}
+
     }
 
     // Make this return true when this Command no longer needs to run execute()

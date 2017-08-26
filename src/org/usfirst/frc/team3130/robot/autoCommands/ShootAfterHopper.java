@@ -4,8 +4,7 @@ import org.usfirst.frc.team3130.robot.OI;
 import org.usfirst.frc.team3130.robot.Robot;
 import org.usfirst.frc.team3130.robot.commands.BasicSpinMotor;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
-import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsLeft;
-import org.usfirst.frc.team3130.robot.subsystems.ShooterWheelsRight;
+import org.usfirst.frc.team3130.robot.subsystems.TurretAngle;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -29,8 +28,7 @@ public class ShootAfterHopper extends CommandGroup {
 		requires(Robot.btRightIndex);
 		requires(Robot.wscRight);
 		requires(Robot.wscLeft);
-		requires(ShooterWheelsRight.GetInstance());
-		requires(ShooterWheelsLeft.GetInstance());
+		requires(TurretAngle.GetInstance());
 		requires(Robot.btIntake);
 		requires(Robot.btHopper);
 		requires(Robot.btHopper2);
