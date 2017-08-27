@@ -41,8 +41,7 @@ public class AndroidInterface extends Subsystem {
   		return m_pInstance;
   	}
   	
-    public synchronized void reset(double start_time, RigidTransform2d initial_field_to_vehicle,
-            Rotation2d initial_turret_rotation) {
+    public synchronized void reset() {
 
         goal_tracker_ = new GoalTracker();
         camera_pitch_correction_ = Rotation2d.fromDegrees(-Constants.kCameraPitchAngleDegrees);
