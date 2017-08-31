@@ -17,9 +17,8 @@ public class ManualTurretAim extends Command {
 	
 	protected void execute() {
     	
-    	double turnSpeed = OI.gamepad.getZ(); //getX returns value from -1 to 1
-    	
-    	//Explicitly turning on Quadratic inputs for drivers, as all other systems will use nonQuadratic
+    	double turnSpeed = OI.gamepad.getRawAxis(4); //returns value from -1 to 1 of R X axis of gamepad.
+
     	TurretAngle.GetInstance().setOpenLoop(turnSpeed);
     }
 

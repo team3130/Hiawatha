@@ -3,6 +3,7 @@ package org.usfirst.frc.team3130.robot.subsystems;
 import org.usfirst.frc.team3130.robot.Constants;
 import org.usfirst.frc.team3130.util.Rotation2d;
 
+import org.usfirst.frc.team3130.robot.commands.ManualTurretAim;
 import org.usfirst.frc.team3130.robot.RobotMap;
 
 import com.ctre.CANTalon;
@@ -12,20 +13,15 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * The Turret subsystem controls the direction the ball is fired. On the Turret
- * assembly is the Hood and Flywheel. The Turret can only rotate within 240
- * degrees (+/- 120), and mechanical bumper switches indicate when the
- * mechanical limits are reached. This is part of the Superstructure superclass.
+ * The TurretAngle subsystem controls the angle the ball is fired. The Turret can only 
+ * rotate within 240 degrees (+/- 120), and mechanical limit switches indicate when the
+ * mechanical limits are reached.
  * 
- * The ball is first picked up with the Intake then is fed to the Flywheel with
- * the HoodRoller. The Turret controls the direction that the ball is fired at.
- * Finally, the Hood controls the output angle and trajectory of the shot.
+ * The balls are fed from the hopper to the Turret via the ball elevator, the TurretAngle 
+ * subsystem set the angle of the Turret. Then the balls are shot out by the TurretFlywheel.
  * 
- * @see Flywheel
- * @see Hood
- * @see HoodRoller
- * @see Intake
- * @see Superstructure
+ * @see TurretFlywheel
+ * 
  */
 public class TurretAngle extends Subsystem {
 	private static CANTalon m_turret;
@@ -45,6 +41,8 @@ public class TurretAngle extends Subsystem {
   		if(m_pInstance == null) m_pInstance = new TurretAngle();
   		return m_pInstance;
   	}
+  	
+
   	
 	private TurretAngle() {
 		// The turret has one Talon to control angle.
@@ -88,7 +86,7 @@ public class TurretAngle extends Subsystem {
 	// Manually move the turret (and put it into vbus mode if it isn't already). Input range -1.0 to 1.0
 	public synchronized void setOpenLoop(double speed) {
 		m_turret.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-		m_turret.set(0.10*speed); //scale to max of 10%
+		m_turret.set(0.20*speed); //scale to max of 20%
 	}
 
 	// Tell the Talon it is at a given position.
@@ -153,10 +151,9 @@ public class TurretAngle extends Subsystem {
 	public void zeroSensors() {
 		reset(new Rotation2d());
 	}
-
 	@Override
 	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
+		setDefaultCommand(new ManualTurretAim());
 		
 	}
 }

@@ -30,9 +30,8 @@ public class RobotMap {
 			public static final int CAN_CLIMBERMOTOR1 = 6;
 			public static final int CAN_CLIMBERMOTOR2 = 7;
 			public static final int CAN_INTAKEMOTOR = 8;
-			public static final int CAN_HOPPERSTIR = 109; //TODO: change back
+			public static final int CAN_HOPPERSTIR = 9; 
 			public static final int CAN_INDEXMOTORLEFT = 10;
-
 			public static final int CAN_SHOOTERWHEELSRIGHT = 12; //TODO: reassign to something else
 			public static final int CAN_GEARBAR = 13;
 			public static final int CAN_HOPPER2 = 14;
@@ -40,7 +39,7 @@ public class RobotMap {
 			
 			public static final int CAN_TURRETINDEX = 101; //TODO: assign this number
 			public static final int CAN_TURRETHOP = 102; //TODO: assign this number
-			public static final int CAN_TURRETANGLE = 9;
+			public static final int CAN_TURRETANGLE = 30;
 			public static final int CAN_SHOOTERMASTER = 103; //TODO: assign this number
 			public static final int CAN_SHOOTERSLAVE = 104; //TODO: assign this number
 		
