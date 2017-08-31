@@ -47,6 +47,8 @@ public class RobotSensors extends Command {
     	//SmartDashboard.putNumber("Shooter Right Wheel Position", ShooterWheelsRight.GetPosition());
     	//SmartDashboard.putNumber("Shooter Right Wheel Current", ShooterWheelsRight.GetCurrent());
     	
+    	SmartDashboard.putNumber("Flywheel Speed", TurretFlywheel.getSpeed());
+    	
     	SmartDashboard.putBoolean("Boiler Seen", AndroidInterface.targetTracking() == true );
     	
     	//Chassis
@@ -74,18 +76,18 @@ public class RobotSensors extends Command {
     	//SmartDashboard.putNumber("Intake Wheels Current", Intake.getCurrent());
     	
     	//Gear
-    	SmartDashboard.putBoolean("Gear Lift State", Robot.bcGearLift.getState());
-    	SmartDashboard.putBoolean("Gear Pinch State", Robot.bcGearPinch.getState());
+    	//SmartDashboard.putBoolean("Gear Lift State", Robot.bcGearLift.getState());
+    	//SmartDashboard.putBoolean("Gear Pinch State", Robot.bcGearPinch.getState());
     	
-    	SmartDashboard.putBoolean("GearShift State", !Chassis.GetShiftedDown());
+    	//SmartDashboard.putBoolean("GearShift State", !Chassis.GetShiftedDown());
     	
-    	if (Math.abs(JetsonInterface.getDouble("Peg Sys Time", 0) - JetsonInterface.getDouble("Peg Time", 9999)) < .15) {
+    	/*if (Math.abs(JetsonInterface.getDouble("Peg Sys Time", 0) - JetsonInterface.getDouble("Peg Time", 9999)) < .15) {
     		SmartDashboard.putBoolean("Gear Target Acquired", true);
     	}
     	else {
     		SmartDashboard.putBoolean("Gear Target Acquired", false);
     	}
-    	
+    	*/
     }
 
     // Make this return true when this Command no longer needs to run execute()

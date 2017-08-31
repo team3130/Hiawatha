@@ -20,8 +20,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * This code was modeled after team 254's 2016 turret code
  */
 public class TurretFlywheel extends Subsystem {
-    CANTalon master_talon;
-    CANTalon slave_talon;
+    private static CANTalon master_talon;
+    private static CANTalon slave_talon;
     private static double P_DEFAULT = 1.0; //TODO: tune this
     private static double I_DEFAULT = 0.0; //TODO: tune this
     private static double D_DEFAULT = 0.0; //TODO: tune this
@@ -83,7 +83,7 @@ public class TurretFlywheel extends Subsystem {
         slave_talon.clearStickyFaults();
     }
 
-    public synchronized double getSpeed() {
+    public static synchronized double getSpeed() {
         return master_talon.getSpeed();
     }
 
@@ -94,7 +94,7 @@ public class TurretFlywheel extends Subsystem {
      * @param Set
      *            flywheel RPM
      */
-    synchronized void setSpeed(double rpm) {
+    public static synchronized void setSpeed(double rpm) {
         master_talon.changeControlMode(CANTalon.TalonControlMode.Speed);
         master_talon.set(rpm);
     }
