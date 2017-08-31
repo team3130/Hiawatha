@@ -40,8 +40,8 @@ public class RobotMap {
 			public static final int CAN_TURRETINDEX = 101; //TODO: assign this number
 			public static final int CAN_TURRETHOP = 102; //TODO: assign this number
 			public static final int CAN_TURRETANGLE = 30;
-			public static final int CAN_SHOOTERMASTER = 103; //TODO: assign this number
-			public static final int CAN_SHOOTERSLAVE = 104; //TODO: assign this number
+			public static final int CAN_SHOOTERMASTER = 31; //TODO: assign this number
+			public static final int CAN_SHOOTERSLAVE = 32; //TODO: assign this number
 		
 		//Pnuematics Ports
 			public static final int PNM_GEARSHIFTER = 0;
