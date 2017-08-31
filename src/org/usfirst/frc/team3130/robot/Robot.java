@@ -86,6 +86,7 @@ public class Robot extends IterativeRobot {
 		AndroidInterface.GetInstance();
 		AndroidInterface.GetInstance().reset();
 		TurretAngle.GetInstance();
+		TurretFlywheel.GetInstance();
 		ShooterWheelsRight.GetInstance();
 		Flashlight.GetInstance();
 

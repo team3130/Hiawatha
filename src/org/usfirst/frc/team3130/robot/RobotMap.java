@@ -105,6 +105,7 @@ public class RobotMap {
 			//Turret
 			public static final int BTN_TURRETINDEX = 666; //TODO: determine this #
 			public static final int BTN_TURRETHOP = 666; //TODO: determine this #
+			public static final int BTN_TURRETFLY = LST_BTN_RBUMPER;
 			
 			//Gear Control
 			public static final int BTN_PINCHGEAR = 1;	//Joystick L
@@ -126,6 +127,7 @@ public class RobotMap {
 			
 			//Flashlight
 			public static final int BTN_FLASHLIGHTTOGGLE = LST_BTN_X;
+			
 
 
 }

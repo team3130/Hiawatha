@@ -95,6 +95,8 @@ public class OI {
 	private static JoystickButton aim;
 	private static JoystickButton aimDrive;
 	
+	private static JoystickButton runFlywheel;
+	
 	private static JoystickButton driveBack;
 	private static JoystickButton driveBackEnd;
 	private static POVTrigger hopperDown;
@@ -150,6 +152,8 @@ public class OI {
 
 		flashlightToggle = new JoystickButton(gamepad, RobotMap.BTN_FLASHLIGHTTOGGLE);
 		
+		runFlywheel = new JoystickButton(gamepad, RobotMap.BTN_TURRETFLY);
+		
 		//Create Commands
 		wipeLPoints	= new WipeStopPoints(Robot.wscLeft);
 		wipeRPoints	= new WipeStopPoints(Robot.wscRight);
@@ -186,6 +190,7 @@ public class OI {
 		
 		flashlightToggle.whenPressed(new FlashlightToggle());
 		
+		runFlywheel.whileHeld(new ManualFlywheel());
 		
 		shiftUp.whenPressed(new DriveShiftUp());
 		shiftDown.whenPressed(new DriveShiftDown());

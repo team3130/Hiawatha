@@ -29,6 +29,22 @@ public class TurretFlywheel extends Subsystem {
     private static int IZONE_DEFAULT = 0; //TODO: tune this
     private static double RAMP_DEFAULT = 0.0; //TODO: tune this
     private static int SPEEDTOLERANCE = 100;
+    
+    //Instance Handling
+  	private static TurretFlywheel m_pInstance;
+  	/**
+  	 * A system for getting an instance of this class.
+  	 * The function provides a method by which the class is setup as a singleton
+  	 * with only a single copy of it existing in memory.
+  	 * <p> It will return a reference to the class, which is shared amongst all callers of GetInstance()
+  	 * 
+  	 * @return the reference to the class referred to in GetInstance. In this case, ShooterWheelsRight.
+  	 */
+  	public static TurretFlywheel GetInstance()
+  	{
+  		if(m_pInstance == null) m_pInstance = new TurretFlywheel();
+  		return m_pInstance;
+  	}
 
     private TurretFlywheel() {
         master_talon = new CANTalon(RobotMap.CAN_SHOOTERMASTER);
@@ -83,7 +99,7 @@ public class TurretFlywheel extends Subsystem {
         master_talon.set(rpm);
     }
 
-    synchronized void setOpenLoop(double speed) {
+    public synchronized void setOpenLoop(double speed) {
         master_talon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
         master_talon.set(speed);
     }
