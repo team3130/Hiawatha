@@ -38,7 +38,8 @@ public class RobotMap {
 			public static final int CAN_INDEXMOTORRIGHT = 45;
 			
 			public static final int CAN_TURRETINDEX = 101; //TODO: assign this number
-			public static final int CAN_TURRETHOP = 102; //TODO: assign this number
+			public static final int CAN_TURRETHOPL = 102; //TODO: assign this number
+			public static final int CAN_TURRETHOPR = 103; //TODO: assign this number
 			public static final int CAN_TURRETANGLE = 30;
 			public static final int CAN_SHOOTERMASTER = 31; //TODO: assign this number
 			public static final int CAN_SHOOTERSLAVE = 32; //TODO: assign this number
@@ -104,8 +105,10 @@ public class RobotMap {
 			
 			//Turret
 			public static final int BTN_TURRETINDEX = 666; //TODO: determine this #
-			public static final int BTN_TURRETHOP = 666; //TODO: determine this #
+			public static final int BTN_TURRETHOPL = 666; //TODO: determine this #
+			public static final int BTN_TURRETHOPR = 666; //TODO: determine this #
 			public static final int BTN_TURRETFLY = LST_BTN_RBUMPER;
+			public static final int BTN_TURRETINTAKE = LST_BTN_X;
 			
 			//Gear Control
 			public static final int BTN_PINCHGEAR = 1;	//Joystick L

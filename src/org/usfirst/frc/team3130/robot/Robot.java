@@ -50,7 +50,8 @@ public class Robot extends IterativeRobot {
 	public static WheelSpeedCalculations wscRight;
 	
 	public static BasicCANTalon btTurretIndex;
-	public static BasicCANTalon btTurretHopper;
+	public static BasicCANTalon btTurretHopperL;
+	public static BasicCANTalon btTurretHopperR;
 	
     // Enabled looper is called at 10Hz whenever the robot is enabled, frequency can be changed in Constants.java: kLooperDt
     Looper mEnabledLooper = new Looper();
@@ -77,7 +78,9 @@ public class Robot extends IterativeRobot {
 		wscRight = new WheelSpeedCalculations("home/lvuser/speed-storage-right.ini");
 		
 		btTurretIndex = new BasicCANTalon(RobotMap.CAN_TURRETINDEX, "Turret Indexer", "Turret Index Motor");
-		btTurretHopper = new BasicCANTalon(RobotMap.CAN_TURRETHOP, "Turret Hopper", "Turret Hopper Motor");
+		btTurretHopperL = new BasicCANTalon(RobotMap.CAN_TURRETHOPL, "Turret Hopper", "Turret Hopper Motor Left");
+		btTurretHopperR = new BasicCANTalon(RobotMap.CAN_TURRETHOPR, "Turret Hopper", "Turret Hopper Motor Right");
+		
 			
 		OI.GetInstance();
 		Chassis.GetInstance();

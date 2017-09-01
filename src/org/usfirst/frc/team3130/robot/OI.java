@@ -95,7 +95,8 @@ public class OI {
 	private static JoystickButton aim;
 	private static JoystickButton aimDrive;
 	
-	private static JoystickButton runFlywheel;
+	private static JoystickButton turretShoot;
+	private static JoystickButton turretIntake;
 	
 	private static JoystickButton driveBack;
 	private static JoystickButton driveBackEnd;
@@ -152,7 +153,8 @@ public class OI {
 
 		flashlightToggle = new JoystickButton(gamepad, RobotMap.BTN_FLASHLIGHTTOGGLE);
 		
-		runFlywheel = new JoystickButton(gamepad, RobotMap.BTN_TURRETFLY);
+		turretShoot = new JoystickButton(gamepad, RobotMap.BTN_TURRETFLY);
+		turretIntake = new JoystickButton(gamepad, RobotMap.BTN_TURRETINTAKE);
 		
 		//Create Commands
 		wipeLPoints	= new WipeStopPoints(Robot.wscLeft);
@@ -190,7 +192,8 @@ public class OI {
 		
 		flashlightToggle.whenPressed(new FlashlightToggle());
 		
-		runFlywheel.whileHeld(new ManualFlywheel());
+		turretShoot.whileHeld(new ManualFlywheel());
+		turretIntake.whileHeld(new ManualTurretIntake());
 		
 		shiftUp.whenPressed(new DriveShiftUp());
 		shiftDown.whenPressed(new DriveShiftDown());
