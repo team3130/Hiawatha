@@ -52,7 +52,7 @@ public class TurretAngle extends Subsystem {
 		m_turret.ConfigFwdLimitSwitchNormallyOpen(true);
 		m_turret.ConfigRevLimitSwitchNormallyOpen(true);
 		m_turret.setStatusFrameRateMs(CANTalon.StatusFrameRate.Feedback, 10);
-		m_turret.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
+		m_turret.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative); //TODO: check if this is accurate
 		if (m_turret.isSensorPresent(
 				CANTalon.FeedbackDevice.CtreMagEncoder_Relative) != CANTalon.FeedbackDeviceStatus.FeedbackStatusPresent) {
 			DriverStation.reportError("Could not detect turret encoder!", false);

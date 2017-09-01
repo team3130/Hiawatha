@@ -3,6 +3,7 @@ package org.usfirst.frc.team3130.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team3130.robot.OI;
+import org.usfirst.frc.team3130.robot.RobotMap;
 import org.usfirst.frc.team3130.robot.subsystems.TurretAngle;
 
 public class ManualTurretAim extends Command {
@@ -17,7 +18,7 @@ public class ManualTurretAim extends Command {
 	
 	protected void execute() {
     	
-    	double turnSpeed = OI.gamepad.getRawAxis(4); //returns value from -1 to 1 of R X axis of gamepad.
+    	double turnSpeed = OI.gamepad.getRawAxis(RobotMap.LST_AXS_RJOYSTICKX); //returns value from -1 to 1 of R X axis of gamepad.
     	TurretAngle.GetInstance().setOpenLoop(turnSpeed);
     }
 

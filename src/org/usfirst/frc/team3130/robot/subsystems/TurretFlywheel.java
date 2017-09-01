@@ -83,7 +83,7 @@ public class TurretFlywheel extends Subsystem {
         slave_talon.clearStickyFaults();
     }
 
-    public static synchronized double getSpeed() {
+    public static double getSpeed() {
         return master_talon.getSpeed() * 48.0 * (13.0/36.0); //Turret Flywheel uses a RS7 encoder with resolution of 12 ticks per rotation (counts per rotation, CPR). RS7 is a quadrature encoder so the multipler is 4xCPR.
     }
 
@@ -94,17 +94,21 @@ public class TurretFlywheel extends Subsystem {
      * @param Set
      *            flywheel RPM
      */
-    public static synchronized void setSpeed(double rpm) {
+    public static void setSpeed(double rpm) {
         master_talon.changeControlMode(CANTalon.TalonControlMode.Speed);
         master_talon.set(rpm);
     }
 
-    public synchronized void setOpenLoop(double speed) {
+    public static double getVBus(){
+    	return master_talon.getBusVoltage();
+    }
+    
+    public static void setOpenLoop(double speed) {
         master_talon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
         master_talon.set(speed);
     }
 
-    public synchronized double getSetpoint() {
+    public static double getSetpoint() {
         return master_talon.getSetpoint();
     }
 
@@ -112,17 +116,17 @@ public class TurretFlywheel extends Subsystem {
      * @return If the flywheel RPM is within the tolerance to the specified set
      *         point.
      */
-    public synchronized boolean isOnTarget() {
+    public static boolean isOnTarget() {
         return (master_talon.getControlMode() == CANTalon.TalonControlMode.Speed
                 && Math.abs(getSpeed() - getSetpoint()) < SPEEDTOLERANCE);
     }
 
-    public synchronized void stop() {
+    public static void stop() {
         setOpenLoop(0);
     }
 
     
-    public void outputToSmartDashboard() {
+    public static void outputToSmartDashboard() {
         SmartDashboard.putNumber("flywheel_rpm", getSpeed());
         SmartDashboard.putNumber("flywheel_setpoint", master_talon.getSetpoint());
         SmartDashboard.putBoolean("flywheel_on_target", isOnTarget());
@@ -130,7 +134,7 @@ public class TurretFlywheel extends Subsystem {
         SmartDashboard.putNumber("flywheel_slave_current", slave_talon.getOutputCurrent());
     }
 
-    public void zeroSensors() {
+    public static void zeroSensors() {
         // no-op
     }
 
