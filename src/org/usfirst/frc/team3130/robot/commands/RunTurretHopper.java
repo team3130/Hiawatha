@@ -11,12 +11,14 @@ import edu.wpi.first.wpilibj.command.Command;
 public class RunTurretHopper extends Command {
 
     public RunTurretHopper() {
-        requires(Robot.btTurretHopper);
+        requires(Robot.btTurretHopperL);
+        requires(Robot.btTurretHopperR);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.btTurretHopper.spinMotor(Preferences.getInstance().getDouble("Turret Hopper Motor PercentVBus", 0.2));
+    	Robot.btTurretHopperL.spinMotor(Preferences.getInstance().getDouble("Turret Hopper Motor PercentVBus", 0.3));
+    	Robot.btTurretHopperR.spinMotor(Preferences.getInstance().getDouble("Turret Hopper Motor PercentVBus", 0.3));
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -30,7 +32,8 @@ public class RunTurretHopper extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.btTurretHopper.spinMotor(0);
+    	Robot.btTurretHopperL.spinMotor(0);
+    	Robot.btTurretHopperR.spinMotor(0);
     }
 
     // Called when another command which requires one or more of the same
