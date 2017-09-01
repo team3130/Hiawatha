@@ -2,6 +2,7 @@ package org.usfirst.frc.team3130.robot.commands;
 
 import org.usfirst.frc.team3130.robot.subsystems.TurretFlywheel;
 
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -9,17 +10,21 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ManualFlywheel extends Command {
 
+	private static int wheelSpeedTarget; 
+	private static int WHEELSPEEDDEFAULT = 3500; //TODO: determine speed for sweet spot
+	
     public ManualFlywheel() {
         requires(TurretFlywheel.GetInstance());
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	wheelSpeedTarget = Preferences.getInstance().getInt("Turret Wheel Speed", WHEELSPEEDDEFAULT);
+    	TurretFlywheel.setSpeed(wheelSpeedTarget);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	TurretFlywheel.GetInstance().setOpenLoop(0.7);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -29,7 +34,7 @@ public class ManualFlywheel extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	TurretFlywheel.GetInstance().setOpenLoop(0);
+    	TurretFlywheel.setOpenLoop(0);
     }
 
     // Called when another command which requires one or more of the same
