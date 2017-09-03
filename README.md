@@ -12,8 +12,11 @@ This code requires json-simple-1.1.1.jar as a library for Android-RIO communicat
 6. Navigate to "Hiawatha>lib>json-simple-1.1.1.jar" select it and hit OK
 7. Hit apply and OK
 
-## ADB Install notes
+## ADB Installation and Operation notes
 
-adb.sh and RIOdroid.sh from Team Spectrum have Windows end of line characters (CRLF) that need to be changed to linux (LF).
+The adb.sh and RIOdroid.sh from Team Spectrum have Windows end of line characters (CRLF) that need to be changed to linux (LF). Check this before deploying robot code.
+
+-Before turning the robot on, make sure that the phone is unlocked and on the home screen.
+-When connecting and disconnecting the Nexus 5 from the RoboRio usb connection, ensure the robot is powered off. 
 
 
