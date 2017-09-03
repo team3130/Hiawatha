@@ -22,9 +22,11 @@ import org.usfirst.frc.team3130.robot.autoCommands.FortyBallAuton;
 import org.usfirst.frc.team3130.robot.autoCommands.NoVision40Ball;
 import org.usfirst.frc.team3130.robot.commands.RobotSensors;
 import org.usfirst.frc.team3130.robot.subsystems.*;
+import org.usfirst.frc.team3130.util.*;
 
 import org.usfirst.frc.team3130.util.Looper;
 import org.usfirst.frc.team3130.robot.vision.VisionProcessor;
+import org.usfirst.frc.team3130.robot.vision.VisionServer;
 
 
 /**
@@ -52,6 +54,7 @@ public class Robot extends IterativeRobot {
 	public static BasicCANTalon btTurretIndex;
 	public static BasicCANTalon btTurretHopperL;
 	public static BasicCANTalon btTurretHopperR;
+	
 	
     // Enabled looper is called at 10Hz whenever the robot is enabled, frequency can be changed in Constants.java: kLooperDt
     Looper mEnabledLooper = new Looper();
@@ -86,19 +89,24 @@ public class Robot extends IterativeRobot {
 		Chassis.GetInstance();
 		Climber.GetInstance();
 		JetsonInterface.GetInstance();
-		AndroidInterface.GetInstance();
-		AndroidInterface.GetInstance().reset();
 		TurretAngle.GetInstance();
 		TurretFlywheel.GetInstance();
 		ShooterWheelsRight.GetInstance();
 		Flashlight.GetInstance();
+		
+		AndroidInterface.GetInstance();
+		AndroidInterface.GetInstance().reset();
+		VisionServer.getInstance();
+		
 
 		// Configure loopers
 		//remove turret resetter, RobotStateEstimator, and Superstructure (imports also removed) @author Eastan
-        //mEnabledLooper.register(new TurretResetter());
+        mEnabledLooper.register(new TurretResetter());
         mEnabledLooper.register(VisionProcessor.getInstance());
         //mEnabledLooper.register(RobotStateEstimator.getInstance());
         //mEnabledLooper.register(Superstructure.getInstance().getLoop());
+        
+ 
         
 		// Simplest camera feed. Remove if not needed.
 		UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
@@ -115,18 +123,22 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Side Gear Hopper", "Side Gear Hopper");
 		chooser.addObject("No Vision Gear and 10", "No Vision Gear and 10");
 		chooser.addObject("No Vision Forty Ball", "No Vision Forty Ball");
-		//SmartDashboard.putData("Auto mode", chooser);*/
+		SmartDashboard.putData("Auto mode", chooser);*/
 	}
 
 	
 	@Override
 	public void disabledInit() {
 		//resetGear.start();
+		VisionServer.getInstance().shutdownVision();
+        mEnabledLooper.stop();
+        mDisabledLooper.start();
 	}
 
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		mEnabledLooper.outputToSmartDashboard();
 	}
 
 	
@@ -173,6 +185,12 @@ public class Robot extends IterativeRobot {
 		autonomousCommand = new DumbGearAuto();		
 		if (autonomousCommand != null)
 			autonomousCommand.start();
+		
+        mDisabledLooper.stop();
+        mEnabledLooper.start();
+        
+        VisionServer.getInstance().requestAppRestart();
+        
 	}
 
 	/**
@@ -181,6 +199,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		mEnabledLooper.outputToSmartDashboard();
 	}
 
 	@Override
@@ -191,7 +210,10 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-		
+        mDisabledLooper.stop();
+        mEnabledLooper.start();
+        
+        VisionServer.getInstance().requestAppRestart();
 	}
 
 	/**
@@ -200,6 +222,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		mEnabledLooper.outputToSmartDashboard();
+		
 	}
 
 	/**

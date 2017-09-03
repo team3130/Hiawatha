@@ -109,6 +109,15 @@ public class TurretAngle extends Subsystem {
 	public synchronized boolean getReverseLimitSwitch() {
 		return m_turret.isRevLimitSwitchClosed();
 	}
+	
+    public synchronized void resetTurretAtMax() {
+       reset(Rotation2d.fromDegrees(Constants.kHardMaxTurretAngle));
+    }
+
+    public synchronized void resetTurretAtMin() {
+        reset(Rotation2d.fromDegrees(Constants.kHardMinTurretAngle));
+    }
+
 
 	public synchronized double getSetpoint() {
 		return m_turret.getSetpoint() * Constants.kTurretRotationsPerTick * 360.0;

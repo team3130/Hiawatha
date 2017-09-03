@@ -7,6 +7,7 @@ import org.usfirst.frc.team3130.robot.vision.messages.OffWireMessage;
 import org.usfirst.frc.team3130.robot.vision.messages.VisionMessage;
 import org.usfirst.frc.team3130.util.CrashTrackingRunnable;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,6 +37,8 @@ public class VisionServer extends CrashTrackingRunnable {
     AdbBridge adb = new AdbBridge();
     double lastMessageReceivedTime = 0;
     private boolean m_use_java_time = false;
+    
+    private AppMaintainanceThread m_maintainance;
 
     private ArrayList<ServerThread> serverThreads = new ArrayList<>();
     private volatile boolean mWantsAppRestart = false;
@@ -55,6 +58,7 @@ public class VisionServer extends CrashTrackingRunnable {
 
     public void requestAppRestart() {
         mWantsAppRestart = true;
+        m_maintainance.restart(); 
     }
 
     protected class ServerThread extends CrashTrackingRunnable {
@@ -153,12 +157,20 @@ public class VisionServer extends CrashTrackingRunnable {
             e.printStackTrace();
         }
         new Thread(this).start();
-        new Thread(new AppMaintainanceThread()).start();
+        m_maintainance = new AppMaintainanceThread();
+        new Thread(m_maintainance).start();
     }
 
     public void restartAdb() {
         adb.restartAdb();
         adb.reversePortForward(m_port, m_port);
+    }
+    
+    public void shutdownVision() {
+        m_maintainance.stop();
+        adb.stopApp();
+        adb.stop();
+        
     }
 
     /**
@@ -197,29 +209,47 @@ public class VisionServer extends CrashTrackingRunnable {
             }
         }
     }
+    public static void outputToSmartDashboard() {
+    	SmartDashboard.putString("adbState", VisionServer.getInstance().adb.getAdbState());
+        SmartDashboard.putBoolean("Android_Connected", VisionServer.getInstance().isConnected());
+
+    }
 
     private class AppMaintainanceThread extends CrashTrackingRunnable {
+        private volatile boolean mVisionEnabled = true;
         @Override
         public void runCrashTracked() {
             while (true) {
-                if (getTimestamp() - lastMessageReceivedTime > .1) {
-                    // camera disconnected
-                    adb.reversePortForward(m_port, m_port);
-                    mIsConnect = false;
-                } else {
-                    mIsConnect = true;
-                }
-                if (mWantsAppRestart) {
-                    adb.restartApp();
-                    mWantsAppRestart = false;
+                if (mVisionEnabled == true) {
+                	if (getTimestamp() - lastMessageReceivedTime > .1) {
+                		// camera disconnected
+                		adb.reversePortForward(m_port, m_port);
+                		mIsConnect = false;
+                	} else {
+                		mIsConnect = true;
+                	}
+                	if (mWantsAppRestart) {
+                		adb.restartApp();
+                		mWantsAppRestart = false;
+                	}
                 }
                 try {
-                    Thread.sleep(200);
+                	Thread.sleep(200);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                	e.printStackTrace();
                 }
+                
             }
         }
+        
+        public void stop() {
+            mVisionEnabled = false;
+        }
+        
+        public void restart() {
+            mVisionEnabled = true;
+        }
+        
     }
 
     private double getTimestamp() {

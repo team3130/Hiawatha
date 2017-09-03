@@ -131,6 +131,10 @@ public class RobotMap {
 			//Flashlight
 			public static final int BTN_FLASHLIGHTTOGGLE = LST_BTN_X;
 			
+			//Vision App Force Restart
+			public static final int BTN_VISIONAPPRESTART_1 = LST_BTN_B;
+			public static final int BTN_VISIONAPPRESTART_2 = LST_BTN_LBUMPER;
+			
 
 
 }

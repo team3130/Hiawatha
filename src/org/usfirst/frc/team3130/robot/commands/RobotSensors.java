@@ -2,6 +2,8 @@ package org.usfirst.frc.team3130.robot.commands;
 
 import org.usfirst.frc.team3130.robot.Robot;
 import org.usfirst.frc.team3130.robot.subsystems.*;
+import org.usfirst.frc.team3130.robot.vision.VisionServer;
+import org.usfirst.frc.team3130.util.*;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -46,12 +48,18 @@ public class RobotSensors extends Command {
     	//SmartDashboard.putNumber("Shooter Right Wheel Voltage", ShooterWheelsRight.GetVolt());
     	//SmartDashboard.putNumber("Shooter Right Wheel Position", ShooterWheelsRight.GetPosition());
     	//SmartDashboard.putNumber("Shooter Right Wheel Current", ShooterWheelsRight.GetCurrent());
-    	
+        
+        TurretFlywheel.outputToSmartDashboard();
+        VisionServer.outputToSmartDashboard();
+        
+    	/*
     	SmartDashboard.putNumber("Flywheel Speed", TurretFlywheel.getSpeed());
     	SmartDashboard.putBoolean("Turret Wheel Up to Speed", TurretFlywheel.isOnTarget());
     	SmartDashboard.putNumber("Turret Wheel Setpoint", TurretFlywheel.getSetpoint());
+    	*/
+    	SmartDashboard.putBoolean("Boiler Seen", AndroidInterface.targetTracking());
     	
-    	SmartDashboard.putBoolean("Boiler Seen", AndroidInterface.targetTracking() == true);
+    	
     	
     	//Chassis
     	//SmartDashboard.putNumber("Front Left Wheel Speed", Chassis.GetSpeedL());
