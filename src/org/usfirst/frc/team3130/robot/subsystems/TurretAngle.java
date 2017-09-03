@@ -76,7 +76,7 @@ public class TurretAngle extends Subsystem {
 
 	// Set the desired angle of the turret (and put it into position control
 	// mode if it isn't already).
-	public synchronized void setAngle(double angle_deg) {
+	public synchronized static void setAngle(double angle_deg) {
 		Rotation2d angle = Rotation2d.fromDegrees(angle_deg);
 		m_turret.changeControlMode(CANTalon.TalonControlMode.Position);
 		// In Position mode, outputValue set is in encoder ticks 

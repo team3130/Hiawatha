@@ -17,6 +17,10 @@ public class ManualFlywheel extends Command {
         requires(TurretFlywheel.GetInstance());
     }
 
+    public void SetParam(int speed){
+    	wheelSpeedTarget = speed;
+    }
+    
     // Called just before this Command runs the first time
     protected void initialize() {
     	wheelSpeedTarget = Preferences.getInstance().getInt("Turret Wheel Speed", WHEELSPEEDDEFAULT);

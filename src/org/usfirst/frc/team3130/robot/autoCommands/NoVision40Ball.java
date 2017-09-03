@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class NoVision40Ball extends CommandGroup {
 
-	private AutoBasicActuate			hopperDown;
 	private AutoDriveStraightToPoint    driveForward;
     private AutoTurn               		turn_towardsHopper;
     private AutoBasicActuate            clampPinch;
@@ -32,7 +31,6 @@ public class NoVision40Ball extends CommandGroup {
 		requires(Robot.btHopper);
 		requires(Robot.bcHopperFloor);
 		
-		hopperDown = new AutoBasicActuate(Robot.bcHopperFloor, true);
 		driveForward = new AutoDriveStraightToPoint();
 	    turn_towardsHopper = new AutoTurn();
 	    clampPinch = new AutoBasicActuate(Robot.bcGearPinch, true);
@@ -40,7 +38,6 @@ public class NoVision40Ball extends CommandGroup {
 		auto_shootFromHopper = new NoVisionShootAfterHopper();
 		drive_pressToButton = new ContDrive();
 
-		addParallel(hopperDown, 1);
 		addParallel(clampPinch, 1);
 		addSequential(driveForward,3);
 		addSequential(turn_towardsHopper,2);

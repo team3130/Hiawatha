@@ -9,9 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ManualTurretIntake extends Command {
-
-	
+public class ManualTurretIntake extends Command {	
 	
     public ManualTurretIntake() {
         requires(Robot.btTurretIndex);

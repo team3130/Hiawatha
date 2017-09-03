@@ -183,7 +183,8 @@ public class Robot extends IterativeRobot {
 		}
 		*/
 		//Hardcode goes below, comment out switch above
-		autonomousCommand = new DumbGearAuto();		
+		
+		autonomousCommand = new NoVision40Ball();		
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 		
