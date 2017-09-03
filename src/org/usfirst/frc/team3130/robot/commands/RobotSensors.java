@@ -3,6 +3,7 @@ package org.usfirst.frc.team3130.robot.commands;
 import org.usfirst.frc.team3130.robot.Robot;
 import org.usfirst.frc.team3130.robot.subsystems.*;
 import org.usfirst.frc.team3130.robot.vision.VisionServer;
+import org.usfirst.frc.team3130.robot.vision.VisionUpdate;
 import org.usfirst.frc.team3130.util.*;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -57,8 +58,8 @@ public class RobotSensors extends Command {
     	SmartDashboard.putBoolean("Turret Wheel Up to Speed", TurretFlywheel.isOnTarget());
     	SmartDashboard.putNumber("Turret Wheel Setpoint", TurretFlywheel.getSetpoint());
     	*/
-    	SmartDashboard.putBoolean("Boiler Seen", AndroidInterface.targetTracking());
-    	
+    	SmartDashboard.putBoolean("Tracking Targets", AndroidInterface.targetTracking());
+    	SmartDashboard.putInt("Target Count", VisionUpdate.hasTargetInfo());
     	
     	
     	//Chassis

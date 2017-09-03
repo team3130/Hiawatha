@@ -18,7 +18,8 @@ public class VisionUpdate {
     protected long capturedAgoMs;
     protected List<TargetInfo> targets;
     protected double capturedAtTimestamp = 0;
-
+    protected static int targetCount = 0;
+    
     private static long getOptLong(Object n, long defaultValue) {
         if (n == null) {
             return defaultValue;
@@ -71,6 +72,7 @@ public class VisionUpdate {
                     return update;
                 }
                 targetInfos.add(new TargetInfo(y.get(), z.get()));
+                targetCount++;
             }
             update.targets = targetInfos;
             update.valid = true;
@@ -84,6 +86,9 @@ public class VisionUpdate {
         return update;
     }
 
+    public static int hasTargetInfo() {
+    	return (targetCount);
+    }
     public List<TargetInfo> getTargets() {
         return targets;
     }
