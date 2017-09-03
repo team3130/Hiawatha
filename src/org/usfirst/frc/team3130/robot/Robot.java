@@ -98,7 +98,8 @@ public class Robot extends IterativeRobot {
 		AndroidInterface.GetInstance().reset();
 		VisionServer.getInstance();
 		
-
+		VisionServer.getInstance().requestAppStart();
+		
 		// Configure loopers
 		//remove turret resetter, RobotStateEstimator, and Superstructure (imports also removed) @author Eastan
         mEnabledLooper.register(new TurretResetter());
@@ -130,7 +131,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledInit() {
 		//resetGear.start();
-		VisionServer.getInstance().shutdownVision();
+
         mEnabledLooper.stop();
         mDisabledLooper.start();
 	}
@@ -189,7 +190,7 @@ public class Robot extends IterativeRobot {
         mDisabledLooper.stop();
         mEnabledLooper.start();
         
-        VisionServer.getInstance().requestAppRestart();
+
         
 	}
 
@@ -213,7 +214,7 @@ public class Robot extends IterativeRobot {
         mDisabledLooper.stop();
         mEnabledLooper.start();
         
-        VisionServer.getInstance().requestAppRestart();
+
 	}
 
 	/**

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3130.robot.vision;
 
 import java.io.IOException;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -25,9 +26,32 @@ public class AdbBridge {
             adb_location = Paths.get(env_val);
         }
         bin_location_ = adb_location;
-        adbState = " AdbBridge() ";
+        adbState = " AdbBridge() Enabled: "+String.valueOf(EnableAllAdb);
+        System.out.println(adbState);  
     }
-
+    //killAdb() used during testing, Adb server shouldn't be killed on Init, doing so invalidates Rio Adb authentication
+    /*private boolean killAdb(){
+    	Runtime r = Runtime.getRuntime();
+        String cmd = "/usr/bin/killall adb";
+        try {
+        	//if(EnableAllAdb == true)
+        	{
+        		System.out.println("ADB kill: " + cmd);
+        		Process p = r.exec(cmd);
+        		int code = p.waitFor();
+        		System.out.println("ADB kill code: " + String.valueOf(code));
+        	}
+        } catch (IOException e) {
+            System.err.println("AdbBridge: Could not run command " + cmd);
+            e.printStackTrace();
+            return false;
+        } catch (InterruptedException e) {
+            System.err.println("AdbBridge: Could not run command " + cmd);
+            e.printStackTrace();
+            return false;
+        }
+        return true;	
+    }*/
     public AdbBridge(Path location) {
         bin_location_ = location;
     }
@@ -35,11 +59,12 @@ public class AdbBridge {
     private boolean runCommand(String args) {
         Runtime r = Runtime.getRuntime();
         String cmd = bin_location_.toString() + " " + args;
-
         try {
         	if(EnableAllAdb == true){
+        		System.out.println("ADB cmd: " + cmd);
         		Process p = r.exec(cmd);
-        		p.waitFor();
+        		int code = p.waitFor();
+        		System.out.println("ADB cmd code: " + String.valueOf(code));
         	}
         } catch (IOException e) {
             System.err.println("AdbBridge: Could not run command " + cmd);
@@ -55,8 +80,13 @@ public class AdbBridge {
 
     public void start() {
     	adbState = " Adb start() ";
-        System.out.println("Starting adb");
+        System.out.println(adbState);
         runCommand("start-server");
+        /*try {
+        	Thread.sleep(3000);
+        } catch (InterruptedException e) {
+        	e.printStackTrace();
+        } */
     }
 
     public void stop() {
@@ -86,6 +116,7 @@ public class AdbBridge {
         System.out.println("Restarting app");
         runCommand("shell am force-stop com.team3130.vision3130 \\; "
                 + "am start com.team3130.vision3130/com.team3130.vision3130.VisionTrackerActivity");
+        System.out.println("App started");
     }
     
     public void stopApp() {
@@ -93,6 +124,12 @@ public class AdbBridge {
     	runCommand("shell am force-stop com.team3130.vision3130");
     }
 
+    public void startApp() {
+    	adbState = "Adb startApp()";
+    	System.out.println("Starting app");
+    	runCommand("shell am start com.team3130.vision3130/com.team3130.vision3130.VisionTrackerActivity");
+    	System.out.println("App started");
+    }
     public String getAdbState(){
     	return adbState;
     }

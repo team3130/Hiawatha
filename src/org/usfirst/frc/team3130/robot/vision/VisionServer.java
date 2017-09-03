@@ -42,7 +42,8 @@ public class VisionServer extends CrashTrackingRunnable {
 
     private ArrayList<ServerThread> serverThreads = new ArrayList<>();
     private volatile boolean mWantsAppRestart = false;
-
+    private volatile boolean mWantsAppStart = false;
+    
     public static VisionServer getInstance() {
         if (s_instance == null) {
             s_instance = new VisionServer(Constants.kAndroidAppTcpPort);
@@ -58,7 +59,10 @@ public class VisionServer extends CrashTrackingRunnable {
 
     public void requestAppRestart() {
         mWantsAppRestart = true;
-        m_maintainance.restart(); 
+    }
+    
+    public void requestAppStart() {
+        mWantsAppStart = true;
     }
 
     protected class ServerThread extends CrashTrackingRunnable {
@@ -142,6 +146,7 @@ public class VisionServer extends CrashTrackingRunnable {
      */
     private VisionServer(int port) {
         try {
+        	System.out.println("Starting VisionServer");
             adb = new AdbBridge();
             m_port = port;
             m_server_socket = new ServerSocket(port);
@@ -166,12 +171,12 @@ public class VisionServer extends CrashTrackingRunnable {
         adb.reversePortForward(m_port, m_port);
     }
     
-    public void shutdownVision() {
+/*    public void shutdownVision() {
         m_maintainance.stop();
         adb.stopApp();
         adb.stop();
         
-    }
+    } */
 
     /**
      * If a VisionUpdate object (i.e. a target) is not in the list, add it.
@@ -219,22 +224,31 @@ public class VisionServer extends CrashTrackingRunnable {
         private volatile boolean mVisionEnabled = true;
         @Override
         public void runCrashTracked() {
+        	System.out.println("Starting AppMaintainanceThread");
             while (true) {
                 if (mVisionEnabled == true) {
-                	if (getTimestamp() - lastMessageReceivedTime > .1) {
-                		// camera disconnected
-                		adb.reversePortForward(m_port, m_port);
-                		mIsConnect = false;
-                	} else {
-                		mIsConnect = true;
-                	}
-                	if (mWantsAppRestart) {
-                		adb.restartApp();
-                		mWantsAppRestart = false;
-                	}
+                    if (mWantsAppStart) {
+                        adb.start();
+                        adb.reversePortForward(m_port, m_port);
+                        adb.startApp();
+                        mWantsAppStart = false;
+                    }else if (mWantsAppRestart) {
+                        adb.start();
+                        adb.reversePortForward(m_port, m_port);
+                        adb.restartApp();
+                        mWantsAppRestart = false;
+                    } else {
+                    	if (getTimestamp() - lastMessageReceivedTime > .1) {
+                    		// camera disconnected
+                    		adb.reversePortForward(m_port, m_port);
+                    		mIsConnect = false;
+                    	} else {
+                    		mIsConnect = true;
+                    	}
+                    }
                 }
                 try {
-                	Thread.sleep(200);
+                	Thread.sleep(4200);
                 } catch (InterruptedException e) {
                 	e.printStackTrace();
                 }

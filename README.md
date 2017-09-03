@@ -12,4 +12,8 @@ This code requires json-simple-1.1.1.jar as a library for Android-RIO communicat
 6. Navigate to "Hiawatha>lib>json-simple-1.1.1.jar" select it and hit OK
 7. Hit apply and OK
 
+## ADB Install notes
+
+adb.sh and RIOdroid.sh from Team Spectrum have Windows end of line characters (CRLF) that need to be changed to linux (LF).
+
 
