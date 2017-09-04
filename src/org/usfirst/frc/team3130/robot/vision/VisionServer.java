@@ -248,7 +248,7 @@ public class VisionServer extends CrashTrackingRunnable {
                     }
                 }
                 try {
-                	Thread.sleep(4200);
+                	Thread.sleep(200);
                 } catch (InterruptedException e) {
                 	e.printStackTrace();
                 }

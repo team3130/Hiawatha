@@ -138,6 +138,9 @@ public class GoalTracker {
         return !mCurrentTracks.isEmpty();
     }
 
+    public int getTrackCount(){
+    	return mCurrentTracks.size();
+    }
     public List<TrackReport> getTracks() {
         List<TrackReport> rv = new ArrayList<>();
         for (GoalTrack track : mCurrentTracks) {

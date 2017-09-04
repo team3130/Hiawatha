@@ -38,6 +38,7 @@ public class Robot extends IterativeRobot {
 	Command autonomousCommand;
 	SendableChooser<String> chooser;
 	RobotSensors robotSensors;
+	VisionServer mVisionServer = VisionServer.getInstance();
 
 	public static BasicCylinder bcGearPinch;	//Disabled Open
 	public static BasicCylinder bcGearLift;		//Disabled Up
@@ -100,6 +101,7 @@ public class Robot extends IterativeRobot {
 		
 		VisionServer.getInstance().requestAppStart();
 		
+		mVisionServer.addVisionUpdateReceiver(VisionProcessor.getInstance());
 		// Configure loopers
 		//remove turret resetter, RobotStateEstimator, and Superstructure (imports also removed) @author Eastan
         mEnabledLooper.register(new TurretResetter());

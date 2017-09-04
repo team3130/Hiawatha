@@ -61,10 +61,9 @@ public class AdbBridge {
         String cmd = bin_location_.toString() + " " + args;
         try {
         	if(EnableAllAdb == true){
-        		System.out.println("ADB cmd: " + cmd);
         		Process p = r.exec(cmd);
-        		int code = p.waitFor();
-        		System.out.println("ADB cmd code: " + String.valueOf(code));
+        		p.waitFor();
+
         	}
         } catch (IOException e) {
             System.err.println("AdbBridge: Could not run command " + cmd);

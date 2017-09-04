@@ -85,7 +85,7 @@ public class TurretAngle extends Subsystem {
 
 	// Manually move the turret (and put it into vbus mode if it isn't already). Input range -1.0 to 1.0
 	public synchronized void setOpenLoop(double speed) {
-		m_turret.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		m_turret.changeControlMode(CANTalon.TalonControlMode.PercentVbus); //TODO: Change to speed mode to counter resistance 
 		m_turret.set(-0.12*speed); //scale to max of 12%
 	}
 

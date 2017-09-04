@@ -16,6 +16,7 @@ import org.usfirst.frc.team3130.robot.vision.TargetInfo;
 import org.usfirst.frc.team3130.util.RigidTransform2d;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class AndroidInterface extends Subsystem {
 
@@ -58,12 +59,15 @@ public class AndroidInterface extends Subsystem {
     			for (TargetInfo target : vision_update) {
                     //target.z will be stored in "x" variable of Translation2d, to get z value, use Translation2d.getX()
                     field_to_goals.add( new Translation2d(target.getZ() , target.getY()));
-             
             	}
     		}
         synchronized (this) {
             goal_tracker_.update(timestamp, field_to_goals);
         }
+    }
+    
+    public static int getTrackCount(){
+    	return GetInstance().goal_tracker_.getTrackCount();
     }
     public synchronized void resetVision() {
         goal_tracker_.reset();
@@ -105,6 +109,41 @@ public class AndroidInterface extends Subsystem {
     }
     public static boolean targetTracking() {
     	return m_pInstance.goal_tracker_.hasTracks();
+    }
+    
+
+	public static void outputToSmartDashboard() {
+    	List<TrackReport> visionReports = GetInstance().goal_tracker_.getTracks();
+    	String TargetInfo = " No Target Tracks ";
+        for (TrackReport vreport : visionReports) {
+        	double targetY = vreport.field_to_goal.getY();
+        	double targetZ = vreport.field_to_goal.getX();
+        	double ydeadband = (targetY > -Constants.kCameraDeadband
+                    && targetY < Constants.kCameraDeadband) ? 0.0 : targetY;
+
+            // Compensate for camera yaw
+            double xyaw = 1.0 * GetInstance().camera_yaw_correction_.cos() + ydeadband * GetInstance().camera_yaw_correction_.sin();
+            double yyaw = ydeadband * GetInstance().camera_yaw_correction_.cos() - 1.0 * GetInstance().camera_yaw_correction_.sin();
+            double zyaw = targetZ;
+
+            // Compensate for camera pitch
+            double xr = zyaw * GetInstance().camera_pitch_correction_.sin() + xyaw * GetInstance().camera_pitch_correction_.cos();
+            double yr = yyaw;
+            double zr = zyaw * GetInstance().camera_pitch_correction_.cos() - xyaw * GetInstance().camera_pitch_correction_.sin();
+             ;
+            // find intersection with the goal
+            if (zr > 0) {
+                double scaling = GetInstance().differential_height_ / zr;
+                double distance = Math.hypot(xr, yr) * scaling;
+                Rotation2d angle = new Rotation2d(xr, yr, true);
+                //range to object, and angle
+                TargetInfo = "angle: " + String.valueOf(angle.getDegrees()) + "  distance: " + String.valueOf(distance);
+            }
+            
+        }
+        SmartDashboard.putString("TargetInfo", TargetInfo);
+        SmartDashboard.putBoolean("Tracking Targets", targetTracking());
+        SmartDashboard.putNumber("Number of Active Tracks", (double) getTrackCount());
     }
 
 @Override

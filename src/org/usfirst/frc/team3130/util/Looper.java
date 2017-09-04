@@ -55,7 +55,6 @@ public class Looper {
 
     public synchronized void start() {
         if (!running_) {
-            System.out.println("Starting loops");
             synchronized (taskRunningLock_) {
                 timestamp_ = Timer.getFPGATimestamp();
                 for (Loop loop : loops_) {
