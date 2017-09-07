@@ -23,27 +23,32 @@ public class RobotMap {
 			
 		//Motors-CAN
 			public static final int CAN_PNMMODULE = 1;
-			public static final int CAN_LEFTMOTORFRONT = 2;
-			public static final int CAN_LEFTMOTORREAR = 3;
-			public static final int CAN_RIGHTMOTORFRONT = 4;
-			public static final int CAN_RIGHTMOTORREAR = 5;
+			public static final int CAN_RIGHTMOTORFRONT = 2;
+			public static final int CAN_LEFTMOTORFRONT = 3;
+            public static final int CAN_RIGHTMOTORREAR = 4;
+            public static final int CAN_LEFTMOTORREAR = 5;
 			public static final int CAN_CLIMBERMOTOR1 = 6;
 			public static final int CAN_CLIMBERMOTOR2 = 7;
-			public static final int CAN_INTAKEMOTOR = 8;
-			public static final int CAN_HOPPERSTIR = 9; 
-			public static final int CAN_INDEXMOTORLEFT = 10;
-			public static final int CAN_SHOOTERWHEELSRIGHT = 12; //TODO: reassign to something else
-			public static final int CAN_GEARBAR = 13;
+			public static final int CAN_TURRETHOPL = 8; 
+			public static final int CAN_TURRETHOPR = 9; 
+            public static final int CAN_BALLINTAKERIGHT = 10;
+            public static final int CAN_BALLINTAKELEFT = 11;
+			public static final int CAN_GEARBAR = 12;
+			public static final int CAN_TURRETANGLE = 13;
 			public static final int CAN_HOPPER2 = 14;
 			public static final int CAN_INDEXMOTORRIGHT = 45;
 			
 			public static final int CAN_TURRETINDEX = 101; //TODO: assign this number
-			public static final int CAN_TURRETHOPL = 102; //TODO: assign this number
-			public static final int CAN_TURRETHOPR = 103; //TODO: assign this number
-			public static final int CAN_TURRETANGLE = 30;
 			public static final int CAN_SHOOTERMASTER = 31; //TODO: assign this number
 			public static final int CAN_SHOOTERSLAVE = 32; //TODO: assign this number
 		
+			
+		//Not currently in use anymore
+		    public static final int CAN_INTAKEMOTOR = 666;
+		    public static final int CAN_INDEXMOTORLEFT = 666;
+		    public static final int CAN_SHOOTERWHEELSRIGHT = 666; 
+			public static final int CAN_HOPPERSTIR = 666; 
+		    
 		//Pnuematics Ports
 			public static final int PNM_GEARSHIFTER = 0;
 			public static final int PNM_GEARLIFT = 4;

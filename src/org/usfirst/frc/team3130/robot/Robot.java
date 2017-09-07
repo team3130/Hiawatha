@@ -47,6 +47,8 @@ public class Robot extends IterativeRobot {
 	public static BasicCANTalon btHopper2;
 	public static BasicCANTalon btGearBar;
 	public static BasicCANTalon btIntake;
+	public static BasicCANTalon btIntakeL;
+    public static BasicCANTalon btIntakeR;
 	public static BasicCANTalon btLeftIndex;
 	public static BasicCANTalon btRightIndex;
 	public static WheelSpeedCalculations wscLeft;
@@ -75,6 +77,8 @@ public class Robot extends IterativeRobot {
 		btHopper2 = new BasicCANTalon(RobotMap.CAN_HOPPER2, "Hopper", "Hopper2 Motor");
 		btGearBar = new BasicCANTalon(RobotMap.CAN_GEARBAR, "Gear", "Gear Bar");
 		btIntake = new BasicCANTalon(RobotMap.CAN_INTAKEMOTOR, "Intake", "Intake Motor");
+		btIntakeL = new BasicCANTalon(RobotMap.CAN_BALLINTAKELEFT, "Intake L", "Intake Motor L");
+        btIntakeR = new BasicCANTalon(RobotMap.CAN_BALLINTAKERIGHT, "Intake R", "Intake Motor R");
 		btLeftIndex = new BasicCANTalon(RobotMap.CAN_INDEXMOTORLEFT, "Indexer", "Left Index Motor");
 		btRightIndex = new BasicCANTalon(RobotMap.CAN_INDEXMOTORRIGHT, "Indexer", "Right Index Motor");
 		
@@ -112,8 +116,8 @@ public class Robot extends IterativeRobot {
  
         
 		// Simplest camera feed. Remove if not needed.
-		UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
-		camera1.setResolution(360, 480);
+      //UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
+              //camera1.setResolution(360, 480);
 		/*
 		chooser = new SendableChooser<String>();
 		chooser.addDefault("No Auton", "No Auto");

@@ -179,8 +179,8 @@ public class OI {
 		testR.SetParam(45);
 		
 		//Bind Joystick Buttons to Commands
-		intakeIn.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Up Speed", .6)));
-		intakeOut.whileHeld(new BasicSpinMotor(Robot.btIntake, Preferences.getInstance().getDouble("Intake Down Speed", -.6)));
+		intakeIn.whileHeld(new BallIntakeIn());
+        intakeOut.whileHeld(new BallIntakeOut());
 		hopperRun.whileHeld(new BasicSpinMotor(Robot.btHopper, Preferences.getInstance().getDouble("Hopper Stirrer PercentVBus", 0.5)));
 		hopperRun2.whileHeld(new BasicSpinMotor(Robot.btHopper2, Preferences.getInstance().getDouble("Hopper2 PercentVBus", 0.8)));
 		testShooterWheels.whileHeld(new RunWheelsManual());
