@@ -3,6 +3,8 @@ package org.usfirst.frc.team3130.robot.subsystems;
 import org.usfirst.frc.team3130.robot.RobotMap;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -49,7 +51,8 @@ public class TurretFlywheel extends Subsystem {
     private TurretFlywheel() {
         master_talon = new CANTalon(RobotMap.CAN_SHOOTERMASTER);
         slave_talon = new CANTalon(RobotMap.CAN_SHOOTERSLAVE);
-
+        
+        master_talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
         master_talon.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
         if (master_talon.isSensorPresent(
                 CANTalon.FeedbackDevice.CtreMagEncoder_Relative) != CANTalon.FeedbackDeviceStatus.FeedbackStatusPresent) {

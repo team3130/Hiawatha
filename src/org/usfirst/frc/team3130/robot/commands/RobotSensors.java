@@ -52,6 +52,7 @@ public class RobotSensors extends Command {
         TurretFlywheel.outputToSmartDashboard();
         VisionServer.outputToSmartDashboard();
         AndroidInterface.outputToSmartDashboard();
+        TurretAngle.outputToSmartDashboard();
         
     	/*
     	SmartDashboard.putNumber("Flywheel Speed", TurretFlywheel.getSpeed());

@@ -18,7 +18,7 @@ public class Constants extends ConstantsBase {
     public static double kSoftMinTurretAngle = -115.0;
     public static double kTurretSafeTolerance = 2.0;
     public static double kTurretOnTargetTolerance = 1.0;
-    public static double kTurretRotationsPerTick = 14.0 / 50.0 * 14.0 / 322.0;
+    public static double kTurretRotationsPerTick = 1 / 4096 * 24 / 164; //CTRE Mag encoder connected to gearbox output shaft
 
     //Turret PID
     // Units: error is 4096 counts/rev. Max output is +/- 1023 units.
