@@ -22,9 +22,8 @@ public class DefaultDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	int dirMultiplier = -1* Chassis.getReverseMultiplier();
-    	double moveSpeed = dirMultiplier * OI.stickL.getY();
-    	double turnSpeed = -OI.stickR.getX();
+    	double moveSpeed = OI.stickL.getY() * 0.85;
+    	double turnSpeed = OI.stickR.getX();
     	double turnThrottle = (-0.5 * OI.stickR.getRawAxis(3)) + 0.5;
     	
     	//Explicitly turning on Quadratic inputs for drivers, as all other systems will use nonQuadratic
