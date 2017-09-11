@@ -16,8 +16,8 @@ public class BallIntakeIn extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.btIntakeL.spinMotor(0.6);
-    	Robot.btIntakeR.spinMotor(0.6);
+    	Robot.btIntakeL.spinMotor(0.4);
+    	Robot.btIntakeR.spinMotor(0.4);
     }
 
     // Called repeatedly when this Command is scheduled to run
