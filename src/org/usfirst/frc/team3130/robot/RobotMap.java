@@ -23,10 +23,10 @@ public class RobotMap {
 			
 		//Motors-CAN
 			public static final int CAN_PNMMODULE = 1;
-			public static final int CAN_RIGHTMOTORFRONT = 2;
-			public static final int CAN_LEFTMOTORFRONT = 3;
-            public static final int CAN_RIGHTMOTORREAR = 4;
-            public static final int CAN_LEFTMOTORREAR = 5;
+			public static final int CAN_RIGHTMOTORFRONT = 2; //2
+			public static final int CAN_LEFTMOTORFRONT = 3; //3
+            public static final int CAN_RIGHTMOTORREAR = 4; //4
+            public static final int CAN_LEFTMOTORREAR = 5; //5
 			public static final int CAN_CLIMBERMOTOR1 = 6;
 			public static final int CAN_CLIMBERMOTOR2 = 7;
 			public static final int CAN_TURRETHOPL = 8; 
