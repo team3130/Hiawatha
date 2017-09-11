@@ -225,7 +225,7 @@ public class VisionServer extends CrashTrackingRunnable {
         @Override
         public void runCrashTracked() {
         	System.out.println("Starting AppMaintainanceThread");
-            while (true) {
+            while (!Thread.interrupted()/*true*/) {
                 if (mVisionEnabled == true) {
                     if (mWantsAppStart) {
                         adb.start();

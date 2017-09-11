@@ -116,8 +116,8 @@ public class Robot extends IterativeRobot {
  
         
 		// Simplest camera feed. Remove if not needed.
-      //UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
-              //camera1.setResolution(360, 480);
+         UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
+         camera1.setResolution(360, 480);
 		/*
 		chooser = new SendableChooser<String>();
 		chooser.addDefault("No Auton", "No Auto");
