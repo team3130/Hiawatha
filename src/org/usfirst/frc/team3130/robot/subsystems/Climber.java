@@ -41,8 +41,8 @@ public class Climber extends Subsystem {
     {
     	m_liftMotor1 = new CANTalon(RobotMap.CAN_CLIMBERMOTOR1);
     	m_liftMotor2 = new CANTalon(RobotMap.CAN_CLIMBERMOTOR2);
-    	m_liftMotor1.enableBrakeMode(true);
-    	m_liftMotor2.enableBrakeMode(true);
+    	m_liftMotor1.enableBrakeMode(false);
+    	m_liftMotor2.enableBrakeMode(false);
     }
     
     /**
