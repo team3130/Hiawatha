@@ -39,20 +39,12 @@ public class TurretAim extends Command {
 	
     public TurretAim() {
         requires(TurretAngle.GetInstance());
-
-
-
-        requires(Robot.wscLeft);
-        requires(Robot.wscRight);
         timer = new Timer();
     }
    
     
     public TurretAim(String instance){
         requires(TurretAngle.GetInstance());
-
-        requires(Robot.wscLeft);
-        requires(Robot.wscRight);
         timer = new Timer();
         this.instance = instance;
     }
@@ -86,7 +78,7 @@ public class TurretAim extends Command {
     	hasAimed = false;
     	hasTurned = false;
     	isActive = false;
-    	m_angle = TurretAngle.GetInstance().getAngleDegrees();
+    	m_angle = TurretAngle.getAngleDegrees();
         timer.start();
         
 
@@ -99,14 +91,14 @@ public class TurretAim extends Command {
 		double turretAngleValue;
 		try {
 			List<ShooterAimingParameters> aimingReports;
-	    	if(TurretAngle.GetInstance().isOnTarget() == false){
+	    	if(TurretAngle.isOnTarget() == false){
 	    		aimingReports = AndroidInterface.GetInstance().getAim(); 
 	    		if(!aimingReports.isEmpty()){
 	    			
 	    			//currently set to grab latest angle value of list
 	    			targetAngle = (aimingReports.get((aimingReports.size() - 1)).getTurretAngle()).getDegrees();
-	    			turretAngleValue = TurretAngle.GetInstance().getAngleDegrees();
-	    			TurretAngle.GetInstance().setAngle(turretAngleValue-targetAngle);
+	    			turretAngleValue = TurretAngle.getAngleDegrees();
+	    			TurretAngle.setAngle(turretAngleValue-targetAngle);
 	    			
 	    		}
 	    	

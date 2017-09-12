@@ -95,6 +95,7 @@ public class Robot extends IterativeRobot {
 		Climber.GetInstance();
 		JetsonInterface.GetInstance();
 		TurretAngle.GetInstance();
+		TurretAngle.zeroSensors();
 		TurretFlywheel.GetInstance();
 		ShooterWheelsRight.GetInstance();
 		Flashlight.GetInstance();
@@ -108,7 +109,6 @@ public class Robot extends IterativeRobot {
 		mVisionServer.addVisionUpdateReceiver(VisionProcessor.getInstance());
 		// Configure loopers
 		//remove turret resetter, RobotStateEstimator, and Superstructure (imports also removed) @author Eastan
-        mEnabledLooper.register(new TurretResetter());
         mEnabledLooper.register(VisionProcessor.getInstance());
         //mEnabledLooper.register(RobotStateEstimator.getInstance());
         //mEnabledLooper.register(Superstructure.getInstance().getLoop());

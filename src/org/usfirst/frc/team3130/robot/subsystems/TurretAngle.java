@@ -49,8 +49,6 @@ public class TurretAngle extends Subsystem {
 		m_turret = new CANTalon(RobotMap.CAN_TURRETANGLE);
 		m_turret.enableBrakeMode(true);
 		m_turret.enableLimitSwitch(false, false);
-		m_turret.ConfigFwdLimitSwitchNormallyOpen(true);
-		m_turret.ConfigRevLimitSwitchNormallyOpen(true);
 		m_turret.setStatusFrameRateMs(CANTalon.StatusFrameRate.Feedback, 10);
 		m_turret.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		m_turret.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative); //TODO: check if this is accurate
@@ -73,6 +71,7 @@ public class TurretAngle extends Subsystem {
 		m_turret.enableReverseSoftLimit(true);
 		m_turret.setForwardSoftLimit(Constants.kSoftMaxTurretAngle / (360.0 * Constants.kTurretRotationsPerTick));
 		m_turret.setReverseSoftLimit(Constants.kSoftMinTurretAngle / (360.0 * Constants.kTurretRotationsPerTick));
+		m_turret.clearStickyFaults();
 	}
 
 	// Set the desired angle of the turret (and put it into position control
@@ -96,29 +95,13 @@ public class TurretAngle extends Subsystem {
 	}
 
 	public synchronized static Rotation2d getAngle() {
-		return Rotation2d.fromRadians(Constants.kTurretRotationsPerTick * m_turret.getPosition() * 2 * Math.PI);
+		return Rotation2d.fromRadians(Constants.kTurretRotationsPerTick * m_turret.getEncPosition() * 2 * Math.PI);
 	}
 
 	public synchronized static double getAngleDegrees() {
-		return Math.toDegrees(Constants.kTurretRotationsPerTick * m_turret.getPosition() * 2 * Math.PI);
+		double tangle = Constants.kTurretRotationsPerTick * m_turret.getEncPosition() * 2.0 * Math.PI;
+		return Math.toDegrees(tangle);
 	}
-	
-	public synchronized static boolean getForwardLimitSwitch() {
-		return m_turret.isFwdLimitSwitchClosed();
-	}
-
-	public synchronized static boolean getReverseLimitSwitch() {
-		return m_turret.isRevLimitSwitchClosed();
-	}
-	
-    public synchronized static void resetTurretAtMax() {
-       reset(Rotation2d.fromDegrees(Constants.kHardMaxTurretAngle));
-    }
-
-    public synchronized static void resetTurretAtMin() {
-        reset(Rotation2d.fromDegrees(Constants.kHardMinTurretAngle));
-    }
-
 
 	public synchronized static double getSetpoint() {
 		return m_turret.getSetpoint() * Constants.kTurretRotationsPerTick * 360.0;
@@ -151,12 +134,12 @@ public class TurretAngle extends Subsystem {
 
 	public static void outputToSmartDashboard() {
 		SmartDashboard.putNumber("turret_error", getError());
-		SmartDashboard.putNumber("turret_angle", getAngle().getDegrees());
+		SmartDashboard.putNumber("turret_angle", getAngleDegrees());
 		SmartDashboard.putNumber("turret_setpoint", getSetpoint());
 		SmartDashboard.putBoolean("turret_on_target", isOnTarget());
 	}
 
-	public void zeroSensors() {
+	public static void zeroSensors() {
 		reset(new Rotation2d());
 	}
 	@Override
