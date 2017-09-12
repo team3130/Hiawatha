@@ -113,7 +113,18 @@ public class Chassis extends PIDSubsystem {
 		m_leftMotorFront.configEncoderCodesPerRev(RobotMap.RATIO_DRIVECODESPERREV);
 		m_rightMotorFront.configEncoderCodesPerRev(RobotMap.RATIO_DRIVECODESPERREV);
 		
+		//Checking encoder present or not
+		if (m_leftMotorFront.isSensorPresent(CANTalon.FeedbackDevice.CtreMagEncoder_Relative) != 
+				                             CANTalon.FeedbackDeviceStatus.FeedbackStatusPresent) {
+			DriverStation.reportError("Could not detect left front encoder!", false);
+		}
 
+		if (m_rightMotorFront.isSensorPresent(CANTalon.FeedbackDevice.CtreMagEncoder_Relative) != 
+                							 CANTalon.FeedbackDeviceStatus.FeedbackStatusPresent) {
+			DriverStation.reportError("Could not detect left front encoder!", false);
+		}
+		
+		
 		//Slave the Talons
 		m_leftMotorRear.changeControlMode(TalonControlMode.Follower);
 		m_leftMotorRear.set(RobotMap.CAN_LEFTMOTORFRONT);

@@ -16,8 +16,6 @@ public class RobotSensors extends Command {
 	
 	Timer timer = new Timer();
 	
-	boolean measuring = false;
-	
     public RobotSensors() {
     	//Ensure permanent running
     	this.setRunWhenDisabled(true);
@@ -32,7 +30,7 @@ public class RobotSensors extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
+	protected void execute() {
     	
     	//SmartDashboard.putNumber("Left Index Current", Robot.btLeftIndex.getCurrent());
     	//SmartDashboard.putNumber("Right Index Current", Robot.btRightIndex.getCurrent());
@@ -60,7 +58,7 @@ public class RobotSensors extends Command {
     	SmartDashboard.putNumber("Turret Wheel Setpoint", TurretFlywheel.getSetpoint());
     	*/
         
-    	SmartDashboard.putInt("Target Count", VisionUpdate.hasTargetInfo());
+    	SmartDashboard.putNumber("Target Count", VisionUpdate.hasTargetInfo());
     	
     	
     	//Chassis
