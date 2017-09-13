@@ -38,8 +38,8 @@ public class RobotMap {
 			public static final int CAN_TURRETINDEX = 14;
 			public static final int CAN_INDEXMOTORRIGHT = 45;
 			
-			public static final int CAN_SHOOTERMASTER = 31; //TODO: assign this number
-			public static final int CAN_SHOOTERSLAVE = 32; //TODO: assign this number
+			public static final int CAN_SHOOTERMASTER = 16; //TODO: assign this number
+			public static final int CAN_SHOOTERSLAVE = 15; //TODO: assign this number
 		
 			
 		//Not currently in use anymore
