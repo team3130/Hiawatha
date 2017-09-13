@@ -35,10 +35,9 @@ public class RobotMap {
             public static final int CAN_BALLINTAKELEFT = 11;
 			public static final int CAN_GEARBAR = 12;
 			public static final int CAN_TURRETANGLE = 13;
-			public static final int CAN_HOPPER2 = 14;
+			public static final int CAN_TURRETINDEX = 14;
 			public static final int CAN_INDEXMOTORRIGHT = 45;
 			
-			public static final int CAN_TURRETINDEX = 101; //TODO: assign this number
 			public static final int CAN_SHOOTERMASTER = 31; //TODO: assign this number
 			public static final int CAN_SHOOTERSLAVE = 32; //TODO: assign this number
 		
@@ -48,7 +47,8 @@ public class RobotMap {
 		    public static final int CAN_INDEXMOTORLEFT = 666;
 		    public static final int CAN_SHOOTERWHEELSRIGHT = 666; 
 			public static final int CAN_HOPPERSTIR = 666; 
-		    
+			public static final int CAN_HOPPER2 = 666;
+			
 		//Pnuematics Ports
 			public static final int PNM_GEARSHIFTER = 0;
 			public static final int PNM_GEARLIFT = 4;
