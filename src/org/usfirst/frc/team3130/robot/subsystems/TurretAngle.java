@@ -57,13 +57,16 @@ public class TurretAngle extends Subsystem {
 			DriverStation.reportError("Could not detect turret encoder!", false);
 		}
 
-		m_turret.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		m_turret.changeControlMode(CANTalon.TalonControlMode.Position);
 
-		m_turret.setPID(Constants.kTurretKp, Constants.kTurretKi, Constants.kTurretKd, Constants.kTurretKf,
-				Constants.kTurretIZone, Constants.kTurretRampRate, 0);
+		m_turret.setPID(Constants.kTurretKp, Constants.kTurretKi, Constants.kTurretKd);
+		/*m_turret.setPID(Constants.kTurretKp, Constants.kTurretKi, Constants.kTurretKd, Constants.kTurretKf,
+				Constants.kTurretIZone, Constants.kTurretRampRate, 0);*/
 		m_turret.setProfile(0);
-		m_turret.reverseSensor(true); //TODO:Set true if turret turns in opposite direction of motor @author Eastan
+		m_turret.reverseSensor(false); //TODO:Set true if turret turns in opposite direction of motor @author Eastan
 		m_turret.reverseOutput(false);
+		
+
 
 		// We use soft limits to make sure the turret doesn't try to spin too
 		// far.
@@ -71,21 +74,23 @@ public class TurretAngle extends Subsystem {
 		m_turret.enableReverseSoftLimit(true);
 		m_turret.setForwardSoftLimit(Constants.kSoftMaxTurretAngle / (360.0 * Constants.kTurretRotationsPerTick));
 		m_turret.setReverseSoftLimit(Constants.kSoftMinTurretAngle / (360.0 * Constants.kTurretRotationsPerTick));
+		m_turret.enableForwardSoftLimit(true);
+		m_turret.enableReverseSoftLimit(true);
+
 		m_turret.clearStickyFaults();
 	}
 
 	// Set the desired angle of the turret (and put it into position control
 	// mode if it isn't already).
 	public synchronized static void setAngle(double angle_deg) {
-		Rotation2d angle = Rotation2d.fromDegrees(angle_deg);
 		m_turret.changeControlMode(CANTalon.TalonControlMode.Position);
 		// In Position mode, outputValue set is in encoder ticks 
-		m_turret.set(angle.getRadians() / (2 * Math.PI * Constants.kTurretRotationsPerTick));
+		m_turret.set(angle_deg / (360.0 * Constants.kTurretRotationsPerTick));
 	}
 
 	// Manually move the turret (and put it into vbus mode if it isn't already). Input range -1.0 to 1.0
 	public synchronized static void setOpenLoop(double speed) {
-		m_turret.changeControlMode(CANTalon.TalonControlMode.PercentVbus); //TODO: Change to speed mode to counter resistance 
+		m_turret.changeControlMode(CANTalon.TalonControlMode.PercentVbus); 
 		m_turret.set(-0.12*speed); //scale to max of 12%
 	}
 
@@ -94,9 +99,6 @@ public class TurretAngle extends Subsystem {
 		m_turret.setPosition(actual_rotation.getRadians() / (2 * Math.PI * Constants.kTurretRotationsPerTick));
 	}
 
-	public synchronized static Rotation2d getAngle() {
-		return Rotation2d.fromRadians(Constants.kTurretRotationsPerTick * m_turret.getEncPosition() * 2 * Math.PI);
-	}
 
 	public synchronized static double getAngleDegrees() {
 		double tangle = Constants.kTurretRotationsPerTick * m_turret.getEncPosition() * 2.0 * Math.PI;
@@ -108,7 +110,7 @@ public class TurretAngle extends Subsystem {
 	}
 
 	private synchronized static double getError() {
-		return getAngle().getDegrees() - getSetpoint();
+		return getAngleDegrees() - getSetpoint();
 	}
 
 	// We are "OnTarget" if we are in position mode and close to the setpoint.
@@ -121,10 +123,6 @@ public class TurretAngle extends Subsystem {
 	 * @return If the turret is within its mechanical limits and in the right
 	 *		 state.
 	 */
-	public synchronized static boolean isSafe() {
-		return (m_turret.getControlMode() == CANTalon.TalonControlMode.Position && m_turret.getSetpoint() == 0 && Math.abs(
-				getAngle().getDegrees() * Constants.kTurretRotationsPerTick * 360.0) < Constants.kTurretSafeTolerance);
-	}
 
 	public synchronized static void stop() {
 		setOpenLoop(0);
@@ -144,7 +142,7 @@ public class TurretAngle extends Subsystem {
 	}
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new ManualTurretAim());
+
 		
 	}
 }

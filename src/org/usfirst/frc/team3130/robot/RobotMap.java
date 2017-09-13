@@ -102,7 +102,7 @@ public class RobotMap {
 			public static final int POV_HOPPERDOWN = LST_POV_S;
 			
 			//Shooter
-			public static final int BTN_TESTSHOOTERWHEELS = LST_BTN_LBUMPER;
+			//public static final int BTN_TESTSHOOTERWHEELS = LST_BTN_LBUMPER;
 			public static final int BTN_RUNINDEXER = LST_BTN_RBUMPER;
 			public static final int BTN_TESTCURVEPREFERENCES = LST_BTN_START;
 			public static final int BTN_AIMSHOOT = 4;		//Joystick R
@@ -114,6 +114,7 @@ public class RobotMap {
 			public static final int BTN_TURRETHOPR = 666; //TODO: determine this #
 			public static final int BTN_TURRETFLY = LST_BTN_RBUMPER;
 			public static final int BTN_TURRETINTAKE = LST_BTN_X;
+			public static final int BTN_TURRETAUTOAIM = LST_BTN_LBUMPER;
 			
 			//Gear Control
 			public static final int BTN_PINCHGEAR = 1;	//Joystick L

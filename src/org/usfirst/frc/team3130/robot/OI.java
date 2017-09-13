@@ -79,7 +79,6 @@ public class OI {
 	private static JoystickButton intakeOut;
 	private static JoystickButton hopperRun;
 	private static JoystickButton hopperRun2;
-	private static JoystickButton testShooterWheels;
 	private static JoystickButton pinchGear;
 	private static JoystickButton lowerGearActive;
 	private static JoystickButton spinIndexer;
@@ -97,6 +96,7 @@ public class OI {
 	
 	private static JoystickButton turretShoot;
 	private static JoystickButton turretIntake;
+	private static JoystickButton turretAutoAim;
 	
 	private static JoystickButton driveBack;
 	private static JoystickButton driveBackEnd;
@@ -132,7 +132,6 @@ public class OI {
 		intakeOut = new JoystickButton(gamepad, RobotMap.BTN_INTAKEDOWN);
 		hopperRun = new JoystickButton(gamepad, RobotMap.BTN_HOPPERDRIVE);
 		hopperRun2 = new JoystickButton(gamepad, RobotMap.BTN_HOPPERDRIVE);
-		testShooterWheels = new JoystickButton(gamepad, RobotMap.BTN_TESTSHOOTERWHEELS);
 		pinchGear = new JoystickButton(stickL, RobotMap.BTN_PINCHGEAR);
 		lowerGearActive = new JoystickButton(stickR, RobotMap.BTN_LOWERGEARACTIVE);
 		spinIndexer = new JoystickButton(gamepad, RobotMap.BTN_RUNINDEXER);
@@ -155,6 +154,8 @@ public class OI {
 		
 		turretShoot = new JoystickButton(gamepad, RobotMap.BTN_TURRETFLY);
 		turretIntake = new JoystickButton(gamepad, RobotMap.BTN_TURRETINTAKE);
+		
+		turretAutoAim = new JoystickButton(gamepad, RobotMap.BTN_TURRETAUTOAIM);
 		
 		//Create Commands
 		wipeLPoints	= new WipeStopPoints(Robot.wscLeft);
@@ -183,7 +184,6 @@ public class OI {
         intakeOut.whileHeld(new BallIntakeOut());
 		hopperRun.whileHeld(new BasicSpinMotor(Robot.btHopper, Preferences.getInstance().getDouble("Hopper Stirrer PercentVBus", 0.5)));
 		hopperRun2.whileHeld(new BasicSpinMotor(Robot.btHopper2, Preferences.getInstance().getDouble("Hopper2 PercentVBus", 0.8)));
-		testShooterWheels.whileHeld(new RunWheelsManual());
 		pinchGear.whileHeld(new BasicActuate(Robot.bcGearPinch));
 		lowerGearActive.whileHeld(new LowerGearPickup());
 		spinIndexer.whileHeld(new RunIndexer(buttonAimer));
@@ -194,6 +194,7 @@ public class OI {
 		
 		turretShoot.whileHeld(new ManualFlywheel());
 		turretIntake.whileHeld(new ManualTurretIntake());
+		turretAutoAim.whileHeld(new TurretAim());
 		
 		shiftUp.whenPressed(new DriveShiftUp());
 		shiftDown.whenPressed(new DriveShiftDown());

@@ -8,7 +8,6 @@ import org.usfirst.frc.team3130.robot.Robot;
 import org.usfirst.frc.team3130.robot.RobotMap;
 import org.usfirst.frc.team3130.robot.subsystems.TurretAngle;
 import org.usfirst.frc.team3130.robot.subsystems.AndroidInterface;
-import org.usfirst.frc.team3130.robot.subsystems.JetsonInterface;
 import org.usfirst.frc.team3130.robot.vision.ShooterAimingParameters;
 
 
@@ -31,7 +30,6 @@ public class TurretAim extends Command {
 	boolean hasAimed;
 	boolean hasTurned;
 	boolean isActive;
-	double m_angle;
 	private String instance = "";
 
 	public enum AimingMode { kVision, kEncoders }
@@ -78,7 +76,6 @@ public class TurretAim extends Command {
     	hasAimed = false;
     	hasTurned = false;
     	isActive = false;
-    	m_angle = TurretAngle.getAngleDegrees();
         timer.start();
         
 
