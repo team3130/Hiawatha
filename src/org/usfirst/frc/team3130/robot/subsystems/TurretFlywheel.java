@@ -54,11 +54,12 @@ public class TurretFlywheel extends Subsystem {
         
         master_talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
         master_talon.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
+        /*
         if (master_talon.isSensorPresent(
                 CANTalon.FeedbackDevice.CtreMagEncoder_Relative) != CANTalon.FeedbackDeviceStatus.FeedbackStatusPresent) {
             DriverStation.reportError("Could not detect shooter encoder!", false);
         }
-
+		*/
         master_talon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
         slave_talon.changeControlMode(CANTalon.TalonControlMode.Follower);
         slave_talon.set(RobotMap.CAN_SHOOTERMASTER);
@@ -87,8 +88,8 @@ public class TurretFlywheel extends Subsystem {
     }
 
     public static double getSpeed() {
-        return master_talon.getSpeed() * 12.0 * (36.0/13.0); //* 48.0 * (13.0/36.0); //Turret Flywheel uses a RS7 encoder with resolution of 12 ticks per rotation (counts per rotation, CPR). RS7 is a quadrature encoder so the multipler is 4xCPR.
-        // manual turning showed 32-34 ticks/rotation
+        return master_talon.getSpeed() * -12.0 * (36.0/13.0); //* 48.0 * (13.0/36.0); //Turret Flywheel uses a RS7 encoder with resolution of 12 ticks per rotation (counts per rotation, CPR). RS7 is a quadrature encoder so the multipler is 4xCPR.
+        // manual turning showed 32-34 ticks/rotation so adjusted accordingly
     }
 
     /**
