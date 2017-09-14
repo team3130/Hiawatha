@@ -141,10 +141,15 @@ public class GoalTracker {
     public int getTrackCount(){
     	return mCurrentTracks.size();
     }
-    public List<TrackReport> getTracks() {
+    public synchronized List<TrackReport> getTracks() {
         List<TrackReport> rv = new ArrayList<>();
-        for (GoalTrack track : mCurrentTracks) {
-            rv.add(new TrackReport(track));
+        try{
+        	for (GoalTrack track : mCurrentTracks) {
+        		rv.add(new TrackReport(track));
+        	}
+        	
+        } catch (Exception e) {
+        	System.out.println("Caught getTracks exception");
         }
         return rv;
     }

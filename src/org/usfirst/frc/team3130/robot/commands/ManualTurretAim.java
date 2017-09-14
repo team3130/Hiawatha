@@ -19,7 +19,7 @@ public class ManualTurretAim extends Command {
 	protected void execute() {
     	
     	double turnSpeed = OI.gamepad.getRawAxis(RobotMap.LST_AXS_RJOYSTICKX); //returns value from -1 to 1 of R X axis of gamepad.
-    	TurretAngle.GetInstance().setOpenLoop(turnSpeed);
+    	TurretAngle.setOpenLoop(turnSpeed);
     }
 
     // Called once after isFinished returns true

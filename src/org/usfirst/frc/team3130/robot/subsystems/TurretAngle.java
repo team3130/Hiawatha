@@ -66,14 +66,15 @@ public class TurretAngle extends Subsystem {
 		m_turret.reverseSensor(false); //TODO:Set true if turret turns in opposite direction of motor @author Eastan
 		m_turret.reverseOutput(false);
 		
+		m_turret.configMaxOutputVoltage(12.0*0.15);
 
 
 		// We use soft limits to make sure the turret doesn't try to spin too
 		// far.
 		m_turret.enableForwardSoftLimit(true);
 		m_turret.enableReverseSoftLimit(true);
-		m_turret.setForwardSoftLimit(Constants.kSoftMaxTurretAngle / (360.0 * Constants.kTurretRotationsPerTick));
-		m_turret.setReverseSoftLimit(Constants.kSoftMinTurretAngle / (360.0 * Constants.kTurretRotationsPerTick));
+		m_turret.setForwardSoftLimit(1.2728758);
+		m_turret.setReverseSoftLimit(-1.2728758);
 		m_turret.enableForwardSoftLimit(true);
 		m_turret.enableReverseSoftLimit(true);
 
@@ -142,7 +143,7 @@ public class TurretAngle extends Subsystem {
 	}
 	@Override
 	protected void initDefaultCommand() {
-
+		setDefaultCommand(new ManualTurretAim());
 		
 	}
 }
