@@ -63,10 +63,10 @@ public class TurretAngle extends Subsystem {
 		/*m_turret.setPID(Constants.kTurretKp, Constants.kTurretKi, Constants.kTurretKd, Constants.kTurretKf,
 				Constants.kTurretIZone, Constants.kTurretRampRate, 0);*/
 		m_turret.setProfile(0);
-		m_turret.reverseSensor(false); //TODO:Set true if turret turns in opposite direction of motor @author Eastan
+		m_turret.reverseSensor(false); 
 		m_turret.reverseOutput(false);
 		
-		//m_turret.configMaxOutputVoltage(12.0*0.15);
+
 
 
 		// We use soft limits to make sure the turret doesn't try to spin too

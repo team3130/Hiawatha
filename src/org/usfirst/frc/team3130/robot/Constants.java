@@ -17,14 +17,14 @@ public class Constants extends ConstantsBase {
     public static double kSoftMaxTurretAngle = 90.0;
     public static double kSoftMinTurretAngle = -90.0;
     public static double kTurretSafeTolerance = 2.0;
-    public static double kTurretOnTargetTolerance = 0.4;
+    public static double kTurretOnTargetTolerance = 0.5;
     public static double kTurretRotationsPerTick =  1.0 / 4096.0 * 34.0 / 164.0; //Correct 9/11/17, CTRE Mag encoder connected to gearbox output shaft
 
     //Turret PID
     // Units: error is 4096 counts/rev. Max output is +/- 1023 units.
     public static double kTurretKp = 0.8;
     public static double kTurretKi = 0.0;
-    public static double kTurretKd = 80.0;
+    public static double kTurretKd = 90.0;
     public static double kTurretKf = 0;
     public static int kTurretIZone = (int) (1023.0 / kTurretKp);
     public static double kTurretRampRate = 0;
@@ -34,8 +34,8 @@ public class Constants extends ConstantsBase {
 	//TODO:calibrate camera.
     public static double kCameraXOffset = -6.454;
     public static double kCameraYOffset = 0.0;
-    public static double kCameraZOffset = 19.75;
-    public static double kCameraPitchAngleDegrees = 35.75; 
+    public static double kCameraZOffset = 22.75;
+    public static double kCameraPitchAngleDegrees = 15.0; 
     public static double kCameraYawAngleDegrees = -1.0;
     public static double kCameraDeadband = 0.0;
     

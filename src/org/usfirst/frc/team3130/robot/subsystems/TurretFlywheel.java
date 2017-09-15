@@ -53,8 +53,8 @@ public class TurretFlywheel extends Subsystem {
         slave_talon = new CANTalon(RobotMap.CAN_SHOOTERSLAVE);
         
         master_talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-        //master_talon.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
-        master_talon.configEncoderCodesPerRev(24);
+
+        master_talon.configEncoderCodesPerRev(12);
         /*
         if (master_talon.isSensorPresent(
                 CANTalon.FeedbackDevice.CtreMagEncoder_Relative) != CANTalon.FeedbackDeviceStatus.FeedbackStatusPresent) {
@@ -95,7 +95,7 @@ public class TurretFlywheel extends Subsystem {
     }
 
     public static double getSpeed() {
-        return master_talon.getSpeed(); //* 48.0 * (13.0/36.0); //Turret Flywheel uses a RS7 encoder with resolution of 12 ticks per rotation (counts per rotation, CPR). RS7 is a quadrature encoder so the multipler is 4xCPR.
+        return master_talon.getSpeed() * 600.0/(4.0 * 12.0); //* 48.0 * (13.0/36.0); //Turret Flywheel uses a RS7 encoder with resolution of 12 ticks per rotation (counts per rotation, CPR). RS7 is a quadrature encoder so the multipler is 4xCPR.
     }
 
     /**
@@ -107,7 +107,7 @@ public class TurretFlywheel extends Subsystem {
      */
     public static void setSpeed(double rpm) {
         master_talon.changeControlMode(CANTalon.TalonControlMode.Speed);
-        master_talon.set(rpm);
+        master_talon.set(rpm * 48.0 / 600.0);
     }
 
     public static double getVBus(){
