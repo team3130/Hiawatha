@@ -53,32 +53,39 @@ public class TurretFlywheel extends Subsystem {
         slave_talon = new CANTalon(RobotMap.CAN_SHOOTERSLAVE);
         
         master_talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-        master_talon.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
+        //master_talon.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
+        master_talon.configEncoderCodesPerRev(24);
         /*
         if (master_talon.isSensorPresent(
                 CANTalon.FeedbackDevice.CtreMagEncoder_Relative) != CANTalon.FeedbackDeviceStatus.FeedbackStatusPresent) {
             DriverStation.reportError("Could not detect shooter encoder!", false);
         }
 		*/
-        master_talon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+        //master_talon.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
         slave_talon.changeControlMode(CANTalon.TalonControlMode.Follower);
         slave_talon.set(RobotMap.CAN_SHOOTERMASTER);
-
-        master_talon.setPID(
-        		Preferences.getInstance().getDouble("TurretFlyP",P_DEFAULT),
-        		Preferences.getInstance().getDouble("TurretFlyI",I_DEFAULT),
-        		Preferences.getInstance().getDouble("TurretFlyD",D_DEFAULT),
-        		Preferences.getInstance().getDouble("TurretFlyF",F_DEFAULT),
-        		Preferences.getInstance().getInt("TurretFlyIZone",IZONE_DEFAULT),
-        		Preferences.getInstance().getDouble("TurretFlyRamp",RAMP_DEFAULT),
-        		0);
         master_talon.setProfile(0);
-        master_talon.reverseSensor(false);
+        master_talon.setPID(
+        		//Preferences.getInstance().getDouble("TurretFlyP",
+        		P_DEFAULT,
+        		//Preferences.getInstance().getDouble("TurretFlyI",
+        		I_DEFAULT,
+        		//Preferences.getInstance().getDouble("TurretFlyD",
+        		D_DEFAULT,
+        		//Preferences.getInstance().getDouble("TurretFlyF",
+        		F_DEFAULT,
+        		//Preferences.getInstance().getInt("TurretFlyIZone",
+        		IZONE_DEFAULT,
+        		//Preferences.getInstance().getDouble("TurretFlyRamp",
+        		RAMP_DEFAULT,
+        		0);
+
+        master_talon.reverseSensor(true);
         master_talon.reverseOutput(false);
         slave_talon.reverseOutput(true);
 
-        master_talon.setVoltageRampRate(36.0);
-        slave_talon.setVoltageRampRate(36.0);
+        //master_talon.setVoltageRampRate(36.0);
+        //slave_talon.setVoltageRampRate(36.0);
 
         master_talon.enableBrakeMode(false);
         slave_talon.enableBrakeMode(false);
@@ -88,8 +95,7 @@ public class TurretFlywheel extends Subsystem {
     }
 
     public static double getSpeed() {
-        return master_talon.getSpeed() * -48.0 * (36.0/13.0); //* 48.0 * (13.0/36.0); //Turret Flywheel uses a RS7 encoder with resolution of 12 ticks per rotation (counts per rotation, CPR). RS7 is a quadrature encoder so the multipler is 4xCPR.
-        // manual turning showed 32-34 ticks/rotation so adjusted accordingly
+        return master_talon.getSpeed(); //* 48.0 * (13.0/36.0); //Turret Flywheel uses a RS7 encoder with resolution of 12 ticks per rotation (counts per rotation, CPR). RS7 is a quadrature encoder so the multipler is 4xCPR.
     }
 
     /**

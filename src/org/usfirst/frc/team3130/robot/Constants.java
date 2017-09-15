@@ -17,14 +17,14 @@ public class Constants extends ConstantsBase {
     public static double kSoftMaxTurretAngle = 90.0;
     public static double kSoftMinTurretAngle = -90.0;
     public static double kTurretSafeTolerance = 2.0;
-    public static double kTurretOnTargetTolerance = 1.0;
+    public static double kTurretOnTargetTolerance = 0.4;
     public static double kTurretRotationsPerTick =  1.0 / 4096.0 * 34.0 / 164.0; //Correct 9/11/17, CTRE Mag encoder connected to gearbox output shaft
 
     //Turret PID
     // Units: error is 4096 counts/rev. Max output is +/- 1023 units.
-    public static double kTurretKp = 0.7;
+    public static double kTurretKp = 0.8;
     public static double kTurretKi = 0.0;
-    public static double kTurretKd = 30.0;
+    public static double kTurretKd = 80.0;
     public static double kTurretKf = 0;
     public static int kTurretIZone = (int) (1023.0 / kTurretKp);
     public static double kTurretRampRate = 0;
@@ -40,7 +40,7 @@ public class Constants extends ConstantsBase {
     public static double kCameraDeadband = 0.0;
     
     // Goal tracker constants
-    public static double kMaxGoalTrackAge = 0.3;
+    public static double kMaxGoalTrackAge = 0.05;
     public static double kMaxTrackerDistance = 18.0;
     public static double kCameraFrameRate = 30.0;
     public static double kTrackReportComparatorStablityWeight = 1.0;
@@ -51,7 +51,7 @@ public class Constants extends ConstantsBase {
    
     public static int kAndroidAppTcpPort = 43130;
     
-    public static double kLooperDt = 0.1; //TODO:tune looper frequency.
+    public static double kLooperDt = 0.01; 
 
     public String getFileLocation() {
         return "~/constants.txt";

@@ -66,7 +66,7 @@ public class TurretAngle extends Subsystem {
 		m_turret.reverseSensor(false); //TODO:Set true if turret turns in opposite direction of motor @author Eastan
 		m_turret.reverseOutput(false);
 		
-		m_turret.configMaxOutputVoltage(12.0*0.15);
+		//m_turret.configMaxOutputVoltage(12.0*0.15);
 
 
 		// We use soft limits to make sure the turret doesn't try to spin too
@@ -85,8 +85,9 @@ public class TurretAngle extends Subsystem {
 	// mode if it isn't already).
 	public synchronized static void setAngle(double angle_deg) {
 		m_turret.changeControlMode(CANTalon.TalonControlMode.Position);
-		// In Position mode, outputValue set is in encoder ticks 
-		m_turret.set(angle_deg / (360.0 * Constants.kTurretRotationsPerTick));
+		// In Position mode, outputValue set is in rotations of the motor 
+		System.out.println("Set value:  " + (angle_deg / 360.0) * (164.0 / 34.0) + " -------------");
+		m_turret.set((angle_deg / 360.0) * (164.0 / 34.0));
 	}
 
 	// Manually move the turret (and put it into vbus mode if it isn't already). Input range -1.0 to 1.0
@@ -107,7 +108,7 @@ public class TurretAngle extends Subsystem {
 	}
 
 	public synchronized static double getSetpoint() {
-		return m_turret.getSetpoint() * Constants.kTurretRotationsPerTick * 360.0;
+		return m_turret.getSetpoint() * 34.0 / 164.0  * 360;
 	}
 
 	private synchronized static double getError() {

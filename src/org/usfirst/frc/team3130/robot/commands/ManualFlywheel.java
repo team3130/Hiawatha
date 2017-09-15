@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ManualFlywheel extends Command {
 
-	private static int wheelSpeedTarget; 
-	private static int WHEELSPEEDDEFAULT = 500; //TODO: determine speed for sweet spot
+	private static double wheelSpeedTarget; 
+	private static double WHEELSPEEDDEFAULT = 2000.0; //TODO: determine speed for sweet spot
 	
     public ManualFlywheel() {
         requires(TurretFlywheel.GetInstance());
@@ -23,15 +23,16 @@ public class ManualFlywheel extends Command {
     
     // Called just before this Command runs the first time
     protected void initialize() {
-    	/*
-    	wheelSpeedTarget = Preferences.getInstance().getInt("Turret Wheel Speed", WHEELSPEEDDEFAULT);
+    	
+    	wheelSpeedTarget = WHEELSPEEDDEFAULT;
     	TurretFlywheel.setSpeed(wheelSpeedTarget);
-    	*/
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	TurretFlywheel.setSpeed(Preferences.getInstance().getDouble("Turret Wheel Speed", WHEELSPEEDDEFAULT));
+    	TurretFlywheel.setSpeed(wheelSpeedTarget);
+  
     }
 
     // Make this return true when this Command no longer needs to run execute()

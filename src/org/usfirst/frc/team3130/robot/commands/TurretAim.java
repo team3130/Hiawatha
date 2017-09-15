@@ -88,14 +88,18 @@ public class TurretAim extends Command {
 		double turretAngleValue;
 		try {
 			List<ShooterAimingParameters> aimingReports;
-	    	if(TurretAngle.isOnTarget() == false){
+	    	{
 	    		aimingReports = AndroidInterface.GetInstance().getAim(); 
 	    		if(!aimingReports.isEmpty()){
 	    			
 	    			//currently set to grab latest angle value of list
 	    			targetAngle = (aimingReports.get((aimingReports.size() - 1)).getTurretAngle()).getDegrees();
 	    			turretAngleValue = TurretAngle.getAngleDegrees();
-	    			TurretAngle.setAngle(turretAngleValue-targetAngle);
+	    			System.out.println("target angle  " + targetAngle );
+	    			System.out.println("current angle " + turretAngleValue );
+	    			System.out.println("set to angle  " + (turretAngleValue + targetAngle));
+	    			TurretAngle.setAngle(turretAngleValue+targetAngle);
+	    			
 	    			
 	    		}
 	    	

@@ -113,6 +113,7 @@ public class AndroidInterface extends Subsystem {
     
 
 	public static void outputToSmartDashboard() {
+    try{
     	List<TrackReport> visionReports = GetInstance().goal_tracker_.getTracks();
     	String TargetInfo = " No Target Tracks ";
         for (TrackReport vreport : visionReports) {
@@ -144,6 +145,12 @@ public class AndroidInterface extends Subsystem {
         SmartDashboard.putString("TargetInfo", TargetInfo);
         SmartDashboard.putBoolean("Tracking Targets", targetTracking());
         SmartDashboard.putNumber("Number of Active Tracks", (double) getTrackCount());
+    } catch (Exception e) {
+    	System.out.println(" target tracks empty");
+    } finally {
+    	
+    }
+    
     }
 
 @Override
