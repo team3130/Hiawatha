@@ -3,6 +3,7 @@ package org.usfirst.frc.team3130.robot.autoCommands;
 import org.usfirst.frc.team3130.robot.OI;
 
 import org.usfirst.frc.team3130.robot.Robot;
+import org.usfirst.frc.team3130.robot.commands.ManualTurretIntake;
 import org.usfirst.frc.team3130.robot.continuousDrive.ContDrive;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.subsystems.TurretAngle;
@@ -16,7 +17,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class FortyBallAuton extends CommandGroup {
 
-	private AutoBasicActuate			hopperDown;
 	private AutoDriveStraightToPoint    driveForward;
     private AutoTurn               		turn_towardsHopper;
     private AutoBasicActuate            clampPinch;
@@ -26,16 +26,12 @@ public class FortyBallAuton extends CommandGroup {
 	
 	public FortyBallAuton() {
 		requires(Chassis.GetInstance());
-		requires(Robot.btLeftIndex);
-		requires(Robot.btRightIndex);
-		requires(Robot.wscRight);
-		requires(Robot.wscLeft);
+		requires(Robot.wscTurret);
 		requires(TurretAngle.GetInstance());
-		requires(Robot.btIntake);
-		requires(Robot.btHopper);
-		requires(Robot.bcHopperFloor);
+		requires(Robot.btTurretIndex);
+		requires(Robot.btTurretHopperL);
+		requires(Robot.btTurretHopperR);
 		
-		hopperDown = new AutoBasicActuate(Robot.bcHopperFloor, true);
 		driveForward = new AutoDriveStraightToPoint();
 	    turn_towardsHopper = new AutoTurn();
 	    clampPinch = new AutoBasicActuate(Robot.bcGearPinch, true);
@@ -43,7 +39,6 @@ public class FortyBallAuton extends CommandGroup {
 		auto_shootFromHopper = new ShootAfterHopper();
 		drive_pressToButton = new ContDrive();
 
-		addParallel(hopperDown, 1);
 		addParallel(clampPinch, 1);
 		addSequential(driveForward,3);
 		addSequential(turn_towardsHopper,2);

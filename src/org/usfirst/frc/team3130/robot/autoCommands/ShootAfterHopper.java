@@ -1,10 +1,9 @@
 package org.usfirst.frc.team3130.robot.autoCommands;
 
-import org.usfirst.frc.team3130.robot.OI;
-import org.usfirst.frc.team3130.robot.Robot;
-import org.usfirst.frc.team3130.robot.commands.BasicSpinMotor;
+import org.usfirst.frc.team3130.robot.commands.TurretAim;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.subsystems.TurretAngle;
+import org.usfirst.frc.team3130.robot.subsystems.TurretFlywheel;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -15,37 +14,22 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class ShootAfterHopper extends CommandGroup {
 
 	private AutoDriveStraightToPoint	drive_backFromHopper;
-	private AutoTurn					drive_turnToGoal;
-	private SmartShoot					shoot_aimAndShoot;
+	private TurretAim					shoot_aimAndShoot;
 	private AutoDelay					delay_Generic1;
 	private AutoDelay					delay_waitData;
-	private CameraDrive					drive_toShoot;
-	private BasicSpinMotor				intake_Up;
 	
     public ShootAfterHopper() {
 		requires(Chassis.GetInstance());
-		requires(Robot.btLeftIndex);
-		requires(Robot.btRightIndex);
-		requires(Robot.wscRight);
-		requires(Robot.wscLeft);
 		requires(TurretAngle.GetInstance());
-		requires(Robot.btIntake);
-		requires(Robot.btHopper);
-		requires(Robot.btHopper2);
+		requires(TurretFlywheel.GetInstance());
 		
 		drive_backFromHopper = new AutoDriveStraightToPoint();
-		drive_turnToGoal = new AutoTurn();
-		shoot_aimAndShoot = new SmartShoot();
+		shoot_aimAndShoot = new TurretAim();
 		delay_Generic1 = new AutoDelay();
 		delay_waitData = new AutoDelay();
-		drive_toShoot = new CameraDrive();
-		intake_Up = new BasicSpinMotor(Robot.btIntake, .6);
 
 		addSequential(delay_Generic1, 1.5);
-		addParallel(intake_Up);
 		addSequential(drive_backFromHopper, 1);
-		addSequential(drive_turnToGoal, 1);
-		addSequential(drive_toShoot, 2);
 		addSequential(delay_waitData, 1);
 		addParallel(shoot_aimAndShoot);
     }
@@ -61,14 +45,5 @@ public class ShootAfterHopper extends CommandGroup {
     			Chassis.GetShiftedDown()	//Stay in current gear
     	);
     	
-    	
-    	if(OI.fieldSide.getSelected() == "Red") {
-    		drive_turnToGoal.SetParam(Preferences.getInstance().getDouble("Auto Shoot Turn Angle", 90));
-    	}
-    	else {
-    	drive_turnToGoal.SetParam(Preferences.getInstance().getDouble("Auto Shoot Turn Angle", -80));
-    	}
-    	
-    	shoot_aimAndShoot.setParam(Preferences.getInstance().getDouble("Auto Shoot Index Percent", .7));
     }
 }
