@@ -53,6 +53,7 @@ public class Robot extends IterativeRobot {
 	public static BasicCANTalon btRightIndex;
 	public static WheelSpeedCalculations wscLeft;
 	public static WheelSpeedCalculations wscRight;
+	public static WheelSpeedCalculations wscTurret;
 	
 	public static BasicCANTalon btTurretIndex;
 	public static BasicCANTalon btTurretHopperL;
@@ -84,6 +85,7 @@ public class Robot extends IterativeRobot {
 		
 		wscLeft = new WheelSpeedCalculations("home/lvuser/speed-storage-left.ini");
 		wscRight = new WheelSpeedCalculations("home/lvuser/speed-storage-right.ini");
+		wscTurret = new WheelSpeedCalculations("home/lvuser/speed-storage-turret.ini");
 		
 		btTurretIndex = new BasicCANTalon(RobotMap.CAN_TURRETINDEX, "Turret Indexer", "Turret Index Motor");
 		btTurretHopperL = new BasicCANTalon(RobotMap.CAN_TURRETHOPL, "Turret Hopper", "Turret Hopper Motor Left");

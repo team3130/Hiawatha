@@ -98,16 +98,14 @@ public class OI {
 	private static JoystickButton turretIntake;
 	private static JoystickButton turretAutoAim;
 	
-	private static JoystickButton driveBack;
-	private static JoystickButton driveBackEnd;
+	//private static JoystickButton driveBack;
+	//private static JoystickButton driveBackEnd;
 	private static POVTrigger hopperDown;
 	private static POVTrigger hopperUp;
 	
 	//Define Commands
-	WipeStopPoints wipeLPoints;
-	WipeStopPoints wipeRPoints;
-	AddPoint		addLPoint;
-	AddPoint		addRPoint;
+	WipeStopPoints wipePoints;
+	AddPoint	   addPoint;
 	TestSpeedPoints	testCurve;
 	AutoDriveStraightToPoint driveBackwards;
 	private CameraAim buttonAimer;
@@ -158,10 +156,8 @@ public class OI {
 		turretAutoAim = new JoystickButton(gamepad, RobotMap.BTN_TURRETAUTOAIM);
 		
 		//Create Commands
-		wipeLPoints	= new WipeStopPoints(Robot.wscLeft);
-		wipeRPoints	= new WipeStopPoints(Robot.wscRight);
-		addLPoint	= new AddPoint(Robot.wscLeft);
-		addRPoint	= new AddPoint(Robot.wscRight);
+		wipePoints	= new WipeStopPoints(Robot.wscTurret);
+		addPoint	= new AddPoint(Robot.wscTurret);
 		testCurve	= new TestSpeedPoints();
 		driveBackwards = new AutoDriveStraightToPoint();
 		buttonAimer = new CameraAim();
@@ -226,10 +222,8 @@ public class OI {
 		SmartDashboard.putData("Field Side",fieldSide);
 		
 		//Place Commands on SMD
-		SmartDashboard.putData("Wipe Left Points", wipeLPoints);
-		SmartDashboard.putData("Wipe Right Points", wipeRPoints);
-		SmartDashboard.putData("Add Left Point", addLPoint);
-		SmartDashboard.putData("Add Right Point", addRPoint);
+		SmartDashboard.putData("Wipe Shooter Points", wipePoints);
+		SmartDashboard.putData("Add Shooter Point", addPoint);
 		SmartDashboard.putData("Test Speed Curve", testCurve);
 	}
 }

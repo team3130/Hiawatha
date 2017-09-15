@@ -7,7 +7,10 @@ import org.usfirst.frc.team3130.robot.OI;
 import org.usfirst.frc.team3130.robot.Robot;
 import org.usfirst.frc.team3130.robot.RobotMap;
 import org.usfirst.frc.team3130.robot.subsystems.TurretAngle;
+import org.usfirst.frc.team3130.robot.subsystems.TurretFlywheel;
+import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculations;
 import org.usfirst.frc.team3130.robot.subsystems.AndroidInterface;
+import org.usfirst.frc.team3130.robot.subsystems.JetsonInterface;
 import org.usfirst.frc.team3130.robot.vision.ShooterAimingParameters;
 
 
@@ -26,24 +29,24 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class TurretAim extends Command {
 
 	protected ShooterAimingParameters shooter_aiming_parameters;
-	private Timer timer;
-	boolean hasAimed;
-	boolean hasTurned;
-	boolean isActive;
 	private String instance = "";
+	private final double DEFAULTTHRESHOLD = 2;
+	private final double SHOOTERTHRESHOLD = 100;
 
 	public enum AimingMode { kVision, kEncoders }
 
-	
     public TurretAim() {
         requires(TurretAngle.GetInstance());
-        timer = new Timer();
+		requires(TurretFlywheel.GetInstance());
+		requires(Robot.wscTurret);
+		requires(Robot.btTurretIndex);
+        requires(Robot.btTurretHopperL);
+        requires(Robot.btTurretHopperR);
     }
    
     
     public TurretAim(String instance){
         requires(TurretAngle.GetInstance());
-        timer = new Timer();
         this.instance = instance;
     }
 
@@ -73,19 +76,15 @@ public class TurretAim extends Command {
     	//TurretAngle already handles its own PID value settings
     	//TODO:Calibrate turret to absolute position
 
-    	hasAimed = false;
-    	hasTurned = false;
-    	isActive = false;
-        timer.start();
-        
-
-
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double targetAngle;
 		double turretAngleValue;
+		boolean onTarget;
+		double distanceToBoiler;
+		double targetSpeed;
 		try {
 			List<ShooterAimingParameters> aimingReports;
 	    	{
@@ -100,7 +99,19 @@ public class TurretAim extends Command {
 	    			System.out.println("set to angle  " + (turretAngleValue + targetAngle));
 	    			TurretAngle.setAngle(turretAngleValue+targetAngle);
 	    			
+	    			//Access current distance and use wheel speed calculations
+	    			distanceToBoiler = (aimingReports.get((aimingReports.size() - 1)).getRange());
+	    			targetSpeed = Robot.wscTurret.GetSpeed(distanceToBoiler);
+	    			TurretFlywheel.setSpeed(targetSpeed);
 	    			
+	    			onTarget = ((Math.abs(targetAngle - turretAngleValue) < (Preferences.getInstance().getDouble("Boiler Threshold", DEFAULTTHRESHOLD)))
+	    	        		 && (Math.abs(TurretFlywheel.getSpeed() - targetSpeed) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
+	    			
+	    			if(onTarget){
+	    				Robot.btTurretHopperL.spinMotor(Preferences.getInstance().getDouble("Turret Hopper Motor PercentVBus", -0.3));
+	    				Robot.btTurretHopperR.spinMotor(Preferences.getInstance().getDouble("Turret Hopper Motor PercentVBus", 0.3));
+	    				Robot.btTurretIndex.spinMotor(TurretFlywheel.getVBus() * -1);
+	    			}
 	    		}
 	    	
 	    	}
@@ -111,7 +122,7 @@ public class TurretAim extends Command {
 	    	//(updates smartdashboard)
 	    	seenTarget();
 		}
-
+		
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -121,7 +132,6 @@ public class TurretAim extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	isActive = false;
     	SmartDashboard.putBoolean("Boiler aim", false);
     }
 
