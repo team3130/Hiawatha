@@ -2,6 +2,7 @@ package org.usfirst.frc.team3130.robot.autoCommands;
 
 import org.usfirst.frc.team3130.robot.OI;
 import org.usfirst.frc.team3130.robot.commands.TurretAim;
+import org.usfirst.frc.team3130.robot.commands.TurretToAngle;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.subsystems.TurretAngle;
 import org.usfirst.frc.team3130.robot.subsystems.TurretFlywheel;
@@ -19,7 +20,7 @@ public class ShootAfterHopper extends CommandGroup {
 	private AutoDelay					delay_Generic1;
 	private AutoDelay					delay_Generic2;
 	private AutoDelay					delay_waitData;
-	private AutoTurn					turnToBoiler;
+	private TurretToAngle				turnToBoiler;
 	
     public ShootAfterHopper() {
 		requires(Chassis.GetInstance());
@@ -28,7 +29,7 @@ public class ShootAfterHopper extends CommandGroup {
 		
 		drive_backFromHopper = new AutoDriveStraightToPoint();
 		delay_waitData = new AutoDelay();
-		turnToBoiler = new AutoTurn();
+		turnToBoiler = new TurretToAngle();
 		delay_Generic1 = new AutoDelay();
 		delay_Generic2 = new AutoDelay();
 		shoot_aimAndShoot = new TurretAim();
@@ -45,10 +46,10 @@ public class ShootAfterHopper extends CommandGroup {
     protected void initialize()
     {
     	if(OI.fieldSide.getSelected() == "Red") {
-    		turnToBoiler.SetParam(Preferences.getInstance().getDouble("Auto Shoot Turn Angle", 45));
+    		turnToBoiler.SetParam(Preferences.getInstance().getDouble("Auto Shoot Turn Angle", -90));
     	}
     	else {
-    		turnToBoiler.SetParam(Preferences.getInstance().getDouble("Auto Shoot Turn Angle", -45));
+    		turnToBoiler.SetParam(Preferences.getInstance().getDouble("Auto Shoot Turn Angle", 90));
     	}
     	
     	drive_backFromHopper.SetParam(
