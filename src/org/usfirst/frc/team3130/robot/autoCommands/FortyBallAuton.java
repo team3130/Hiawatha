@@ -51,24 +51,24 @@ public class FortyBallAuton extends CommandGroup {
 	protected void initialize()
 	{
 		driveForward.SetParam(
-				Preferences.getInstance().getDouble("Forty Ball Forward Dist", -119), 
+				Preferences.getInstance().getDouble("Forty Ball Forward Dist", 93), 
 				Preferences.getInstance().getDouble("Forty Ball Thresh", 20), 
 				Preferences.getInstance().getDouble("Forty Ball Speed", .7), 
 				false
 		);
 		if (OI.fieldSide.getSelected() == "Red") {
-			turn_towardsHopper.SetParam(Preferences.getInstance().getDouble("TurnToHopper Left", -90));
-		}
-		else {
 			turn_towardsHopper.SetParam(Preferences.getInstance().getDouble("TurnToHopper Right", 90));
 		}
+		else {
+			turn_towardsHopper.SetParam(Preferences.getInstance().getDouble("TurnToHopper Left", -90));
+		}
         drive_toHopper.SetParam(
-				Preferences.getInstance().getDouble("Forty Ball Over Dist", -60), 
+				Preferences.getInstance().getDouble("Forty Ball Over Dist", 65), 
 				Preferences.getInstance().getDouble("Forty Ball Thresh", 20), 
 				Preferences.getInstance().getDouble("Forty Ball Speed", .5), 
 				false
 		);
         
-        drive_pressToButton.SetParam(-.3, -12);
+        drive_pressToButton.SetParam(.3, 12);
 	}
 }

@@ -65,6 +65,7 @@ public class TurretFlywheel extends Subsystem {
         slave_talon.changeControlMode(CANTalon.TalonControlMode.Follower);
         slave_talon.set(RobotMap.CAN_SHOOTERMASTER);
         master_talon.setProfile(0);
+        
         master_talon.setPID(
         		Preferences.getInstance().getDouble("TurretFlyP",
         		P_DEFAULT),
@@ -79,9 +80,9 @@ public class TurretFlywheel extends Subsystem {
         		//Preferences.getInstance().getDouble("TurretFlyRamp",
         		RAMP_DEFAULT,
         		0);
-        master_talon.configEncoderCodesPerRev(12);
-        master_talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
         
+        master_talon.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+        master_talon.configEncoderCodesPerRev(12);
         master_talon.reverseSensor(true);
         master_talon.reverseOutput(false);
         slave_talon.reverseOutput(true);
@@ -134,6 +135,10 @@ public class TurretFlywheel extends Subsystem {
                 && Math.abs(getSpeed() - getSetpoint()) < SPEEDTOLERANCE);
     }
 
+    public static CANTalon getMotor() {
+    	return master_talon;
+    }
+    
     public static void stop() {
         setOpenLoop(0);
     }

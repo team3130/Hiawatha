@@ -50,7 +50,7 @@ public class Chassis extends PIDSubsystem {
 
 	public static final double robotWidth = 26.0;
 
-	public static final double InchesPerRev = Preferences.getInstance().getDouble("Wheel Diameter", (3.678 + 3.676) / 2.0) * Math.PI;
+	public static final double InchesPerRev = Preferences.getInstance().getDouble("Wheel Diameter", (3.888 + 3.838) / 2.0) * Math.PI;
 
 	
 	//PID Preferences Defaults
@@ -106,9 +106,6 @@ public class Chassis extends PIDSubsystem {
 		m_rightMotorFront.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		m_leftMotorFront.reverseSensor(true);
 		m_rightMotorFront.reverseSensor(false);
-		
-		m_leftMotorFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-		m_rightMotorFront.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		
 		m_leftMotorFront.configEncoderCodesPerRev(RobotMap.RATIO_DRIVECODESPERREV);
 		m_rightMotorFront.configEncoderCodesPerRev(RobotMap.RATIO_DRIVECODESPERREV);
@@ -381,7 +378,7 @@ public class Chassis extends PIDSubsystem {
 			if (bias < -speedLimit) bias = -speedLimit;
 			double speed_L = moveSpeed-bias;
 			double speed_R = moveSpeed+bias;
-			DriveTank(speed_L, speed_R, false);
+			DriveTank(speed_R, speed_L, false); //switched because believe robot front = back
 			prevSpeedLimit = Math.abs(speedLimit);
 		}else{
 			setSpeedTalon(bias);
@@ -677,6 +674,7 @@ public class Chassis extends PIDSubsystem {
     {
     	return m_driveMultiplier;
     }
+    
 }
 
 

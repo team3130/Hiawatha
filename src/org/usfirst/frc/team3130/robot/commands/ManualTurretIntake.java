@@ -19,8 +19,8 @@ public class ManualTurretIntake extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-		Robot.btTurretHopperL.spinMotor(Preferences.getInstance().getDouble("Turret Hopper Motor PercentVBus", -0.6));
-		Robot.btTurretHopperR.spinMotor(Preferences.getInstance().getDouble("Turret Hopper Motor PercentVBus", 0.7));
+		Robot.btTurretHopperL.spinMotor(Preferences.getInstance().getDouble("Turret Hopper Motor PercentVBus", -0.5));
+		Robot.btTurretHopperR.spinMotor(Preferences.getInstance().getDouble("Turret Hopper Motor PercentVBus", 0.6));
     }
 
     // Called repeatedly when this Command is scheduled to run
