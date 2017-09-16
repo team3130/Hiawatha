@@ -1,8 +1,11 @@
 package org.usfirst.frc.team3130.robot.commands;
 
-import org.usfirst.frc.team3130.robot.RobotMap;
+import java.util.List;
+
+import org.usfirst.frc.team3130.robot.subsystems.AndroidInterface;
 import org.usfirst.frc.team3130.robot.subsystems.JetsonInterface;
 import org.usfirst.frc.team3130.robot.subsystems.WheelSpeedCalculations;
+import org.usfirst.frc.team3130.robot.vision.ShooterAimingParameters;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
@@ -22,11 +25,20 @@ public class AddPoint extends Command {
 
     // Called once when the command executes
     protected void initialize() {
-    	double dist = JetsonInterface.getDouble("Boiler Groundrange", 120)
-    			*(1/Preferences.getInstance().getDouble("Vision to Inches", RobotMap.RATIO_VISIONTOINCHES));
-    	//double dist = Preferences.getInstance().getDouble("Distance", 120);
-    	double speed = Preferences.getInstance().getDouble("Left Speed Setpoint", 0);
-    	m_wscTarget.AddPoint(dist, speed);
+    	try {
+			List<ShooterAimingParameters> aimingReports;
+			aimingReports = AndroidInterface.GetInstance().getAim(); 
+	    		if(!aimingReports.isEmpty()){
+	    	    	double dist = (aimingReports.get((aimingReports.size() - 1)).getRange());
+	    	    	//double dist = Preferences.getInstance().getDouble("Distance", 120);
+	    	    	double speed = Preferences.getInstance().getDouble("ShooterTest", 0);
+	    	    	m_wscTarget.AddPoint(dist, speed);
+	    		}
+	    
+		}catch (NullPointerException e) {
+			
+		}
+
     }
 
 	@Override

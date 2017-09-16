@@ -125,6 +125,10 @@ public class TurretAngle extends Subsystem {
 	 * @return If the turret is within its mechanical limits and in the right
 	 *		 state.
 	 */
+	
+	public static CANTalon getMotor(){
+		return m_turret;
+	}
 
 	public synchronized static void stop() {
 		setOpenLoop(0);

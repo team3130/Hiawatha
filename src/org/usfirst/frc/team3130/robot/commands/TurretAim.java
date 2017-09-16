@@ -32,12 +32,17 @@ public class TurretAim extends Command {
 	private String instance = "";
 	private final double DEFAULTTHRESHOLD = 2;
 	private final double SHOOTERTHRESHOLD = 100;
+	private double kTurretKpD = 0.9;
+	private double kTurretKiD = 0.0;
+	private double kTurretKdD = 50.0;
+	private double kTurretKp;
+	private double kTurretKi;
+	private double kTurretKd;
 
 	public enum AimingMode { kVision, kEncoders }
 
     public TurretAim() {
         requires(TurretAngle.GetInstance());
-		requires(TurretFlywheel.GetInstance());
 		requires(Robot.wscTurret);
 		requires(Robot.btTurretIndex);
         requires(Robot.btTurretHopperL);
@@ -72,7 +77,9 @@ public class TurretAim extends Command {
     
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+    	kTurretKp = Preferences.getInstance().getDouble("TurretAdjP",kTurretKpD);
+        kTurretKi = Preferences.getInstance().getDouble("TurretAdjI",kTurretKiD);
+        kTurretKd = Preferences.getInstance().getDouble("TurretAdjD",kTurretKdD);
     	//TurretAngle already handles its own PID value settings
     	//TODO:Calibrate turret to absolute position
 
@@ -82,14 +89,14 @@ public class TurretAim extends Command {
     protected void execute() {
     	double targetAngle;
 		double turretAngleValue;
-		boolean onTarget;
-		double distanceToBoiler;
-		double targetSpeed;
+
 		try {
 			List<ShooterAimingParameters> aimingReports;
 	    	{
 	    		aimingReports = AndroidInterface.GetInstance().getAim(); 
 	    		if(!aimingReports.isEmpty()){
+	    			
+	    			TurretAngle.getMotor().setPID(kTurretKp, kTurretKi, kTurretKd);
 	    			
 	    			//currently set to grab latest angle value of list
 	    			targetAngle = (aimingReports.get((aimingReports.size() - 1)).getTurretAngle()).getDegrees();
@@ -98,21 +105,9 @@ public class TurretAim extends Command {
 	    			System.out.println("current angle " + turretAngleValue );
 	    			System.out.println("set to angle  " + (turretAngleValue + targetAngle));
 	    			TurretAngle.setAngle(turretAngleValue+targetAngle);
-	    			
-	    			//Access current distance and use wheel speed calculations
-	    			distanceToBoiler = (aimingReports.get((aimingReports.size() - 1)).getRange());
-	    			targetSpeed = Robot.wscTurret.GetSpeed(distanceToBoiler);
-	    			TurretFlywheel.setSpeed(targetSpeed);
-	    			
-	    			onTarget = ((Math.abs(targetAngle - turretAngleValue) < (Preferences.getInstance().getDouble("Boiler Threshold", DEFAULTTHRESHOLD)))
-	    	        		 && (Math.abs(TurretFlywheel.getSpeed() - targetSpeed) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
-	    			
-	    			if(onTarget){
-	    				Robot.btTurretHopperL.spinMotor(Preferences.getInstance().getDouble("Turret Hopper Motor PercentVBus", -0.3));
-	    				Robot.btTurretHopperR.spinMotor(Preferences.getInstance().getDouble("Turret Hopper Motor PercentVBus", 0.3));
-	    				Robot.btTurretIndex.spinMotor(TurretFlywheel.getVBus() * -1);
-	    			}
+	    			HoldAngle.setAngle(TurretAngle.getAngleDegrees());
 	    		}
+	    		
 	    	
 	    	}
 		}catch (NullPointerException e) {
@@ -127,6 +122,8 @@ public class TurretAim extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+        
+        
         return false;
     }
 

@@ -2,6 +2,8 @@ package org.usfirst.frc.team3130.robot;
 
 import org.usfirst.frc.team3130.util.ConstantsBase;
 
+import edu.wpi.first.wpilibj.Preferences;
+
 public class Constants extends ConstantsBase {
 /*refactored for 3130
   @author Eastan
@@ -22,9 +24,9 @@ public class Constants extends ConstantsBase {
 
     //Turret PID
     // Units: error is 4096 counts/rev. Max output is +/- 1023 units.
-    public static double kTurretKp = 0.8;
-    public static double kTurretKi = 0.0;
-    public static double kTurretKd = 90.0;
+    public static double kTurretKp = Preferences.getInstance().getDouble("TurretAdjP",0.9);
+    public static double kTurretKi = Preferences.getInstance().getDouble("TurretAdjI",0.0);
+    public static double kTurretKd = Preferences.getInstance().getDouble("TurretAdjD",80.0);
     public static double kTurretKf = 0;
     public static int kTurretIZone = (int) (1023.0 / kTurretKp);
     public static double kTurretRampRate = 0;
@@ -36,7 +38,7 @@ public class Constants extends ConstantsBase {
     public static double kCameraYOffset = 0.0;
     public static double kCameraZOffset = 22.75;
     public static double kCameraPitchAngleDegrees = 15.0; 
-    public static double kCameraYawAngleDegrees = -1.0;
+    public static double kCameraYawAngleDegrees = 1.2;
     public static double kCameraDeadband = 0.0;
     
     // Goal tracker constants

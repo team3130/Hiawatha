@@ -97,6 +97,7 @@ public class OI {
 	private static JoystickButton turretShoot;
 	private static JoystickButton turretIntake;
 	private static JoystickButton turretAutoAim;
+	private static JoystickButton turretHoldAngle;
 	
 	//private static JoystickButton driveBack;
 	//private static JoystickButton driveBackEnd;
@@ -152,7 +153,7 @@ public class OI {
 		
 		turretShoot = new JoystickButton(gamepad, RobotMap.BTN_TURRETFLY);
 		turretIntake = new JoystickButton(gamepad, RobotMap.BTN_TURRETINTAKE);
-		
+		turretHoldAngle = new JoystickButton(gamepad, RobotMap.BTN_TURRETFLY);
 		turretAutoAim = new JoystickButton(gamepad, RobotMap.BTN_TURRETAUTOAIM);
 		
 		//Create Commands
@@ -191,12 +192,14 @@ public class OI {
 		turretShoot.whileHeld(new ManualFlywheel());
 		turretIntake.whileHeld(new ManualTurretIntake());
 		turretAutoAim.whileHeld(new TurretAim());
+		turretHoldAngle.whileHeld(new HoldAngle());
 		
 		shiftUp.whenPressed(new DriveShiftUp());
 		shiftDown.whenPressed(new DriveShiftDown());
 		
 		aim.whileHeld(buttonAimer);
 		aimDrive.whileHeld(new CameraDrive());
+		
 		
 		//driveBack.whenPressed(driveBackwards);
 		//driveBackEnd.whenReleased(new DefaultDrive());
