@@ -30,8 +30,6 @@ public class TurretAim extends Command {
 
 	protected ShooterAimingParameters shooter_aiming_parameters;
 	private String instance = "";
-	private final double DEFAULTTHRESHOLD = 2;
-	private final double SHOOTERTHRESHOLD = 100;
 	private double kTurretKpD = 0.9;
 	private double kTurretKiD = 0.0;
 	private double kTurretKdD = 50.0;
@@ -81,7 +79,6 @@ public class TurretAim extends Command {
         kTurretKi = Preferences.getInstance().getDouble("TurretAdjI",kTurretKiD);
         kTurretKd = Preferences.getInstance().getDouble("TurretAdjD",kTurretKdD);
     	//TurretAngle already handles its own PID value settings
-    	//TODO:Calibrate turret to absolute position
 
     }
 

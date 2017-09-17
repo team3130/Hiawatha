@@ -3,7 +3,6 @@ package org.usfirst.frc.team3130.robot;
 
 import org.usfirst.frc.team3130.robot.autoCommands.*;
 import org.usfirst.frc.team3130.robot.commands.*;
-import org.usfirst.frc.team3130.robot.commands.RunWheelsManual;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Preferences;
@@ -101,8 +100,6 @@ public class OI {
 	
 	//private static JoystickButton driveBack;
 	//private static JoystickButton driveBackEnd;
-	private static POVTrigger hopperDown;
-	private static POVTrigger hopperUp;
 	
 	//Define Commands
 	WipeStopPoints wipePoints;
@@ -146,8 +143,6 @@ public class OI {
 		//driveBack = new JoystickButton(gamepad, RobotMap.BTN_DRIVEBACK);
 		//driveBackEnd = new JoystickButton(gamepad, RobotMap.BTN_DRIVEBACK);
 		
-		hopperDown = new POVTrigger(gamepad, RobotMap.POV_HOPPERDOWN);
-		hopperUp = new POVTrigger(gamepad, RobotMap.POV_HOPPERUP);
 
 		flashlightToggle = new JoystickButton(gamepad, RobotMap.BTN_FLASHLIGHTTOGGLE);
 		
@@ -200,12 +195,8 @@ public class OI {
 		aim.whileHeld(buttonAimer);
 		aimDrive.whileHeld(new CameraDrive());
 		
-		
 		//driveBack.whenPressed(driveBackwards);
 		//driveBackEnd.whenReleased(new DefaultDrive());
-		
-		hopperUp.whenActive(new AutoBasicActuate(Robot.bcHopperFloor, false));
-		hopperDown.whenActive(new AutoBasicActuate(Robot.bcHopperFloor, true));
 		
 		//btn10L.whileHeld(testL);
 		//btn10R.whileHeld(testR);
@@ -221,7 +212,7 @@ public class OI {
 		fieldSide = new SendableChooser<String>();
 		//If hardcoding required, manually choose fieldSide below
 		//fieldSide.addObject("Red Side", "Red");
-		fieldSide.addDefault("Red Side", "Red");
+		fieldSide.addDefault("Blue Side", "Blue");
 		SmartDashboard.putData("Field Side",fieldSide);
 		
 		//Place Commands on SMD

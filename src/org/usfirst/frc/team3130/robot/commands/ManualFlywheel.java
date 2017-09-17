@@ -53,11 +53,6 @@ public class ManualFlywheel extends Command {
         		//Preferences.getInstance().getDouble("TurretFlyRamp",
         		RAMP_DEFAULT,
         		0);
-    }
-
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    
     	double distanceToBoiler;
     	double targetSpeed;
     
@@ -66,13 +61,22 @@ public class ManualFlywheel extends Command {
 			aimingReports = AndroidInterface.GetInstance().getAim(); 
 	    		if(!aimingReports.isEmpty()){
 	    			distanceToBoiler = (aimingReports.get((aimingReports.size() - 1)).getRange());
-	    			//targetSpeed = Robot.wscTurret.GetSpeed(distanceToBoiler);
-	    			TurretFlywheel.setSpeed(Preferences.getInstance().getDouble("ShooterTest", 800.0));
+	    			targetSpeed = Robot.wscTurret.GetSpeed(distanceToBoiler);
+	    			TurretFlywheel.setSpeed(targetSpeed);
+	    			//TurretFlywheel.setSpeed(Preferences.getInstance().getDouble("ShooterTest", 3900.0));
 	    			System.out.println("SHOOTING..........");
 	    		}
 	    
 		}catch (NullPointerException e) {
+			
 		}
+    	
+    }
+
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+    
+
     	
     	
     }

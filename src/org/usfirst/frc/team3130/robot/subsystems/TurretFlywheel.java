@@ -98,7 +98,7 @@ public class TurretFlywheel extends Subsystem {
     }
 
     public static double getSpeed() {
-        return master_talon.getSpeed();// * (4.0 * 12.0)/600.0; * 48.0 * (13.0/36.0); //Turret Flywheel uses a RS7 encoder with resolution of 12 ticks per rotation (counts per rotation, CPR). RS7 is a quadrature encoder so the multipler is 4xCPR.
+        return master_talon.getSpeed();//Some Magical number. Old Stuff--> * (4.0 * 12.0)/600.0; Turret Flywheel uses a RS7 encoder with resolution of 12 ticks per rotation (counts per rotation, CPR).
     }
 
     /**
@@ -110,7 +110,7 @@ public class TurretFlywheel extends Subsystem {
      */
     public static void setSpeed(double rpm) {
         master_talon.changeControlMode(CANTalon.TalonControlMode.Speed);
-        master_talon.set(rpm); //* 600.0/48.0);
+        master_talon.set(rpm);
     }
 
     public static double getVBus(){
@@ -123,7 +123,7 @@ public class TurretFlywheel extends Subsystem {
     }
 
     public static double getSetpoint() {
-        return master_talon.getSetpoint(); /// (600.0/(4.0 * 12.0));
+        return master_talon.getSetpoint(); 
     }
 
     /**

@@ -107,6 +107,10 @@ public class Chassis extends PIDSubsystem {
 		m_leftMotorFront.reverseSensor(true);
 		m_rightMotorFront.reverseSensor(false);
 		
+		//CHASSIS USES CTRE MAG ENCODERS
+		m_leftMotorFront.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
+		m_rightMotorFront.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
+		
 		m_leftMotorFront.configEncoderCodesPerRev(RobotMap.RATIO_DRIVECODESPERREV);
 		m_rightMotorFront.configEncoderCodesPerRev(RobotMap.RATIO_DRIVECODESPERREV);
 		

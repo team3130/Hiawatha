@@ -52,7 +52,6 @@ public class VisionGearAnd10 extends CommandGroup {
     @Override
     protected void initialize()
     {
-    	shoot.setParam(Preferences.getInstance().getDouble("GearAnd10 Index Speed", 0.5));
 
     	backMore.SetParam(
     			Preferences.getInstance().getDouble("GearAnd10 Extra Back Distance", 12), 

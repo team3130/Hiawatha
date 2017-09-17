@@ -53,7 +53,6 @@ public class RobotMap {
 			public static final int PNM_GEARSHIFTER = 0;
 			public static final int PNM_GEARLIFT = 4;
 			public static final int PNM_GEARPINCH = 2;
-			public static final int PNM_HOPPERFLOOR = 5;
 			
 		//Analog Input
 			//Prefix ANG_
@@ -98,8 +97,7 @@ public class RobotMap {
 			
 			//Hopper
 			public static final int BTN_HOPPERDRIVE = LST_BTN_RBUMPER;//TODO: Get Actual Button
-			public static final int POV_HOPPERUP = LST_POV_N;
-			public static final int POV_HOPPERDOWN = LST_POV_S;
+
 			
 			//Shooter
 			//public static final int BTN_TESTSHOOTERWHEELS = LST_BTN_LBUMPER;

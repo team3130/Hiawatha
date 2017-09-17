@@ -40,9 +40,10 @@ public class FortyBallAuton extends CommandGroup {
 		drive_pressToButton = new ContDrive();
 
 		addParallel(clampPinch, 1);
-		addSequential(driveForward,3);
-		addSequential(turn_towardsHopper,2);
-		addSequential(drive_toHopper,2);
+		
+		addSequential(driveForward,2);//3);
+		addSequential(turn_towardsHopper,1.7); //2);
+		addSequential(drive_toHopper,1.5); //2);
 		addSequential(drive_pressToButton, .5);
 		addSequential(auto_shootFromHopper);
 	}
@@ -51,24 +52,24 @@ public class FortyBallAuton extends CommandGroup {
 	protected void initialize()
 	{
 		driveForward.SetParam(
-				Preferences.getInstance().getDouble("Forty Ball Forward Dist", 93), 
+				-Preferences.getInstance().getDouble("Forty Ball Forward Dist", 93), 
 				Preferences.getInstance().getDouble("Forty Ball Thresh", 20), 
 				Preferences.getInstance().getDouble("Forty Ball Speed", .7), 
 				false
 		);
 		if (OI.fieldSide.getSelected() == "Red") {
-			turn_towardsHopper.SetParam(Preferences.getInstance().getDouble("TurnToHopper Right", 90));
+			turn_towardsHopper.SetParam(-Preferences.getInstance().getDouble("TurnToHopper Right", 90));
 		}
 		else {
-			turn_towardsHopper.SetParam(Preferences.getInstance().getDouble("TurnToHopper Left", -90));
+			turn_towardsHopper.SetParam(-Preferences.getInstance().getDouble("TurnToHopper Left", -90));
 		}
         drive_toHopper.SetParam(
-				Preferences.getInstance().getDouble("Forty Ball Over Dist", 65), 
+				-Preferences.getInstance().getDouble("Forty Ball Over Dist", 65), 
 				Preferences.getInstance().getDouble("Forty Ball Thresh", 20), 
 				Preferences.getInstance().getDouble("Forty Ball Speed", .5), 
 				false
 		);
         
-        drive_pressToButton.SetParam(.3, 12);
+        drive_pressToButton.SetParam(-.3, -12);
 	}
 }

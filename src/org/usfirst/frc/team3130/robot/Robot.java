@@ -72,7 +72,6 @@ public class Robot extends IterativeRobot {
 
 		bcGearPinch = new BasicCylinder(RobotMap.PNM_GEARPINCH, "Gear", "Pinch Cylinder");
 		bcGearLift = new BasicCylinder(RobotMap.PNM_GEARLIFT, "Gear", "Lift Cylinder");
-		bcHopperFloor = new BasicCylinder(RobotMap.PNM_HOPPERFLOOR, "Hopper", "Floor Cylinder");
 		
 		btHopper = new BasicCANTalon(RobotMap.CAN_HOPPERSTIR, "Hopper", "Hopper Motor");
 		btHopper2 = new BasicCANTalon(RobotMap.CAN_HOPPER2, "Hopper", "Hopper2 Motor");
@@ -192,7 +191,7 @@ public class Robot extends IterativeRobot {
 		*/
 		//Hardcode goes below, comment out switch above
 		
-		autonomousCommand = new DumbGearAuto();	
+		autonomousCommand = new FortyBallAuton();	
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 		

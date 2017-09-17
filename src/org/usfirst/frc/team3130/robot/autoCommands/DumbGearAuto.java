@@ -54,7 +54,7 @@ public class DumbGearAuto extends CommandGroup {
 				//turnToPeg.SetParam(Preferences.getInstance().getDouble("TurnToGear Left", -45));
 				
 				toPeg.SetParam(
-						-Preferences.getInstance().getDouble("DumbGear toPeg Dist Left", -74), 
+						-Preferences.getInstance().getDouble("DumbGear toPeg Dist Left", -24), 
 						Preferences.getInstance().getDouble("DumbGear toPeg Thresh Left", 3), 
 						Preferences.getInstance().getDouble("DumbGear toPeg Speed Left", .6), 
 						false

@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The TurretAngle subsystem controls the angle the ball is fired. The Turret can only 
- * rotate within 200 degrees (+/- 100) because of mechanical hard stops.
+ * rotate within 196 degrees (+/- 98) because of mechanical hard stops.
  * 
  * The balls are fed from the hopper to the Turret via the ball elevator, the TurretAngle 
  * subsystem set the angle of the Turret. Then the balls are shot out by the TurretFlywheel.
@@ -50,8 +50,9 @@ public class TurretAngle extends Subsystem {
 		m_turret.enableBrakeMode(true);
 		m_turret.enableLimitSwitch(false, false);
 		m_turret.setStatusFrameRateMs(CANTalon.StatusFrameRate.Feedback, 10);
+		
 		m_turret.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		m_turret.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative); //TODO: check if this is accurate
+		m_turret.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
 		if (m_turret.isSensorPresent(
 				CANTalon.FeedbackDevice.CtreMagEncoder_Relative) != CANTalon.FeedbackDeviceStatus.FeedbackStatusPresent) {
 			DriverStation.reportError("Could not detect turret encoder!", false);
@@ -67,10 +68,7 @@ public class TurretAngle extends Subsystem {
 		m_turret.reverseOutput(false);
 		
 
-
-
-		// We use soft limits to make sure the turret doesn't try to spin too
-		// far.
+		// We use soft limits to make sure the turret doesn't try to spin too far.
 		m_turret.enableForwardSoftLimit(true);
 		m_turret.enableReverseSoftLimit(true);
 		m_turret.setForwardSoftLimit(1.2728758);
@@ -86,14 +84,14 @@ public class TurretAngle extends Subsystem {
 	public synchronized static void setAngle(double angle_deg) {
 		m_turret.changeControlMode(CANTalon.TalonControlMode.Position);
 		// In Position mode, outputValue set is in rotations of the motor 
-		System.out.println("Set value:  " + (angle_deg / 360.0) * (164.0 / 34.0) + " -------------");
+		//DEBUG: System.out.println("Set value:  " + (angle_deg / 360.0) * (164.0 / 34.0) + " -------------");
 		m_turret.set((angle_deg / 360.0) * (164.0 / 34.0));
 	}
 
 	// Manually move the turret (and put it into vbus mode if it isn't already). Input range -1.0 to 1.0
 	public synchronized static void setOpenLoop(double speed) {
 		m_turret.changeControlMode(CANTalon.TalonControlMode.PercentVbus); 
-		m_turret.set(-0.12*speed); //scale to max of 12%
+		m_turret.set(-0.12*speed); 
 	}
 
 	// Tell the Talon it is at a given position.

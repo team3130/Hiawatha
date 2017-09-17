@@ -9,16 +9,13 @@ public class Constants extends ConstantsBase {
   @author Eastan
  */
 	//Vision tracking centerpoint height on high efficiency boiler
-
     public static double kCenterOfTargetHeight = 86.0; //Correct 9/11/17, in inches
     
     // Turret mechanical constants
-	//TODO:determine constants for turret.
     public static double kHardMaxTurretAngle = 97.0;
     public static double kHardMinTurretAngle = -98.0;
-    public static double kSoftMaxTurretAngle = 90.0;
-    public static double kSoftMinTurretAngle = -90.0;
-    public static double kTurretSafeTolerance = 2.0;
+    public static double kSoftMaxTurretAngle = 95.0;
+    public static double kSoftMinTurretAngle = -95.0;
     public static double kTurretOnTargetTolerance = 0.5;
     public static double kTurretRotationsPerTick =  1.0 / 4096.0 * 34.0 / 164.0; //Correct 9/11/17, CTRE Mag encoder connected to gearbox output shaft
 
@@ -38,7 +35,7 @@ public class Constants extends ConstantsBase {
     public static double kCameraYOffset = 0.0;
     public static double kCameraZOffset = 22.75;
     public static double kCameraPitchAngleDegrees = 15.0; 
-    public static double kCameraYawAngleDegrees = 1.2;
+    public static double kCameraYawAngleDegrees = 1.3;
     public static double kCameraDeadband = 0.0;
     
     // Goal tracker constants
