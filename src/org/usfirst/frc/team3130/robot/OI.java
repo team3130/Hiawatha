@@ -84,7 +84,6 @@ public class OI {
 
 	private static JoystickButton flashlightToggle;
 	
-	private static JoystickButton testCurvePreferences;
 	private static JoystickButton shiftUp;
 	private static JoystickButton shiftDown;
 	private static JoystickButton gearAssist;
@@ -97,6 +96,7 @@ public class OI {
 	private static JoystickButton turretIntake;
 	private static JoystickButton turretAutoAim;
 	private static JoystickButton turretHoldAngle;
+	private static JoystickButton turretManualShoot;
 	
 	//private static JoystickButton driveBack;
 	//private static JoystickButton driveBackEnd;
@@ -131,7 +131,6 @@ public class OI {
 		pinchGear = new JoystickButton(stickL, RobotMap.BTN_PINCHGEAR);
 		lowerGearActive = new JoystickButton(stickR, RobotMap.BTN_LOWERGEARACTIVE);
 		spinIndexer = new JoystickButton(gamepad, RobotMap.BTN_RUNINDEXER);
-		testCurvePreferences = new JoystickButton(gamepad, RobotMap.BTN_TESTCURVEPREFERENCES);
 		
 		gearAssist = new JoystickButton(stickR, RobotMap.BTN_GEARASSIST);
 		shiftUp = new JoystickButton(stickR, RobotMap.BTN_SHIFTUP);
@@ -148,8 +147,9 @@ public class OI {
 		
 		turretShoot = new JoystickButton(gamepad, RobotMap.BTN_TURRETFLY);
 		turretIntake = new JoystickButton(gamepad, RobotMap.BTN_TURRETINTAKE);
-		turretHoldAngle = new JoystickButton(gamepad, RobotMap.BTN_TURRETFLY);
+		turretHoldAngle = new JoystickButton(gamepad, RobotMap.BTN_TURRETMANUALFLY);
 		turretAutoAim = new JoystickButton(gamepad, RobotMap.BTN_TURRETAUTOAIM);
+		turretManualShoot = new JoystickButton(gamepad, RobotMap.BTN_TURRETMANUALFLY);
 		
 		//Create Commands
 		wipePoints	= new WipeStopPoints(Robot.wscTurret);
@@ -179,15 +179,15 @@ public class OI {
 		pinchGear.whileHeld(new BasicActuate(Robot.bcGearPinch));
 		lowerGearActive.whileHeld(new LowerGearPickup());
 		spinIndexer.whileHeld(new RunIndexer(buttonAimer));
-		testCurvePreferences.whileHeld(new SpeedCurveShoot());
 		gearAssist.whileHeld(gearDrive);
 		
 		flashlightToggle.whenPressed(new FlashlightToggle());
 		
-		turretShoot.whileHeld(new ManualFlywheel());
+		turretShoot.whileHeld(new AutoFlywheel());
 		turretIntake.whileHeld(new ManualTurretIntake());
 		turretAutoAim.whileHeld(new TurretAim());
 		turretHoldAngle.whileHeld(new HoldAngle());
+		turretManualShoot.whileHeld(new ManualFlywheel());
 		
 		shiftUp.whenPressed(new DriveShiftUp());
 		shiftDown.whenPressed(new DriveShiftDown());

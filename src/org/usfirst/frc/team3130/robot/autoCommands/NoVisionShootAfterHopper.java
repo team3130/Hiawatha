@@ -3,7 +3,7 @@ package org.usfirst.frc.team3130.robot.autoCommands;
 import org.usfirst.frc.team3130.robot.OI;
 import org.usfirst.frc.team3130.robot.Robot;
 import org.usfirst.frc.team3130.robot.commands.BasicSpinMotor;
-import org.usfirst.frc.team3130.robot.commands.ManualFlywheel;
+import org.usfirst.frc.team3130.robot.commands.AutoFlywheel;
 import org.usfirst.frc.team3130.robot.commands.ManualTurretIntake;
 import org.usfirst.frc.team3130.robot.commands.TurretToAngle;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
@@ -23,7 +23,7 @@ public class NoVisionShootAfterHopper extends CommandGroup {
 	private int                  wheelSpeed;
 	private ManualTurretIntake   turretIntake;
 	private JostleIntake         spinIntake;
-	private ManualFlywheel       shoot;
+	private AutoFlywheel       shoot;
 	
 	private AutoDelay            delay1;
 	
@@ -37,13 +37,13 @@ public class NoVisionShootAfterHopper extends CommandGroup {
         wheelSpeed = 3500; //TODO: determine speed for distance
 		
 		turnTurret =    new TurretToAngle();
-		shoot =         new ManualFlywheel();
+		shoot =         new AutoFlywheel();
 		delay1 =        new AutoDelay();
 		intakeUp =      new BasicSpinMotor(Robot.btIntake, .6);
 		
         turretIntake =  new ManualTurretIntake();
         spinIntake =    new JostleIntake();
-        shoot =         new ManualFlywheel();
+        shoot =         new AutoFlywheel();
 
 		addSequential(delay1, 1.5);
 		addParallel(intakeUp);

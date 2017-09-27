@@ -1,7 +1,7 @@
 package org.usfirst.frc.team3130.robot.autoCommands;
 
 import org.usfirst.frc.team3130.robot.OI;
-import org.usfirst.frc.team3130.robot.commands.ManualFlywheel;
+import org.usfirst.frc.team3130.robot.commands.AutoFlywheel;
 import org.usfirst.frc.team3130.robot.commands.TurretAim;
 import org.usfirst.frc.team3130.robot.commands.TurretToAngle;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
@@ -18,7 +18,7 @@ public class ShootAfterHopper extends CommandGroup {
 
 	private TurretAim					shoot_aim;
 	private TurretToAngle				turnToBoiler;
-	private ManualFlywheel				shoot;
+	private AutoFlywheel				shoot;
 	
     public ShootAfterHopper() {
 		requires(Chassis.GetInstance());
@@ -27,7 +27,7 @@ public class ShootAfterHopper extends CommandGroup {
 
 		turnToBoiler = new TurretToAngle();
 		shoot_aim = new TurretAim();
-		shoot = new ManualFlywheel();
+		shoot = new AutoFlywheel();
 
 		addSequential(turnToBoiler, 0.7);
 		addSequential(shoot_aim, 1.5);

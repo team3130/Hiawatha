@@ -89,7 +89,7 @@ public class TurretAim extends Command {
 
 		try {
 			List<ShooterAimingParameters> aimingReports;
-	    	{
+	    	
 	    		aimingReports = AndroidInterface.GetInstance().getAim(); 
 	    		if(!aimingReports.isEmpty()){
 	    			
@@ -103,7 +103,7 @@ public class TurretAim extends Command {
 	    			System.out.println("set to angle  " + (turretAngleValue + targetAngle));
 	    			TurretAngle.setAngle(turretAngleValue+targetAngle);
 	    			HoldAngle.setAngle(TurretAngle.getAngleDegrees());
-	    		}
+	    		
 	    		
 	    	
 	    	}

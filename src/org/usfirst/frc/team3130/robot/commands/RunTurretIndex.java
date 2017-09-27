@@ -17,7 +17,7 @@ public class RunTurretIndex extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.btTurretIndex.spinMotor(Preferences.getInstance().getDouble("Turret Index PercentVBus", 0.2));
+    	Robot.btTurretIndex.spinMotor(Preferences.getInstance().getDouble("Turret Index PercentVBus", 0.2)-0.07);
     }
 
     // Called repeatedly when this Command is scheduled to run

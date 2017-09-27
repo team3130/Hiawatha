@@ -14,23 +14,31 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ManualFlywheel extends Command {
+public class AutoFlywheel extends Command {
 
+	private static double wheelSpeedTarget; 
+	private static double WHEELSPEEDDEFAULT = 800.0; //TODO: determine speed for sweet spot
 	private static double P_DEFAULT = 1.0; //TODO: tune this
     private static double I_DEFAULT = 0.0; //TODO: tune this
     private static double D_DEFAULT = 0.0; //TODO: tune this
     private static double F_DEFAULT = 0.0; //TODO: tune this
     private static int IZONE_DEFAULT = 0; //TODO: tune this
     private static double RAMP_DEFAULT = 0.0; //TODO: tune this
+	private static double targetSpeed;
 	
-    public ManualFlywheel() {
-    	System.out.println("ManualFlywheel().....");
+    public AutoFlywheel() {
     }
 
+    public void SetParam(int speed){
+    	wheelSpeedTarget = speed;
+    }
     
     // Called just before this Command runs the first time
     protected void initialize() {
-
+    	/*
+    	wheelSpeedTarget = WHEELSPEEDDEFAULT;
+    	TurretFlywheel.setSpeed(wheelSpeedTarget);
+    	*/
     	
     	TurretFlywheel.getMotor().setPID(
     			Preferences.getInstance().getDouble("TurretFlyP",
@@ -46,17 +54,31 @@ public class ManualFlywheel extends Command {
         		//Preferences.getInstance().getDouble("TurretFlyRamp",
         		RAMP_DEFAULT,
         		0);
+    	double distanceToBoiler;
 
-   
-    	System.out.println("Initialize..........");
+    
+    	try {
+			List<ShooterAimingParameters> aimingReports;
+			aimingReports = AndroidInterface.GetInstance().getAim(); 
+	    		if(!aimingReports.isEmpty()){
+	    			distanceToBoiler = (aimingReports.get((aimingReports.size() - 1)).getRange());
+	    			targetSpeed = Robot.wscTurret.GetSpeed(distanceToBoiler);
+	    			
+	    			//TurretFlywheel.setSpeed(Preferences.getInstance().getDouble("ShooterTest", 3900.0));
+	    			System.out.println("SHOOTING..........");
+	    		}
+	    
+		}catch (NullPointerException e) {
+			
+		}
     	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	TurretFlywheel.setSpeed(Preferences.getInstance().getDouble("ShooterTest", 3900.0));
+    	TurretFlywheel.setSpeed(targetSpeed);
 
-    	System.out.println("SHOOTING..........");
+    	
     	
     }
 
