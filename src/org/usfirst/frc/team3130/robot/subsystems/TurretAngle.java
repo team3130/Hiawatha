@@ -71,8 +71,8 @@ public class TurretAngle extends Subsystem {
 		// We use soft limits to make sure the turret doesn't try to spin too far.
 		m_turret.enableForwardSoftLimit(true);
 		m_turret.enableReverseSoftLimit(true);
-		m_turret.setForwardSoftLimit(1.2728758);
-		m_turret.setReverseSoftLimit(-1.2728758);
+		m_turret.setForwardSoftLimit(1.80324074);
+		m_turret.setReverseSoftLimit(-1.80324074);
 		m_turret.enableForwardSoftLimit(true);
 		m_turret.enableReverseSoftLimit(true);
 
@@ -85,13 +85,13 @@ public class TurretAngle extends Subsystem {
 		m_turret.changeControlMode(CANTalon.TalonControlMode.Position);
 		// In Position mode, outputValue set is in rotations of the motor 
 		//DEBUG: System.out.println("Set value:  " + (angle_deg / 360.0) * (164.0 / 34.0) + " -------------");
-		m_turret.set((angle_deg / 360.0) * (164.0 / 34.0));
+		m_turret.set((angle_deg / 360.0) * (164.0 / 24.0));
 	}
 
 	// Manually move the turret (and put it into vbus mode if it isn't already). Input range -1.0 to 1.0
 	public synchronized static void setOpenLoop(double speed) {
 		m_turret.changeControlMode(CANTalon.TalonControlMode.PercentVbus); 
-		m_turret.set(-0.12*speed); 
+		m_turret.set(-0.14*speed); 
 	}
 
 	// Tell the Talon it is at a given position.
@@ -106,7 +106,7 @@ public class TurretAngle extends Subsystem {
 	}
 
 	public synchronized static double getSetpoint() {
-		return m_turret.getSetpoint() * 34.0 / 164.0  * 360;
+		return m_turret.getSetpoint() * 24.0 / 164.0  * 360;
 	}
 
 	private synchronized static double getError() {
