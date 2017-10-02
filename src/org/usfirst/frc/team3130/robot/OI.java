@@ -187,7 +187,7 @@ public class OI {
 		turretIntake.whileHeld(new ManualTurretIntake());
 		turretAutoAim.whileHeld(new TurretAim());
 		turretHoldAngle.whileHeld(new HoldAngle());
-		turretManualShoot.whileHeld(new ManualFlywheel());
+		turretManualShoot.whileHeld(new AutoFlywheel());
 		
 		shiftUp.whenPressed(new DriveShiftUp());
 		shiftDown.whenPressed(new DriveShiftDown());
