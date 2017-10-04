@@ -145,9 +145,9 @@ public class OI {
 
 		flashlightToggle = new JoystickButton(gamepad, RobotMap.BTN_FLASHLIGHTTOGGLE);
 		
-		turretShoot = new JoystickButton(gamepad, RobotMap.BTN_TURRETFLY);
+		turretShoot = new JoystickButton(gamepad, RobotMap.BTN_TURRETAUTOFLY);
 		turretIntake = new JoystickButton(gamepad, RobotMap.BTN_TURRETINTAKE);
-		turretHoldAngle = new JoystickButton(gamepad, RobotMap.BTN_TURRETMANUALFLY);
+		turretHoldAngle = new JoystickButton(gamepad, RobotMap.BTN_TURRETAUTOFLY);
 		turretAutoAim = new JoystickButton(gamepad, RobotMap.BTN_TURRETAUTOAIM);
 		turretManualShoot = new JoystickButton(gamepad, RobotMap.BTN_TURRETMANUALFLY);
 		

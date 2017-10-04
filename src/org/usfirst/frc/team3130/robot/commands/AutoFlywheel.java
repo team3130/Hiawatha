@@ -65,7 +65,7 @@ public class AutoFlywheel extends Command {
 	    			targetSpeed = Robot.wscTurret.GetSpeed(distanceToBoiler);
 	    			
 	    			//TurretFlywheel.setSpeed(Preferences.getInstance().getDouble("ShooterTest", 3900.0));
-	    			System.out.println("SHOOTING..........");
+	    			System.out.println("SHOOTING AUTO..........");
 	    		}
 	    
 		}catch (NullPointerException e) {

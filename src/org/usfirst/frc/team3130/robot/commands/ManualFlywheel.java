@@ -48,7 +48,7 @@ public class ManualFlywheel extends Command {
         		0);
 
    
-    	System.out.println("Initialize..........");
+    	//System.out.println("Initialize..........");
     	
     }
 
@@ -56,7 +56,8 @@ public class ManualFlywheel extends Command {
     protected void execute() {
     	TurretFlywheel.setSpeed(Preferences.getInstance().getDouble("ShooterTest", 3900.0));
 
-    	System.out.println("SHOOTING..........");
+    	System.out.println("SHOOTING  MANUAL..........");
+    	System.out.println("Speed: " + TurretFlywheel.getSpeed());
     	
     }
 
