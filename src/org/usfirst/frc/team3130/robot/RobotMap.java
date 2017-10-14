@@ -110,10 +110,10 @@ public class RobotMap {
 			public static final int BTN_TURRETINDEX = 666; //TODO: determine this #
 			public static final int BTN_TURRETHOPL = 666; //TODO: determine this #
 			public static final int BTN_TURRETHOPR = 666; //TODO: determine this #
-			public static final int BTN_TURRETAUTOFLY = LST_BTN_START;
+			public static final int BTN_TURRETAUTOFLY = LST_BTN_RBUMPER;
 			public static final int BTN_TURRETINTAKE = LST_BTN_X;
 			public static final int BTN_TURRETAUTOAIM = LST_BTN_LBUMPER;
-			public static final int BTN_TURRETMANUALFLY = LST_BTN_RBUMPER;
+			public static final int BTN_TURRETMANUALFLY = LST_BTN_START;
 			
 			//Gear Control
 			public static final int BTN_PINCHGEAR = 1;	//Joystick L

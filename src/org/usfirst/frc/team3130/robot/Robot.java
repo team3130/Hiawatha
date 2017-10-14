@@ -21,6 +21,7 @@ import org.usfirst.frc.team3130.robot.autoCommands.VisionGearAuto;
 import org.usfirst.frc.team3130.robot.autoCommands.FortyBallAuton;
 import org.usfirst.frc.team3130.robot.autoCommands.NoVision40Ball;
 import org.usfirst.frc.team3130.robot.commands.RobotSensors;
+import org.usfirst.frc.team3130.robot.commands.TurretAim;
 import org.usfirst.frc.team3130.robot.subsystems.*;
 import org.usfirst.frc.team3130.util.*;
 
@@ -119,8 +120,8 @@ public class Robot extends IterativeRobot {
 		// Simplest camera feed. Remove if not needed.
          UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
          camera1.setResolution(360, 480);
-		/*
-		chooser = new SendableChooser<String>();
+		
+		/*chooser = new SendableChooser<String>();
 		chooser.addDefault("No Auton", "No Auto");
 		chooser.addObject("Dumb Gear", "Dumb Gear Auto");
 		chooser.addObject("Gear and 10", "Gear and 10");
@@ -153,8 +154,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		
-		/*
-		switch(chooser.getSelected()){
+		
+		
+		/*switch(chooser.getSelected()){
 			case "Dumb Gear Auto":
 				autonomousCommand = new DumbGearAuto();
 				break;
@@ -187,11 +189,11 @@ public class Robot extends IterativeRobot {
 				break;
 			default:
 				autonomousCommand = null;
-		}
-		*/
+		}*/
+		
 		//Hardcode goes below, comment out switch above
 		
-		autonomousCommand = new FortyBallAuton();	
+		autonomousCommand = new GearAnd10();	
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 		
@@ -217,6 +219,7 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		TurretAim.SetParam(false);
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
         mDisabledLooper.stop();

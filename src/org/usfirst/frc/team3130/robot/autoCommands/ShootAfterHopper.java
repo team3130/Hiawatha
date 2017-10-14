@@ -18,9 +18,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class ShootAfterHopper extends CommandGroup {
 
 	private TurretAim					shoot_aim;
-	private TurretToAngle				turnToBoiler;
+
 	private AutoFlywheel				shoot;
 	private ManualTurretIntake			elevator;
+	private AutoDelay					delay;
 	
     public ShootAfterHopper() {
 		requires(Chassis.GetInstance());
@@ -28,26 +29,22 @@ public class ShootAfterHopper extends CommandGroup {
 		requires(TurretFlywheel.GetInstance());
 		
 
-		turnToBoiler = new TurretToAngle();
+	
 		shoot_aim = new TurretAim();
 		shoot = new AutoFlywheel();
+		delay = new AutoDelay();
 		elevator = new ManualTurretIntake();
 		
-		addSequential(turnToBoiler, 0.7);
-		addSequential(shoot_aim, 1.5);
-		addSequential(shoot);
+		addSequential(shoot_aim, 1.0);
+		addParallel(shoot);
+		addSequential(delay, 0.8);
 		addParallel(elevator);
     }
     
     @Override
     protected void initialize()
     {
-    	if(OI.fieldSide.getSelected() == "Red") {
-    		turnToBoiler.SetParam(Preferences.getInstance().getDouble("Auto Shoot Turn Angle", -90));
-    	}
-    	else {
-    		turnToBoiler.SetParam(Preferences.getInstance().getDouble("Auto Shoot Turn Angle", 90));
-    	}
+
     	
     	/*drive_backFromHopper.SetParam(
     			-Preferences.getInstance().getDouble("Drive Back Hopper Dist", -24), 

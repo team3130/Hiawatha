@@ -147,7 +147,7 @@ public class OI {
 		
 		turretShoot = new JoystickButton(gamepad, RobotMap.BTN_TURRETAUTOFLY);
 		turretIntake = new JoystickButton(gamepad, RobotMap.BTN_TURRETINTAKE);
-		turretHoldAngle = new JoystickButton(gamepad, RobotMap.BTN_TURRETMANUALFLY);
+		turretHoldAngle = new JoystickButton(gamepad, RobotMap.BTN_TURRETAUTOFLY);
 		turretAutoAim = new JoystickButton(gamepad, RobotMap.BTN_TURRETAUTOAIM);
 		turretManualShoot = new JoystickButton(gamepad, RobotMap.BTN_TURRETMANUALFLY);
 		
@@ -204,14 +204,14 @@ public class OI {
 		
 		gearStartPos = new SendableChooser<String>();
 		//If hardcoding required, manually choose peg below
-		//gearStartPos.addObject("Left Peg", "Left");
-		//gearStartPos.addObject("Center Peg", "Center");
+		//gearStartPos.addDefault("Left Peg", "Left");
+		//gearStartPos.addDefault("Right Peg", "Right");
 		gearStartPos.addDefault("Center Peg", "Center");
 		SmartDashboard.putData("Gear Pos Chooser",gearStartPos);
 		
 		fieldSide = new SendableChooser<String>();
 		//If hardcoding required, manually choose fieldSide below
-		//fieldSide.addObject("Red Side", "Red");
+		//fieldSide.addDefault("Red Side", "Red");
 		fieldSide.addDefault("Blue Side", "Blue");
 		SmartDashboard.putData("Field Side",fieldSide);
 		

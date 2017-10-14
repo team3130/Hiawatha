@@ -137,7 +137,7 @@ public class TurretAngle extends Subsystem {
 	public static void outputToSmartDashboard() {
 		SmartDashboard.putNumber("turret_error", getError());
 		SmartDashboard.putNumber("turret_angle", getAngleDegrees());
-		SmartDashboard.putNumber("turret_setpoint", getSetpoint());
+		//SmartDashboard.putNumber("turret_setpoint", getSetpoint());
 		SmartDashboard.putBoolean("turret_on_target", isOnTarget());
 	}
 

@@ -70,14 +70,14 @@ public class CameraAim extends Command {
         
     	if(instance != ""){
     		if(Math.abs(JetsonInterface.getDouble("Boiler Sys Time", 9999) - JetsonInterface.getDouble("Boiler Time", 0)) < 0.25){
-    			SmartDashboard.putBoolean("Boiler Seen" + instance, true);
+    			//SmartDashboard.putBoolean("Boiler Seen" + instance, true);
     		}
     		else{
-    			SmartDashboard.putBoolean("Boiler Seen" + instance, false);
+    			//SmartDashboard.putBoolean("Boiler Seen" + instance, false);
     		}
     	}
     	
-        SmartDashboard.putBoolean("Ready to Shoot" + instance, onTarget);
+        //SmartDashboard.putBoolean("Ready to Shoot" + instance, onTarget);
     	//SmartDashboard.putBoolean("LeftShooter Upto Speed" + instance, (Math.abs(ShooterWheelsLeft.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
     	//SmartDashboard.putBoolean("RightShooter Upto Speed" + instance, (Math.abs(ShooterWheelsRight.GetError()) < Preferences.getInstance().getDouble("ShooterWheel Tolerance", SHOOTERTHRESHOLD)));
     	

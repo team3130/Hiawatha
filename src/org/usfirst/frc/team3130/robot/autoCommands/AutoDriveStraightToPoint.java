@@ -89,7 +89,7 @@ public class AutoDriveStraightToPoint extends PIDCommand {
 		if(output > m_speed) output = m_speed;
 		else if(output < -m_speed) output = -m_speed;
 		
-		Chassis.DriveStraight(output);
+		Chassis.DriveStraight(-output);
 	}
 	
 	private void setPID()

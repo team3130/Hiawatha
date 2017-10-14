@@ -147,9 +147,9 @@ public class TurretFlywheel extends Subsystem {
     public static void outputToSmartDashboard() {
         SmartDashboard.putNumber("flywheel_rpm", getSpeed());
         SmartDashboard.putNumber("flywheel_setpoint", getSetpoint());
-        SmartDashboard.putBoolean("flywheel_on_target", isOnTarget());
-        SmartDashboard.putNumber("flywheel_master_current", master_talon.getOutputCurrent());
-        SmartDashboard.putNumber("flywheel_slave_current", slave_talon.getOutputCurrent());
+        //SmartDashboard.putBoolean("flywheel_on_target", isOnTarget());
+        //SmartDashboard.putNumber("flywheel_master_current", master_talon.getOutputCurrent());
+        //SmartDashboard.putNumber("flywheel_slave_current", slave_talon.getOutputCurrent());
     }
 
     public static void zeroSensors() {

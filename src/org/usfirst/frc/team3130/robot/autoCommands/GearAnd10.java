@@ -32,12 +32,12 @@ public class GearAnd10 extends CommandGroup {
         shoot = new SmartShoot();
         wait = new AutoDelay();
         
+        addParallel(turnToBoiler, 1);
         addSequential(placeGear);
         if((OI.fieldSide.getSelected().equals("Red") && OI.gearStartPos.getSelected().equals("Left"))
         		|| (OI.fieldSide.getSelected().equals("Blue") && OI.gearStartPos.getSelected().equals("Right"))){
         	addSequential(backMore, 1.5);
         }
-        addSequential(turnToBoiler, 1.0);
         addSequential(shoot);
     }
     
@@ -61,7 +61,7 @@ public class GearAnd10 extends CommandGroup {
 					break;
 					
 				case "Center":
-					turnToBoiler.SetParam(70.6);
+					turnToBoiler.SetParam(65);
 					break;
 				
 				case "Left":
@@ -79,7 +79,7 @@ public class GearAnd10 extends CommandGroup {
 				break;
 				
 			case "Center":
-				turnToBoiler.SetParam(-70.6);
+				turnToBoiler.SetParam(-65);
 				break;
 			
 			case "Left":

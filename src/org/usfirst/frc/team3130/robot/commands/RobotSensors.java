@@ -58,8 +58,8 @@ public class RobotSensors extends Command {
     	SmartDashboard.putNumber("Turret Wheel Setpoint", TurretFlywheel.getSetpoint());
     	*/
         
-    	SmartDashboard.putNumber("Target Count", VisionUpdate.hasTargetInfo());
-    	
+    	//SmartDashboard.putNumber("Target Count", VisionUpdate.hasTargetInfo());
+    
     	
     	//Chassis
     	//SmartDashboard.putNumber("Front Left Wheel Speed", Chassis.GetSpeedL());
@@ -73,8 +73,8 @@ public class RobotSensors extends Command {
     	//SmartDashboard.putNumber("Rear Left Current", Chassis.GetRearCurrentL());
     	//SmartDashboard.putNumber("Rear Right Current", Chassis.GetRearCurrentR());
     	SmartDashboard.putNumber("Angle", Chassis.GetAngle());
-    	//SmartDashboard.putNumber("Left Distance", Chassis.GetDistanceL());
-    	//SmartDashboard.putNumber("Right Distance", Chassis.GetDistanceR());
+    	SmartDashboard.putNumber("Left Distance", Chassis.GetDistanceL());
+    	SmartDashboard.putNumber("Right Distance", Chassis.GetDistanceR());
     	
     	
     	//Shooter Altitude
