@@ -2,6 +2,7 @@ package org.usfirst.frc.team3130.robot.autoCommands;
 
 import org.usfirst.frc.team3130.robot.Robot;
 import org.usfirst.frc.team3130.robot.commands.AutoFlywheel;
+import org.usfirst.frc.team3130.robot.commands.HoldAngle;
 import org.usfirst.frc.team3130.robot.commands.ManualTurretIntake;
 import org.usfirst.frc.team3130.robot.commands.TurretAim;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
@@ -34,6 +35,7 @@ public class SmartShoot extends CommandGroup {
 		delay = new AutoDelay();
 		
 		addSequential(shoot_aim, 0.7);
+		addParallel(new HoldAngle());
 		addParallel(shoot);
 		addSequential(delay, 1.2);
 		addParallel(elevator);

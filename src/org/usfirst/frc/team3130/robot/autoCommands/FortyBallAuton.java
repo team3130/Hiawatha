@@ -55,7 +55,6 @@ public class FortyBallAuton extends CommandGroup {
 	@Override
 	protected void initialize()
 	{
-		TurretAim.SetParam(true);
 		
 		
 		driveForward.SetParam(

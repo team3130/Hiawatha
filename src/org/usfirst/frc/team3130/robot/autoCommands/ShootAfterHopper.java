@@ -2,9 +2,9 @@ package org.usfirst.frc.team3130.robot.autoCommands;
 
 import org.usfirst.frc.team3130.robot.OI;
 import org.usfirst.frc.team3130.robot.commands.AutoFlywheel;
+import org.usfirst.frc.team3130.robot.commands.HoldAngle;
 import org.usfirst.frc.team3130.robot.commands.ManualTurretIntake;
 import org.usfirst.frc.team3130.robot.commands.TurretAim;
-import org.usfirst.frc.team3130.robot.commands.TurretToAngle;
 import org.usfirst.frc.team3130.robot.subsystems.Chassis;
 import org.usfirst.frc.team3130.robot.subsystems.TurretAngle;
 import org.usfirst.frc.team3130.robot.subsystems.TurretFlywheel;
@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class ShootAfterHopper extends CommandGroup {
 
 	private TurretAim					shoot_aim;
-
+	private TurretOffset				offset;
 	private AutoFlywheel				shoot;
 	private ManualTurretIntake			elevator;
 	private AutoDelay					delay;
@@ -34,8 +34,11 @@ public class ShootAfterHopper extends CommandGroup {
 		shoot = new AutoFlywheel();
 		delay = new AutoDelay();
 		elevator = new ManualTurretIntake();
+		offset = new TurretOffset();
 		
-		addSequential(shoot_aim, 1.0);
+		addSequential(shoot_aim, 0.9);
+		addSequential(offset, 0.1);
+		addParallel(new HoldAngle());
 		addParallel(shoot);
 		addSequential(delay, 0.8);
 		addParallel(elevator);

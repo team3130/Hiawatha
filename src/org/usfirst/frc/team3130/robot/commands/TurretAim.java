@@ -30,8 +30,6 @@ public class TurretAim extends Command {
 
 	protected ShooterAimingParameters shooter_aiming_parameters;
 	private String instance = "";
-	private static boolean autonEnabled = true;
-	private double holdAngle = 2.0;
 	private double kTurretKpD = 0.9;
 	private double kTurretKiD = 0.0;
 	private double kTurretKdD = 50.0;
@@ -60,11 +58,7 @@ public class TurretAim extends Command {
      * Tells if the Robot has seen a target recently
      * 
      */
-    public static void SetParam(boolean auton)
-    {
-    	autonEnabled = auton;
-    	
-    }
+
     
     public boolean seenTarget()
     {
@@ -112,13 +106,7 @@ public class TurretAim extends Command {
 	    			System.out.println("current angle " + turretAngleValue );
 	    			System.out.println("set to angle  " + (turretAngleValue + targetAngle));
 	    			TurretAngle.setAngle(turretAngleValue+targetAngle);
-	    			if(autonEnabled == true && OI.fieldSide.getSelected() == "Blue"){
-	    				HoldAngle.setAngle(TurretAngle.getAngleDegrees() - holdAngle);
-	    			}else if(autonEnabled == true && OI.fieldSide.getSelected() == "Red"){
-	    				HoldAngle.setAngle(TurretAngle.getAngleDegrees() + holdAngle);
-	    			}else{
-	    				HoldAngle.setAngle(TurretAngle.getAngleDegrees());
-	    			}
+	    			HoldAngle.setAngle(TurretAngle.getAngleDegrees());
 	    		
 	    		
 	    	
