@@ -62,7 +62,7 @@ public class AutoFlywheel extends Command {
 			aimingReports = AndroidInterface.GetInstance().getAim(); 
 	    		if(!aimingReports.isEmpty()){
 	    			distanceToBoiler = (aimingReports.get((aimingReports.size() - 1)).getRange());
-	    			targetSpeed = Robot.wscTurret.GetSpeed(distanceToBoiler);
+	    			targetSpeed = Robot.wscTurret.GetSpeed(distanceToBoiler + 33);
 	    			
 	    			//TurretFlywheel.setSpeed(Preferences.getInstance().getDouble("ShooterTest", 3900.0));
 	    			System.out.println("SHOOTING AUTO..........");

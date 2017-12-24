@@ -2,6 +2,7 @@ package org.usfirst.frc.team3130.robot.autoCommands;
 
 import org.usfirst.frc.team3130.robot.OI;
 import org.usfirst.frc.team3130.robot.commands.AutoFlywheel;
+import org.usfirst.frc.team3130.robot.commands.BallIntakeIn;
 import org.usfirst.frc.team3130.robot.commands.HoldAngle;
 import org.usfirst.frc.team3130.robot.commands.ManualTurretIntake;
 import org.usfirst.frc.team3130.robot.commands.TurretAim;
@@ -22,6 +23,7 @@ public class ShootAfterHopper extends CommandGroup {
 	private AutoFlywheel				shoot;
 	private ManualTurretIntake			elevator;
 	private AutoDelay					delay;
+	//private BallIntakeIn				intake;
 	
     public ShootAfterHopper() {
 		requires(Chassis.GetInstance());
@@ -33,12 +35,14 @@ public class ShootAfterHopper extends CommandGroup {
 		shoot_aim = new TurretAim();
 		shoot = new AutoFlywheel();
 		delay = new AutoDelay();
+		//intake = new BallIntakeIn();
 		elevator = new ManualTurretIntake();
 		offset = new TurretOffset();
 		
-		addSequential(shoot_aim, 0.9);
+		addSequential(shoot_aim, 0.7);
 		addSequential(offset, 0.1);
 		addParallel(new HoldAngle());
+		//addParallel(intake);
 		addParallel(shoot);
 		addSequential(delay, 0.8);
 		addParallel(elevator);

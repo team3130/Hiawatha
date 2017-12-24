@@ -193,7 +193,7 @@ public class Robot extends IterativeRobot {
 		
 		//Hardcode goes below, comment out switch above
 		
-		autonomousCommand = new GearAnd10();	
+		autonomousCommand = new FortyBallAuton();	
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 		

@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class TurretOffset extends Command {
 
-	private double offsetAngle = 2.0;
+	private double offsetAngle = 4.0;
 
 	
     public TurretOffset() {
