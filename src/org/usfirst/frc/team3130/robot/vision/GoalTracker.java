@@ -9,6 +9,8 @@ import org.usfirst.frc.team3130.robot.Constants;
 
 import org.usfirst.frc.team3130.util.Translation2d;
 
+import edu.wpi.first.wpilibj.Timer;
+
 /**
  * This is used in the event that multiple goals are detected to judge all goals
  * based on timestamp, stability, and continuation of previous goals (i.e. if a
@@ -145,7 +147,10 @@ public class GoalTracker {
         List<TrackReport> rv = new ArrayList<>();
         try{
         	for (GoalTrack track : mCurrentTracks) {
-        		rv.add(new TrackReport(track));
+        		track.emptyUpdate();
+        		if (track.isAlive()){
+        			rv.add(new TrackReport(track));
+        		}
         	}
         	
         } catch (Exception e) {

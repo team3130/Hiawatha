@@ -30,7 +30,6 @@ public class Constants extends ConstantsBase {
     public static int kTurretAllowableError = 100;
     
 	//Camera in relation to turret.
-	//TODO:calibrate camera.
     public static double kCameraXOffset = -6.454;
     public static double kCameraYOffset = 0.0;
     public static double kCameraZOffset = 22.75;

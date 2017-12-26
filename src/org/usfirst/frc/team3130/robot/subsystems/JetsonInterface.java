@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.tables.ITable;
  *
  */
 
-//TODO:Replace with Android Vision App 
+ 
 public class JetsonInterface extends Subsystem {
 
 	//Instance Handling

@@ -24,7 +24,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * Aims the TurretAngle
  */
 
-//TODO:This command still needs reworking @author Eastan
 
 public class TurretAim extends Command {
 
@@ -93,24 +92,22 @@ public class TurretAim extends Command {
 		
 		try {
 			List<ShooterAimingParameters> aimingReports;
-	    	
-	    		aimingReports = AndroidInterface.GetInstance().getAim(); 
-	    		if(!aimingReports.isEmpty()){
-	    			
-	    			TurretAngle.getMotor().setPID(kTurretKp, kTurretKi, kTurretKd);
-	    			
-	    			//currently set to grab latest angle value of list
-	    			targetAngle = (aimingReports.get((aimingReports.size() - 1)).getTurretAngle()).getDegrees();
-	    			turretAngleValue = TurretAngle.getAngleDegrees();
-	    			System.out.println("target angle  " + targetAngle );
-	    			System.out.println("current angle " + turretAngleValue );
-	    			System.out.println("set to angle  " + (turretAngleValue + targetAngle));
-	    			TurretAngle.setAngle(turretAngleValue+targetAngle);
-	    			HoldAngle.setAngle(TurretAngle.getAngleDegrees());
-	    		
-	    		
-	    	
-	    	}
+	    	aimingReports = AndroidInterface.GetInstance().getAim(); 
+    		if(!aimingReports.isEmpty()){
+    			
+    			TurretAngle.getMotor().setPID(kTurretKp, kTurretKi, kTurretKd);
+    			
+    			//currently set to grab latest angle value of list
+    			targetAngle = (aimingReports.get((aimingReports.size() - 1)).getTurretAngle()).getDegrees();
+    			turretAngleValue = TurretAngle.getAngleDegrees();
+    			System.out.println("target angle  " + targetAngle );
+    			System.out.println("current angle " + turretAngleValue );
+    			System.out.println("set to angle  " + (turretAngleValue + targetAngle));
+    			TurretAngle.setAngle(turretAngleValue+targetAngle);
+    			HoldAngle.setAngle(TurretAngle.getAngleDegrees());
+    		}else{
+    			System.out.println("No targets");
+    		}
 		}catch (NullPointerException e) {
 			
 		}finally {

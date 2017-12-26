@@ -38,8 +38,8 @@ public class RobotMap {
 			public static final int CAN_TURRETINDEX = 14;
 			public static final int CAN_INDEXMOTORRIGHT = 45;
 			
-			public static final int CAN_SHOOTERMASTER = 16; //TODO: assign this number
-			public static final int CAN_SHOOTERSLAVE = 15; //TODO: assign this number
+			public static final int CAN_SHOOTERMASTER = 16; 
+			public static final int CAN_SHOOTERSLAVE = 15; 
 		
 			
 		//Not currently in use anymore
@@ -96,7 +96,7 @@ public class RobotMap {
 			public static final int BTN_INTAKEDOWN = LST_BTN_B;
 			
 			//Hopper
-			public static final int BTN_HOPPERDRIVE = LST_BTN_RBUMPER;//TODO: Get Actual Button
+			public static final int BTN_HOPPERDRIVE = LST_BTN_RBUMPER;
 
 			
 			//Shooter

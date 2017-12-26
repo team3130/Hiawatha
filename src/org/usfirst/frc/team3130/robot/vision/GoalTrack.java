@@ -49,18 +49,27 @@ public class GoalTrack {
      * @return True if the track was updated
      */
     public boolean tryUpdate(double timestamp, Translation2d new_observation) {
-        if (!isAlive()) {
-            return false;
-        }
-        double distance = mSmoothedPosition.inverse().translateBy(new_observation).norm();
-        if (distance < Constants.kMaxTrackerDistance) {
-            mObservedPositions.put(timestamp, new_observation);
-            pruneByTime();
-            return true;
-        } else {
-            emptyUpdate();
-            return false;
-        }
+    	boolean result = false;
+    	try{
+	        if (!isAlive()) {
+	            result = false;
+	        }else{
+		        double distance = mSmoothedPosition.inverse().translateBy(new_observation).norm();
+		        if (distance < Constants.kMaxTrackerDistance) {
+		            mObservedPositions.put(timestamp, new_observation);
+		            pruneByTime();
+		            result = true;
+		        } else {
+		            emptyUpdate();
+		            result = false;
+		        }
+	        }
+	        return result;
+    	}
+    	catch (Exception e){
+    		System.out.println("tryUpdate");
+    		return result;
+    	}
     }
 
     public boolean isAlive() {
@@ -73,19 +82,24 @@ public class GoalTrack {
      * 
      * @see Constants.java
      */
-    void pruneByTime() {
-        double delete_before = Timer.getFPGATimestamp() - Constants.kMaxGoalTrackAge;
-        for (Iterator<Map.Entry<Double, Translation2d>> it = mObservedPositions.entrySet().iterator(); it.hasNext();) {
-            Map.Entry<Double, Translation2d> entry = it.next();
-            if (entry.getKey() < delete_before) {
-                it.remove();
-            }
-        }
-        if (mObservedPositions.isEmpty()) {
-            mSmoothedPosition = null;
-        } else {
-            smooth();
-        }
+    synchronized void pruneByTime() {
+    	try{
+	    	double delete_before = Timer.getFPGATimestamp() - Constants.kMaxGoalTrackAge;
+	    	for (Iterator<Map.Entry<Double, Translation2d>> it = mObservedPositions.entrySet().iterator(); it.hasNext();) {
+	    		Map.Entry<Double, Translation2d> entry = it.next();
+	            if (entry.getKey() < delete_before) {
+	                it.remove();
+	            }
+	        }
+	        if (mObservedPositions.isEmpty()) {
+	            mSmoothedPosition = null;
+	        } else {
+	            smooth();
+	        }
+    	}
+    	catch(Exception e) {
+    		System.out.println("Caught prunebytime exception");
+    	}
     }
 
     /**
