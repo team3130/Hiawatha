@@ -38,7 +38,7 @@ public class Constants extends ConstantsBase {
     public static double kCameraDeadband = 0.0;
     
     // Goal tracker constants
-    public static double kMaxGoalTrackAge = 0.05;
+    public static double kMaxGoalTrackAge = 0.2;
     public static double kMaxTrackerDistance = 18.0;
     public static double kCameraFrameRate = 30.0;
     public static double kTrackReportComparatorStablityWeight = 1.0;
